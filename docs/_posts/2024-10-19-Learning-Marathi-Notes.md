@@ -11,7 +11,7 @@ We volunteer for Colorado Marathi Shala. Sharing links to references, which may 
    1. [Presentation for Dasra 2024][Presentation for Dasra 2024]
    2. [Kahoot for Dasra 2024][Kahoot for Dasra 2024]
 2. Here is collection of [Marathi Grammer Books][Marathi Grammer Books]
-   1.The book written by Mr. Shinde [Shinde Grammer Book]seems to be the right way to get started.
+   1.The book written by Mr. Shinde [Shinde Grammer Book] seems to be the right way to get started.
 
 [Marathi Grammer Books]: https://drive.google.com/drive/folders/1BfKwRjpbQkdexzxEHLzak4Ee3GbZHH3a?usp=sharing
 [Shinde Grammer Book]: https://drive.google.com/file/d/15WUJ2O9ol0Bi2_B5YDqr-1ykp92xtXnj/view?usp=sharing
