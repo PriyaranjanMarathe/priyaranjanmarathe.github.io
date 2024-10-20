@@ -50,3 +50,11 @@ plugins:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
+
+---
+layout: default
+comments: true
+# other options
+
+disqus:
+  shortname: priyaranjanmarathe
