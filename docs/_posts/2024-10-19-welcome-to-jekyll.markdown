@@ -9,5 +9,9 @@ I am trying to get my hands dirty with Jekyll inspired from this blog post from 
 
 So far I am loving it. The page generation is so fast. It warrants that I take a class on markdown format soon. Looking at [this][markdown tutorial link] tutorial for the same.
 
+Updates
+
+1. 9 November 2024 - Today it took me around 10 minutes to figure out ways to publish a new blog post from my Obsidian notes whicha are already in markdown formats. I had figure out some configuration settings with Jekyll. I want this time to be around 2 minutes next time I try to post a new blog post. Looking forward.
+
 [AndrejKarpathy]: https://karpathy.github.io/2014/07/01/switching-to-jekyll/
 [markdown tutorial link]: https://www.youtube.com/watch?v=_PPWWRV6gbA&t=60s
