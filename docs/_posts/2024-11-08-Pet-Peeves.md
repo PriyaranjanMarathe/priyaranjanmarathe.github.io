@@ -1,8 +1,8 @@
 ---
-layout: post
-title: Pet peeves
-date: 2024-11-09 20:09:22 -0600
-categories: jekyll update
+layout: "post"
+title: "Pet Peeves"
+date: "2024-11-08 00:00:00 -0600"
+categories: "jekyll update"
 ---
 
 Noting some pet peeves. Hopefully some resonate well with others on the Internet as well.
