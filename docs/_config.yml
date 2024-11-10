@@ -11,6 +11,9 @@ collections:
   til:
     output: true
     permalink: /til/:title/
+  bot:
+    output: true
+    permalink: /bot/:title/
 
 theme: minima
 plugins:
