@@ -1,5 +1,5 @@
 ---
-layout: "post"
+layout: "default"
 title: "Pet Peeves"
 date: "2024-11-08 00:00:00 -0600"
 categories: "jekyll update"
