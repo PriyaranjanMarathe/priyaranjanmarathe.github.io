@@ -4,8 +4,9 @@ description: >-
   Musings of a life long learner.
 baseurl: "/marathe"
 url: ""
-twitter_username: 6C1_16
+bluesky_username: https://bsky.app/profile/priyaranjan.bsky.social
 github_username: priyaranjanmarathe
+twitter_username: 6C1_16
 
 collections:
   til:
