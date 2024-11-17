@@ -1,7 +1,8 @@
 ---
 layout: "post"
 title: "Julia package to analyse night time data"
-date: "2024-11-11 00:00:00 -0600"
+comments: true
+date: "2024-09-15"
 categories: "jekyll update"
 ---
 

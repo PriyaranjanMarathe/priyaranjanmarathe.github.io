@@ -1,7 +1,8 @@
 ---
 layout: "post"
 title: "Pet Peeves"
-date: "2024-11-06"
+comments: true
+date: "2024-09-22"
 categories: "jekyll update"
 ---
 

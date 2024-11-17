@@ -1,7 +1,8 @@
 ---
 layout: default
 title: "Schedule Jekyll blog post in the future"
-date: "2024-11-01"
+comments: true
+date: "2024-09-22"
 ---
 
 Learnt a cool Jekyll trick to schedule a blog post in the future.

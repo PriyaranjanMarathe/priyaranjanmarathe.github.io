@@ -1,9 +1,10 @@
 ---
 layout: post
 title: Delete_TempTable_SQL_Server
-date: 2024-11-11 00:00:00 -0600
+comments: true
+date: "2024-09-29"
 categories: jekyll update
 ---
-`` IF Object_id('tempdb.dbo.#1LastThreeDates', 'U') IS NOT NULL
-					 DROP TABLE #1LastThreeDates
 
+`` IF Object_id('tempdb.dbo.#Temp_Table', 'U') IS NOT NULL
+DROP TABLE #Temp_Table

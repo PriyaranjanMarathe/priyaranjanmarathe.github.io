@@ -2,7 +2,7 @@
 layout: "post"
 title: "TIL - Mouse - Multiple lines at a time"
 comments: true
-date: "2024-11-11 00:00:00 -0600"
+date: "2024-09-08"
 categories: "jekyll update"
 ---
 
