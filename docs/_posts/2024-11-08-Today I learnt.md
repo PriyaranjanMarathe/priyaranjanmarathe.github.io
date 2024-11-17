@@ -2,6 +2,7 @@
 layout: "post"
 title: "Today I learnt"
 date: "2024-11-08"
+comments: true
 categories: "jekyll update"
 ---
 

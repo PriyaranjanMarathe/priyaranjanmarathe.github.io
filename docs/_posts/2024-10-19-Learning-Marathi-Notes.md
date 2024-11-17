@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Learning Marathi Notes"
+comments: true
 date: "2024-09-17"
 categories: jekyll update
 ---
