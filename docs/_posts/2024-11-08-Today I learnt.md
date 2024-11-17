@@ -1,7 +1,7 @@
 ---
 layout: "post"
-title: "Today I learnt(TIL)"
-date: "2024-11-08 00:00:00 -0600"
+title: "Today I learnt"
+date: "2024-11-08"
 categories: "jekyll update"
 ---
 

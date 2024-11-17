@@ -1,7 +1,7 @@
 ---
 layout: "post"
 title: "Best_of_Twitter_Week_of_11_10_2024"
-date: "2024-11-10 00:00:00 -0600"
+date: "2024-11-10"
 categories: "jekyll update"
 ---
 
@@ -18,6 +18,6 @@ categories: "jekyll update"
 11. [A blog post is a very long and complex search query to find fascinating people and make them route..](https://www.henrikkarlsson.xyz/p/search-query)excellent blog post by [Henrick Karlsson ](https://www.henrikkarlsson.xyz/about) on why writing long(ish) blog posts helps you think better and build a network.
 12. [Generating Agency Through Blogging](https://tomcritchlow.com/2022/08/29/blogging-agency/) and [Agency at Work](https://tomcritchlow.com/2022/07/05/agency/) These posts remind me of a friend who is what we call "Hikmati" and "Chitwal" in "Marathi". The amount of things/projects she has done continues to inspire us. We all should be like her. Agency is "very" important.
 13. [Note about interesting “starter packs” on BlueSky](https://www.linkedin.com/pulse/bluesky-data-starter-packs-rami-krispin-cyldc?utm_source=share&utm_medium=member_ios&utm_campaign=share_via)
-14. [How writing about real estate helped realtor Jim Smith succeed.](https://realestatetoday.substack.com/p/we-learned-firsthand-last-month-about) more evidence that once we spot an idea, instances of it are seen everywhere. Just yesterday I read about agency through blogs. See #12 above.
+14. [How writing about real estate helped Realtor Jim Smith succeed.](https://realestatetoday.substack.com/p/we-learned-firsthand-last-month-about) more evidence that once we spot an idea, instances of it are seen everywhere. Just yesterday I read about agency through blogs. See #12 above.
 15. [Why it’s hard to take research findings too seriously?](https://www.linkedin.com/pulse/bluesky-data-starter-packs-rami-krispin-cyldc?utm_source=share&utm_medium=member_ios&utm_campaign=share_via)
 16. Also I need to rename the topic to “Best of social“ because frankly I don’t see the point of being fixated on Twitter. I am looking to make the change in #March2025

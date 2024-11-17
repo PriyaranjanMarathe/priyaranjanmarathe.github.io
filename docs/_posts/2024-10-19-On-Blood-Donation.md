@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "On Blood Donation"
-date: "2024-10-18 20:09:22 -0600"
+date: "2024-09-18"
 categories: "blood donation"
 ---
 

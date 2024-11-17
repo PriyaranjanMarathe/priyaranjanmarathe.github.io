@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Learning Marathi Notes"
-date: "2024-10-18 20:09:22 -0600"
+date: "2024-09-17"
 categories: jekyll update
 ---
 
