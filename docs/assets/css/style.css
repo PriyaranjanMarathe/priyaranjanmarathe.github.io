@@ -1,0 +1,11 @@
+#disqus-container {
+    margin-top: 2em; /* Add spacing above Disqus */
+    padding: 1em; /* Add padding inside the container */
+    max-width: 800px; /* Match the width of your content area */
+    margin-left: auto;
+    margin-right: auto; /* Center align */
+    background-color: #f9f9f9; /* Optional: subtle background */
+    border: 1px solid #ddd; /* Optional: border to define the section */
+    border-radius: 8px; /* Optional: rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: shadow for depth */
+}
