@@ -1,5 +1,5 @@
 ---
-layout: "post"
+layout: "default"
 title: "Today I learnt"
 date: "2024-09-29"
 comments: true

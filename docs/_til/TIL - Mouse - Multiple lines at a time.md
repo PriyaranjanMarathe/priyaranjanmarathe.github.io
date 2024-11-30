@@ -1,5 +1,5 @@
 ---
-layout: "post"
+layout: "default"
 title: "TIL - Mouse - Multiple lines at a time"
 comments: true
 date: "2024-09-08"
