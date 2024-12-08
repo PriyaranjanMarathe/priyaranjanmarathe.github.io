@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: "default"
 title: "Schedule Jekyll blog post in the future"
 comments: true
 date: "2024-09-22"

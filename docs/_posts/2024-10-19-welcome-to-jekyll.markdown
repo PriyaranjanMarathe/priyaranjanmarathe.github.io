@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: "default"
 title: "My first blogpost using Jekyll!"
 comments: true
 date: "2024-09-01"

@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: "default"
 title: "Best of Twitter Week of - 11_3_2024"
 comments: true
 date: "2024-11-09"

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: "default"
 title: Delete_TempTable_SQL_Server
 comments: true
 date: "2024-09-29"

@@ -1,5 +1,5 @@
 ---
-layout: "post"
+layout: "default"
 title: "Pet Peeves"
 comments: true
 date: "2024-09-22"

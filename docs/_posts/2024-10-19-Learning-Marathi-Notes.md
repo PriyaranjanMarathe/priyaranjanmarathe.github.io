@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: "default"
 title: "Learning Marathi Notes"
 comments: true
 date: "2024-09-01"

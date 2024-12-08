@@ -1,5 +1,5 @@
 ---
-layout: "post"
+layout: "default"
 title: "Draw.io VS Code Integration"
 comments: true
 date: "2024-09-08"
