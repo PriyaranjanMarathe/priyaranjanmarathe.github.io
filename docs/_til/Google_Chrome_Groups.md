@@ -1,7 +1,7 @@
 ---
 layout: "default"
-title: Google_Chrome_Groups
-date: 2024-12-30:00:00 -0600
+title: "Google_Chrome_Groups"
+date: "2024-11-30"
 categories: jekyll update
 ---
 
