@@ -16,12 +16,12 @@ Imagine you have a database table `config_parameters` with fields like:
 
 | id  | category  | key                            | value   |
 |-----|-----------|--------------------------------|---------|
-| 1   | machine   | Max Output RPM                 | 3200    |
-| 2   | machine   | Efficiency %                   | 92.5    |
-| 3   | tank      | Max Capacity L                 | 1500    |
-| 4   | tank      | Current Temp °C                | 87      |
-| 5   | sensor    | Humidity %                     | 45.3    |
-| 6   | sensor    | Pressure kPa                   | 101.3   |
+| 1   | player    | Max Speed                      | 36      |
+| 2   | player    | Stamina                        | 92      |
+| 3   | team      | Max Roster Size                | 25      |
+| 4   | team      | Home Wins                      | 12      |
+| 5   | equipment | Helmet Durability              | 87      |
+| 6   | equipment | Ball Pressure                  | 15.5    |
 
 **Goal:**
 - Construct a nested payload from this table.
@@ -33,15 +33,15 @@ Imagine you have a database table `config_parameters` with fields like:
 A manual, verbose approach often works best for clarity and debugging.
 
 ```javascript
-let payload = { presets: { machine: {}, tank: {}, sensor: {} } };
+let payload = { player: {}, team: {}, equipment: {} };
 
 // Manual assignments
-payload.presets.machine["Max Output RPM"] = 3200;
-payload.presets.machine["Efficiency %"] = 92.5;
-payload.presets.tank["Max Capacity L"] = 1500;
-payload.presets.tank["Current Temp °C"] = 87;
-payload.presets.sensor["Humidity %"] = 45.3;
-payload.presets.sensor["Pressure kPa"] = 101.3;
+payload.player["Max Speed"] = 36;
+payload.player["Stamina"] = 92;
+payload.team["Max Roster Size"] = 25;
+payload.team["Home Wins"] = 12;
+payload.equipment["Helmet Durability"] = 87;
+payload.equipment["Ball Pressure"] = 15.5;
 ```
 
 ### Why This Works:
@@ -55,19 +55,19 @@ payload.presets.sensor["Pressure kPa"] = 101.3;
 Dynamic construction can work with small safeguards in place.
 
 ```javascript
-let payload = { presets: { machine: {}, tank: {}, sensor: {} } };
+let payload = { player: {}, team: {}, equipment: {} };
 let dbRows = [
-  { category: 'machine', key: 'Max Output RPM', value: 3200 },
-  { category: 'machine', key: 'Efficiency %', value: 92.5 },
-  { category: 'tank', key: 'Max Capacity L', value: 1500 },
-  { category: 'tank', key: 'Current Temp °C', value: 87 },
-  { category: 'sensor', key: 'Humidity %', value: 45.3 },
-  { category: 'sensor', key: 'Pressure kPa', value: 101.3 }
+  { category: 'player', key: 'Max Speed', value: 36 },
+  { category: 'player', key: 'Stamina', value: 92 },
+  { category: 'team', key: 'Max Roster Size', value: 25 },
+  { category: 'team', key: 'Home Wins', value: 12 },
+  { category: 'equipment', key: 'Helmet Durability', value: 87 },
+  { category: 'equipment', key: 'Ball Pressure', value: 15.5 }
 ];
 
 // Populate payload dynamically
 for (let row of dbRows) {
-  payload.presets[row.category][row.key] = row.value;
+  payload[row.category][row.key] = row.value;
 }
 ```
 
@@ -82,9 +82,9 @@ Suppose the API expects:
 
 ```json
 {
-  "machine": ["Max Output RPM", "Efficiency %"],
-  "tank": ["Max Capacity L"],
-  "sensor": ["Humidity %", "Pressure kPa"]
+  "player": ["Max Speed", "Stamina"],
+  "team": ["Max Roster Size"],
+  "equipment": ["Helmet Durability", "Ball Pressure"]
 }
 ```
 
@@ -92,9 +92,9 @@ Suppose the API expects:
 
 ```javascript
 let apiSchema = {
-  machine: ["Max Output RPM", "Efficiency %"],
-  tank: ["Max Capacity L"],
-  sensor: ["Humidity %", "Pressure kPa"]
+  player: ["Max Speed", "Stamina"],
+  team: ["Max Roster Size"],
+  equipment: ["Helmet Durability", "Ball Pressure"]
 };
 
 function validatePayload(payload, schema) {
@@ -102,7 +102,7 @@ function validatePayload(payload, schema) {
 
   for (let category in schema) {
     schema[category].forEach(key => {
-      if (!(key in payload.presets[category])) {
+      if (!(key in payload[category])) {
         errors.push(`${category}: Missing ${key}`);
       }
     });
@@ -116,27 +116,28 @@ console.log(validatePayload(payload, apiSchema));
 
 ---
 
-## Real-Life Example – Game Config:
+## Real-Life Example – Sports Config:
 
 ```javascript
-let gamePayload = { presets: { player: {}, weapons: {}, levels: {} } };
+let gamePayload = { player: {}, team: {}, equipment: {} };
 
-gamePayload.presets.player["Max Health"] = 100;
-gamePayload.presets.player["Armor Level"] = 5;
-gamePayload.presets.weapons["Laser Gun Damage"] = 150;
-gamePayload.presets.weapons["Plasma Cannon Heat"] = 87;
-gamePayload.presets.levels["Enemies in Level 1"] = 50;
+gamePayload.player["Max Speed"] = 36;
+gamePayload.player["Stamina"] = 92;
+gamePayload.team["Max Roster Size"] = 25;
+gamePayload.team["Home Wins"] = 12;
+gamePayload.equipment["Helmet Durability"] = 87;
+gamePayload.equipment["Ball Pressure"] = 15.5;
 ```
 
-### Validate Game Payload:
+### Validate Sports Payload:
 
 ```javascript
-let gameSchema = {
-  player: ["Max Health", "Armor Level"],
-  weapons: ["Laser Gun Damage"],
-  levels: ["Enemies in Level 1"]
+let sportsSchema = {
+  player: ["Max Speed", "Stamina"],
+  team: ["Max Roster Size"],
+  equipment: ["Helmet Durability", "Ball Pressure"]
 };
-console.log(validatePayload(gamePayload, gameSchema));
+console.log(validatePayload(gamePayload, sportsSchema));
 ```
 
 ---
