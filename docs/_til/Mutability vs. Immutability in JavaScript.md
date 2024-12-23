@@ -1,4 +1,11 @@
-# TIL: Mutability vs. Immutability in JavaScript (A Practical Guide)
+---
+layout: default
+title: Mutability vs. Immutability in JavaScript
+comments: true
+date: 2024-12-22
+categories:
+---
+# TIL: Mutability vs. Immutability in JavaScript 
 
 ## Understanding the Problem of Mutability
 
