@@ -9,10 +9,12 @@ title: "TIL"
 2. [Simon Willison on why he creates a new TIL if he had to open ten tabs to solve a problem](https://x.com/simonw/status/1855259241952727350)
 
 <ul>
-  {% for post in site.til %}
+  {% assign sorted_posts = site.til | sort: 'date' | reverse %}
+  {% for post in sorted_posts %}
     <li>
       <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> - 
       <em>{{ post.date | date: "%B %d, %Y" }}</em>
     </li>
   {% endfor %}
 </ul>
+
