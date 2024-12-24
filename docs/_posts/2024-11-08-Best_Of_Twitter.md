@@ -9,7 +9,8 @@ categories: "jekyll update"
 I am collating list of "best of twitter, social really" for the week [here](https://priyaranjanmarathe.github.io/marathe/bot.html).
 
 <ul>
-  {% for post in site.bot %}
+  {% assign sorted_posts = site.bot | sort: 'date' | reverse %}
+  {% for post in sorted_posts %}
     <li>
       <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> - 
       <em>{{ post.date | date: "%B %d, %Y" }}</em>

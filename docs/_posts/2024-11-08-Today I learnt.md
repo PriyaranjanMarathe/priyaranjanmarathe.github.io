@@ -9,7 +9,8 @@ categories: "jekyll update"
 I am collating list of "Today I learnt(TIL)" [here](https://priyaranjanmarathe.github.io/marathe/til.html).
 
 <ul>
-  {% for post in site.til %}
+  {% assign sorted_posts = site.til | sort: 'date' | reverse %}
+  {% for post in sorted_posts %}
     <li>
       <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> - 
       <em>{{ post.date | date: "%B %d, %Y" }}</em>
