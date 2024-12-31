@@ -9,6 +9,7 @@ title: "TIL"
 2. [Simon Willison on why he creates a new TIL if he had to open ten tabs to solve a problem](https://x.com/simonw/status/1855259241952727350)
 
 <ul>
+  {% if site.til and site.til.size > 0 %}
   {% assign sorted_posts = site.til | sort: 'date' | reverse %}
   {% for post in sorted_posts %}
     <li>
@@ -16,5 +17,9 @@ title: "TIL"
       <em>{{ post.date | date: "%B %d, %Y" }}</em>
     </li>
   {% endfor %}
+{% else %}
+  <p>No TIL posts available yet.</p>
+{% endif %}
+
 </ul>
 
