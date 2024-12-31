@@ -1,8 +1,8 @@
 ---
-layout: default
-title: Handling Division by Zero with NULLIF in SQL Server
-comments: true
-date: 2024-12-30
+layout: "default"
+title: "Handling Division by Zero with NULLIF in SQL Server"
+comments: "true"
+date: "2024-12-30"
 categories:
 ---
 
