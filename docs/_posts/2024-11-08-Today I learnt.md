@@ -20,5 +20,4 @@ I am collating list of "Today I learnt(TIL)" [here](https://priyaranjanmarathe.g
 {% else %}
   <p>No TIL posts available yet.</p>
 {% endif %}
-
 </ul>
