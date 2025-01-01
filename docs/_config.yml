@@ -16,8 +16,8 @@ collections:
     output: true
     permalink: /bot/:title/
 
-# theme: minima
-remote_theme: jekyll/minima
+theme: minima
+
 
 plugins:
   - jekyll-feed
