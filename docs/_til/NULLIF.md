@@ -1,9 +1,9 @@
 ---
 layout: "default"
-title: "Handling Division by Zero with NULLIF in SQL Server"
-comments: "true"
-date: "2024-12-30"
-categories:
+title: NULLIF in SQL Server
+comments: true
+date: "2025-01-01"
+categories: jekyll update
 ---
 
 # TIL: Handling Division by Zero with NULLIF in SQL Server  
