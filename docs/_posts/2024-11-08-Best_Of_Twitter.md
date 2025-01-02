@@ -8,7 +8,7 @@ categories: "jekyll update"
 
 I am collating list of "best of twitter, social really" for the week [here](https://priyaranjanmarathe.github.io/bot.html).
 
-<!-- <ul>
+<ul>
   {% if site.bot and site.bot.size > 0 %}
   {% assign sorted_posts = site.bot | sort: 'date' | reverse %}
   {% for post in sorted_posts %}
@@ -20,5 +20,4 @@ I am collating list of "best of twitter, social really" for the week [here](http
 {% else %}
   <p>No Best of Twitter posts available yet.</p>
 {% endif %}
-
 </ul> 
