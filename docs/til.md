@@ -10,7 +10,7 @@ title: "TIL"
 
 <ul>
   {% if site.til and site.til.size > 0 %}
-  {% assign sorted_posts = site.til %}
+  {% assign sorted_posts = site.til | sort: 'date' | reverse %}
   {% for post in sorted_posts %}
     <li>
       <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> - 
