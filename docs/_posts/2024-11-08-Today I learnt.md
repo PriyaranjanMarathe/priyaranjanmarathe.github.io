@@ -7,7 +7,7 @@ categories: "jekyll update"
 ---
 
 I am collating list of "Today I learnt(TIL)" [here](https://priyaranjanmarathe.github.io/til.html).
-<!-- <ul>
+<ul>
   {% if site.til and site.til.size > 0 %}
   {% assign sorted_posts = site.til | sort: 'date' | reverse %}
   {% for post in sorted_posts %}
@@ -19,4 +19,4 @@ I am collating list of "Today I learnt(TIL)" [here](https://priyaranjanmarathe.g
 {% else %}
   <p>No TIL posts available yet.</p>
 {% endif %}
-</ul> -->
+</ul>
