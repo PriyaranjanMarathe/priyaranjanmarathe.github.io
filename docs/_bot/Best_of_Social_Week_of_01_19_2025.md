@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: Best_of_Social_Week_of_01_09_2025
 date: 2025-01-19
 categories: jekyll update
