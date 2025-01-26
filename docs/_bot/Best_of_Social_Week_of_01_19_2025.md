@@ -11,7 +11,7 @@ categories: jekyll update
 
 ### Reflections on Sharing
 
-I have realized that I have an “urge” to share good stuff with friends and family. The motivation is to share things that work well for me so that everyone can try them. However, I’ve also realized that WhatsApp and text messaging are not the best ways to archive these shares as it becomes hard to search through them. That is why I’ve been collecting notes in TILs (Today I Learned) and BOS (Book of Secrets). I see this as a 30-year project. It would be amazing to reflect on what I was up to when I’m 70. I am so much looking forward to it!
+I have realized that I have an “urge” to share good stuff with friends and family. The motivation is to share things that work well for me so that everyone can try them. However, I’ve also realized that WhatsApp and text messaging are not the best ways to archive these shares as it becomes hard to search through them. That is why I’ve been collecting notes in TILs (Today I Learned) and BOS (Best of Social). I see this as a 30-year project. It would be amazing to reflect on what I was up to when I’m 70. I am so much looking forward to it!
 
 ---
 
