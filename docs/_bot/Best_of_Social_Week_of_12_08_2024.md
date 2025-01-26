@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: "default"
 title: Best_of_Social_Week_of_12_08_2024
 date: 2024-12-08
 categories: jekyll update
