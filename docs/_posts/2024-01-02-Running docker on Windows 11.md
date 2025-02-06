@@ -7,11 +7,6 @@ categories: tils
 ---
 
 # Running Docker on Windows 11
-**Learning Notes**  
-_Please don’t scream and ask, WHY. One has to do what one has to do. Or, as Haruki Murakami says, “I can bear any pain as long as it has meaning.“_
-
----
-
 ## The Ask
 Running Docker on Windows 11 without Docker Desktop, WSL, or Docker Engine (since it’s not free on Windows Server versions). And if you feel particularly ambitious, let’s also make it work across other Windows and Linux flavors.
 
@@ -295,4 +290,3 @@ curl -X GET "http://localhost:8000/tables" \
      -H "accept: application/json"
 Wrapping Up
 By rolling with SQLite, you’ve got a compact setup that’s easy to manage in Docker. This method outlines building, running, and testing an app on Windows 11 without Docker Desktop or WSL—no screaming needed.
-
