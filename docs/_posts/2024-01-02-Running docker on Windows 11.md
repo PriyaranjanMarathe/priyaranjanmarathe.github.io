@@ -7,9 +7,6 @@ categories: tils
 ---
 
 # Running Docker on Windows 11
-
-By  
-
 **Learning Notes**  
 _Please don’t scream and ask, WHY. One has to do what one has to do. Or, as Haruki Murakami says, “I can bear any pain as long as it has meaning.“_
 
