@@ -6,11 +6,13 @@ date: "2025-01-07"
 categories: tils
 ---
 
-VSCode key bindings for Save All files is 
+# VSCode Key Bindings for Save All
 
-Press Ctrl + K, wait for the following menu to appear
+To save all files in VSCode:
+
+1. Press `Ctrl + K` and wait for the command palette to appear.
+2. Then press `S`.
+
 ![VS-Code-Bindings]({{ site.baseurl }}/assets/images/VS-Code-Bindings.png)
 
-and then press the key S 
-
-I am noting this down because it was little hard to understand at first and my colleague helped me with it. 
+*Note: I’m writing this down because the process was initially unclear until my colleague explained it.*
