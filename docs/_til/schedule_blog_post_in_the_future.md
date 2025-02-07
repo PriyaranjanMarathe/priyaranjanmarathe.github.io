@@ -3,6 +3,8 @@ layout: "default"
 title: "Schedule Jekyll blog post in the future"
 comments: true
 date: "2024-09-22"
+categories: tils
+
 ---
 
 Learnt a cool Jekyll trick to schedule a blog post in the future.

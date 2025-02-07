@@ -3,7 +3,7 @@ layout: "default"
 title: "Julia package to analyse night time data"
 comments: true
 date: "2024-09-15"
-categories: "jekyll update"
+categories: "tils"
 ---
 
 1. Ajay Shah and Amit Varma did a marathon podcast recently. It runs over 10.5 hours.

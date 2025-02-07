@@ -3,7 +3,8 @@ layout: default
 title: Schema Validation
 comments: true
 date: 2024-12-22
-categories:
+categories: tils
+
 ---
 # TIL: Constructing and Validating Nested Payloads from DB Config Tables
 

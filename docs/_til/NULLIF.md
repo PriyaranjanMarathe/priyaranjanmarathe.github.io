@@ -3,7 +3,7 @@ layout: "default"
 title: NULLIF in SQL Server
 comments: true
 date: "2025-01-01"
-categories: jekyll update
+categories: tils
 ---
 
 # TIL: Handling Division by Zero with NULLIF in SQL Server  
