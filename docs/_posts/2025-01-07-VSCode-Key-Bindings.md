@@ -9,7 +9,7 @@ categories: tils
 VSCode key bindings for Save All files is 
 
 Press Ctrl + K, wait for the following menu to appear
-![alt text](image.png)
+![My Image](./image.png)
 
 and then press the key S 
 
