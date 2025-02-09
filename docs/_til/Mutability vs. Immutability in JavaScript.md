@@ -3,7 +3,7 @@ layout: default
 title: Mutability vs. Immutability in JavaScript
 comments: true
 date: 2024-12-22
-categories:
+categories: tils
 ---
 # TIL: Mutability vs. Immutability in JavaScript 
 

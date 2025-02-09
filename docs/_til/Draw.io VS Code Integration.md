@@ -3,7 +3,7 @@ layout: "default"
 title: "Draw.io VS Code Integration"
 comments: true
 date: "2024-09-08"
-categories: "jekyll update"
+categories: "tils"
 ---
 
 # Draw.io VS Code Integration

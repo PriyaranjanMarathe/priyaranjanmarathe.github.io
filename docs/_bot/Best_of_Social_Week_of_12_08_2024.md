@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 layout: default
+=======
+layout: "default"
+>>>>>>> ed25f9e3aebb03cdc5dfe60427287a9d6f7f23f2
 title: Best_of_Social_Week_of_12_08_2024
 date: 2024-12-08
 categories: jekyll update

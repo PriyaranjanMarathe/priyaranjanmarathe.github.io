@@ -3,7 +3,7 @@ layout: "default"
 title: TRY_CAST in SQL with `VARCHAR` and `FLOAT`
 comments: true
 date: "2025-01-11"
-categories: jekyll update
+categories: tils
 ---
 
 ### TIL: TRY_CAST in SQL with `BIGINT` and `VARCHAR`

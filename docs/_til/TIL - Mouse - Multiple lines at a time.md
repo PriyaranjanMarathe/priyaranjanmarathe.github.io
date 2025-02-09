@@ -3,7 +3,7 @@ layout: "default"
 title: "TIL - Mouse - Multiple lines at a time"
 comments: true
 date: "2024-09-08"
-categories: "jekyll update"
+categories: "tils"
 ---
 
 This setting is a life saver on Windows 11 :)

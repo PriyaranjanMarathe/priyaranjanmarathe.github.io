@@ -3,7 +3,8 @@ layout: default
 title: Fixing SSL Verification Error for Ruby on Windows (Zscaler Root CA Issue)
 comments: true
 date: 2024-12-24
-categories:
+categories: tils
+
 ---
 
 ## Fixing SSL Verification Error for Ruby on Windows (Zscaler Root CA Issue)
