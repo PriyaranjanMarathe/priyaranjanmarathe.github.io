@@ -1,9 +1,10 @@
 ---
 layout: "default"
-title: "Learn the NATO alphabet for wonderful time with customer care"
+title: "Best of Social - 2 Feb 2025"
 comments: true
 date: "2025-02-09"
 categories: bos
+tags: [bos]
 ---
 ## Indian Classical Music
 
