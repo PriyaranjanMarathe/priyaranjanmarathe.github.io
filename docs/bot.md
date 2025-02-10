@@ -6,16 +6,10 @@ title: "BOT"
 <h1>Best of Twitter</h1>
 Thanks [Alexy Guzey](https://guzey.com/best-of-twitter/) for the inspiration for these pages.
 <ul>
-  {% if site.bot and site.bot.size > 0 %}
-  {% assign sorted_posts = site.bot | sort: 'date' | reverse %}
-  {% for post in sorted_posts %}
+  {% for post in site.categories.bos %}
     <li>
-      <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a> - 
-      <em>{{ post.date | date: "%B %d, %Y" }}</em>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      <span>{{ post.date | date: "%b %-d, %Y" }}</span>
     </li>
   {% endfor %}
-{% else %}
-  <p>No Best of Twitter posts available yet.</p>
-{% endif %}
-
 </ul>

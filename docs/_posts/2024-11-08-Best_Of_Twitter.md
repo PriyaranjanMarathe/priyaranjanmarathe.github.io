@@ -3,7 +3,7 @@ layout: "default"
 title: "Best of Twitter (Social)."
 comments: true
 date: "2024-09-08"
-categories: "jekyll update"
+categories: "bos"
 ---
 
 I am collating list of "best of twitter, social really" for the week [here](https://priyaranjanmarathe.github.io/bot.html).
