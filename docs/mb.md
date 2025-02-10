@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "mbs"
+title: "MICROBLOG"
 ---
 <h1>{{ page.title }}</h1>
 <p>Microblogging/link blogs can be fun and handy to record random thoughts. Inspired by the Scott and Simom again :)</p>
