@@ -2,7 +2,7 @@
 layout: "default"
 title: "No cover on your iPhone?"
 comments: true
-date: "2024-12-08"
+date: "2029-12-08"
 categories: "jekyll update"
 ---
 
