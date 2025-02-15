@@ -8,6 +8,9 @@ github_username: priyaranjanmarathe
 twitter_username: 6C1_16
 
 collections:
+  blog:
+    output: true
+    permalink: /blog/:title/
   mb:
     output: true
     permalink: /mb/:title/
