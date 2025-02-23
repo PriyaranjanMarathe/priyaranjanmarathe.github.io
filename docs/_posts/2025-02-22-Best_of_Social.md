@@ -15,6 +15,6 @@ tags: [bos]
 
 2. Asha Bhosale is such a versatile singer. Making a note of a few I revisited recently.
    - [Aabshar e Ghazal - Asha Ji sings with Hariharan Ji. This album is from 1985 and Hariji has only one song.](https://music.youtube.com/playlist?list=OLAK5uy_n1JIab5az5key22khZ8SF_MObF3MKZQYQ&si=oiKexchQpxP6YzKC)
-   - [AKabhi to Najar Milao - Amazing duets between Ashaji and Adnan Sami. Sami was a sensation in the 90s. He brought a fresh voice to India.](https://music.youtube.com/playlist?list=OLAK5uy_mcpVXvNBBgy8ajhcTYlzK6ti8ciDwkPO4&si=LyLIZaItz8KFZ8Vk)
+   - [Kabhi to Najar Milao - Amazing duets between Ashaji and Adnan Sami. Sami was a sensation in the 90s. He brought a fresh voice to India.](https://music.youtube.com/playlist?list=OLAK5uy_mcpVXvNBBgy8ajhcTYlzK6ti8ciDwkPO4&si=LyLIZaItz8KFZ8Vk)
    - [Jait re Jait - milestone sound score by Balasaheb Mangeshkar](https://music.youtube.com/playlist?list=OLAK5uy_mJE6cok67wZQmr8ExRc8Pxc4eZ9T13lTU&si=nb1cqiMJq-1eLvC7)
    - [The Golden Collection. Salona Sa Sajan Hai is just amazing. Asha Ji’s touching the sound of “salona sa” is just wonderful.](https://music.youtube.com/playlist?list=OLAK5uy_l6Fn3mYenT3RNaopUbFRLQSQE-ED7So3Y&si=NmB50X8p4juSUByy)
