@@ -9,7 +9,7 @@ categories: mb
 # Chaavaa and Polarization
 
 1. Watched the Ranveer Hooda movie _Chaavaa_ recently. _Chaavaa_ is based on Shivaji Sawant's novel. The movie is well done, and kudos to the team for amazing production values.
-2. Seeing the discussion skewed towards _Shrikes, Aurangzeb, and Anaji Pant_.
+2. Seeing the discussion skewed towards _Shirkes, Aurangzeb, and Anaji Pant_.
 3. Prediction – _Rana Pratap_ and _Tej Bahadur_ movies to be released in the next 2-3 years?
    - Easy "debates"
    - [Remembering the essay - Keep Your Identity Small by Paul Graham here](https://www.paulgraham.com/identity.html)
