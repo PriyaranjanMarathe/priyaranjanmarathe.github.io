@@ -15,17 +15,13 @@ categories: tils
 2. **Resize the Physical Volume**  
    - Use `sudo pvresize /dev/xvdf` (or the relevant device name) to claim the extra disk space.
 
-3. **Extend the Logical Volume**  
-   - Run `lvextend -L +100G /dev/VolGroup00/lv_var` to add more storage.
+3. **Extend and Grow in One Step**  
+   - For XFS (and many other filesystems), `lvextend -r -L +100G /dev/VolGroup00/lv_var` automatically resizes both the LV and the filesystem.
 
-4. **Grow the Filesystem**  
-   - For XFS: `sudo xfs_growfs /dev/VolGroup00/lv_var`.
+4. **Finding the Device Name**  
+   - `cat /proc/partitions` lists partitions and sizes (e.g., `/dev/nvme1n1` might be your new disk to `pvresize`).
 
-5. **Finding the Device Name**  
-   - `cat /proc/partitions` lists partitions and sizes (e.g., `/dev/nvme1n1` is a disk you might want to resize with `pvresize /dev/nvme1n1`).
 
----
+[Also available at the Wordpress link](https://ranjanmarathe.wordpress.com/2023/12/11/extend-a-logical-volume-on-ubuntu/)
 
-**Q:** How might these steps differ if you’re dealing with a RAID array or ephemeral storage on AWS? Could ephemeral storage complicate long-term volume expansions?
-
-[Also available on](https://ranjanmarathe.wordpress.com/2023/12/11/extend-a-logical-volume-on-ubuntu/)
+Thanks [Nagendra Sahni](https://www.linkedin.com/in/nagendra-sahni-a6a319191/) for teaching me this technique on a deadline and reviewing the draft. 
