@@ -1,6 +1,6 @@
 ---
 layout: "default"
-title: "Best of Twitter Week of - 11_3_2024"
+title: "Best of Twitter Week of - 2024-11-09"
 comments: true
 date: "2024-11-09"
 categories: "bos"
