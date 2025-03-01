@@ -18,6 +18,9 @@ collections:
   bot:
     output: true
     permalink: /bot/:title/
+  html_files:
+    output: true
+    permalink: /:path/
 
 theme: minima
 
