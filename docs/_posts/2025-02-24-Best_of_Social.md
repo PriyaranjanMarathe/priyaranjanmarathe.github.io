@@ -1,13 +1,13 @@
 ---
 layout: "default"
-title: "Best of Social - 9 Feb 2025"
+title: "Best of Social - 24 Feb 2025"
 comments: true
 date: "2025-02-09"
 categories: bos
 tags: [bos]
 ---
 
-# 9 February 2025
+# 24 February 2025
 
 ## Polars
 

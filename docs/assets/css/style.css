@@ -9,3 +9,18 @@
     border-radius: 8px; /* Optional: rounded corners */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: shadow for depth */
 }
+
+.gcse-search {
+    max-width: 300px; /* Adjust the width as needed */
+    margin: 0 auto; /* Center the search bar */
+}
+
+.gcse-search input.gsc-input {
+    height: 30px; /* Adjust the height as needed */
+    font-size: 14px; /* Adjust the font size as needed */
+}
+
+.gcse-search button.gsc-search-button {
+    height: 34px; /* Adjust the height as needed */
+    font-size: 14px; /* Adjust the font size as needed */
+}
