@@ -24,3 +24,23 @@
     height: 34px; /* Adjust the height as needed */
     font-size: 14px; /* Adjust the font size as needed */
 }
+
+nav {
+    display: flex;
+    justify-content: center; /* centers items */
+    gap: 1rem;
+    background-color: #222;
+    padding: 1rem;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  nav a:hover {
+    background-color: #444;
+    border-radius: 4px;
+  }
