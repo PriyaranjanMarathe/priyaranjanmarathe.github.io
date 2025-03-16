@@ -1,24 +1,31 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+<html lang="{{ page.lang | default: site.lang | default: " en" }}">
 
 {%- include head.html -%}
+
 <head>
     <meta name="google-site-verification" content="my5juJd8928Rn3SNECWUmHRUVNPLZICnRb4L6yrvg2Y" />
 </head>
 
 <body>
 
-    {%- include header.html -%}
+    <!-- {%- include header.html -%} -->
+
 
     <main class="page-content" aria-label="Content">
+
         <div class="wrapper">
             <!-- Google Custom Search -->
             <!-- <script async src="https://cse.google.com/cse.js?cx=d1935aa9a8aaf42d9"></script>
             <div class="gcse-search"></div> -->
             <!-- End Google Custom Search -->
-            
-              
-            <nav>
+
+            <a href="{{ site.baseurl }}/" style="text-decoration: none; color: inherit;">
+                <h2 style="position: sticky; top: 0; background: white; z-index: 1000; text-align: left;">
+                    Ranjan Marathe blog
+                </h2>
+            </a>
+            <nav style="position: sticky; top: 50px; background: white; z-index: 900; text-align: left;">
                 <a href="{{ site.baseurl }}/">Home</a>
                 <a href="{{ site.baseurl }}/about">About</a>
                 <a href="{{ site.baseurl }}/bot">BOT</a>
@@ -26,7 +33,8 @@
                 <a href="{{ site.baseurl }}/til">TILS</a>
                 <a href="{{ site.baseurl }}/search/">Search</a>
             </nav>
-            
+
+
 
             {{ content }}
         </div>
@@ -50,7 +58,8 @@
                 (d.head || d.body).appendChild(s);
             })();
         </script>
-        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by
+                Disqus.</a></noscript>
     </main>
 
     {%- include footer.html -%}
