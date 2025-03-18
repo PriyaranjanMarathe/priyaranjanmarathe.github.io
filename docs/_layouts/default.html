@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+<html lang="{{ page.lang | default: 'en' }}">
 
 {%- include head.html -%}
 
@@ -8,27 +8,53 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         crossorigin="anonymous">
+
+    <style>
+        /* Smaller, Sleek Tabs */
+        .nav-tabs .nav-item .nav-link {
+            padding: 6px 12px;
+            /* Reduce padding */
+            font-size: 14px;
+            /* Make text smaller */
+            border-radius: 6px 6px 0 0;
+            /* Smooth tab corners */
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hover Effect */
+        .nav-tabs .nav-item .nav-link:hover {
+            background-color: #f8f9fa;
+            /* Subtle hover color */
+        }
+
+        /* Active Tab Styling */
+        .nav-tabs .nav-item .nav-link.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        /* Make the navbar thinner */
+        .nav-tabs {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 2px;
+        }
+    </style>
 </head>
 
 <body>
     <main class="page-content" aria-label="Content">
 
-        <!-- Wrapper for Blog Title -->
-        <div class="container-fluid bg-white fixed-top shadow">
-            <div class="container text-center py-3">
-                <a href="{{ site.baseurl }}/" style="text-decoration: none; color: inherit;">
-                    <h2 class="fw-bold">Ranjan Marathe Blog</h2>
-                </a>
-            </div>
+        <!-- Blog Title (Aligned with Posts) -->
+        <div class="container mt-4">
+            <a href="{{ site.baseurl }}/" style="text-decoration: none; color: inherit;">
+                <h2 class="fw-bold">Ranjan Marathe Blog</h2>
+            </a>
         </div>
 
-        <!-- Space Below the Blog Title -->
-        <div style="height: 80px;"></div>
-
-        <!-- Navbar Container -->
-        <div class="container">
-            <ul class="nav nav-tabs justify-content-center bg-white shadow-sm"
-                style="position: fixed; top: 80px; width: 100%; z-index: 999;">
+        <!-- Navbar (Matching Post Width) -->
+        <div class="container mt-3">
+            <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link {% if page.url == '/' %}active{% endif %}" href="{{ site.baseurl }}/">Home</a>
                 </li>
@@ -55,11 +81,8 @@
             </ul>
         </div>
 
-        <!-- Space Below Navbar -->
-        <div style="height: 50px;"></div>
-
-        <!-- Main Content -->
-        <div class="container mt-5">
+        <!-- Main Content (Same Alignment as Navbar & Title) -->
+        <div class="container mt-4">
             {{ content }}
         </div>
 
