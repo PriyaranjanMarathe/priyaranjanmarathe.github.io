@@ -56,27 +56,28 @@
         <div class="container mt-3">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link {% if page.url == '/' %}active{% endif %}" href="{{ site.baseurl }}/">Home</a>
+                    <a class="nav-link {% if page.url == '/' or page.url == '/index.html' %}active{% endif %}"
+                        href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if page.url == '/about' %}active{% endif %}"
-                        href="{{ site.baseurl }}/about">About</a>
+                    <a class="nav-link {% if page.url == '/about/' or page.url == '/about.html' %}active{% endif %}"
+                        href="/about/">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if page.url == '/bot' %}active{% endif %}"
-                        href="{{ site.baseurl }}/bot">BOT</a>
+                    <a class="nav-link {% if page.url == '/bot/' or page.url == '/bot.html' %}active{% endif %}"
+                        href="/bot/">BOT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if page.url == '/mb' %}active{% endif %}"
-                        href="{{ site.baseurl }}/mb">Microblog</a>
+                    <a class="nav-link {% if page.url == '/mb/' or page.url == '/mb.html' %}active{% endif %}"
+                        href="/mb/">Microblog</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if page.url == '/til' %}active{% endif %}"
-                        href="{{ site.baseurl }}/til">TILS</a>
+                    <a class="nav-link {% if page.url == '/til/' or page.url == '/til.html' %}active{% endif %}"
+                        href="/til/">TILS</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {% if page.url == '/search/' %}active{% endif %}"
-                        href="{{ site.baseurl }}/search/">Search</a>
+                    <a class="nav-link {% if page.url == '/search/' or page.url == '/search.html' %}active{% endif %}"
+                        href="/search/">Search</a>
                 </li>
             </ul>
         </div>
