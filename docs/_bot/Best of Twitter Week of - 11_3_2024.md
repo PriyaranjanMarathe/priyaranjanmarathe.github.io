@@ -2,7 +2,7 @@
 layout: "default"
 title: "Best of Twitter Week of - 11_3_2024"
 comments: true
-date: "2024-11-09"
+date: "2030-11-09"
 ---
 
 1. [Onion video](https://x.com/pitdesi/status/1853814397564858584?s=46) on over analysis of US elections. Great reminder on why there are better things to do in life. I am glad we choose to listen to music and go to bed at the regular time this Tuesday, instead of staying up like in 2020 and PM Modi’s election to office in 2014. We respect freedom and the democratic process but can’t make it “central” part of our worldview. Otherwise we are renting our headspace to exactly the wrong people we want to really.
