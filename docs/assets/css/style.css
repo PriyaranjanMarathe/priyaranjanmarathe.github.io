@@ -3,27 +3,41 @@
   margin-top: 70px; /* Ensure content does not hide behind navbar */
 }
 
-/* Ensure all active tabs have the same background */
-.nav-tabs .nav-item .nav-link.active,
-.nav-tabs .nav-item.active .nav-link {
-  background-color: #007bff !important;
-  color: white !important;
-  border-color: #007bff !important;
+/* Minimalist, Compact Navigation */
+.nav-tabs {
+  border-bottom: none; /* Remove default tab borders */
+  display: flex;
+  justify-content: center; /* Center align tabs */
+  gap: 10px; /* Add spacing between tabs */
+  padding: 5px 0; /* Reduce top and bottom padding */
 }
 
-/* Ensure clicked tabs stay styled correctly */
-.nav-tabs .nav-link:focus,
-.nav-tabs .nav-link:active {
-  background-color: #007bff !important;
-  color: white !important;
-  border-color: #007bff !important;
+/* Tab Items */
+.nav-tabs .nav-item {
+  list-style: none; /* Remove list styling */
 }
 
-/* Prevent Bootstrap's default focus highlight */
-.nav-tabs .nav-link:focus,
-.nav-tabs .nav-link:active {
-  outline: none !important;
-  box-shadow: none !important;
+/* Tab Links */
+.nav-tabs .nav-item .nav-link {
+  padding: 4px 10px; /* Reduce padding */
+  font-size: 14px; /* Slightly smaller font */
+  font-weight: 500; /* Make text slightly bold */
+  color: #333; /* Default text color */
+  border: none !important; /* Remove all borders */
+  background: transparent; /* Transparent background */
+  transition: color 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.nav-tabs .nav-item .nav-link:hover {
+  color: #007bff; /* Highlight on hover */
+}
+
+/* Active Tab */
+.nav-tabs .nav-item .nav-link.active {
+  font-weight: bold; /* Slightly bolder text */
+  color: #007bff; /* Highlight active tab */
+  border-bottom: 2px solid #007bff; /* Subtle underline effect */
 }
 
 /* Sticky Blog Title */
