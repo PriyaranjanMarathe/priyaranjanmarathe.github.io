@@ -9,7 +9,8 @@ categories: jekyll update
 We presented "Escape From Agra" puppet show ["Shivjayanti 2025"] (https://www.facebook.com/share/18k1H1cEAV/) in Denver. We spent around 40 hours on the preparation. Sharing the steps we followed to prepare the show.
 
 Why do this?
-1.At least 83 million people speak Marathi. It is the 4th most spoken language in India. So if this note reaches to 0.00000964 % of them, it would be 8 people. Anything useful to 8 people is worth spending time documenting.
+
+1. At least 83 million people speak Marathi. It is the 4th most spoken language in India. So if this note reaches to 0.00000964 % of them, it would be 8 people. Anything useful to 8 people is worth spending time documenting.
 
 Setup and Preparation
 
