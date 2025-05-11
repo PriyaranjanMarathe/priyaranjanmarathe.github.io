@@ -2,7 +2,7 @@
 layout: "default"
 title: "Best_of_Social_Week_of_11_17_2024"
 comments: true
-date: "2024-11-24"
+date: "2030-11-24"
 ---
 
 1. [Simon Willison](https://simonw.substack.com/p/civic-band-scraping-and-searching) shared information about "Civic Band" which scraps and searches PDF meeting minutes from hundreds of municipalities. There are so many use cases to think of here.
