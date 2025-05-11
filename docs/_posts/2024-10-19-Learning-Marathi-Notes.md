@@ -19,6 +19,9 @@ We volunteer for Colorado Marathi Shala. Sharing links to references, which may 
    2. Backup of the books on another [location][another location]
 4. [Here] [Here] is a collection of interesting articles related to beauty of Marathi language.
 5. Sharing details I learnt from Balasaheb Mangeshkar Ji. Mohammad Khalil Bin Ahmed formalized the “Chands” in Arabic Gazhals. [Al-Khalil_ibn_Ahmad_al-Farahidi][Al-Khalil_ibn_Ahmad_al-Farahidi] 's his knowledge transferred to Persian and then to Sanskrit/Hindi/Marathi. Greats like Saint Dnyaneshwar and Samantha Ramdas Swami studied and used in their creations. [भुजंगप्रयात][भुजंगप्रयात]. Source of the [video][video]
+6. Why learning Marathi?
+   1. I know it's difficult to teach kids Marathi. Especially when you are outside India. But....
+   2. Learning Marathi, helps one to understand the [Devnagari script](https://en.wikipedia.org/wiki/Devanagari) and it opens the doors to "read" at least 120 languages.So the efforts are worth it.
 
 [Marathi Grammer Books]: https://drive.google.com/drive/folders/1BfKwRjpbQkdexzxEHLzak4Ee3GbZHH3a?usp=sharing
 [Shinde Grammer Book]: https://drive.google.com/file/d/1L51kSAbVs73DsXfmRcOeur8h7jijsnMq/view?usp=sharing
