@@ -6,15 +6,11 @@ date: "2025-05-11"
 categories: jekyll update
 ---
 
-We presented "Escape From Agra" puppet show ["Shivjayanti 2025"](https://www.facebook.com/share/18k1H1cEAV/) in Denver. We spent around 40 hours on the preparation. Sharing the steps we followed to prepare the show.
+I had the opportunity of listening to experts from the writing of Marathi writer Ravindra Pinge today.Thanks to ["अभिव्यक्ती - AbhivyaktiArt"](https://www.youtube.com/@AbhivyaktiArt) for giving us the opportunity to be part of the show. I am sharing some notes from today's presentation.
 
-Why do this?
+Notes from today's presentation?
 
-1. At least 83 million people speak Marathi. It is the 4th most spoken language in India. So if this note reaches to 0.00000964 % of them, it would be 8 people. Anything useful to 8 people is worth spending time documenting.
-2. I think a presentation day, at the end of school year presenting such projects would be a great way to end the year for kids learning Marathi. Also we need to emphasize why learning Marathis is [good for kids.](https://priyaranjanmarathe.github.io/jekyll/update/2024/09/01/Learning-Marathi-Notes.html)
-
-Setup and Preparation
-
-1. [Video of the puppet show](https://youtu.be/K3HxGJ_vNZ0)
-2. [Inspiration video](https://www.facebook.com/watch/?v=158898675931295)
-3. [Album documenting the preparation](https://flic.kr/s/aHBqjC6smk)
+1. I am not old, but already seeing Pinge’s khant in me. When I am going to read/study Knuth? Guess this happens to everyone? Amazingly he has PuLa and Durgabai as his mentors. The vyasang is little easier with Internet now? One doesn’t need to go to London?
+2. Mentions of Mutat, Vijaydurga and the khalkhalte paats of Konkan brought back my Konkan memories. May be my morning coffee kicking in but remembering the hot humid May vacation days.
+3. [These elders](https://workflowy.com/s/why-blog/6CV3abrjMuZXFOZi#/fb97ea05c4b5) saying same thing as Pinge Ji. Or the other way around.
+4. I will update link to the video once it is available. But sharing link to the [AbhivyaktiArt](https://www.youtube.com/@AbhivyaktiArt) channel. I am sure they will post the video soon.
