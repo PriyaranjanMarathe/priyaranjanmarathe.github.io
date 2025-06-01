@@ -6,9 +6,7 @@ date: "2025-06-01"
 categories: tils
 ---
 
-# TIL: Where is my location?
-
-## 💡 TIL - GIS
+TIL: Where is my location?
 
 1. Used [Jonathan's ideas](https://heyman.info/about) to create a simple where am I page. Please check it out [here](https://priyaranjanmarathe.github.io/where-am-i/).
 2. The Github repository is available [here](https://github.com/PriyaranjanMarathe/whats-my-address)
