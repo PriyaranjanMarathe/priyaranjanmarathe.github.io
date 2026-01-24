@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ranjan Marathe</title>
+    <description>Engineering, ML, and occasional thoughts</description>
+    <link>https://ranjanmarathe.github.io/</link>
+    <atom:link href="https://ranjanmarathe.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Tue, 21 Jan 2026 00:00:00 +0000</lastBuildDate>
+    
+    <!-- Add new items here, newest first -->
+    <item>
+      <title>Example Post Title</title>
+      <link>https://ranjanmarathe.github.io/posts/example-post.html</link>
+      <pubDate>Tue, 21 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://ranjanmarathe.github.io/posts/example-post.html</guid>
+      <description>This is a sample post to show the structure.</description>
+    </item>
+    
+  </channel>
+</rss>

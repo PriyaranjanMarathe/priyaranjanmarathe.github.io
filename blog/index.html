@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranjan Marathe</title>
+    <meta name="description" content="Thoughts on engineering, ML, and life">
+    <link rel="canonical" href="https://priyaranjanmarathe.github.io/blog/">
+    <style>
+        :root {
+            --text: #1a1a1a;
+            --text-secondary: #555;
+            --bg: #fefefe;
+            --accent: #0066cc;
+            --border: #e0e0e0;
+            --tag-bg: #f0f0f0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text: #e8e8e8;
+                --text-secondary: #aaa;
+                --bg: #121212;
+                --accent: #6db3f2;
+                --border: #333;
+                --tag-bg: #252525;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 18px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Georgia, serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        header {
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        header h1 a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        nav {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-right: 1.5rem;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        .search-box {
+            margin-bottom: 2rem;
+        }
+
+        #search {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: inherit;
+        }
+
+        #search:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        #search::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .tags-filter {
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.8rem;
+            background: var(--tag-bg);
+            color: var(--text-secondary);
+            border-radius: 3px;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .tag:hover, .tag.active {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+
+        .posts {
+            list-style: none;
+        }
+
+        .post-item {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .post-item:last-child {
+            border-bottom: none;
+        }
+
+        .post-date {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-title a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .post-title a:hover {
+            color: var(--accent);
+        }
+
+        .post-excerpt {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .post-tags .tag {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+        }
+
+        .no-results {
+            color: var(--text-secondary);
+            font-style: italic;
+            display: none;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+        }
+
+        .rss-link {
+            float: right;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="/blog/">Ranjan Marathe</a></h1>
+        <p>Engineering, ML, and occasional thoughts</p>
+        <nav>
+            <a href="/blog/">Posts</a>
+            <a href="/blog/about.html">About</a>
+            <a href="/blog/feed.xml" class="rss-link">RSS</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="search-box">
+            <input type="text" id="search" placeholder="Search posts..." autocomplete="off">
+        </div>
+
+        <div class="tags-filter" id="tags-filter">
+            <span class="tag active" data-tag="all">All</span>
+        </div>
+
+        <ul class="posts" id="posts-list">
+            <li class="post-item" data-tags="math,learning,interactive" data-title="logarithms exponentials half-life interactive math education" data-content="exponential growth decay logarithms half-life carbon dating compound interest">
+                <div class="post-date">January 23, 2026</div>
+                <h2 class="post-title"><a href="/blog/posts/math-chapter1.html">Chapter 1: Logarithms, Exponentials & Half-Life</a></h2>
+                <p class="post-excerpt">An interactive journey through growth, decay, and the mathematics of change. Explore exponential functions, logarithms, and half-life with visual experiments.</p>
+                <div class="post-tags">
+                    <span class="tag">math</span>
+                    <span class="tag">learning</span>
+                    <span class="tag">interactive</span>
+                </div>
+            </li>
+        </ul>
+
+        <p class="no-results" id="no-results">No posts found.</p>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ranjan Marathe · <a href="https://github.com/PriyaranjanMarathe">GitHub</a></p>
+    </footer>
+
+    <script>
+        const posts = document.querySelectorAll('.post-item');
+        const tagsFilter = document.getElementById('tags-filter');
+        const allTags = new Set();
+
+        posts.forEach(post => {
+            const tags = post.dataset.tags.split(',');
+            tags.forEach(tag => allTags.add(tag.trim()));
+        });
+
+        allTags.forEach(tag => {
+            const btn = document.createElement('span');
+            btn.className = 'tag';
+            btn.dataset.tag = tag;
+            btn.textContent = tag;
+            tagsFilter.appendChild(btn);
+        });
+
+        const searchInput = document.getElementById('search');
+        const noResults = document.getElementById('no-results');
+        let activeTag = 'all';
+
+        function filterPosts() {
+            const query = searchInput.value.toLowerCase();
+            let visibleCount = 0;
+
+            posts.forEach(post => {
+                const title = post.dataset.title.toLowerCase();
+                const content = post.dataset.content.toLowerCase();
+                const tags = post.dataset.tags.toLowerCase();
+
+                const matchesSearch = !query || title.includes(query) || content.includes(query);
+                const matchesTag = activeTag === 'all' || tags.includes(activeTag);
+
+                if (matchesSearch && matchesTag) {
+                    post.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    post.classList.add('hidden');
+                }
+            });
+
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        searchInput.addEventListener('input', filterPosts);
+
+        tagsFilter.addEventListener('click', (e) => {
+            if (e.target.classList.contains('tag')) {
+                document.querySelectorAll('.tags-filter .tag').forEach(t => t.classList.remove('active'));
+                e.target.classList.add('active');
+                activeTag = e.target.dataset.tag;
+                filterPosts();
+            }
+        });
+    </script>
+</body>
+</html>
