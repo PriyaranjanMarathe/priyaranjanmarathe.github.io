@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>विपरीत केकावली — A Creative Marathi Exercise with LLMs</title>
+    <meta name="description" content="A creative homework exercise for Marathi students: compose the viparit (corollary) of Moropant's Kekavali using LLM tools while deepening understanding of classical Marathi poetry.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
+
+```
+    :root {
+        --bg: #faf8f5;
+        --text: #2c2416;
+        --text-secondary: #6b5d4d;
+        --accent: #8b4513;
+        --accent-light: #d4a574;
+        --border: #e0d5c7;
+        --card-bg: #fff8f0;
+        --highlight: #fef3e2;
+        --code-bg: #f5ede3;
+        --tag-bg: #f0e6d6;
+        --sanskrit: #5c3d1e;
+        --max-width: 720px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Source Serif 4', 'Noto Serif Devanagari', Georgia, serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.8;
+        font-size: 17px;
+    }
+
+    /* Header - matching blog style */
+    header {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 2rem 1.5rem 1rem;
+    }
+
+    header a {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 0.9rem;
+        opacity: 0.7;
+        transition: opacity 0.2s;
+    }
+
+    header a:hover { opacity: 1; }
+
+    /* Main content */
+    main {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 1.5rem 4rem;
+    }
+
+    /* Title section */
+    .post-meta {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    h1 {
+        font-family: 'Noto Serif Devanagari', serif;
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--sanskrit);
+        line-height: 1.3;
+        margin-bottom: 0.3rem;
+    }
+
+    .subtitle {
+        font-family: 'Source Serif 4', serif;
+        font-size: 1.15rem;
+        color: var(--text-secondary);
+        font-style: italic;
+        margin-bottom: 2rem;
+    }
+
+    .tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem;
+    }
+
+    .tag {
+        background: var(--tag-bg);
+        color: var(--text-secondary);
+        padding: 0.2rem 0.7rem;
+        border-radius: 3px;
+        font-size: 0.8rem;
+        font-family: system-ui, sans-serif;
+    }
+
+    /* Section headings */
+    h2 {
+        font-family: 'Source Serif 4', serif;
+        font-size: 1.4rem;
+        font-weight: 600;
+        color: var(--accent);
+        margin: 2.5rem 0 1rem;
+        padding-bottom: 0.3rem;
+        border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+        font-family: 'Source Serif 4', serif;
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--text);
+        margin: 2rem 0 0.8rem;
+    }
+
+    p { margin-bottom: 1.2rem; }
+
+    a {
+        color: var(--accent);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+    }
+
+    /* Verse blocks */
+    .verse-block {
+        background: var(--card-bg);
+        border-left: 3px solid var(--accent-light);
+        padding: 1.5rem 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 0 6px 6px 0;
+    }
+
+    .verse-block.original {
+        border-left-color: var(--accent);
+    }
+
+    .verse-block.viparit {
+        border-left-color: #c0392b;
+        background: #fdf6f5;
+    }
+
+    .verse-label {
+        font-family: system-ui, sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-secondary);
+        margin-bottom: 0.8rem;
+    }
+
+    .verse-label.original-label { color: var(--accent); }
+    .verse-label.viparit-label { color: #c0392b; }
+
+    .verse-text {
+        font-family: 'Noto Serif Devanagari', serif;
+        font-size: 1.05rem;
+        line-height: 2;
+        color: var(--text);
+    }
+
+    .verse-text .line {
+        display: block;
+    }
+
+    /* Meaning blocks */
+    .meaning {
+        background: var(--highlight);
+        padding: 1rem 1.2rem;
+        margin: 0.8rem 0 1.5rem;
+        border-radius: 4px;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        font-style: italic;
+    }
+
+    .meaning strong {
+        font-style: normal;
+        color: var(--text);
+    }
+
+    /* Comparison table */
+    .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5rem 0;
+        font-size: 0.95rem;
+    }
+
+    .comparison-table th {
+        background: var(--accent);
+        color: #fff;
+        padding: 0.7rem 1rem;
+        text-align: left;
+        font-family: 'Noto Serif Devanagari', serif;
+        font-weight: 600;
+    }
+
+    .comparison-table td {
+        padding: 0.6rem 1rem;
+        border-bottom: 1px solid var(--border);
+        font-family: 'Noto Serif Devanagari', serif;
+    }
+
+    .comparison-table tr:nth-child(even) {
+        background: var(--highlight);
+    }
+
+    /* Exercise box */
+    .exercise-box {
+        background: linear-gradient(135deg, #fef9f0 0%, #f8efe0 100%);
+        border: 2px solid var(--accent-light);
+        border-radius: 8px;
+        padding: 2rem;
+        margin: 2rem 0;
+    }
+
+    .exercise-box h3 {
+        color: var(--accent);
+        margin-top: 0;
+    }
+
+    .exercise-box ol, .exercise-box ul {
+        padding-left: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .exercise-box li {
+        margin-bottom: 0.6rem;
+    }
+
+    /* Step indicators */
+    .step {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        align-items: flex-start;
+    }
+
+    .step-number {
+        flex-shrink: 0;
+        width: 2rem;
+        height: 2rem;
+        background: var(--accent);
+        color: #fff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, sans-serif;
+        font-size: 0.85rem;
+        font-weight: 700;
+    }
+
+    .step-content h4 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+        color: var(--text);
+    }
+
+    .step-content p {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        margin-bottom: 0;
+    }
+
+    /* Callout */
+    .callout {
+        background: #eef6ee;
+        border-left: 3px solid #2d8a4e;
+        padding: 1.2rem 1.5rem;
+        margin: 1.5rem 0;
+        border-radius: 0 6px 6px 0;
+    }
+
+    .callout.warning {
+        background: #fef6e8;
+        border-left-color: #d4a017;
+    }
+
+    .callout p {
+        margin-bottom: 0;
+        font-size: 0.95rem;
+    }
+
+    .callout strong {
+        color: #2d8a4e;
+    }
+
+    .callout.warning strong {
+        color: #b8860b;
+    }
+
+    /* Horizontal rule */
+    hr {
+        border: none;
+        border-top: 1px solid var(--border);
+        margin: 2.5rem 0;
+    }
+
+    /* Footer */
+    footer {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+        border-top: 1px solid var(--border);
+        color: var(--text-secondary);
+        font-size: 0.85rem;
+        text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+        body { font-size: 16px; }
+        h1 { font-size: 1.6rem; }
+        .verse-block { padding: 1rem; }
+        .exercise-box { padding: 1.2rem; }
+        .comparison-table { font-size: 0.85rem; }
+        .comparison-table th, .comparison-table td { padding: 0.5rem; }
+    }
+</style>
+```
+
+</head>
+<body>
+
+<header>
+    <a href="/blog/">← back to home</a>
+</header>
+
+<main>
+    <p class="post-meta">February 8, 2026</p>
+    <h1>विपरीत केकावली</h1>
+    <p class="subtitle">A Creative Marathi Exercise with LLMs — Teaching Classical Poetry Through Its Mirror Image</p>
+
+```
+<div class="tags">
+    <span class="tag">marathi</span>
+    <span class="tag">education</span>
+    <span class="tag">LLM</span>
+    <span class="tag">poetry</span>
+    <span class="tag">moropant</span>
+    <span class="tag">kekavali</span>
+</div>
+
+<!-- ===== INTRODUCTION ===== -->
+
+<p>मोरोपंत (मयूर पंडित, १७२९–१७९४) हे मराठी पंडितकवींतील शेवटचे मोठे नाव. त्यांची <em>केकावली</em> — १२१ पृथ्वी छंदातील चौपाया — मराठी काव्यपरंपरेतील एक अमूल्य रत्न आहे. "सुसंगती सदा घडो" हे केकावलीचे भरतवाक्य — उपसंहारातील देवाकडे केलेली आर्त प्रार्थना.</p>
+
+<p>This post proposes a creative exercise for Marathi classrooms: after deeply studying Moropant's Kekavali, students compose its <strong>विपरीत</strong> (corollary) — where the original invokes every good thing, the corollary warns against every corresponding evil. The twist: students can use any LLM tool for their first draft, but then must critically evaluate and perfect the output using their own knowledge of Marathi prosody, vocabulary, and meaning.</p>
+
+<p>The idea draws from Panini's foundational grammatical principle of <strong>विधि-निषेध</strong> (injunction and prohibition) — every positive rule implies its negative counterpart.</p>
+
+<hr>
+
+<!-- ===== THE ORIGINAL ===== -->
+
+<h2>मूळ भरतवाक्य — मोरोपंत</h2>
+
+<h3>कडवे पहिले</h3>
+
+<div class="verse-block original">
+    <div class="verse-label original-label">मूळ — मोरोपंत</div>
+    <div class="verse-text">
+        <span class="line">सुसंगती सदा घडो । सुजनवाक्य कानीं पडो ।</span>
+        <span class="line">कलंक मतिचा झडो । विषय सर्वथा नावडो ।</span>
+        <span class="line">सदंघ्रिकमळी दडो । मुरडिता हटाने अडो ।</span>
+        <span class="line">वियोग घडता रडो । मन भवच्चरित्री जडो ॥</span>
+    </div>
+</div>
+
+<div class="meaning">
+    <strong>भावार्थ:</strong> सज्जनांची संगत सदा लाभो. सत्पुरुषांचे बोल कानीं पडो. मनाचा कलंक झडो. विषयांची आवड सर्वस्वी नष्ट होवो. संतचरणकमळीं मन दडो. मागे फिरताना हट्टाने अडो. वियोग झाला तर रडो. मन देवाच्या चरित्रांत जडो.
+</div>
+
+<h3>कडवे दुसरे</h3>
+
+<div class="verse-block original">
+    <div class="verse-label original-label">मूळ — मोरोपंत</div>
+    <div class="verse-text">
+        <span class="line">न निश्चय कधी ढळो । कुजनविघ्नबाधा टळो ।</span>
+        <span class="line">न चित्त भजनीं चळो । मति सदुक्तमार्गीं वळो ।</span>
+        <span class="line">स्वतत्त्व हृदयां कळो । दुरभिमान सारा गळो ।</span>
+        <span class="line">पुन्हा न मन हे मळो । दुरित आत्मबोधे जळो ॥</span>
+    </div>
+</div>
+
+<div class="meaning">
+    <strong>भावार्थ:</strong> निश्चय कधी ढळू नये. दुर्जनांच्या विघ्नबाधा टळोत. चित्त भजनांतून चळू नये. बुद्धी सन्मार्गाकडे वळो. स्वतःचे तत्त्व हृदयांत कळो. दुराभिमान सारा गळो. मन पुन्हा मलिन न होवो. पापे आत्मज्ञानाने जळोत.
+</div>
+
+<h3>कडवे तिसरे ते सहावे</h3>
+
+<div class="verse-block original">
+    <div class="verse-label original-label">मूळ — मोरोपंत (कडवे ३)</div>
+    <div class="verse-text">
+        <span class="line">नजे प्रियस दोष ते । प्रियस दोषही चांगले ।</span>
+        <span class="line">स्वतोक पितरा रुचे । जरी हि कर दमी रांगले ।</span>
+        <span class="line">तुलाची धरी पोटीशी । कशी तदा यशोदा बरे ।</span>
+        <span class="line">जरी मळवीशी रजो । मलीन काय तू अंबरे ॥</span>
+    </div>
+</div>
+
+<div class="meaning">
+    <strong>भावार्थ:</strong> प्रियजनांचे दोष दिसत नाहीत — प्रियजनांचे दोषही गोड वाटतात. स्वतःच्या बाळाला पिता कवटाळतो, जरी त्याचे हात मळलेले असले. यशोदा कृष्णाला मळलेल्या अवस्थेतही पोटाशी धरते. हे अंबरा (आकाशा), तुला रजाने (धुळीने) मळवले तरी तू मलिन होतोस काय?
+</div>
+
+<div class="verse-block original">
+    <div class="verse-label original-label">मूळ — मोरोपंत (कडवे ४)</div>
+    <div class="verse-text">
+        <span class="line">पिता जरी विटे । विटोन जननी कुपित्री विटे ।</span>
+        <span class="line">दया मृतर सार्धधी । नकुल क:जले त्या किटे ।</span>
+        <span class="line">प्रसादपट झाकिती । परीपरा गुरुचे थीटे ।</span>
+        <span class="line">म्हणोनी म्हणती । भले न ऋण जन्मदेचे फीटे ॥</span>
+    </div>
+</div>
+
+<div class="meaning">
+    <strong>भावार्थ:</strong> बाप विटला तरी विटो, पण आई कधीच विटत नाही. देवाची दया अमृतापेक्षाही श्रेष्ठ. गुरूंचा प्रसाद सर्वस्व झाकून टाकतो. म्हणून म्हणतात — जन्मदात्याचे ऋण कधी फिटत नाही.
+</div>
+
+<div class="verse-block original">
+    <div class="verse-label original-label">मूळ — मोरोपंत (कडवे ५)</div>
+    <div class="verse-text">
+        <span class="line">कृतात्त कटका । मलध्वज जरा दिसो लागली ।</span>
+        <span class="line">पुर:सर्गता । स्वये झगडता तनु भागली ।</span>
+        <span class="line">सहाय दुसरा । नसे तुज विणे बळे आगळा ।</span>
+        <span class="line">लहू जरी उताविळा । स्वरी तो कापितो आगळा ॥</span>
+    </div>
+</div>
+
+<div class="verse-block original">
+    <div class="verse-label original-label">मूळ — मोरोपंत (कडवे ६)</div>
+    <div class="verse-text">
+        <span class="line">दया मृतघना । अहो हरिवळा मयुराकडे ।</span>
+        <span class="line">रडे शिशुतया सी घे । कळवळोनी माता कडे ।</span>
+        <span class="line">असा अतिथी । धार्मिकस्तुतपदा कदा सापडे ।</span>
+        <span class="line">पुन्हा जड भवारणवीं । उतरिता नदा सापडे ॥</span>
+    </div>
+</div>
+
+<div class="meaning">
+    <strong>भावार्थ:</strong> हे दयामृताच्या मेघा! या मयूराकडे (मोरोपंत कवीकडे) वळ. रडत्या शिशूला माता कळवळून कुशीत घेते. असा धार्मिक, स्तुतिपात्र अतिथी कधी सापडेल? या जड भवसागरातून तारण्यास तुझ्याविना दुसरा कोण?
+</div>
+
+<hr>
+
+<!-- ===== THE VIPARIT ===== -->
+
+<h2>विपरीत केकावली — कुसंगतीचा शाप</h2>
+
+<p>खालील रचना मूळ भरतवाक्याचा <strong>विपरीत प्रतिध्वनी</strong> आहे. जेथे मोरोपंत "हे घडो" म्हणतात, तेथे विपरीत रचना "हे कदापि न घडो" असे सावधान करते.</p>
+
+<h3>कडवे पहिले — विपरीत</h3>
+
+<div class="verse-block viparit">
+    <div class="verse-label viparit-label">विपरीत — कुसंगतीचा शाप</div>
+    <div class="verse-text">
+        <span class="line">कुसंगती कदा न लागो । दुर्जनबोल कानां न वागो ।</span>
+        <span class="line">कलंक मतिसी न दाटो । विषयलोभ चित्ता न भेटो ।</span>
+        <span class="line">कुपंथ पायांसी न गाठो । विमुख होता पंथ न आटो ।</span>
+        <span class="line">अधर्म दारीं न हाटो । मन कुकर्मरंगीं न माटो ॥</span>
+    </div>
+</div>
+
+<div class="meaning">
+    <strong>विपरीत भावार्थ:</strong> कुसंग कधी लागू नये. दुर्जनांचे बोल कानांवर न पडोत. मनाला कलंक न दाटो. विषयलोभ चित्ताला न भेटो. कुमार्ग पायांना न गाठो. विमुख होताना पंथ न आटो. अधर्म दारी न येवो. मन कुकर्मांच्या रंगात न रंगो.
+</div>
+
+<h3>कडवे दुसरे — विपरीत</h3>
+
+<div class="verse-block viparit">
+    <div class="verse-label viparit-label">विपरीत — कुसंगतीचा शाप</div>
+    <div class="verse-text">
+        <span class="line">दुर्बुद्धी कदा न ढळो अंगीं । कुजनसंगत न जडो संगीं ।</span>
+        <span class="line">कुचित्त अधमीं न चळो भंगीं । कुमति कुमार्गाने न वळो रंगीं ।</span>
+        <span class="line">अतत्त्व हृदयां न कळो अंगीं । दुराग्रह कधीं न फुलो तंगीं ।</span>
+        <span class="line">पुन्हा न मन हे कलुषें भरो । अविद्या मदमत्सरें न स्मरो ॥</span>
+    </div>
+</div>
+
+<h3>कडवे तिसरे — विपरीत</h3>
+
+<div class="verse-block viparit">
+    <div class="verse-label viparit-label">विपरीत — कुसंगतीचा शाप</div>
+    <div class="verse-text">
+        <span class="line">कुसंगें दिसती दोष जेथे । निर्दोषीं कलंक लावी तेथे ।</span>
+        <span class="line">स्वतोक पितरां नावडे खोटा । कुजनाचा मळ चढे पोटा ।</span>
+        <span class="line">कुसंगें विसरे यशोदा बाळा । कशी धरी कुशींत त्या वेळा ।</span>
+        <span class="line">कुधूळ जरी पडे अंबरीं । कुदृष्टी मलीन करी अंतरीं ॥</span>
+    </div>
+</div>
+
+<div class="meaning">
+    <strong>रूपकांचा विपर्यास:</strong> मूळात यशोदा कृष्णाला मळलेल्या अवस्थेतही पोटाशी धरते — कारण प्रेम दोष पाहत नाही. विपरीतात कुसंगतीमुळे तेच प्रेमही लोपते. मूळात आकाश धुळीने मलिन होत नाही. विपरीतात कुदृष्टी अंतरालाच मलिन करते.
+</div>
+
+<h3>कडवे चौथे — विपरीत</h3>
+
+<div class="verse-block viparit">
+    <div class="verse-label viparit-label">विपरीत — कुसंगतीचा शाप</div>
+    <div class="verse-text">
+        <span class="line">कुसंगें पिता सहजीं विटे ।</span>
+        <span class="line">कुसंगें जननी कोपून विटे ।</span>
+        <span class="line">दया लोपते अंतरीं ।</span>
+        <span class="line">कुजन कृतघ्न त्या किटे ।</span>
+        <span class="line">अज्ञानपट झांकिती ।</span>
+        <span class="line">कुसंगें गुरुवाक्यही थीटे ।</span>
+        <span class="line">म्हणोनी सांगती ।</span>
+        <span class="line">कुसंगे ऋणही फुकट फीटे ॥</span>
+    </div>
+</div>
+
+<h3>कडवे पाचवे — विपरीत</h3>
+
+<div class="verse-block viparit">
+    <div class="verse-label viparit-label">विपरीत — कुसंगतीचा शाप</div>
+    <div class="verse-text">
+        <span class="line">कुकर्माचे सैन्य दाटे ।</span>
+        <span class="line">अधर्मध्वज सर्वत्र फाटे ।</span>
+        <span class="line">कुसंगें स्वबळ लोपे ।</span>
+        <span class="line">स्वये लढतां शक्ती कोपे ।</span>
+        <span class="line">सहाय दुसरा न मिळे ।</span>
+        <span class="line">कुसंगे बळ सारे गळे ।</span>
+        <span class="line">उतावीळ जरी मन धावे ।</span>
+        <span class="line">कुमार्गें स्वकीय हातीं मावे ॥</span>
+    </div>
+</div>
+
+<h3>कडवे सहावे — विपरीत</h3>
+
+<div class="verse-block viparit">
+    <div class="verse-label viparit-label">विपरीत — कुसंगतीचा शाप</div>
+    <div class="verse-text">
+        <span class="line">कुसंगे मेघ कोरडा ।</span>
+        <span class="line">अहो मयूर तळमळे उघड्या ।</span>
+        <span class="line">कुसंगे शिशु रडे एकला ।</span>
+        <span class="line">कळवळा लोपे मातेला ।</span>
+        <span class="line">असा कुसंगीं अभागी ।</span>
+        <span class="line">अधार्मिक कुपदीं सदा लागी ।</span>
+        <span class="line">पुन्हा जड भवारणवांत ।</span>
+        <span class="line">बुडवी कुसंग; न तारी नाव ॥</span>
+    </div>
+</div>
+
+<div class="meaning">
+    <strong>रूपकांचा विपर्यास:</strong> मूळात मोरोपंत "दयामृतघना" म्हणून देवाला मेघाची उपमा देतात — मयूर (मोरोपंत स्वतः "मयूर पंडित") त्या मेघाकडे आर्त नजरेने पाहतो. विपरीतात कुसंगतीमुळे मेघ कोरडा पडतो, मयूर तळमळतो. मूळात माता रडत्या शिशूला कुशीत घेते. विपरीतात कुसंगतीमुळे मातेचा कळवळाही लोपतो. मूळात भवसागरातून तारण्यास "नदा" (नाव) सापडते. विपरीतात कुसंग बुडवतो, नाव तारत नाही.
+</div>
+
+<hr>
+
+<!-- ===== COMPARISON TABLE ===== -->
+
+<h2>विधि-निषेध तुलना</h2>
+
+<p>पाणिनींच्या अष्टाध्यायीत <strong>विधी</strong> (injunction: "कर") आणि <strong>प्रतिषेध</strong> (prohibition: "करू नकोस") हा द्वैत-संबंध मूलभूत आहे. तसाच मोरोपंतांच्या विधीचा प्रतिषेध:</p>
+
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th>मूळ (मोरोपंत — विधी)</th>
+            <th>विपरीत (निषेध)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>सुसंगती सदा <strong>घडो</strong></td>
+            <td>कुसंगती कदा न <strong>लागो</strong></td>
+        </tr>
+        <tr>
+            <td>सुजनवाक्य कानीं <strong>पडो</strong></td>
+            <td>दुर्जनबोल कानां न <strong>वागो</strong></td>
+        </tr>
+        <tr>
+            <td>कलंक मतिचा <strong>झडो</strong></td>
+            <td>कलंक मतिसी न <strong>दाटो</strong></td>
+        </tr>
+        <tr>
+            <td>सदंघ्रिकमळी <strong>दडो</strong></td>
+            <td>कुपंथ पायांसी न <strong>गाठो</strong></td>
+        </tr>
+        <tr>
+            <td>दयामृतघना — मयूर <strong>नाचे</strong></td>
+            <td>कुसंगे मेघ <strong>कोरडा</strong></td>
+        </tr>
+        <tr>
+            <td>शिशु रडे — माता <strong>घे</strong> कडे</td>
+            <td>शिशु रडे <strong>एकला</strong></td>
+        </tr>
+        <tr>
+            <td>भवारणव — नदा <strong>सापडे</strong></td>
+            <td>भवारणव — न तारी <strong>नाव</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<!-- ===== THE EXERCISE ===== -->
+
+<h2>The Exercise — For Marathi Classrooms</h2>
+
+<p>This is a creative exercise designed for Marathi teachers to give their students. The core idea: students have already learned about LLMs — they will use them regardless. So instead of pretending they won't, we design an exercise that <strong>requires</strong> LLM use as the starting point but makes the student's own knowledge the finishing line.</p>
+
+<div class="callout">
+    <p><strong>मूळ तत्त्व:</strong> Kids are going to use LLMs no matter what. Unless we make them <em>think</em> while they use it, how are they going to learn?</p>
+</div>
+
+<p>This idea was inspired by the <a href="https://www.insidehighered.com/news/admissions/graduate/2025/07/18/new-michigan-law-essay-prompt-asks-applicants-use-ai" target="_blank">University of Michigan Law School's new admissions essay prompt</a> (July 2025), which <em>requires</em> applicants to use generative AI in composing their response — and then evaluates how thoughtfully they used it. Their dean put it simply: "If we have applicants who have that skill, let's give them an opportunity to demonstrate it." The same principle applies here — except with मोरोपंत instead of legal briefs, and छंदशास्त्र instead of case law.</p>
+
+<div class="exercise-box">
+    <h3>📋 गृहपाठ: विपरीत केकावली लिहा</h3>
+
+    <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+            <h4>शिका — Learn the Original Deeply (In Class, 1-2 Lectures)</h4>
+            <p>Teacher teaches Moropant's Bharat-vakya in depth: the meter (मात्रावृत्त, ११+१३ मात्रा प्रत्येक चरणात), the vocabulary (सुसंगती, सदंघ्रि, दुरभिमान, दुरित, भवारणव), the theological imagery (यशोदा-कृष्ण, दयामेघ-मयूर), and the rhetorical structure (विध्यर्थ — the optative mood: "may this happen").</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+            <h4>समजा — Understand the Corollary Concept</h4>
+            <p>Explain the पाणिनीय विधि-निषेध concept: every "सु-" has a "कु-/दु-", every "घडो" has a "न घडो". Show 2-3 example lines so students grasp the pattern. Use the comparison table above as a reference.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+            <h4>तयार करा — Use an LLM to Generate a First Draft</h4>
+            <p>Students prompt any LLM (Claude, ChatGPT, Gemini, etc.) to write a विपरीत केकावली. This is the <strong>starting point</strong>, not the final answer. The LLM will produce something — but it will almost certainly have problems: wrong meter, weak vocabulary, repetitive construction, inauthentic Marathi.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+            <h4>तपासा — Critically Evaluate the LLM Output</h4>
+            <p>This is where real learning happens. Students must check:</p>
+            <ul style="margin-top:0.5rem">
+                <li><strong>छंद</strong> (Meter) — Does each line match the मात्रा count? Is the rhythm right?</li>
+                <li><strong>शब्दसंपत्ती</strong> (Vocabulary) — Are the words authentic Marathi? Or Hindi-influenced? Or just generic?</li>
+                <li><strong>यमक</strong> (Rhyme) — Do the line-endings follow the original's rhyme pattern?</li>
+                <li><strong>अर्थ</strong> (Meaning) — Does each विपरीत line truly mirror the मूळ line's meaning?</li>
+                <li><strong>रूपकें</strong> (Imagery) — Are the metaphors inverted properly? (यशोदा, मेघ-मयूर, भवारणव)</li>
+                <li><strong>वैविध्य</strong> (Variety) — Does the LLM just repeat "न घडो" in every line? Or does it use varied verb endings like the original?</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">5</div>
+        <div class="step-content">
+            <h4>सुधारा — Fix, Rewrite, Perfect</h4>
+            <p>Students rewrite the draft with their corrections. They may go back to the LLM with specific fix requests, or they may rewrite lines entirely themselves. The final submission should be accompanied by a short note explaining what they changed and why.</p>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="step-number">6</div>
+        <div class="step-content">
+            <h4>सादर करा — Submit with a Reflection</h4>
+            <p>Final submission includes: (a) the LLM's raw first draft, (b) the student's corrected version, and (c) a paragraph explaining what the LLM got wrong and how they fixed it. This reflection is the most important part.</p>
+        </div>
+    </div>
+</div>
+
+<h3>Why This Works</h3>
+
+<p>This exercise tests multiple skills simultaneously. Students can't fake it — even with an LLM doing the heavy lifting, evaluating and fixing Marathi poetry requires genuine understanding of the language's prosody, vocabulary, and literary tradition.</p>
+
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th>Skill Tested</th>
+            <th>How</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>मराठी भाषाज्ञान</td>
+            <td>Evaluating whether the LLM's word choices are authentic Marathi vs. Hindi-influenced or generic</td>
+        </tr>
+        <tr>
+            <td>छंदशास्त्र (Prosody)</td>
+            <td>Counting मात्रा, checking rhythm, verifying meter compliance</td>
+        </tr>
+        <tr>
+            <td>काव्यरसग्रहण</td>
+            <td>Understanding the theological metaphors well enough to invert them properly</td>
+        </tr>
+        <tr>
+            <td>LLM Literacy</td>
+            <td>Learning to prompt effectively, evaluate output critically, iterate intelligently</td>
+        </tr>
+        <tr>
+            <td>Creative Writing</td>
+            <td>The final polished version requires original compositional skill</td>
+        </tr>
+        <tr>
+            <td>Critical Thinking</td>
+            <td>The reflection forces metacognition about what the AI missed and why</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="callout warning">
+    <p><strong>शिक्षकांसाठी टीप:</strong> LLM output is the starting line, not the finish line. The student who submits the LLM's raw output unmodified will score poorly — because the LLM <em>will</em> make mistakes in meter, vocabulary, and imagery. The student who deeply understands Moropant's original can spot and fix those mistakes. That's the test.</p>
+</div>
+
+<hr>
+
+<!-- ===== GRADING RUBRIC ===== -->
+
+<h2>Suggested Grading Rubric</h2>
+
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th>Component</th>
+            <th>Weight</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>छंदशुद्धता</strong> — Correct meter and rhyme</td>
+            <td>25%</td>
+        </tr>
+        <tr>
+            <td><strong>शब्दयोजना</strong> — Authentic, varied Marathi vocabulary</td>
+            <td>25%</td>
+        </tr>
+        <tr>
+            <td><strong>अर्थशुद्धता</strong> — Each line truly mirrors the original's meaning</td>
+            <td>20%</td>
+        </tr>
+        <tr>
+            <td><strong>चिंतनटीप</strong> — Quality of the reflection: what was wrong, what was fixed, why</td>
+            <td>20%</td>
+        </tr>
+        <tr>
+            <td><strong>सर्जनशीलता</strong> — Creative and original touches beyond mere inversion</td>
+            <td>10%</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>About Moropant</h2>
+
+<p>मोरोपंत रामचंद्र पारडकर (१७२९–१७९४), "मयूर पंडित" म्हणून प्रसिद्ध, हे कार्हाडे ब्राह्मण मराठी कवी होते. मराठी साहित्यविद्वानांनी "पंडित कवी" म्हणून वर्गीकृत केलेल्या कवींमधील ते शेवटचे मोठे नाव (मुक्तेश्वर, वामन पंडित, रघुनाथ पंडित, श्रीधर हे अन्य प्रमुख पंडित कवी). मोरोपंतांनी १०८ रामायणे लिहिण्याचा संकल्प केला होता; प्रत्यक्षात ९४-९५ लिहिली. केकावली (१२१ पृथ्वी छंदातील चौपाया, अंतिम एक स्रग्धरा छंदात) ही त्यांची अंतिम प्रमुख कृती, c. १७९० मध्ये पूर्ण. दोनशे वर्षांनंतरही केकावलीचे आकर्षण अबाधित आहे.</p>
+
+<p>"सुसंगती सदा घडो" हे केकावलीचे भरतवाक्य — ग्रंथसमाप्तीच्या वेळी केलेली उपसंहारात्मक प्रार्थना. बालकपालक (2013) या चित्रपटाद्वारे ही रचना पुन्हा लोकप्रिय झाली.</p>
+
+<hr>
+
+<p style="color: var(--text-secondary); font-size: 0.9rem; font-style: italic;">
+    Note: The विपरीत version above is itself an LLM-assisted draft — composed in conversation with Claude, iteratively corrected over multiple rounds. It is offered as an example, not a perfect model. Students are encouraged to improve upon it. That's the point.
+</p>
+
+<p style="color: var(--text-secondary); font-size: 0.9rem; font-style: italic;">
+    The grammatical framework referenced here is Panini's — the great Sanskrit grammarian whose Ashtadhyayi (~4th century BCE) formalized the विधि-निषेध (rule and exception) principle that structures all of Sanskrit grammar and, by extension, Marathi's literary tradition.
+</p>
+```
+
+</main>
+
+<footer>
+    © 2026 Ranjan Marathe · <a href="/blog/">Home</a> · <a href="https://github.com/PriyaranjanMarathe">GitHub</a>
+</footer>
+
+</body>
+</html>
