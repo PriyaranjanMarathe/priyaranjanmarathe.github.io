@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Oat UI Grid Playground</title>
+
+  <!-- Oat UI (Kailash Nadh) -->
+  <link rel="stylesheet" href="https://unpkg.com/@knadh/oat/oat.min.css">
+  <script src="https://unpkg.com/@knadh/oat/oat.min.js" defer></script>
+
+  <style>
+    :root { color-scheme: light dark; }
+    main { max-width: 980px; margin: 0 auto; padding: 24px; }
+    .meta { opacity: .8; margin: .35rem 0 1rem; }
+    .tags { opacity: .85; margin: .75rem 0 1rem; }
+    .tags span { margin-right: .35rem; }
+    .muted { opacity: .8; }
+    .right { display:flex; justify-content:flex-end; }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p><a href="/blog/">← back to home</a></p>
+
+    <p class="meta">February 13, 2026</p>
+    <h1>Oat UI Grid Playground</h1>
+    <p class="muted">A tiny “dashboard-y” grid demo for my blog, built with semantic HTML + Oat UI.</p>
+
+    <p class="tags">
+      <span class="badge secondary">ui</span>
+      <span class="badge secondary">html</span>
+      <span class="badge secondary">css</span>
+      <span class="badge secondary">oat</span>
+    </p>
+
+    <hr>
+
+    <article class="card">
+      <header>
+        <h2 style="margin-bottom:.25rem;">Grid + components showcase</h2>
+        <p class="muted" style="margin-top:0;">
+          Cards, 12-col grid, tabs, dropdown, dialog, toast, skeleton — all in plain HTML.
+        </p>
+      </header>
+
+      <fieldset class="group" style="margin-top:.75rem;">
+        <legend>Search</legend>
+        <input id="q" type="search" placeholder="Type then hit Enter…" />
+        <button class="outline" onclick="runSearch()">Go</button>
+        <button onclick="toastSuccess()">Toast</button>
+
+        <ot-dropdown style="margin-left:.5rem;">
+          <button popovertarget="demo-menu" class="outline">
+            Dropdown
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <menu popover id="demo-menu">
+            <button role="menuitem" onclick="toastInfo('Clicked: One')">One</button>
+            <button role="menuitem" onclick="toastInfo('Clicked: Two')">Two</button>
+            <button role="menuitem" onclick="toastDanger()">Chaos</button>
+          </menu>
+        </ot-dropdown>
+
+        <button class="outline" style="margin-left:.5rem;" onclick="showSkeleton()">Skeleton</button>
+      </fieldset>
+
+      <div id="searchOut" class="muted" style="margin-top:.75rem;"></div>
+    </article>
+
+    <section style="margin-top:1rem;">
+      <div class="row">
+        <div class="col-4">
+          <article class="card">
+            <header><h3>Semantic-first</h3></header>
+            <p class="muted">Write HTML. It looks good.</p>
+            <details>
+              <summary>Why it hits</summary>
+              <p class="muted">Less div soup, more meaning.</p>
+            </details>
+          </article>
+        </div>
+
+        <div class="col-4">
+          <article class="card">
+            <header><h3>Badges + buttons</h3></header>
+            <p>
+              <span class="badge success">Success</span>
+              <span class="badge warning">Warning</span>
+              <span class="badge danger">Danger</span>
+              <span class="badge outline">Outline</span>
+            </p>
+            <menu class="buttons">
+              <button class="outline small" onclick="toastInfo('Left')">Left</button>
+              <button class="outline small" onclick="toastInfo('Mid')">Mid</button>
+              <button class="outline small" onclick="toastInfo('Right')">Right</button>
+            </menu>
+          </article>
+        </div>
+
+        <div class="col-4">
+          <article class="card">
+            <header><h3>Mini KPI</h3></header>
+            <p class="muted" style="margin:.25rem 0 .6rem;">progress + meter</p>
+            <progress value="72" max="100"></progress>
+            <div style="height:.6rem;"></div>
+            <meter value="0.82" min="0" max="1" low="0.3" high="0.7" optimum="1"></meter>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section style="margin-top:1rem;">
+      <article class="card">
+        <header>
+          <h2 style="margin-bottom:.25rem;">Tabs + table</h2>
+          <p class="muted" style="margin-top:0;">Simple, readable UI without frameworks.</p>
+        </header>
+
+        <ot-tabs>
+          <div role="tablist">
+            <button role="tab">Users</button>
+            <button role="tab">Notes</button>
+          </div>
+
+          <div role="tabpanel">
+            <table>
+              <thead>
+                <tr><th>Name</th><th>Role</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Ada</td><td>Admin</td><td><span class="badge success">Active</span></td></tr>
+                <tr><td>Grace</td><td>Editor</td><td><span class="badge warning">Review</span></td></tr>
+                <tr><td>Donald</td><td>Viewer</td><td><span class="badge secondary">Pending</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div role="tabpanel">
+            <div id="skeletonZone" style="display:none;">
+              <p class="muted">Skeleton loading…</p>
+              <article style="display:flex; gap: var(--space-3); padding: var(--space-6);">
+                <div role="status" class="skeleton box"></div>
+                <div style="flex: 1; display:flex; flex-direction:column; gap: var(--space-1);">
+                  <div role="status" class="skeleton line"></div>
+                  <div role="status" class="skeleton line" style="width: 60%"></div>
+                </div>
+              </article>
+            </div>
+
+            <button class="outline" commandfor="about-dialog" command="show-modal">Open dialog</button>
+          </div>
+        </ot-tabs>
+      </article>
+    </section>
+
+    <dialog id="about-dialog" closedby="any" onclose="onDialogClose(this)">
+      <form method="dialog">
+        <header>
+          <h3>About</h3>
+          <p class="muted">Native dialog + Oat toast.</p>
+        </header>
+        <div data-field>
+          <label>Pick a vibe</label>
+          <select id="vibe">
+            <option value="calm">calm</option>
+            <option value="crispy">crispy</option>
+            <option value="feral">feral</option>
+          </select>
+        </div>
+        <footer>
+          <button type="button" commandfor="about-dialog" command="close" class="outline">Close</button>
+          <button value="confirm">Confirm</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <hr>
+
+    <small class="muted">
+      Attribution: UI styling uses Oat by Kailash Nadh (MIT). Source: https://github.com/knadh/oat
+    </small>
+  </main>
+
+  <script>
+    function toastSuccess() {
+      ot.toast('Action completed', 'All good', { variant: 'success' });
+    }
+    function toastDanger() {
+      ot.toast('Something broke (intentionally)', 'Oops', { variant: 'danger', placement: 'top-left' });
+    }
+    function toastInfo(msg) {
+      ot.toast(msg || 'Hello', 'FYI', { placement: 'top-right' });
+    }
+
+    function runSearch() {
+      const q = document.getElementById('q')?.value?.trim() || '';
+      const out = document.getElementById('searchOut');
+      if (!out) return;
+
+      if (!q) {
+        out.innerHTML = '<span class="badge warning">No query</span> <span class="muted">Type something first.</span>';
+        return;
+      }
+      out.innerHTML = '<span class="badge success">Query</span> <span class="mono"></span>';
+      out.querySelector('.mono').textContent = q;
+      toastInfo(`Searched: ${q}`);
+    }
+
+    function showSkeleton() {
+      document.getElementById('skeletonZone').style.display = 'block';
+      toastInfo('Skeleton: on');
+    }
+
+    function onDialogClose(d) {
+      if (d.returnValue === 'confirm') {
+        const vibe = document.getElementById('vibe')?.value || 'calm';
+        toastSuccess();
+        toastInfo(`Vibe set: ${vibe}`);
+      }
+    }
+  </script>
+</body>
+</html>
