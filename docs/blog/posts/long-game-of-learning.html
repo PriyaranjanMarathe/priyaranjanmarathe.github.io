@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Long Game of Learning</title>
+    <meta name="description" content="Deep competence is a forty-year project. Why mastery isn't binary, early exposure builds scaffolding, and the real rewards compound over decades.">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+```
+    :root {
+        --font-body: 'Georgia', 'Times New Roman', serif;
+        --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+        --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        --color-bg: #ffffff;
+        --color-text: #24292f;
+        --color-text-secondary: #57606a;
+        --color-link: #0969da;
+        --color-border: #d0d7de;
+        --color-tag-bg: #ddf4ff;
+        --color-tag-text: #0969da;
+        --color-tag-bg-hover: #b6e3ff;
+        --color-blockquote-border: #d0d7de;
+        --color-hr: #d8dee4;
+        --max-width: 720px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --color-bg: #0d1117;
+            --color-text: #e6edf3;
+            --color-text-secondary: #8b949e;
+            --color-link: #58a6ff;
+            --color-border: #30363d;
+            --color-tag-bg: #1f3a5f;
+            --color-tag-text: #58a6ff;
+            --color-tag-bg-hover: #264a78;
+            --color-blockquote-border: #30363d;
+            --color-hr: #21262d;
+        }
+    }
+
+    body {
+        font-family: var(--font-body);
+        background: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.7;
+        font-size: 17px;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+    }
+
+    /* Nav */
+    .back-link {
+        font-family: var(--font-heading);
+        font-size: 0.875rem;
+        color: var(--color-link);
+        text-decoration: none;
+        display: inline-block;
+        margin-bottom: 2rem;
+    }
+    .back-link:hover { text-decoration: underline; }
+
+    /* Post meta */
+    .post-date {
+        font-family: var(--font-heading);
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+        margin-bottom: 0.5rem;
+    }
+
+    /* Title */
+    h1 {
+        font-family: var(--font-heading);
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1.25;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+    }
+
+    .post-subtitle {
+        font-size: 1.1rem;
+        color: var(--color-text-secondary);
+        margin-bottom: 1rem;
+        font-style: italic;
+    }
+
+    /* Tags */
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-bottom: 2.5rem;
+    }
+    .tag {
+        font-family: var(--font-heading);
+        font-size: 0.75rem;
+        background: var(--color-tag-bg);
+        color: var(--color-tag-text);
+        padding: 0.15rem 0.55rem;
+        border-radius: 2em;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .tag:hover { background: var(--color-tag-bg-hover); }
+
+    /* Content */
+    .post-content p {
+        margin-bottom: 1.4rem;
+    }
+
+    .post-content h2 {
+        font-family: var(--font-heading);
+        font-size: 1.35rem;
+        font-weight: 600;
+        margin: 2.5rem 0 1rem;
+        letter-spacing: -0.01em;
+    }
+
+    .post-content h3 {
+        font-family: var(--font-heading);
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 2rem 0 0.75rem;
+    }
+
+    .post-content strong {
+        font-weight: 700;
+    }
+
+    .post-content em {
+        font-style: italic;
+    }
+
+    .post-content a {
+        color: var(--color-link);
+        text-decoration: none;
+    }
+    .post-content a:hover { text-decoration: underline; }
+
+    .post-content hr {
+        border: none;
+        border-top: 1px solid var(--color-hr);
+        margin: 2.5rem 0;
+    }
+
+    .post-content blockquote {
+        border-left: 3px solid var(--color-blockquote-border);
+        padding-left: 1.25rem;
+        margin: 1.5rem 0;
+        color: var(--color-text-secondary);
+        font-style: italic;
+    }
+
+    .post-content code {
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+        background: var(--color-tag-bg);
+        padding: 0.15em 0.35em;
+        border-radius: 3px;
+    }
+
+    /* Example blocks — the bolded domain examples */
+    .post-content .example-block {
+        margin-bottom: 1.4rem;
+    }
+    .post-content .example-block strong {
+        display: block;
+        font-family: var(--font-heading);
+        margin-bottom: 0.2rem;
+    }
+
+    /* Footer */
+    .post-footer {
+        margin-top: 4rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid var(--color-hr);
+        font-family: var(--font-heading);
+        font-size: 0.8rem;
+        color: var(--color-text-secondary);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .post-footer a {
+        color: var(--color-link);
+        text-decoration: none;
+    }
+    .post-footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+        h1 { font-size: 1.6rem; }
+        body { font-size: 16px; }
+        .container { padding: 1.25rem 1rem 3rem; }
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="container">
+        <a href="/blog/" class="back-link">← back to home</a>
+
+```
+    <div class="post-date">March 1, 2026</div>
+
+    <h1>The Long Game of Learning</h1>
+    <div class="post-subtitle">Deep competence is a forty-year project. Scaffolding, compounding, and the case for staying.</div>
+
+    <div class="tags">
+        <span class="tag">learning</span>
+        <span class="tag">education</span>
+        <span class="tag">mastery</span>
+        <span class="tag">compounding</span>
+        <span class="tag">parenting</span>
+    </div>
+
+    <div class="post-content">
+```
+
+<p>There is a common misunderstanding about what it means to <em>know</em> something.</p>
+
+<p>We tell a child they are "learning" a skill, and somewhere along the way, we expect them to cross a line — from <em>not knowing</em> to <em>knowing</em>. As if competence were a light switch. As if one day the circuit completes and the thing is simply yours.</p>
+
+<p>But that is not how it works. Not for any skill worth having.</p>
+
+<hr>
+
+<p>Consider what happens when you first expose someone to a new discipline. Early on, the mind is doing something quiet and invisible: it is building scaffolding. Not mastery — scaffolding. The structures that will, over years and decades, support the weight of real understanding.</p>
+
+<p>A child who spends a year with a new subject has not "learned" it. They have built the first floor of a building that takes a lifetime to complete. And the tragedy is when we — or they — look at that first floor and conclude it wasn't worth the effort because the building isn't finished.</p>
+
+<p>The truth is simpler and more demanding: <strong>deep competence is a forty-year project.</strong></p>
+
+<p>Think about anyone you know who is truly exceptional at something — not performatively good, but deeply fluent. The kind of person who sees patterns others miss, who navigates complexity with a calm that looks effortless. That person did not arrive there in a semester or a certification or even a decade. They arrived there because they stayed with the thing long enough for the scaffolding to become structure, and the structure to become intuition.</p>
+
+<hr>
+
+<p>This pattern holds everywhere you look.</p>
+
+<p><strong>A child learning a second language</strong> stumbles through vocabulary lists and conjugation tables for years. At fifteen, they feel like they barely know anything. But the scaffolding is in place — the ear has been trained, the grammar has been internalized at a level deeper than conscious thought. At forty-five, after decades of reading, traveling, working, and living in that language, they understand jokes, navigate bureaucracies, argue politics, and dream in it. The fifteen-year-old and the forty-five-year-old are on the same continuum. The difference is thirty years of compounding.</p>
+
+<p><strong>A student who learns basic statistics in college</strong> might feel like they "forgot it all" by their thirties. But when they encounter a machine learning problem at work — when someone shows them a gradient descent algorithm or a confusion matrix — the old scaffolding activates. They grasp it faster than someone starting cold. The early investment didn't disappear. It went underground, waiting to be built upon.</p>
+
+<p><strong>A kid taking piano lessons</strong> practices scales and simple pieces for years, and quits at thirteen convinced they "weren't good at music." Twenty years later, they pick up a different instrument — a guitar, a drum, a voice — and something surprising happens: rhythm feels natural, their ear can detect when something is off-key, they understand song structure intuitively. The piano scaffolding didn't serve only the piano. It taught their mind how music works.</p>
+
+<p><strong>Someone who learns to cook</strong> in their twenties — following recipes rigidly, measuring everything, failing often — does not become a good cook in year two. They become a good cook in year twenty, when they can open a fridge with five random ingredients and make something worth eating, when they can taste a dish and know exactly what is missing, when they can adjust a recipe on the fly because they understand the <em>principles</em> underneath the steps. The early years of following recipes were not wasted. They were the scaffolding.</p>
+
+<p><strong>An athlete who starts a sport young</strong> — say, tennis at seven — will spend years looking uncoordinated, hitting balls into the net, losing to kids who are bigger or faster. At seventeen, they might be decent. But the extraordinary players are the ones still playing at thirty-five, forty, when the sport has moved from their muscles into their mind, when they can read an opponent's body language before the ball is struck, when strategy and anticipation have replaced raw speed. That is a twenty-five-year build. It looks like talent. It is mostly time.</p>
+
+<p><strong>A young engineer writing their first lines of code</strong> produces work that is functional but brittle — it solves the immediate problem and nothing else. Ten years in, they write code that anticipates edge cases. Twenty years in, they are not thinking about code at all — they are thinking about systems, tradeoffs, organizational dynamics, the shape of problems that haven't surfaced yet. The code was the scaffolding. The architecture was always the destination.</p>
+
+<hr>
+
+<p>This matters especially for how we frame learning for kids.</p>
+
+<p>When a young person is struggling with a discipline — when they feel like they are "bad at it" or "not a natural" — what they are actually experiencing is the discomfort of early scaffolding. The foundations are going in. The concrete is wet. Nothing feels solid yet, and that is exactly how it is supposed to feel.</p>
+
+<p>If we tell them the skill is binary — you either have it or you don't — we give them permission to quit at the first sign of difficulty. But if we tell them the truth — that what they are building now is the frame that everything else will hang on, that the real rewards come in year twenty, year thirty, year forty — we give them something far more valuable: a reason to stay.</p>
+
+<p>Consider the opposite: a child who is told they are "gifted" at something early on. The scaffolding goes up fast. But because they were told the skill is innate, they never develop the patience for the long build. When the work gets genuinely hard — and it always does — they have no framework for struggle. They were told they <em>had</em> it. So when it feels like they don't, they assume the gift has run out. Meanwhile, the kid who was told "this takes time, keep building" is still going at thirty-five, long after the "gifted" one stopped.</p>
+
+<hr>
+
+<p>There is always a first discipline. The one that comes most naturally, the one the mind organizes itself around earliest. And then there are the ones that come after — the second, the third — each one layered on top of what came before, each one borrowing from the structures already in place.</p>
+
+<p>This is the quiet miracle of learning: <strong>it compounds.</strong> The scaffolding you build for one discipline doesn't just serve that discipline. It teaches the mind how to build scaffolding.</p>
+
+<p>The person who learned a second language finds the third one easier — not because the languages are similar, but because they already know what it feels like to be lost and to find their way. The musician who picks up a second instrument understands practice differently. The engineer who learns a second programming paradigm suddenly sees the first one more clearly. The cook who learns a second cuisine — a completely different tradition, different ingredients, different logic — finds that their understanding of <em>food itself</em> has deepened, not just their repertoire.</p>
+
+<p>The second thing you learn deeply is easier not because it is simpler, but because you already know what the process of learning feels like from the inside.</p>
+
+<hr>
+
+<p>So the message, if we are honest about it, is this:</p>
+
+<p>You are not failing. You are building. And the building is not done — it is not supposed to be done. The people who seem to know things effortlessly have simply been building longer than you. Stay with it. The scaffolding becomes the structure. The structure becomes the intuition. And the intuition, eventually, becomes yours.</p>
+
+<p>But only if you stay.</p>
+
+```
+    </div>
+
+    <div class="post-footer">
+        <span>© 2026 Ranjan Marathe · <a href="/blog/">Home</a></span>
+        <a href="https://github.com/PriyaranjanMarathe">GitHub</a>
+    </div>
+</div>
+```
+
+</body>
+</html>
