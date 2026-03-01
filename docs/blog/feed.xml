@@ -3,17 +3,80 @@
   <channel>
     <title>Ranjan Marathe</title>
     <description>Engineering, ML, and occasional thoughts</description>
-    <link>https://ranjanmarathe.github.io/</link>
-    <atom:link href="https://ranjanmarathe.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Tue, 21 Jan 2026 00:00:00 +0000</lastBuildDate>
-    
-    <!-- Add new items here, newest first -->
+    <link>https://priyaranjanmarathe.github.io/blog/</link>
+    <atom:link href="https://priyaranjanmarathe.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
+    <lastBuildDate>Sat, 01 Mar 2026 00:00:00 +0000</lastBuildDate>
+
     <item>
-      <title>Example Post Title</title>
-      <link>https://ranjanmarathe.github.io/posts/example-post.html</link>
-      <pubDate>Tue, 21 Jan 2026 00:00:00 +0000</pubDate>
-      <guid>https://ranjanmarathe.github.io/posts/example-post.html</guid>
-      <description>This is a sample post to show the structure.</description>
+      <title>The Long Game of Learning</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/long-game-of-learning.html</link>
+      <pubDate>Sat, 01 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/long-game-of-learning.html</guid>
+      <description>Deep competence is a forty-year project. Why mastery isn't binary, early exposure builds scaffolding, and the real rewards compound over decades.</description>
+    </item>
+
+    <item>
+      <title>LLMs in Recruiting</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/llm-recruiting.html</link>
+      <pubDate>Thu, 20 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/llm-recruiting.html</guid>
+      <description>The Application as Audition — Lessons from Unravel Tech and the विपरीत केकावली. The process of using the AI is the test.</description>
+    </item>
+
+    <item>
+      <title>Don't Dumb It Down: Kids Can Handle Complexity</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/dont-dumb-it-down.html</link>
+      <pubDate>Sat, 15 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/dont-dumb-it-down.html</guid>
+      <description>Simple approach for new parents: don't shrink the world for kids. Keep it true, keep it kind, keep it interactive. Don't simplify the truth—simplify the path into it.</description>
+    </item>
+
+    <item>
+      <title>US State Demographics — Oat Grid</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/oat-grid-demo.html</link>
+      <pubDate>Thu, 13 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/oat-grid-demo.html</guid>
+      <description>Interactive demo showcasing US state demographics using American Community Survey data in a clean Oat UI 12-column grid layout.</description>
+    </item>
+
+    <item>
+      <title>विपरीत केकावली — A Creative Marathi Exercise with LLMs</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/kekavali-viparit-exercise.html</link>
+      <pubDate>Sat, 08 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/kekavali-viparit-exercise.html</guid>
+      <description>A creative homework exercise for Marathi students: compose the viparit (corollary) of Moropant's Kekavali using LLM tools while deepening understanding of classical poetry.</description>
+    </item>
+
+    <item>
+      <title>Blog Feeds in OPML and HTML</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/blog-feeds.html</link>
+      <pubDate>Sun, 02 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/blog-feeds.html</guid>
+      <description>Discover a curated collection of technical blogs with OPML and a readable HTML listing.</description>
+    </item>
+
+    <item>
+      <title>Turn a $30 Phone into a Smart Home Sensor</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/vibemonitor-smart-sensor.html</link>
+      <pubDate>Fri, 24 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/vibemonitor-smart-sensor.html</guid>
+      <description>Use VibeMonitor to transform a cheap prepaid smartphone into a vibration sensor for your dryer, washer, or any appliance.</description>
+    </item>
+
+    <item>
+      <title>Reflections on "If" by Rudyard Kipling</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/kipling-if-poem.html</link>
+      <pubDate>Fri, 24 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/kipling-if-poem.html</guid>
+      <description>Exploring the timeless wisdom in Rudyard Kipling's poem about character, resilience, and integrity. A test of the blog posting workflow.</description>
+    </item>
+
+    <item>
+      <title>Chapter 1: Logarithms, Exponentials &amp; Half-Life</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/math-chapter1.html</link>
+      <pubDate>Thu, 23 Jan 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/math-chapter1.html</guid>
+      <description>An interactive journey through growth, decay, and the mathematics of change. Explore exponential functions, logarithms, and half-life with visual experiments.</description>
     </item>
     
   </channel>
