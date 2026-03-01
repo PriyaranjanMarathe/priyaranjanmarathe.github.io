@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>US State Demographics — Oat Grid</title>
+
+  <!-- Oat UI (grid + base styles) -->
+  <link rel="stylesheet" href="https://unpkg.com/@knadh/oat/oat.min.css" />
+  <script src="https://unpkg.com/@knadh/oat/oat.min.js" defer></script>
+
+  <style>
+    :root { color-scheme: light dark; }
+    main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    .muted { opacity: .8; }
+    .kpis { display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.6rem; }
+    .kpis .badge { white-space: nowrap; }
+    .toolbar { display:flex; gap:.75rem; flex-wrap:wrap; align-items:end; }
+    .toolbar > * { margin: 0; }
+    .small { font-size: .92rem; }
+
+    /* Oat grid has no breakpoint API; this tiny media rule makes cards go 1-up on phones. */
+    @media (max-width: 720px) {
+      .col-4 { grid-column: span 12 !important; }
+      .col-6 { grid-column: span 12 !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <p><a href="/blog/">← back to home</a></p>
+
+    <p class="muted">February 13, 2026</p>
+    <h1>US State Demographics (ACS) in an Oat Grid</h1>
+    <p class="muted small">
+      Data: American Community Survey 1-year estimates (ACS 1-year API includes 2024).  [oai_citation:1‡Census.gov](https://www.census.gov/data/developers/data-sets/acs-1year.html)
+      Layout: Oat UI 12-col grid (.container/.row/.col-N).  [oai_citation:2‡Oat](https://oat.ink/components/grid/)
+    </p>
+
+    <hr />
+
+    <section class="card">
+      <header>
+        <h2 style="margin-bottom:.25rem;">Controls</h2>
+        <p class="muted" style="margin-top:0;">
+          Loads all states + DC and renders as cards (3-up on desktop, 1-up on mobile).
+        </p>
+      </header>
+
+      <div class="toolbar">
+        <label data-field style="min-width: 240px;">
+          Search state
+          <input id="q" type="search" placeholder="e.g., Colorado" />
+        </label>
+
+        <label data-field style="min-width: 260px;">
+          Sort by
+          <select id="sortBy">
+            <option value="pop">Population</option>
+            <option value="income">Median household income</option>
+            <option value="age">Median age</option>
+            <option value="poverty">Poverty rate</option>
+            <option value="hisp">Hispanic share</option>
+          </select>
+        </label>
+
+        <label data-field style="min-width: 200px;">
+          Direction
+          <select id="dir">
+            <option value="desc">High → Low</option>
+            <option value="asc">Low → High</option>
+          </select>
+        </label>
+
+        <div style="margin-left:auto; display:flex; gap:.5rem; flex-wrap:wrap;">
+          <button class="outline" id="reloadBtn">Reload</button>
+          <span class="badge outline" id="status">Idle</span>
+        </div>
+      </div>
+
+      <p class="muted small" style="margin-top:.75rem;">
+        Metrics pulled per state: total population (B01003), median age (B01002), median household income (B19013),
+        Hispanic/Latino count + total (B03003), poverty below + universe (B17001).
+        (Variable naming follows ACS API conventions.)  [oai_citation:3‡Census.gov](https://api.census.gov/data/2020/acs/acs5/variables/B19013_001E.html?utm_source=chatgpt.com)
+      </p>
+    </section>
+
+    <div class="container" style="margin-top: 1rem;">
+      <div class="row" id="grid">
+        <!-- cards injected here -->
+      </div>
+    </div>
+
+    <hr />
+    <small class="muted">
+      Attribution: UI layout uses [Oat UI](chatgpt://generic-entity?number=1) by [Kailash Nadh](chatgpt://generic-entity?number=2) (MIT). Source: https://github.com/knadh/oat
+    </small>
+  </main>
+
+  <script>
+    // ---- ACS 1-year (latest includes 2024 per Census dev page) ----
+    // Docs: https://www.census.gov/data/developers/data-sets/acs-1year.html
+    const ACS_YEAR = 2024;
+    const ACS_URL = `https://api.census.gov/data/${ACS_YEAR}/acs/acs1`;
+
+    // Variables (estimates: *_E)
+    const VARS = {
+      pop: "B01003_001E",         // Total population
+      medAge: "B01002_001E",      // Median age
+      medIncome: "B19013_001E",   // Median household income
+      hisp: "B03003_003E",        // Hispanic or Latino
+      totalEth: "B03003_001E",    // Total (for hispanic share denominator)
+      povBelow: "B17001_002E",    // Below poverty level
+      povTotal: "B17001_001E"     // Poverty universe total
+    };
+
+    const els = {
+      q: document.getElementById("q"),
+      sortBy: document.getElementById("sortBy"),
+      dir: document.getElementById("dir"),
+      grid: document.getElementById("grid"),
+      status: document.getElementById("status"),
+      reloadBtn: document.getElementById("reloadBtn")
+    };
+
+    let rows = [];
+
+    const fmtInt = (n) => Number.isFinite(n) ? n.toLocaleString() : "—";
+    const fmtMoney = (n) => Number.isFinite(n) ? n.toLocaleString(undefined, { style: "currency", currency: "USD", maximumFractionDigits: 0 }) : "—";
+    const fmt1 = (n) => Number.isFinite(n) ? n.toLocaleString(undefined, { maximumFractionDigits: 1 }) : "—";
+    const fmtPct = (n) => Number.isFinite(n) ? (n * 100).toLocaleString(undefined, { maximumFractionDigits: 1 }) + "%" : "—";
+
+    function setStatus(txt, variant = "outline") {
+      els.status.className = `badge ${variant}`;
+      els.status.textContent = txt;
+    }
+
+    function safeNum(x) {
+      const n = Number(x);
+      return Number.isFinite(n) ? n : NaN;
+    }
+
+    function parseACS(json) {
+      // json[0] header row
+      const header = json[0];
+      const idx = Object.fromEntries(header.map((k, i) => [k, i]));
+      const out = [];
+
+      for (let r = 1; r < json.length; r++) {
+        const row = json[r];
+        const name = row[idx["NAME"]];
+        const stateFips = row[idx["state"]];
+
+        const pop = safeNum(row[idx[VARS.pop]]);
+        const medAge = safeNum(row[idx[VARS.medAge]]);
+        const medIncome = safeNum(row[idx[VARS.medIncome]]);
+        const hisp = safeNum(row[idx[VARS.hisp]]);
+        const totalEth = safeNum(row[idx[VARS.totalEth]]);
+        const povBelow = safeNum(row[idx[VARS.povBelow]]);
+        const povTotal = safeNum(row[idx[VARS.povTotal]]);
+
+        const hispShare = (Number.isFinite(hisp) && Number.isFinite(totalEth) && totalEth > 0) ? (hisp / totalEth) : NaN;
+        const povRate = (Number.isFinite(povBelow) && Number.isFinite(povTotal) && povTotal > 0) ? (povBelow / povTotal) : NaN;
+
+        out.push({
+          name,
+          stateFips,
+          pop,
+          medAge,
+          medIncome,
+          hispShare,
+          povRate
+        });
+      }
+      return out;
+    }
+
+    function metricVal(r, key) {
+      switch (key) {
+        case "pop": return r.pop;
+        case "income": return r.medIncome;
+        case "age": return r.medAge;
+        case "poverty": return r.povRate;
+        case "hisp": return r.hispShare;
+        default: return r.pop;
+      }
+    }
+
+    function applyFiltersAndRender() {
+      const q = (els.q.value || "").trim().toLowerCase();
+      const sortBy = els.sortBy.value;
+      const dir = els.dir.value;
+
+      let filtered = rows;
+      if (q) filtered = filtered.filter(r => r.name.toLowerCase().includes(q));
+
+      filtered = filtered.slice().sort((a, b) => {
+        const av = metricVal(a, sortBy);
+        const bv = metricVal(b, sortBy);
+        const aOK = Number.isFinite(av);
+        const bOK = Number.isFinite(bv);
+        if (aOK && bOK) return dir === "asc" ? (av - bv) : (bv - av);
+        if (aOK && !bOK) return -1;
+        if (!aOK && bOK) return 1;
+        return a.name.localeCompare(b.name);
+      });
+
+      render(filtered);
+    }
+
+    function render(list) {
+      els.grid.innerHTML = "";
+
+      // cards: 3-up on desktop => col-4
+      // (Oat grid is 12 columns; 12/4 = 3)
+      for (const r of list) {
+        const card = document.createElement("div");
+        card.className = "col-4";
+        card.innerHTML = `
+          <article class="card">
+            <header>
+              <h3 style="margin-bottom:.25rem;">${escapeHtml(r.name)}</h3>
+              <p class="muted small" style="margin-top:0;">FIPS: <span class="mono">${escapeHtml(r.stateFips)}</span></p>
+            </header>
+
+            <div class="kpis">
+              <span class="badge outline">Pop: ${fmtInt(r.pop)}</span>
+              <span class="badge outline">Age: ${fmt1(r.medAge)}</span>
+              <span class="badge outline">Income: ${fmtMoney(r.medIncome)}</span>
+              <span class="badge outline">Poverty: ${fmtPct(r.povRate)}</span>
+              <span class="badge outline">Hispanic: ${fmtPct(r.hispShare)}</span>
+            </div>
+          </article>
+        `;
+        els.grid.appendChild(card);
+      }
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    async function load() {
+      setStatus("Loading…", "warning");
+      els.reloadBtn.disabled = true;
+
+      // Build API query
+      const get = [
+        "NAME",
+        VARS.pop, VARS.medAge, VARS.medIncome,
+        VARS.hisp, VARS.totalEth,
+        VARS.povBelow, VARS.povTotal
+      ].join(",");
+
+      const url = `${ACS_URL}?get=${encodeURIComponent(get)}&for=state:*`;
+
+      try {
+        const res = await fetch(url, { cache: "no-store" });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const json = await res.json();
+
+        rows = parseACS(json);
+        setStatus(`Loaded: ${rows.length}`, "success");
+        applyFiltersAndRender();
+      } catch (e) {
+        console.error(e);
+        setStatus("Load failed", "danger");
+        els.grid.innerHTML = `
+          <div class="col-12">
+            <article class="card">
+              <header><h3>Couldn’t load Census API data</h3></header>
+              <p class="muted small">
+                This page fetches ACS 1-year data from api.census.gov. Check your network / CORS / blockers.
+              </p>
+              <p class="muted small"><code>${escapeHtml(String(e))}</code></p>
+            </article>
+          </div>
+        `;
+      } finally {
+        els.reloadBtn.disabled = false;
+      }
+    }
+
+    // Wire events
+    ["input", "change"].forEach(ev => {
+      els.q.addEventListener(ev, applyFiltersAndRender);
+      els.sortBy.addEventListener(ev, applyFiltersAndRender);
+      els.dir.addEventListener(ev, applyFiltersAndRender);
+    });
+    els.reloadBtn.addEventListener("click", load);
+
+    // Go
+    load();
+  </script>
+</body>
+</html>

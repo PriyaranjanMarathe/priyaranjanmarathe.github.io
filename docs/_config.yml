@@ -1,0 +1,30 @@
+title: Ranjan Marathe blog
+email: FirstName.LastName@yahoo.com
+description: >-
+  Musings of a life long learner.
+baseurl: ""
+url: ""
+github_username: priyaranjanmarathe
+twitter_username: 6C1_16
+
+collections:
+  mb:
+    output: true
+    permalink: /mb/:title/
+  til:
+    output: true
+    permalink: /til/:title/
+  bot:
+    output: true
+    permalink: /bot/:title/
+  html_files:
+    output: true
+    permalink: /:path/
+
+theme: minima
+
+plugins:
+  - jekyll-feed
+
+disqus:
+  shortname: priyaranjanmarathe

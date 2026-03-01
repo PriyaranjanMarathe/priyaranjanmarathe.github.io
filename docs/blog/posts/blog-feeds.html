@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Collection - Curated by Andrej Karpathy</title>
+    <style>
+        body {
+            font-family: Verdana, Geneva, sans-serif;
+            font-size: 10pt;
+            background-color: #f6f6ef;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #ff6600;
+            padding: 2px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            padding: 4px;
+        }
+
+        .header-content a {
+            color: black;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .header-title {
+            font-weight: bold;
+            font-size: 11pt;
+            margin-left: 4px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #f6f6ef;
+        }
+
+        .intro {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+
+        .intro p {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: #f6f6ef;
+        }
+
+        tr {
+            background-color: #f6f6ef;
+        }
+
+        td {
+            padding: 5px 0;
+            vertical-align: top;
+        }
+
+        .number {
+            color: #828282;
+            text-align: right;
+            padding-right: 8px;
+            width: 30px;
+        }
+
+        .title {
+            padding-right: 4px;
+        }
+
+        .title a {
+            color: #000000;
+            text-decoration: none;
+        }
+
+        .title a:visited {
+            color: #828282;
+        }
+
+        .title a:hover {
+            text-decoration: underline;
+        }
+
+        .domain {
+            color: #828282;
+            font-size: 8pt;
+            margin-left: 5px;
+        }
+
+        .domain a {
+            color: #828282;
+            text-decoration: none;
+        }
+
+        .domain a:hover {
+            text-decoration: underline;
+        }
+
+        .subtext {
+            color: #828282;
+            font-size: 8pt;
+            padding-left: 38px;
+            padding-bottom: 8px;
+        }
+
+        .subtext a {
+            color: #828282;
+            text-decoration: none;
+        }
+
+        .subtext a:hover {
+            text-decoration: underline;
+        }
+
+        .description {
+            color: #000000;
+            font-size: 9pt;
+            line-height: 1.4;
+        }
+
+        .spacer {
+            height: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <a href="https://priyaranjanmarathe.github.io/blog/">← back to home</a>
+            <span class="header-title">Blog Collection</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <p><b>A collection of exceptional technical blogs curated by Andrej Karpathy.</b></p>
+            <p>These are veteran programmers and writers who have been sharing their craft for decades. Their writings span systems programming, AI research, security, web development, software architecture, and deep technical explorations. Each has developed a distinctive voice and perspective worth following.</p>
+        </div>
+
+        <table>
+            <tr><td colspan="2" class="spacer"></td></tr>
+            <tr>
+                <td class="number">1.</td>
+                <td class="title">
+                    <a href="https://simonwillison.net" target="_blank">Simon Willison</a>
+                    <span class="domain">(<a href="https://simonwillison.net/atom/everything/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Co-creator of Django. Deep explorations of LLMs, datasette, and web development. Daily posts on AI tooling and practical applications.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">2.</td>
+                <td class="title">
+                    <a href="https://jeffgeerling.com" target="_blank">Jeff Geerling</a>
+                    <span class="domain">(<a href="https://www.jeffgeerling.com/blog.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Raspberry Pi expert, Ansible maintainer. Hardware hacking, home automation, and infrastructure as code.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">3.</td>
+                <td class="title">
+                    <a href="https://www.seangoedecke.com" target="_blank">Sean Goedecke</a>
+                    <span class="domain">(<a href="https://www.seangoedecke.com/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software engineering philosophy and practice. Thoughtful takes on team dynamics and technical decision-making.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">4.</td>
+                <td class="title">
+                    <a href="https://krebsonsecurity.com" target="_blank">Brian Krebs</a>
+                    <span class="domain">(<a href="https://krebsonsecurity.com/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Investigative cybersecurity journalism. Breaking security news and deep dives into cybercrime operations.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">5.</td>
+                <td class="title">
+                    <a href="https://daringfireball.net" target="_blank">John Gruber - Daring Fireball</a>
+                    <span class="domain">(<a href="https://daringfireball.net/feeds/main" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Creator of Markdown. Apple, tech industry analysis, and design philosophy. Writing the web has been reading for 20+ years.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">6.</td>
+                <td class="title">
+                    <a href="http://antirez.com" target="_blank">Salvatore Sanfilippo (antirez)</a>
+                    <span class="domain">(<a href="http://antirez.com/rss" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Creator of Redis. Systems programming, data structures, and the art of building elegant software.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">7.</td>
+                <td class="title">
+                    <a href="https://pluralistic.net" target="_blank">Cory Doctorow - Pluralistic</a>
+                    <span class="domain">(<a href="https://pluralistic.net/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Tech policy, digital rights, and surveillance capitalism. Daily linkblog with incisive commentary on tech and society.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">8.</td>
+                <td class="title">
+                    <a href="https://lcamtuf.substack.com" target="_blank">Michal Zalewski (lcamtuf)</a>
+                    <span class="domain">(<a href="https://lcamtuf.substack.com/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Security researcher, creator of AFL fuzzer. Deep technical security research and systems thinking.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">9.</td>
+                <td class="title">
+                    <a href="https://mitchellh.com" target="_blank">Mitchell Hashimoto</a>
+                    <span class="domain">(<a href="https://mitchellh.com/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Founder of HashiCorp. Created Vagrant, Terraform. Infrastructure, distributed systems, and developer tools.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">10.</td>
+                <td class="title">
+                    <a href="https://dynomight.net" target="_blank">dynomight</a>
+                    <span class="domain">(<a href="https://dynomight.net/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Applied rationality and clear thinking. Deep dives into topics with data-driven skepticism and humor.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">11.</td>
+                <td class="title">
+                    <a href="https://xeiaso.net" target="_blank">Xe Iaso</a>
+                    <span class="domain">(<a href="https://xeiaso.net/blog.rss" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Systems programming, Go, Nix, and WebAssembly. Unique writing style with technical depth and personality.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">12.</td>
+                <td class="title">
+                    <a href="https://devblogs.microsoft.com/oldnewthing" target="_blank">Raymond Chen - The Old New Thing</a>
+                    <span class="domain">(<a href="https://devblogs.microsoft.com/oldnewthing/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Windows internals from a Microsoft veteran. Nearly daily posts on Win32 API quirks and historical design decisions.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">13.</td>
+                <td class="title">
+                    <a href="https://righto.com" target="_blank">Ken Shirriff</a>
+                    <span class="domain">(<a href="https://www.righto.com/feeds/posts/default" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Reverse engineering and IC analysis. Stunning teardowns of vintage chips and hardware with die photography.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">14.</td>
+                <td class="title">
+                    <a href="https://lucumr.pocoo.org" target="_blank">Armin Ronacher</a>
+                    <span class="domain">(<a href="https://lucumr.pocoo.org/feed.atom" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Creator of Flask and Jinja2. Python internals, web frameworks, and open source philosophy.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">15.</td>
+                <td class="title">
+                    <a href="https://rachelbythebay.com" target="_blank">rachelbythebay</a>
+                    <span class="domain">(<a href="https://rachelbythebay.com/w/atom.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Tales from production systems. War stories and hard-won lessons from decades in the trenches.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">16.</td>
+                <td class="title">
+                    <a href="https://overreacted.io" target="_blank">Dan Abramov</a>
+                    <span class="domain">(<a href="https://overreacted.io/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">React core team member. Created Redux. Deep explorations of JavaScript, React internals, and teaching programming.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">17.</td>
+                <td class="title">
+                    <a href="https://johndcook.com" target="_blank">John D. Cook</a>
+                    <span class="domain">(<a href="https://www.johndcook.com/blog/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Applied mathematics and statistics. Daily posts on numerical computing, probability, and mathematical insights.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">18.</td>
+                <td class="title">
+                    <a href="https://matklad.github.io" target="_blank">matklad (Alex Kladov)</a>
+                    <span class="domain">(<a href="https://matklad.github.io/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Rust, language design, and developer tools. Lead developer of rust-analyzer.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">19.</td>
+                <td class="title">
+                    <a href="https://paulgraham.com" target="_blank">Paul Graham</a>
+                    <span class="domain">(<a href="http://www.aaronsw.com/2002/feeds/pgessays.rss" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Y Combinator founder, Lisp hacker. Essays on startups, programming languages, and thinking clearly.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">20.</td>
+                <td class="title">
+                    <a href="https://eli.thegreenplace.net" target="_blank">Eli Bendersky</a>
+                    <span class="domain">(<a href="https://eli.thegreenplace.net/feeds/all.atom.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Compilers, programming languages, and Go. Clear technical tutorials and deep dives into language implementation.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">21.</td>
+                <td class="title">
+                    <a href="https://fabiensanglard.net" target="_blank">Fabien Sanglard</a>
+                    <span class="domain">(<a href="https://fabiensanglard.net/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Game engine archaeology. Code reviews of iconic games like Doom, Quake, and Prince of Persia.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">22.</td>
+                <td class="title">
+                    <a href="https://gwern.net" target="_blank">Gwern Branwen</a>
+                    <span class="domain">(<a href="https://gwern.substack.com/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Research on AI, statistics, and self-experimentation. Encyclopedic long-form essays with obsessive citations.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">23.</td>
+                <td class="title">
+                    <a href="https://berthub.eu" target="_blank">Bert Hubert</a>
+                    <span class="domain">(<a href="https://berthub.eu/articles/index.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">DNS, networking, and European tech policy. Creator of PowerDNS. Clear explanations of complex protocols.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">24.</td>
+                <td class="title">
+                    <a href="https://beej.us" target="_blank">Brian "Beej" Hall</a>
+                    <span class="domain">(<a href="https://beej.us/blog/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Author of legendary "Beej's Guide" series. Network programming, C, and teaching programming with humor.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">25.</td>
+                <td class="title">
+                    <a href="https://troyhunt.com" target="_blank">Troy Hunt</a>
+                    <span class="domain">(<a href="https://www.troyhunt.com/rss/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Creator of Have I Been Pwned. Web security, data breaches, and practical security advice.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">26.</td>
+                <td class="title">
+                    <a href="https://experimental-history.com" target="_blank">Adam Mastroianni</a>
+                    <span class="domain">(<a href="https://www.experimental-history.com/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Psychology researcher. Data-driven explorations of human behavior with wit and clarity.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">27.</td>
+                <td class="title">
+                    <a href="https://michael.stapelberg.ch" target="_blank">Michael Stapelberg</a>
+                    <span class="domain">(<a href="https://michael.stapelberg.ch/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Creator of i3 window manager. Linux systems, Go, and infrastructure. Detailed technical writeups.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">28.</td>
+                <td class="title">
+                    <a href="https://computer.rip" target="_blank">computer.rip</a>
+                    <span class="domain">(<a href="https://computer.rip/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Computing history and telecommunications. Deep dives into vintage systems and forgotten protocols.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">29.</td>
+                <td class="title">
+                    <a href="https://www.construction-physics.com" target="_blank">Brian Potter - Construction Physics</a>
+                    <span class="domain">(<a href="https://www.construction-physics.com/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">How things get built. Engineering, construction, and manufacturing processes explained.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">30.</td>
+                <td class="title">
+                    <a href="https://www.filfre.net" target="_blank">Jimmy Maher - The Digital Antiquarian</a>
+                    <span class="domain">(<a href="https://www.filfre.net/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Computer gaming history. Exhaustively researched chronicles of classic games and their creators.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">31.</td>
+                <td class="title">
+                    <a href="https://anildash.com" target="_blank">Anil Dash</a>
+                    <span class="domain">(<a href="https://anildash.com/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Tech culture, ethics, and community. Glitch founder and long-time blogger on making tech more humane.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">32.</td>
+                <td class="title">
+                    <a href="https://miguelgrinberg.com" target="_blank">Miguel Grinberg</a>
+                    <span class="domain">(<a href="https://blog.miguelgrinberg.com/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Flask mega-tutorials and Python web development. Clear, comprehensive guides for building real applications.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">33.</td>
+                <td class="title">
+                    <a href="https://mjg59.dreamwidth.org" target="_blank">Matthew Garrett</a>
+                    <span class="domain">(<a href="https://mjg59.dreamwidth.org/data/rss" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Linux kernel, firmware, and hardware security. UEFI Secure Boot expert with strong technical opinions.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">34.</td>
+                <td class="title">
+                    <a href="https://tedunangst.com" target="_blank">Ted Unangst</a>
+                    <span class="domain">(<a href="https://www.tedunangst.com/flak/rss" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">OpenBSD developer. Systems programming, security, and software minimalism.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">35.</td>
+                <td class="title">
+                    <a href="https://www.seangoedecke.com" target="_blank">Sean Goedecke</a>
+                    <span class="domain">(<a href="https://www.seangoedecke.com/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Engineering management and software philosophy. Thoughtful essays on building teams and products.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">36.</td>
+                <td class="title">
+                    <a href="https://shkspr.mobi" target="_blank">Terence Eden</a>
+                    <span class="domain">(<a href="https://shkspr.mobi/blog/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Web standards, open data, and digital rights. Technical explorations with a focus on accessibility.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">37.</td>
+                <td class="title">
+                    <a href="https://utcc.utoronto.ca/~cks" target="_blank">Chris Siebenmann</a>
+                    <span class="domain">(<a href="https://utcc.utoronto.ca/~cks/space/blog/?atom" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Unix systems administration and Python. Daily technical notes from running university infrastructure.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">38.</td>
+                <td class="title">
+                    <a href="https://skyfall.dev" target="_blank">skyfall.dev</a>
+                    <span class="domain">(<a href="https://skyfall.dev/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software engineering insights and technical deep dives. Focus on web development and system design.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">39.</td>
+                <td class="title">
+                    <a href="https://garymarcus.substack.com" target="_blank">Gary Marcus</a>
+                    <span class="domain">(<a href="https://garymarcus.substack.com/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">AI skepticism and cognitive science. Critical analysis of AI hype and limitations.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">40.</td>
+                <td class="title">
+                    <a href="https://timsh.org" target="_blank">Tim Shelburne</a>
+                    <span class="domain">(<a href="https://timsh.org/rss/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Technical writing and software development. Clear explanations of complex programming concepts.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">41.</td>
+                <td class="title">
+                    <a href="https://gilesthomas.com" target="_blank">Giles Thomas</a>
+                    <span class="domain">(<a href="https://gilesthomas.com/feed/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Python and web development. Co-founder of PythonAnywhere.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">42.</td>
+                <td class="title">
+                    <a href="https://derekthompson.org" target="_blank">Derek Thompson</a>
+                    <span class="domain">(<a href="https://www.theatlantic.com/feed/author/derek-thompson/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Technology, economics, and culture. Atlantic staff writer with data-driven analysis.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">43.</td>
+                <td class="title">
+                    <a href="https://evanhahn.com" target="_blank">Evan Hahn</a>
+                    <span class="domain">(<a href="https://evanhahn.com/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">JavaScript and web development. Practical tutorials and explorations of web technologies.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">44.</td>
+                <td class="title">
+                    <a href="https://terriblesoftware.org" target="_blank">Terrible Software</a>
+                    <span class="domain">(<a href="https://terriblesoftware.org/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software archaeology and legacy systems. Stories of maintenance horror and technical debt.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">45.</td>
+                <td class="title">
+                    <a href="https://rakhim.exotext.com" target="_blank">Rakhim Davletkaliyev</a>
+                    <span class="domain">(<a href="https://rakhim.exotext.com/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Programming education and software craft. Creator of Codexpanse podcast.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">46.</td>
+                <td class="title">
+                    <a href="https://joanwestenberg.com" target="_blank">Joan Westenberg</a>
+                    <span class="domain">(<a href="https://joanwestenberg.com/rss" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Tech industry commentary and startup culture. Sharp critiques of Silicon Valley narratives.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">47.</td>
+                <td class="title">
+                    <a href="https://xania.org" target="_blank">Xania</a>
+                    <span class="domain">(<a href="https://xania.org/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software engineering and system design. Technical deep dives with practical insights.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">48.</td>
+                <td class="title">
+                    <a href="https://micahflee.com" target="_blank">Micah Lee</a>
+                    <span class="domain">(<a href="https://micahflee.com/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Security, privacy, and investigative journalism. Developer of OnionShare and Intercept technologist.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">49.</td>
+                <td class="title">
+                    <a href="https://nesbitt.io" target="_blank">Andrew Nesbitt</a>
+                    <span class="domain">(<a href="https://nesbitt.io/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Open source ecosystems and package management. Creator of Libraries.io.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">50.</td>
+                <td class="title">
+                    <a href="https://tedium.co" target="_blank">Tedium</a>
+                    <span class="domain">(<a href="https://feed.tedium.co/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">The dull side of the internet. Deep dives into obscure tech history and forgotten innovations.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">51.</td>
+                <td class="title">
+                    <a href="https://susam.net" target="_blank">Susam Pal</a>
+                    <span class="domain">(<a href="https://susam.net/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Programming puzzles, algorithms, and software engineering. Elegant solutions to technical problems.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">52.</td>
+                <td class="title">
+                    <a href="https://entropicthoughts.com" target="_blank">Entropic Thoughts</a>
+                    <span class="domain">(<a href="https://entropicthoughts.com/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software engineering and distributed systems. Technical reflections on building scalable applications.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">53.</td>
+                <td class="title">
+                    <a href="https://buttondown.com/hillelwayne" target="_blank">Hillel Wayne</a>
+                    <span class="domain">(<a href="https://buttondown.com/hillelwayne/rss" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Formal methods and software correctness. TLA+ expert making verification accessible.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">54.</td>
+                <td class="title">
+                    <a href="https://dwarkesh.com" target="_blank">Dwarkesh Patel</a>
+                    <span class="domain">(<a href="https://www.dwarkeshpatel.com/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Long-form podcast interviews with deep thinkers. Technology, AI, and future studies.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">55.</td>
+                <td class="title">
+                    <a href="https://borretti.me" target="_blank">Fernando Borretti</a>
+                    <span class="domain">(<a href="https://borretti.me/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Programming language design and Common Lisp. Creator of Austral language.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">56.</td>
+                <td class="title">
+                    <a href="https://wheresyoured.at" target="_blank">Ed Zitron</a>
+                    <span class="domain">(<a href="https://www.wheresyoured.at/rss/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Tech industry criticism and corporate accountability. Unsparing analysis of tech leadership failures.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">57.</td>
+                <td class="title">
+                    <a href="https://jayd.ml" target="_blank">Jay D.</a>
+                    <span class="domain">(<a href="https://jayd.ml/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Systems programming and low-level computing. Technical explorations of hardware and software interfaces.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">58.</td>
+                <td class="title">
+                    <a href="https://minimaxir.com" target="_blank">Max Woolf</a>
+                    <span class="domain">(<a href="https://minimaxir.com/index.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Data science, machine learning, and generative AI. Creator of popular AI tools and visualizations.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">59.</td>
+                <td class="title">
+                    <a href="https://geohot.github.io" target="_blank">George Hotz</a>
+                    <span class="domain">(<a href="https://geohot.github.io/blog/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Security researcher and autonomous vehicle hacker. Founder of comma.ai and tinygrad.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">60.</td>
+                <td class="title">
+                    <a href="https://blog.jim-nielsen.com" target="_blank">Jim Nielsen</a>
+                    <span class="domain">(<a href="https://blog.jim-nielsen.com/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Web design and development. Thoughtful takes on building for the web.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">61.</td>
+                <td class="title">
+                    <a href="https://dfarq.homeip.net" target="_blank">Dave Farquhar</a>
+                    <span class="domain">(<a href="https://dfarq.homeip.net/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Vintage computing and retrotech. Stories of classic computers and restoration projects.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">62.</td>
+                <td class="title">
+                    <a href="https://jyn.dev" target="_blank">jyn</a>
+                    <span class="domain">(<a href="https://jyn.dev/atom.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Rust compiler development and tooling. Insights into building developer tools.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">63.</td>
+                <td class="title">
+                    <a href="https://geoffreylitt.com" target="_blank">Geoffrey Litt</a>
+                    <span class="domain">(<a href="https://www.geoffreylitt.com/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">End-user programming and tools for thought. Research on making software more malleable.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">64.</td>
+                <td class="title">
+                    <a href="https://downtowndougbrown.com" target="_blank">Doug Brown</a>
+                    <span class="domain">(<a href="https://www.downtowndougbrown.com/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Hardware hacking and embedded systems. Mac ROM projects and vintage hardware revival.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">65.</td>
+                <td class="title">
+                    <a href="https://brutecat.com" target="_blank">brutecat</a>
+                    <span class="domain">(<a href="https://brutecat.com/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Security research and reverse engineering. Technical breakdowns of vulnerabilities.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">66.</td>
+                <td class="title">
+                    <a href="https://abortretry.fail" target="_blank">Abort, Retry, Fail?</a>
+                    <span class="domain">(<a href="https://www.abortretry.fail/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Retrocomputing and vintage operating systems. Deep dives into classic computer platforms.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">67.</td>
+                <td class="title">
+                    <a href="https://oldvcr.blogspot.com" target="_blank">Old VCR</a>
+                    <span class="domain">(<a href="https://oldvcr.blogspot.com/feeds/posts/default" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Vintage computing and classic Macintosh systems. Power Mac and classic Mac preservation.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">68.</td>
+                <td class="title">
+                    <a href="https://bogdanthegeek.github.io" target="_blank">Bogdan</a>
+                    <span class="domain">(<a href="https://bogdanthegeek.github.io/blog/index.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software engineering and technical projects. Explorations in programming and system design.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">69.</td>
+                <td class="title">
+                    <a href="https://hugotunius.se" target="_blank">Hugo Tunius</a>
+                    <span class="domain">(<a href="https://hugotunius.se/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software development and engineering practices. Technical insights from building systems.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">70.</td>
+                <td class="title">
+                    <a href="https://chadnauseam.com" target="_blank">Chad Nauseam</a>
+                    <span class="domain">(<a href="https://chadnauseam.com/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Web development and browser extensions. Creator of tools for a better internet experience.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">71.</td>
+                <td class="title">
+                    <a href="https://simone.org" target="_blank">Simone</a>
+                    <span class="domain">(<a href="https://simone.org/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software engineering and technical writing. Practical guides and development insights.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">72.</td>
+                <td class="title">
+                    <a href="https://it-notes.dragas.net" target="_blank">IT Notes from Pelican</a>
+                    <span class="domain">(<a href="https://it-notes.dragas.net/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Systems administration and infrastructure. Technical notes from the IT trenches.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">73.</td>
+                <td class="title">
+                    <a href="https://hey.paris" target="_blank">hey.paris</a>
+                    <span class="domain">(<a href="https://hey.paris/index.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software development and programming insights. Personal reflections on the craft.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">74.</td>
+                <td class="title">
+                    <a href="https://danielwirtz.com" target="_blank">Daniel Wirtz</a>
+                    <span class="domain">(<a href="https://danielwirtz.com/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Web development and JavaScript. Technical tutorials and framework explorations.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">75.</td>
+                <td class="title">
+                    <a href="https://matduggan.com" target="_blank">Mat Duggan</a>
+                    <span class="domain">(<a href="https://matduggan.com/rss/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Tech industry analysis and software development. Critical takes on tech trends.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">76.</td>
+                <td class="title">
+                    <a href="https://refactoringenglish.com" target="_blank">Refactoring English</a>
+                    <span class="domain">(<a href="https://refactoringenglish.com/index.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Technical writing and communication. Making programming concepts accessible through clear language.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">77.</td>
+                <td class="title">
+                    <a href="https://worksonmymachine.substack.com" target="_blank">Works on My Machine</a>
+                    <span class="domain">(<a href="https://worksonmymachine.substack.com/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">DevOps and software engineering. Tales from building and breaking production systems.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">78.</td>
+                <td class="title">
+                    <a href="https://philiplaine.com" target="_blank">Philip Laine</a>
+                    <span class="domain">(<a href="https://philiplaine.com/index.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software development and technical leadership. Insights on building effective engineering teams.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">79.</td>
+                <td class="title">
+                    <a href="https://steveblank.com" target="_blank">Steve Blank</a>
+                    <span class="domain">(<a href="https://steveblank.com/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Lean startup methodology and entrepreneurship. Pioneer of customer development.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">80.</td>
+                <td class="title">
+                    <a href="https://bernsteinbear.com" target="_blank">Max Bernstein</a>
+                    <span class="domain">(<a href="https://bernsteinbear.com/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Compilers and programming language implementation. Building interpreters and virtual machines.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">81.</td>
+                <td class="title">
+                    <a href="https://danieldelaney.net" target="_blank">Daniel Delaney</a>
+                    <span class="domain">(<a href="https://danieldelaney.net/feed" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Web development and JavaScript frameworks. Practical guides for modern web applications.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">82.</td>
+                <td class="title">
+                    <a href="https://herman.bearblog.dev" target="_blank">herman</a>
+                    <span class="domain">(<a href="https://herman.bearblog.dev/feed/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Programming and software development. Thoughts on building software with clarity.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">83.</td>
+                <td class="title">
+                    <a href="https://tomrenner.com" target="_blank">Tom Renner</a>
+                    <span class="domain">(<a href="https://tomrenner.com/index.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software engineering and technical problem-solving. Real-world development challenges.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">84.</td>
+                <td class="title">
+                    <a href="https://blog.pixelmelt.dev" target="_blank">Pixelmelt</a>
+                    <span class="domain">(<a href="https://blog.pixelmelt.dev/rss/" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Graphics programming and game development. Low-level rendering and performance optimization.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">85.</td>
+                <td class="title">
+                    <a href="https://martinalderson.com" target="_blank">Martin Alderson</a>
+                    <span class="domain">(<a href="https://martinalderson.com/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software development and technical explorations. Building and shipping software.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">86.</td>
+                <td class="title">
+                    <a href="https://danielchasehooper.com" target="_blank">Daniel Hooper</a>
+                    <span class="domain">(<a href="https://danielchasehooper.com/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Independent software development. Building and launching solo developer projects.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">87.</td>
+                <td class="title">
+                    <a href="https://chiark.greenend.org.uk/~sgtatham" target="_blank">Simon Tatham</a>
+                    <span class="domain">(<a href="https://www.chiark.greenend.org.uk/~sgtatham/quasiblog/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Creator of PuTTY. Systems programming, cryptography, and puzzle game development.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">88.</td>
+                <td class="title">
+                    <a href="https://grantslatton.com" target="_blank">Grant Slatton</a>
+                    <span class="domain">(<a href="https://grantslatton.com/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Systems programming and low-level computing. Technical deep dives into computer architecture.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">89.</td>
+                <td class="title">
+                    <a href="https://aresluna.org" target="_blank">Ares Luna</a>
+                    <span class="domain">(<a href="https://aresluna.org/main.rss" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software development and technical writing. Insights from building modern applications.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">90.</td>
+                <td class="title">
+                    <a href="https://keygen.sh" target="_blank">Keygen</a>
+                    <span class="domain">(<a href="https://keygen.sh/blog/feed.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software licensing and API development. Building infrastructure for software distribution.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">91.</td>
+                <td class="title">
+                    <a href="https://ericmigi.com" target="_blank">Eric Migi</a>
+                    <span class="domain">(<a href="https://ericmigi.com/rss.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software engineering and development practices. Technical insights and project experiences.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">92.</td>
+                <td class="title">
+                    <a href="https://idiallo.com" target="_blank">Ibrahima Diallo</a>
+                    <span class="domain">(<a href="https://idiallo.com/feed.rss" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Web development and software engineering. Practical tutorials and technical guides.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+
+            <tr>
+                <td class="number">93.</td>
+                <td class="title">
+                    <a href="https://maurycyz.com" target="_blank">Maurycy Zarzycki</a>
+                    <span class="domain">(<a href="https://maurycyz.com/index.xml" target="_blank">rss</a>)</span>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td class="subtext">
+                    <span class="description">Software development and programming insights. Building robust applications.</span>
+                </td>
+            </tr>
+            <tr><td colspan="2" class="spacer"></td></tr>
+        </table>
+    </div>
+</body>
+</html>

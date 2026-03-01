@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: 'en' }}">
+
+{%- include head.html -%}
+
+<head>
+    <meta name="google-site-verification" content="my5juJd8928Rn3SNECWUmHRUVNPLZICnRb4L6yrvg2Y" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        crossorigin="anonymous">
+
+    <style>
+        /* Smaller, Sleek Tabs */
+        .nav-tabs .nav-item .nav-link {
+            padding: 6px 12px;
+            /* Reduce padding */
+            font-size: 14px;
+            /* Make text smaller */
+            border-radius: 6px 6px 0 0;
+            /* Smooth tab corners */
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hover Effect */
+        .nav-tabs .nav-item .nav-link:hover {
+            background-color: #f8f9fa;
+            /* Subtle hover color */
+        }
+
+        /* Active Tab Styling */
+        .nav-tabs .nav-item .nav-link.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        /* Make the navbar thinner */
+        .nav-tabs {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 2px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page-content" aria-label="Content">
+
+        <!-- Blog Title (Aligned with Posts) -->
+        <div class="container mt-4">
+            <a href="{{ site.baseurl }}/" style="text-decoration: none; color: inherit;">
+                <h2 class="fw-bold">Ranjan Marathe Blog</h2>
+            </a>
+        </div>
+
+        <!-- Navbar (Matching Post Width) -->
+        <div class="container mt-3">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link {% if page.url == '/' or page.url == '/index.html' %}active{% endif %}"
+                        href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if page.url == '/bot/' or page.url == '/bot.html' %}active{% endif %}"
+                        href="/bot.html">BOT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if page.url == '/mb/' or page.url == '/mb.html' %}active{% endif %}"
+                        href="/mb.html">Microblog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if page.url == '/til/' or page.url == '/til.html' %}active{% endif %}"
+                        href="/til.html">TILS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if page.url == '/search/' or page.url == '/search.html' %}active{% endif %}"
+                        href="/search/">Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if page.url == '/about/' or page.url == '/about.html' %}active{% endif %}"
+                        href="/about/">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if page.url contains '/blog/' %}active{% endif %}"
+                        href="/blog/">Blog</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content (Same Alignment as Navbar & Title) -->
+        <div class="container mt-4">
+            {{ content }}
+        </div>
+
+    </main>
+</body>
+
+</html>

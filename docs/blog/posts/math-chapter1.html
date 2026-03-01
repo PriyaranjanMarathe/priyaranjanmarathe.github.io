@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Chapter 1: Logarithms, Exponentials & Half-Life | Ranjan Marathe</title>
+    <link rel="canonical" href="https://priyaranjanmarathe.github.io/blog/posts/math-chapter1.html">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #5B4FE0;
+            --primary-dark: #4338CA;
+            --secondary: #8B5CF6;
+            --accent: #F59E0B;
+            --bg-gradient-1: #1E1B4B;
+            --bg-gradient-2: #312E81;
+            --text-primary: #F8FAFC;
+            --text-secondary: #CBD5E1;
+            --card-bg: rgba(30, 27, 75, 0.95);
+            --card-border: rgba(139, 92, 246, 0.3);
+            --success: #10B981;
+            --warning: #F59E0B;
+            --info: #3B82F6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+            min-height: 100vh;
+            padding: 20px;
+            padding-bottom: 100px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #A78BFA 0%, #F472B6 50%, #FB923C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.4rem;
+            color: var(--text-primary);
+            margin-top: 48px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, var(--secondary), var(--accent));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.15rem;
+            color: #A78BFA;
+            margin-top: 28px;
+            margin-bottom: 14px;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        ul, ol {
+            margin-left: 24px;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        li strong {
+            color: var(--text-primary);
+        }
+
+        code {
+            background: rgba(139, 92, 246, 0.2);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'SF Mono', Menlo, Monaco, monospace;
+            font-size: 0.9em;
+            color: #C4B5FD;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 20px 0;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .intro-box {
+            background: linear-gradient(135deg, rgba(91, 79, 224, 0.15) 0%, rgba(139, 92, 246, 0.15) 100%);
+            border-left: 4px solid var(--primary);
+        }
+
+        .concept-box {
+            border-color: var(--secondary);
+        }
+
+        .concept-box h4 {
+            color: #A78BFA;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .math-formula {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            padding: 14px;
+            margin: 16px 0;
+            font-family: 'SF Mono', Menlo, Monaco, monospace;
+            font-size: 1rem;
+            text-align: center;
+            color: #E0E7FF;
+        }
+
+        .tip-box {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border-left: 4px solid var(--info);
+        }
+
+        .tip-box strong {
+            color: #60A5FA;
+        }
+
+        .warning-box {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(245, 158, 11, 0.1) 100%);
+            border-left: 4px solid var(--warning);
+        }
+
+        .warning-box strong {
+            color: #FBBF24;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.1) 100%);
+            border-left: 4px solid var(--success);
+        }
+
+        .example-box strong {
+            color: #34D399;
+        }
+
+        .interactive-section {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(251, 146, 60, 0.1) 100%);
+            border: 2px solid rgba(245, 158, 11, 0.4);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 28px 0;
+        }
+
+        .interactive-section h3 {
+            color: #FBBF24;
+            margin-top: 0;
+            font-size: 1.1rem;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin: 16px 0;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .control-group label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .control-group input[type="number"],
+        .control-group input[type="range"] {
+            width: 100%;
+            padding: 10px 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            -webkit-appearance: none;
+        }
+
+        .control-group input[type="number"]:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+
+        .value-display {
+            font-family: 'SF Mono', Menlo, Monaco, monospace;
+            font-size: 0.9rem;
+            color: #C4B5FD;
+            text-align: right;
+        }
+
+        .run-button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 8px 4px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            -webkit-appearance: none;
+        }
+
+        .run-button:active {
+            transform: scale(0.98);
+        }
+
+        .reset-button {
+            background: rgba(100, 100, 100, 0.5);
+        }
+
+        .chart-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            margin: 16px 0;
+            position: relative;
+        }
+
+        .chart-container canvas {
+            max-width: 100%;
+            height: auto !important;
+        }
+
+        .output-area {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 16px;
+            font-family: 'SF Mono', Menlo, Monaco, monospace;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: #A5B4FC;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(139, 92, 246, 0.3);
+            text-align: center;
+        }
+
+        .footer h3 {
+            background: linear-gradient(135deg, #A78BFA 0%, #F472B6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer p {
+            font-size: 0.9rem;
+        }
+
+        @supports (-webkit-overflow-scrolling: touch) {
+            body {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background: linear-gradient(135deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 16px;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+            
+            h2 {
+                font-size: 1.25rem;
+            }
+            
+            .card {
+                padding: 16px;
+            }
+            
+            .interactive-section {
+                padding: 16px;
+            }
+            
+            .controls-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/blog/" class="back-link">← Ranjan Marathe</a>
+        
+        <h1>Chapter 1: Logarithms, Exponentials & Half-Life</h1>
+        <p class="subtitle">An Interactive Journey Through Growth, Decay, and the Mathematics of Change</p>
+        <div class="post-tags" style="margin: 1rem 0;">
+            <a href="/blog/#tag-math" class="tag" style="display: inline-block; padding: 0.2rem 0.6rem; font-size: 0.75rem; background: rgba(139, 92, 246, 0.2); color: var(--text-secondary); border-radius: 3px; text-decoration: none; margin-right: 0.5rem;">math</a>
+            <a href="/blog/#tag-learning" class="tag" style="display: inline-block; padding: 0.2rem 0.6rem; font-size: 0.75rem; background: rgba(139, 92, 246, 0.2); color: var(--text-secondary); border-radius: 3px; text-decoration: none; margin-right: 0.5rem;">learning</a>
+            <a href="/blog/#tag-interactive" class="tag" style="display: inline-block; padding: 0.2rem 0.6rem; font-size: 0.75rem; background: rgba(139, 92, 246, 0.2); color: var(--text-secondary); border-radius: 3px; text-decoration: none; margin-right: 0.5rem;">interactive</a>
+        </div>
+
+        <div class="card intro-box">
+            <p><strong style="color: var(--text-primary);">Welcome to interactive mathematics!</strong> This chapter will help you understand exponential functions, logarithms, and half-life through visual exploration. Tap the buttons to generate visualizations and experiment with different parameters.</p>
+            <p style="margin-top: 12px; margin-bottom: 0;"><strong style="color: var(--text-primary);">How to use:</strong></p>
+            <ul style="margin-top: 8px; margin-bottom: 0;">
+                <li>Read the explanations carefully</li>
+                <li>Tap "Generate Chart" to see visualizations</li>
+                <li>Adjust sliders and values to experiment</li>
+                <li>Observe how changes affect the results</li>
+            </ul>
+        </div>
+
+        <!-- Part 1: Exponential Growth -->
+        <h2>Part 1: Exponential Functions</h2>
+
+        <h3>What Makes Exponential Growth Special?</h3>
+        <p>Imagine you have a dollar, and every day your money <em>doubles</em>. On day 1, you have $2. On day 2, $4. On day 3, $8. By day 10, $1,024. By day 20? Over a million dollars!</p>
+
+        <p>Exponential growth appears everywhere:</p>
+        <ul>
+            <li><strong>Compound interest:</strong> Savings grow when interest is reinvested</li>
+            <li><strong>Population growth:</strong> Bacteria double regularly</li>
+            <li><strong>Viral spread:</strong> Each infected person infects others</li>
+            <li><strong>Technology:</strong> Moore's Law—computer power doubles every ~2 years</li>
+        </ul>
+
+        <div class="card concept-box">
+            <h4>The Mathematical Form</h4>
+            <p>An exponential function has the form:</p>
+            <div class="math-formula">f(x) = a · b<sup>x</sup></div>
+            <p>Where:</p>
+            <ul>
+                <li><strong>a</strong> = initial value</li>
+                <li><strong>b</strong> = base (growth factor per unit time)</li>
+                <li><strong>x</strong> = the exponent (usually time)</li>
+            </ul>
+        </div>
+
+        <div class="card tip-box">
+            <strong>💡 Why so fast?</strong> With linear growth, we <em>add</em> a constant (1, 2, 3, 4...). With exponential, we <em>multiply</em> (1, 2, 4, 8...). Each step builds on all previous growth!
+        </div>
+
+        <div class="interactive-section">
+            <h3>🎮 Experiment 1: Different Growth Rates</h3>
+            <p>Compare exponential functions with different bases. Watch how dramatically different they become!</p>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Base 1</label>
+                    <input type="number" id="exp1-base1" value="1.5" step="0.1" min="1.1" max="5">
+                </div>
+                <div class="control-group">
+                    <label>Base 2</label>
+                    <input type="number" id="exp1-base2" value="2.0" step="0.1" min="1.1" max="5">
+                </div>
+                <div class="control-group">
+                    <label>Base 3</label>
+                    <input type="number" id="exp1-base3" value="3.0" step="0.1" min="1.1" max="5">
+                </div>
+                <div class="control-group">
+                    <label>Initial Value (a)</label>
+                    <input type="number" id="exp1-initial" value="1" step="1" min="1" max="10">
+                </div>
+            </div>
+
+            <button class="run-button" onclick="runExperiment1()">▶ Generate Chart</button>
+            
+            <div class="chart-container">
+                <canvas id="chart1"></canvas>
+            </div>
+            <div id="output1" class="output-area">Tap "Generate Chart" to see the visualization...</div>
+        </div>
+
+        <div class="card example-box">
+            <strong>📊 Real Example: Compound Interest</strong>
+            <p>Invest $1,000 at 7% annual interest:</p>
+            <div class="math-formula">A(t) = 1000 × (1.07)<sup>t</sup></div>
+            <p>After 10 years: $1,967.15<br>
+            After 30 years: $7,612.26</p>
+            <p>In the first 10 years you gain ~$967. In the next 20 years, ~$5,645!</p>
+        </div>
+
+        <!-- Part 2: Exponential Decay -->
+        <h2>Part 2: Exponential Decay</h2>
+
+        <h3>What is Exponential Decay?</h3>
+        <p>Exponential decay is growth in reverse—instead of multiplying, we're dividing. Instead of doubling, we're halving.</p>
+
+        <ul>
+            <li><strong>Radioactive decay:</strong> Unstable atoms break down</li>
+            <li><strong>Medicine elimination:</strong> Your body removes drugs proportionally</li>
+            <li><strong>Cooling:</strong> Hot objects cool proportional to temperature difference</li>
+            <li><strong>Depreciation:</strong> Cars lose value over time</li>
+        </ul>
+
+        <div class="card concept-box">
+            <h4>The Half-Life Formula</h4>
+            <div class="math-formula">N(t) = N₀ × (1/2)<sup>t/t<sub>½</sub></sup></div>
+            <p>Where:</p>
+            <ul>
+                <li><strong>N(t)</strong> = amount remaining at time t</li>
+                <li><strong>N₀</strong> = initial amount</li>
+                <li><strong>t<sub>½</sub></strong> = half-life</li>
+            </ul>
+        </div>
+
+        <div class="card tip-box">
+            <strong>✨ The Magic of Half-Life:</strong> If you start with 100g and the half-life is 5 days, after 5 days you have 50g. After another 5 days, 25g. After another 5 days, 12.5g. The half-life is always the same!
+        </div>
+
+        <div class="interactive-section">
+            <h3>🎮 Experiment 2: Radioactive Decay</h3>
+            <p>Simulate decay with different half-lives. Carbon-14 has a half-life of 5,730 years. Iodine-131 only 8 days!</p>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Half-Life 1</label>
+                    <input type="number" id="decay-hl1" value="2" step="1" min="1" max="20">
+                </div>
+                <div class="control-group">
+                    <label>Half-Life 2</label>
+                    <input type="number" id="decay-hl2" value="5" step="1" min="1" max="20">
+                </div>
+                <div class="control-group">
+                    <label>Half-Life 3</label>
+                    <input type="number" id="decay-hl3" value="10" step="1" min="1" max="20">
+                </div>
+                <div class="control-group">
+                    <label>Initial Amount</label>
+                    <input type="number" id="decay-initial" value="100" step="10" min="10" max="1000">
+                </div>
+            </div>
+
+            <button class="run-button" onclick="runExperiment2()">▶ Generate Chart</button>
+            
+            <div class="chart-container">
+                <canvas id="chart2"></canvas>
+            </div>
+            <div id="output2" class="output-area">Tap "Generate Chart" to see the visualization...</div>
+        </div>
+
+        <div class="card example-box">
+            <strong>🦴 Carbon-14 Dating</strong>
+            <p>A fossil has 25% of original C-14. How old?</p>
+            <ul>
+                <li>After 1 half-life (5,730 years): 50%</li>
+                <li>After 2 half-lives (11,460 years): 25% ← Our fossil!</li>
+            </ul>
+            <p>The artifact is approximately 11,460 years old!</p>
+        </div>
+
+        <!-- Part 3: Logarithms -->
+        <h2>Part 3: Logarithms</h2>
+
+        <h3>What Problem Do Logarithms Solve?</h3>
+        <p>Exponentials answer: "If I multiply <em>b</em> by itself <em>x</em> times, what do I get?"</p>
+        <p>Logarithms answer the <em>reverse</em>: "How many times must I multiply <em>b</em> to get <em>y</em>?"</p>
+
+        <ul>
+            <li>2<sup>3</sup> = 8, so log₂(8) = 3</li>
+            <li>10<sup>2</sup> = 100, so log₁₀(100) = 2</li>
+            <li>e<sup>1</sup> = e, so ln(e) = 1</li>
+        </ul>
+
+        <div class="card concept-box">
+            <h4>The Definition</h4>
+            <div class="math-formula">If b<sup>y</sup> = x, then log<sub>b</sub>(x) = y</div>
+            <p><strong>In words:</strong> The logarithm tells us what power we need to raise the base to get our target number.</p>
+        </div>
+
+        <div class="card concept-box">
+            <h4>Essential Properties</h4>
+            <div class="math-formula">log(x × y) = log(x) + log(y)</div>
+            <div class="math-formula">log(x / y) = log(x) - log(y)</div>
+            <div class="math-formula">log(x<sup>n</sup>) = n × log(x)</div>
+            <div class="math-formula">log<sub>b</sub>(b) = 1 &nbsp;&nbsp;and&nbsp;&nbsp; log<sub>b</sub>(1) = 0</div>
+        </div>
+
+        <div class="interactive-section">
+            <h3>🎮 Experiment 3: Exponential vs Logarithm</h3>
+            <p>See how logarithms "undo" exponentials—they're mirror images across y = x!</p>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Base</label>
+                    <input type="number" id="log-base" value="2" step="0.5" min="1.5" max="10">
+                </div>
+            </div>
+
+            <button class="run-button" onclick="runExperiment3()">▶ Generate Chart</button>
+            
+            <div class="chart-container">
+                <canvas id="chart3"></canvas>
+            </div>
+            <div id="output3" class="output-area">Tap "Generate Chart" to see the visualization...</div>
+        </div>
+
+        <div class="interactive-section">
+            <h3>🎮 Experiment 4: Logarithm Properties</h3>
+            <p>Verify the properties with real calculations!</p>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Value a</label>
+                    <input type="number" id="prop-a" value="8" step="1" min="1" max="100">
+                </div>
+                <div class="control-group">
+                    <label>Value b</label>
+                    <input type="number" id="prop-b" value="4" step="1" min="1" max="100">
+                </div>
+                <div class="control-group">
+                    <label>Power n</label>
+                    <input type="number" id="prop-n" value="3" step="1" min="1" max="10">
+                </div>
+            </div>
+
+            <button class="run-button" onclick="runExperiment4()">▶ Calculate</button>
+            
+            <div id="output4" class="output-area">Tap "Calculate" to verify the properties...</div>
+        </div>
+
+        <!-- Part 4: Logarithmic Scales -->
+        <h2>Part 4: Logarithmic Scales</h2>
+
+        <h3>Why Do We Need Log Scales?</h3>
+        <p>Some phenomena span <em>huge</em> ranges:</p>
+        <ul>
+            <li><strong>Sound:</strong> Quietest vs jet engine: factor of 1,000,000,000,000</li>
+            <li><strong>Earthquakes:</strong> Minor tremor vs major quake: factor of 100,000,000</li>
+            <li><strong>Acidity:</strong> Battery acid vs drain cleaner: factor of 10<sup>14</sup></li>
+        </ul>
+
+        <div class="card concept-box">
+            <h4>Linear vs Logarithmic</h4>
+            <p><strong>Linear scale:</strong> Equal spacing = equal differences</p>
+            <p style="text-align: center; font-family: monospace;">1 — 2 — 3 — 4 — 5</p>
+            <p><strong>Logarithmic scale:</strong> Equal spacing = equal ratios</p>
+            <p style="text-align: center; font-family: monospace;">1 — 10 — 100 — 1,000 — 10,000</p>
+        </div>
+
+        <div class="card concept-box">
+            <h4>The Richter Scale</h4>
+            <div class="math-formula">M = log₁₀(A/A₀)</div>
+            <p>Each +1 magnitude = 10× more amplitude, ~32× more energy!</p>
+        </div>
+
+        <div class="card concept-box">
+            <h4>Decibels (Sound)</h4>
+            <div class="math-formula">dB = 10 × log₁₀(I/I₀)</div>
+            <p>Every +10 dB = 10× more intense!</p>
+            <ul>
+                <li>0 dB: Threshold of hearing</li>
+                <li>60 dB: Normal conversation</li>
+                <li>120 dB: Rock concert (painful!)</li>
+            </ul>
+        </div>
+
+        <div class="interactive-section">
+            <h3>🎮 Experiment 5: Linear vs Log Plot</h3>
+            <p>See why log scales are essential for exponential data!</p>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Growth Base</label>
+                    <input type="number" id="scale-base" value="2" step="0.5" min="1.5" max="10">
+                </div>
+                <div class="control-group">
+                    <label>Time Steps</label>
+                    <input type="number" id="scale-steps" value="10" step="1" min="5" max="20">
+                </div>
+            </div>
+
+            <button class="run-button" onclick="runExperiment5()">▶ Generate Charts</button>
+            
+            <div class="chart-container">
+                <canvas id="chart5a"></canvas>
+            </div>
+            <div class="chart-container">
+                <canvas id="chart5b"></canvas>
+            </div>
+            <div id="output5" class="output-area">Tap "Generate Charts" to compare linear vs log scales...</div>
+        </div>
+
+        <!-- Part 5: Advanced Applications -->
+        <h2>Part 5: Advanced Applications</h2>
+
+        <h3>The Special Number e</h3>
+        <p>In continuous growth, a special number appears: <strong>e ≈ 2.71828...</strong></p>
+        <div class="math-formula">e = lim<sub>n→∞</sub> (1 + 1/n)<sup>n</sup></div>
+        <p>For continuous growth: N(t) = N₀ × e<sup>kt</sup></p>
+
+        <div class="interactive-section">
+            <h3>🎮 Experiment 6: Continuous vs Discrete</h3>
+            <p>Compare compounding frequencies. This shows why e matters!</p>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Principal ($)</label>
+                    <input type="number" id="compound-principal" value="1000" step="100" min="100" max="10000">
+                </div>
+                <div class="control-group">
+                    <label>Annual Rate (%)</label>
+                    <input type="number" id="compound-rate" value="5" step="1" min="1" max="20">
+                </div>
+                <div class="control-group">
+                    <label>Years</label>
+                    <input type="number" id="compound-years" value="20" step="5" min="5" max="50">
+                </div>
+            </div>
+
+            <button class="run-button" onclick="runExperiment6()">▶ Generate Chart</button>
+            
+            <div class="chart-container">
+                <canvas id="chart6"></canvas>
+            </div>
+            <div id="output6" class="output-area">Tap "Generate Chart" to compare compounding frequencies...</div>
+        </div>
+
+        <h3>Logistic Growth</h3>
+        <p>Pure exponential growth goes forever, but reality has limits. Logistic growth models this:</p>
+        <div class="math-formula">P(t) = K / (1 + A × e<sup>-rt</sup>)</div>
+
+        <div class="interactive-section">
+            <h3>🎮 Experiment 7: Exponential vs Logistic</h3>
+            <p>Compare unlimited exponential with realistic logistic growth.</p>
+
+            <div class="controls-grid">
+                <div class="control-group">
+                    <label>Initial Population</label>
+                    <input type="number" id="logistic-p0" value="10" step="5" min="1" max="100">
+                </div>
+                <div class="control-group">
+                    <label>Growth Rate</label>
+                    <input type="number" id="logistic-r" value="0.3" step="0.05" min="0.1" max="1">
+                </div>
+                <div class="control-group">
+                    <label>Carrying Capacity</label>
+                    <input type="number" id="logistic-k" value="1000" step="100" min="100" max="5000">
+                </div>
+            </div>
+
+            <button class="run-button" onclick="runExperiment7()">▶ Generate Chart</button>
+            
+            <div class="chart-container">
+                <canvas id="chart7"></canvas>
+            </div>
+            <div id="output7" class="output-area">Tap "Generate Chart" to compare growth models...</div>
+        </div>
+
+        <!-- Summary -->
+        <h2>📚 Chapter Summary</h2>
+
+        <div class="card concept-box">
+            <h4>What You've Learned</h4>
+            <p><strong>1. Exponential Functions</strong></p>
+            <ul>
+                <li>Form: f(x) = a·b<sup>x</sup></li>
+                <li>b > 1: growth; 0 < b < 1: decay</li>
+            </ul>
+
+            <p><strong>2. Half-Life</strong></p>
+            <ul>
+                <li>Time for quantity to reduce to half</li>
+                <li>N(t) = N₀ × (1/2)<sup>t/t<sub>½</sub></sup></li>
+            </ul>
+
+            <p><strong>3. Logarithms</strong></p>
+            <ul>
+                <li>Inverse of exponentiation</li>
+                <li>Converts multiplication to addition</li>
+            </ul>
+
+            <p><strong>4. Log Scales</strong></p>
+            <ul>
+                <li>Handle enormous ranges</li>
+                <li>Make exponential patterns linear</li>
+            </ul>
+
+            <p><strong>5. Advanced Concepts</strong></p>
+            <ul>
+                <li>e ≈ 2.718: continuous growth base</li>
+                <li>Logistic growth: realistic limits</li>
+            </ul>
+        </div>
+
+        <div class="card tip-box">
+            <strong>🔑 Key Takeaway:</strong> Exponentials and logarithms are inverse operations, like multiplication and division. When you see repeated multiplication, think exponential. When you need to find "how many times," think logarithm!
+        </div>
+
+        <div class="footer">
+            <h3>🌟 Congratulations!</h3>
+            <p>You've completed Chapter 1!</p>
+            <p style="margin-top: 16px;"><strong>Keep exploring, experimenting, and asking "what if?"</strong></p>
+            <p style="margin-top: 20px; font-size: 0.85rem; color: #64748B;">
+                <a href="/blog/" style="color: #64748B;">← Back to all posts</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        const charts = {};
+
+        function linspace(start, end, num) {
+            const arr = [];
+            const step = (end - start) / (num - 1);
+            for (let i = 0; i < num; i++) {
+                arr.push(start + step * i);
+            }
+            return arr;
+        }
+
+        function destroyChart(id) {
+            if (charts[id]) {
+                charts[id].destroy();
+                delete charts[id];
+            }
+        }
+
+        function runExperiment1() {
+            const base1 = parseFloat(document.getElementById('exp1-base1').value);
+            const base2 = parseFloat(document.getElementById('exp1-base2').value);
+            const base3 = parseFloat(document.getElementById('exp1-base3').value);
+            const a = parseFloat(document.getElementById('exp1-initial').value);
+
+            const x = linspace(0, 10, 50);
+            const y1 = x.map(xi => a * Math.pow(base1, xi));
+            const y2 = x.map(xi => a * Math.pow(base2, xi));
+            const y3 = x.map(xi => a * Math.pow(base3, xi));
+
+            destroyChart('chart1');
+
+            const ctx = document.getElementById('chart1').getContext('2d');
+            charts['chart1'] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: x.map(v => v.toFixed(1)),
+                    datasets: [
+                        {
+                            label: `f(x) = ${a} × ${base1}^x`,
+                            data: y1,
+                            borderColor: '#3B82F6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: `f(x) = ${a} × ${base2}^x`,
+                            data: y2,
+                            borderColor: '#EF4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: `f(x) = ${a} × ${base3}^x`,
+                            data: y3,
+                            borderColor: '#10B981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            tension: 0.4,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Exponential Growth with Different Bases',
+                            color: '#F8FAFC',
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        legend: {
+                            labels: { color: '#CBD5E1' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'x (time)', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8', maxTicksLimit: 10 },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        },
+                        y: {
+                            title: { display: true, text: 'f(x)', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            const output = document.getElementById('output1');
+            output.innerHTML = `At x=0: all functions start at ${a}
+At x=5:
+  Base ${base1}: ${(a * Math.pow(base1, 5)).toFixed(2)}
+  Base ${base2}: ${(a * Math.pow(base2, 5)).toFixed(2)}
+  Base ${base3}: ${(a * Math.pow(base3, 5)).toFixed(2)}
+
+Notice how the gap increases exponentially!`;
+        }
+
+        function runExperiment2() {
+            const hl1 = parseFloat(document.getElementById('decay-hl1').value);
+            const hl2 = parseFloat(document.getElementById('decay-hl2').value);
+            const hl3 = parseFloat(document.getElementById('decay-hl3').value);
+            const initial = parseFloat(document.getElementById('decay-initial').value);
+
+            const time = linspace(0, 30, 100);
+            const y1 = time.map(t => initial * Math.pow(0.5, t / hl1));
+            const y2 = time.map(t => initial * Math.pow(0.5, t / hl2));
+            const y3 = time.map(t => initial * Math.pow(0.5, t / hl3));
+
+            destroyChart('chart2');
+
+            const ctx = document.getElementById('chart2').getContext('2d');
+            charts['chart2'] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: time.map(v => v.toFixed(1)),
+                    datasets: [
+                        {
+                            label: `Fast decay (t½ = ${hl1})`,
+                            data: y1,
+                            borderColor: '#EF4444',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: `Medium decay (t½ = ${hl2})`,
+                            data: y2,
+                            borderColor: '#F59E0B',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: `Slow decay (t½ = ${hl3})`,
+                            data: y3,
+                            borderColor: '#3B82F6',
+                            tension: 0.4,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Exponential Decay: Comparing Half-Lives',
+                            color: '#F8FAFC',
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        legend: {
+                            labels: { color: '#CBD5E1' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Time (units)', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8', maxTicksLimit: 10 },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Amount Remaining', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            const output = document.getElementById('output2');
+            output.innerHTML = `Half-Life Calculations:
+
+Fast (t½=${hl1}):
+  50% at t=${hl1}, 25% at t=${2*hl1}
+
+Medium (t½=${hl2}):
+  50% at t=${hl2}, 25% at t=${2*hl2}
+
+Slow (t½=${hl3}):
+  50% at t=${hl3}, 25% at t=${2*hl3}
+
+After 2 half-lives: always 25% remaining
+After 3 half-lives: 12.5% remaining`;
+        }
+
+        function runExperiment3() {
+            const base = parseFloat(document.getElementById('log-base').value);
+
+            const xExp = linspace(0, 5, 50);
+            const yExp = xExp.map(x => Math.pow(base, x));
+
+            const xLog = linspace(0.1, 35, 100);
+            const yLog = xLog.map(x => Math.log(x) / Math.log(base));
+
+            destroyChart('chart3');
+
+            const ctx = document.getElementById('chart3').getContext('2d');
+            charts['chart3'] = new Chart(ctx, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: `y = ${base}^x (Exponential)`,
+                            data: xExp.map((x, i) => ({ x: x, y: yExp[i] })),
+                            borderColor: '#3B82F6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.5)',
+                            showLine: true,
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: `y = log${base}(x) (Logarithm)`,
+                            data: xLog.map((x, i) => ({ x: x, y: yLog[i] })),
+                            borderColor: '#EF4444',
+                            backgroundColor: 'rgba(239, 68, 68, 0.5)',
+                            showLine: true,
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'y = x (mirror line)',
+                            data: [{ x: 0, y: 0 }, { x: 35, y: 35 }],
+                            borderColor: 'rgba(148, 163, 184, 0.5)',
+                            borderDash: [5, 5],
+                            showLine: true,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Exponential and Logarithm are Inverses',
+                            color: '#F8FAFC',
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        legend: {
+                            labels: { color: '#CBD5E1' }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'linear',
+                            min: -1,
+                            max: 35,
+                            title: { display: true, text: 'x', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        },
+                        y: {
+                            min: -2,
+                            max: 35,
+                            title: { display: true, text: 'y', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            const output = document.getElementById('output3');
+            output.innerHTML = `Exponential (base ${base}):
+  ${base}^0 = 1
+  ${base}^1 = ${base}
+  ${base}^2 = ${Math.pow(base, 2)}
+  ${base}^3 = ${Math.pow(base, 3)}
+
+Logarithm (base ${base}):
+  log(1) = 0
+  log(${base}) = 1
+  log(${Math.pow(base, 2)}) = 2
+  log(${Math.pow(base, 3)}) = 3
+
+The points are swapped! (x,y) → (y,x)
+They're mirror images across y = x`;
+        }
+
+        function runExperiment4() {
+            const a = parseFloat(document.getElementById('prop-a').value);
+            const b = parseFloat(document.getElementById('prop-b').value);
+            const n = parseFloat(document.getElementById('prop-n').value);
+
+            const log2 = (x) => Math.log(x) / Math.log(2);
+
+            const output = document.getElementById('output4');
+            output.innerHTML = `═══════════════════════════════════════════
+LOGARITHM PROPERTIES (base 2)
+═══════════════════════════════════════════
+
+1. MULTIPLICATION → ADDITION
+   a = ${a}, b = ${b}
+   a × b = ${a * b}
+   log₂(a × b) = ${log2(a * b).toFixed(4)}
+   log₂(a) + log₂(b) = ${log2(a).toFixed(4)} + ${log2(b).toFixed(4)} = ${(log2(a) + log2(b)).toFixed(4)}
+   ✓ They match!
+
+2. DIVISION → SUBTRACTION
+   a / b = ${(a / b).toFixed(4)}
+   log₂(a / b) = ${log2(a / b).toFixed(4)}
+   log₂(a) - log₂(b) = ${(log2(a) - log2(b)).toFixed(4)}
+   ✓ They match!
+
+3. EXPONENTS → MULTIPLICATION
+   a^n = ${a}^${n} = ${Math.pow(a, n)}
+   log₂(a^n) = ${log2(Math.pow(a, n)).toFixed(4)}
+   n × log₂(a) = ${n} × ${log2(a).toFixed(4)} = ${(n * log2(a)).toFixed(4)}
+   ✓ They match!
+
+4. SPECIAL VALUES
+   log₂(2) = ${log2(2).toFixed(4)} (base = 1)
+   log₂(1) = ${log2(1).toFixed(4)} (always 0)
+
+═══════════════════════════════════════════
+SOLVE: 2^x = 100
+x = log₂(100) = ${log2(100).toFixed(4)}
+Verify: 2^${log2(100).toFixed(4)} = ${Math.pow(2, log2(100)).toFixed(2)}
+═══════════════════════════════════════════`;
+        }
+
+        function runExperiment5() {
+            const base = parseFloat(document.getElementById('scale-base').value);
+            const steps = parseInt(document.getElementById('scale-steps').value);
+
+            const time = [];
+            const values = [];
+            for (let i = 0; i <= steps; i++) {
+                time.push(i);
+                values.push(Math.pow(base, i));
+            }
+
+            destroyChart('chart5a');
+            destroyChart('chart5b');
+
+            const ctx5a = document.getElementById('chart5a').getContext('2d');
+            charts['chart5a'] = new Chart(ctx5a, {
+                type: 'line',
+                data: {
+                    labels: time,
+                    datasets: [{
+                        label: `y = ${base}^x`,
+                        data: values,
+                        borderColor: '#3B82F6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'LINEAR Scale - Early values crushed!',
+                            color: '#F8FAFC',
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        legend: { labels: { color: '#CBD5E1' } }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Time', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        },
+                        y: {
+                            type: 'linear',
+                            title: { display: true, text: 'Value', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            const ctx5b = document.getElementById('chart5b').getContext('2d');
+            charts['chart5b'] = new Chart(ctx5b, {
+                type: 'line',
+                data: {
+                    labels: time,
+                    datasets: [{
+                        label: `y = ${base}^x`,
+                        data: values,
+                        borderColor: '#EF4444',
+                        backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'LOGARITHMIC Scale - All values visible!',
+                            color: '#F8FAFC',
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        legend: { labels: { color: '#CBD5E1' } }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Time', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        },
+                        y: {
+                            type: 'logarithmic',
+                            title: { display: true, text: 'Value (log scale)', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            let table = `Time    Value         log₁₀(Value)\n`;
+            table += `════════════════════════════════════\n`;
+            for (let i = 0; i <= steps; i++) {
+                const v = values[i];
+                table += `${i.toString().padEnd(8)}${v.toFixed(0).padEnd(14)}${Math.log10(v).toFixed(2)}\n`;
+            }
+
+            const output = document.getElementById('output5');
+            output.innerHTML = table + `
+════════════════════════════════════
+Linear: Early values crushed at bottom
+Log: All values clearly visible!
+Exponential growth = straight line on log scale`;
+        }
+
+        function runExperiment6() {
+            const P = parseFloat(document.getElementById('compound-principal').value);
+            const r = parseFloat(document.getElementById('compound-rate').value) / 100;
+            const years = parseInt(document.getElementById('compound-years').value);
+
+            const time = linspace(0, years, 100);
+            const annual = time.map(t => P * Math.pow(1 + r, t));
+            const monthly = time.map(t => P * Math.pow(1 + r/12, 12*t));
+            const daily = time.map(t => P * Math.pow(1 + r/365, 365*t));
+            const continuous = time.map(t => P * Math.exp(r * t));
+
+            destroyChart('chart6');
+
+            const ctx = document.getElementById('chart6').getContext('2d');
+            charts['chart6'] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: time.map(v => v.toFixed(1)),
+                    datasets: [
+                        {
+                            label: 'Annual',
+                            data: annual,
+                            borderColor: '#3B82F6',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Monthly',
+                            data: monthly,
+                            borderColor: '#10B981',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Daily',
+                            data: daily,
+                            borderColor: '#F59E0B',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Continuous (e)',
+                            data: continuous,
+                            borderColor: '#EF4444',
+                            borderDash: [5, 5],
+                            tension: 0.4,
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `$${P} at ${(r*100).toFixed(0)}% Annual Interest`,
+                            color: '#F8FAFC',
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        legend: { labels: { color: '#CBD5E1' } }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Years', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8', maxTicksLimit: 10 },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Amount ($)', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        }
+                    }
+                }
+            });
+
+            let output = `Initial: $${P} | Rate: ${(r*100).toFixed(0)}%\n`;
+            output += `═══════════════════════════════════════════\n`;
+            [5, 10, 15, 20].filter(t => t <= years).forEach(t => {
+                output += `\nAfter ${t} years:\n`;
+                output += `  Annual:     $${(P * Math.pow(1 + r, t)).toFixed(2)}\n`;
+                output += `  Monthly:    $${(P * Math.pow(1 + r/12, 12*t)).toFixed(2)}\n`;
+                output += `  Daily:      $${(P * Math.pow(1 + r/365, 365*t)).toFixed(2)}\n`;
+                output += `  Continuous: $${(P * Math.exp(r * t)).toFixed(2)}\n`;
+            });
+            output += `\n═══════════════════════════════════════════\n`;
+            output += `More frequent compounding → higher returns\nContinuous (using e) is the maximum`;
+
+            document.getElementById('output6').innerHTML = output;
+        }
+
+        function runExperiment7() {
+            const P0 = parseFloat(document.getElementById('logistic-p0').value);
+            const r = parseFloat(document.getElementById('logistic-r').value);
+            const K = parseFloat(document.getElementById('logistic-k').value);
+
+            const A = (K - P0) / P0;
+            const time = linspace(0, 30, 100);
+
+            const exponential = time.map(t => P0 * Math.exp(r * t));
+            const logistic = time.map(t => K / (1 + A * Math.exp(-r * t)));
+
+            destroyChart('chart7');
+
+            const ctx = document.getElementById('chart7').getContext('2d');
+            charts['chart7'] = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: time.map(v => v.toFixed(1)),
+                    datasets: [
+                        {
+                            label: 'Exponential (unlimited)',
+                            data: exponential.map(v => Math.min(v, K * 1.5)),
+                            borderColor: '#EF4444',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: 'Logistic (limited)',
+                            data: logistic,
+                            borderColor: '#3B82F6',
+                            tension: 0.4,
+                            pointRadius: 0
+                        },
+                        {
+                            label: `Carrying capacity = ${K}`,
+                            data: Array(time.length).fill(K),
+                            borderColor: '#10B981',
+                            borderDash: [10, 5],
+                            pointRadius: 0
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Exponential vs Logistic Growth',
+                            color: '#F8FAFC',
+                            font: { size: 14, weight: 'bold' }
+                        },
+                        legend: { labels: { color: '#CBD5E1' } }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Time', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8', maxTicksLimit: 10 },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' }
+                        },
+                        y: {
+                            title: { display: true, text: 'Population', color: '#CBD5E1' },
+                            ticks: { color: '#94A3B8' },
+                            grid: { color: 'rgba(148, 163, 184, 0.1)' },
+                            max: K * 1.5
+                        }
+                    }
+                }
+            });
+
+            const tHalf = Math.log(A) / r;
+            let output = `Initial: ${P0} | Growth rate: ${r} | Capacity: ${K}\n`;
+            output += `═══════════════════════════════════════════\n`;
+            output += `Time to reach half capacity: ${tHalf.toFixed(2)} units\n\n`;
+            output += `Time    Exponential    Logistic    % Capacity\n`;
+            output += `─────────────────────────────────────────────\n`;
+            [5, 10, 15, 20, 25, 30].forEach(t => {
+                const exp = P0 * Math.exp(r * t);
+                const log = K / (1 + A * Math.exp(-r * t));
+                const pct = (log / K) * 100;
+                output += `${t.toString().padEnd(8)}${exp.toFixed(0).padEnd(15)}${log.toFixed(0).padEnd(12)}${pct.toFixed(1)}%\n`;
+            });
+            output += `\n═══════════════════════════════════════════\n`;
+            output += `Exponential: grows without bound (unrealistic)\nLogistic: approaches carrying capacity (realistic)`;
+
+            document.getElementById('output7').innerHTML = output;
+        }
+    </script>
+</body>
+</html>

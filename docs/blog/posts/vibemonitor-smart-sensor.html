@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turn a $30 Phone into a Smart Home Sensor | Blog</title>
+    <meta name="description" content="Use VibeMonitor to transform a cheap prepaid smartphone into a vibration sensor for your dryer, washer, or any appliance.">
+    <link rel="canonical" href="https://priyaranjanmarathe.github.io/blog/posts/vibemonitor-smart-sensor.html">
+    <style>
+        :root {
+            --text: #1a1a1a;
+            --text-secondary: #555;
+            --bg: #fefefe;
+            --accent: #0066cc;
+            --border: #e0e0e0;
+            --tag-bg: #f0f0f0;
+            --code-bg: #f5f5f5;
+            --callout-bg: #e7f5f2;
+            --callout-border: #00a67d;
+            --warning-bg: #fff8e6;
+            --warning-border: #e6a700;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text: #e8e8e8;
+                --text-secondary: #aaa;
+                --bg: #121212;
+                --accent: #6db3f2;
+                --border: #333;
+                --tag-bg: #252525;
+                --code-bg: #1e1e1e;
+                --callout-bg: #0d2922;
+                --callout-border: #00d4aa;
+                --warning-bg: #2a2210;
+                --warning-border: #ffb347;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 18px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Georgia, serif;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--bg);
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        header {
+            margin-bottom: 3rem;
+        }
+
+        header .site-name {
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        header .site-name a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        header .site-name a:hover {
+            color: var(--accent);
+        }
+
+        .post-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header h1 {
+            font-size: 1.75rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.75rem;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .post-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            font-size: 0.75rem;
+            background: var(--tag-bg);
+            color: var(--text-secondary);
+            border-radius: 3px;
+            text-decoration: none;
+        }
+
+        article {
+            margin-bottom: 4rem;
+        }
+
+        article h2 {
+            font-size: 1.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        article h3 {
+            font-size: 1.15rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        article p {
+            margin-bottom: 1.25rem;
+        }
+
+        article a {
+            color: var(--accent);
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+            text-underline-offset: 2px;
+        }
+
+        article a:hover {
+            text-decoration-thickness: 2px;
+        }
+
+        article ul, article ol {
+            margin-bottom: 1.25rem;
+            padding-left: 1.5rem;
+        }
+
+        article li {
+            margin-bottom: 0.5rem;
+        }
+
+        article code {
+            font-family: 'SF Mono', Menlo, Monaco, monospace;
+            font-size: 0.85em;
+            background: var(--code-bg);
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+        }
+
+        article pre {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-radius: 4px;
+            overflow-x: auto;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border);
+        }
+
+        article pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.8rem;
+            line-height: 1.5;
+        }
+
+        article img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin: 1.5rem 0;
+        }
+
+        article hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 2rem 0;
+        }
+
+        .callout {
+            background: var(--callout-bg);
+            border-left: 3px solid var(--callout-border);
+            padding: 1rem 1.25rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .callout p {
+            margin-bottom: 0;
+        }
+
+        .callout-warning {
+            background: var(--warning-bg);
+            border-left-color: var(--warning-border);
+        }
+
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.25rem 0;
+            font-size: 0.95rem;
+        }
+
+        .cost-table th,
+        .cost-table td {
+            text-align: left;
+            padding: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cost-table th {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .cost-table tr:last-child td {
+            border-bottom: none;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            color: var(--bg);
+            font-size: 0.8rem;
+            font-weight: 600;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .use-case-section {
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1rem 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .use-case-section h4 {
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+            color: var(--accent);
+        }
+
+        .use-case-section ul {
+            margin-bottom: 0;
+        }
+
+        .use-case-section li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .attribution {
+            background: var(--tag-bg);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 1.25rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .attribution p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .post-nav {
+            display: flex;
+            justify-content: space-between;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .post-nav a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .post-nav a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="site-name"><a href="/blog/">← Back to Blog</a></div>
+        <div class="post-meta">January 24, 2026 • 8 min read</div>
+        <h1>Turn a $30 Prepaid Phone into a Smart Home Vibration Sensor</h1>
+        <p class="subtitle">Get notified when your dryer, washer, or any appliance finishes its cycle — no subscription, no cloud dependency.</p>
+        <div class="post-tags">
+            <a href="/blog/#tag-smart-home" class="tag">smart-home</a>
+            <a href="/blog/#tag-diy" class="tag">diy</a>
+            <a href="/blog/#tag-android" class="tag">android</a>
+        </div>
+    </header>
+
+    <article>
+        <h2>The Problem</h2>
+        <p>Older appliances don't tell you when they're done. You start the dryer, forget about it, and three hours later your clothes are a wrinkled mess. Smart sensors exist, but they're often overpriced, cloud-dependent, or require subscriptions.</p>
+        
+        <p>Enter <a href="https://github.com/marshallrichards/VibeMonitor" target="_blank">VibeMonitor</a>, an open-source Android app by Marshall Richards that transforms a cheap prepaid smartphone into a vibration sensor. Stick it on any appliance, and it'll send you a webhook notification when the vibration stops.</p>
+
+        <div class="callout">
+            <p><strong>The insight:</strong> Modern prepaid phones cost $30 and come packed with sensors — accelerometer, gyroscope, ambient light, microphone, camera. That's more sensing capability than most dedicated IoT devices, at a fraction of the cost.</p>
+        </div>
+
+        <h2>Total Cost</h2>
+        <table class="cost-table">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Moto G Play 2024/2025 (Prepaid, Walmart)</td>
+                    <td>~$30</td>
+                </tr>
+                <tr>
+                    <td>3M VHB double-sided tape</td>
+                    <td>~$8</td>
+                </tr>
+                <tr>
+                    <td>Phone holder (from cheap selfie stick)</td>
+                    <td>~$5</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>~$43</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="callout callout-warning">
+            <p><strong>No service plan needed.</strong> The phone is "locked to carrier" but you never need to activate cellular service. Skip all the carrier setup prompts, connect to WiFi, and you're done. The carrier lock is completely irrelevant for this use case.</p>
+        </div>
+
+        <h2>Setup Guide</h2>
+
+        <h3><span class="step-number">1</span>Prepare the Phone</h3>
+        <p>Power on the phone, skip all carrier activation prompts, and connect to your home WiFi. Then enable Developer Options:</p>
+        <ul>
+            <li>Go to <strong>Settings → About Phone</strong></li>
+            <li>Tap "Build number" 7 times to unlock Developer Options</li>
+            <li>Go to <strong>Settings → System → Developer Options</strong></li>
+            <li>Enable <strong>Wireless debugging</strong> (easier than USB for this)</li>
+        </ul>
+
+        <h3><span class="step-number">2</span>Set Up Notifications (Free)</h3>
+        <p>You need somewhere to receive webhook notifications. The simplest free option is <a href="https://ntfy.sh" target="_blank">ntfy.sh</a> — no account required:</p>
+        <ol>
+            <li>Pick a unique topic name (e.g., <code>myhouse-dryer-x7k9m</code>)</li>
+            <li>Install the ntfy app on your main phone, subscribe to your topic</li>
+            <li>Your webhook URL will be: <code>https://ntfy.sh/your-topic-name</code></li>
+        </ol>
+        <p>Test it from your computer terminal:</p>
+        <pre><code>curl -d "Test notification" ntfy.sh/your-topic-name</code></pre>
+
+        <h3><span class="step-number">3</span>Build the App</h3>
+        <p>VibeMonitor doesn't have pre-built releases, so you'll need to compile it. On macOS with Homebrew:</p>
+        <pre><code># Install dependencies
+brew install openjdk@17 android-platform-tools
+
+# Set up environment
+export JAVA_HOME=$(brew --prefix openjdk@17)
+export PATH="$JAVA_HOME/bin:$PATH"
+export ANDROID_HOME=~/Library/Android/sdk
+
+# Clone and build
+git clone https://github.com/marshallrichards/VibeMonitor.git
+cd VibeMonitor
+chmod +x gradlew
+./gradlew assembleDebug</code></pre>
+
+        <p>The APK will be at <code>app/build/outputs/apk/debug/app-debug.apk</code></p>
+
+        <h3><span class="step-number">4</span>Install via Wireless ADB</h3>
+        <p>On the sensor phone, go to <strong>Developer Options → Wireless debugging → Pair device with pairing code</strong>. Note the IP, port, and 6-digit code.</p>
+        <pre><code># Pair (use the pairing port shown on phone)
+adb pair 192.168.x.x:xxxxx
+# Enter 6-digit code when prompted
+
+# Connect (use the main wireless debugging port)
+adb connect 192.168.x.x:xxxxx
+
+# Verify connection
+adb devices
+
+# Install
+adb install app/build/outputs/apk/debug/app-debug.apk</code></pre>
+
+        <h3><span class="step-number">5</span>Configure VibeMonitor</h3>
+        <ol>
+            <li>Open the app and grant notification permissions (required for background service)</li>
+            <li>Add your webhook URL: <code>https://ntfy.sh/your-topic-name</code></li>
+            <li>Set the vibration threshold (start with default, tune later)</li>
+            <li>Set the duration (how long vibration must stop before notification)</li>
+            <li>Tap "Test Webhook" to verify notifications work</li>
+        </ol>
+
+        <h3><span class="step-number">6</span>Mount and Tune</h3>
+        <p>Attach the phone to your dryer (top surface works well) using 3M VHB tape or a phone holder. Keep it plugged in permanently. Run a dryer cycle and adjust the threshold until it reliably detects running vs. stopped states.</p>
+
+        <div class="callout">
+            <p><strong>Battery tip:</strong> Go to <strong>Settings → Apps → VibeMonitor → Battery</strong> and set to "Unrestricted" so Android doesn't kill the background service.</p>
+        </div>
+
+        <h2>Beyond the Dryer: More Use Cases</h2>
+        <p>A $30 phone has far more sensors than a dedicated IoT device. Here's what else you can monitor:</p>
+
+        <div class="use-case-section">
+            <h4>📳 Vibration/Motion (Accelerometer)</h4>
+            <ul>
+                <li><strong>Washing machine</strong> — know when the cycle ends</li>
+                <li><strong>Garage door</strong> — detect open/close, alert on unexpected movement</li>
+                <li><strong>3D printer</strong> — notification when print finishes (or fails)</li>
+                <li><strong>Sump pump</strong> — track activation frequency, alert on anomalies</li>
+                <li><strong>Package delivery</strong> — detect mailbox lid movement</li>
+            </ul>
+        </div>
+
+        <div class="use-case-section">
+            <h4>🎤 Sound (Microphone)</h4>
+            <ul>
+                <li><strong>Smoke/CO alarm</strong> — get phone alerts when alarms trigger</li>
+                <li><strong>Doorbell</strong> — smart notifications for dumb doorbells</li>
+                <li><strong>Dog barking monitor</strong> — track barking while away</li>
+                <li><strong>Appliance beeps</strong> — centralize alerts from microwave, oven, etc.</li>
+            </ul>
+        </div>
+
+        <div class="use-case-section">
+            <h4>💡 Light (Ambient Sensor + Camera)</h4>
+            <ul>
+                <li><strong>Freezer door ajar</strong> — light sensor detects if door isn't sealed</li>
+                <li><strong>Pilot light monitor</strong> — camera watches gas appliance pilot</li>
+                <li><strong>Power outage detection</strong> — watch an LED nightlight</li>
+                <li><strong>Mail arrival</strong> — light change inside dark mailbox</li>
+            </ul>
+        </div>
+
+        <div class="use-case-section">
+            <h4>📷 Camera (Computer Vision)</h4>
+            <ul>
+                <li><strong>Analog gauge reader</strong> — water/gas meter, oil tank level</li>
+                <li><strong>Parking spot monitor</strong> — check if street spot is taken</li>
+                <li><strong>Security camera</strong> — always-on, motion-triggered</li>
+                <li><strong>Pet feeder level</strong> — visual check on food/water</li>
+            </ul>
+        </div>
+
+        <h2>Why This Matters</h2>
+        <p>The VibeMonitor approach represents a broader insight: modern smartphones are absurdly capable general-purpose sensor platforms. Prepaid carriers sell them at a loss hoping you'll buy their plans. You don't have to.</p>
+        
+        <p>For the price of a single "smart" vibration sensor, you get a device with a 6+ inch screen for debugging, a multi-day battery, WiFi, multiple sensors, and a full Linux-based OS that can run arbitrary code.</p>
+
+        <p>The code is open source. The notifications are self-hosted (or use free services). There's no subscription, no cloud dependency, no vendor lock-in. Just a cheap phone doing exactly what you tell it to do.</p>
+
+        <div class="attribution">
+            <p><strong>VibeMonitor</strong> created by <a href="https://github.com/marshallrichards" target="_blank">Marshall Richards</a><br>
+            <a href="https://github.com/marshallrichards/VibeMonitor" target="_blank">github.com/marshallrichards/VibeMonitor</a></p>
+            <p style="margin-top: 0.75rem; font-size: 0.85rem;">Original write-up inspired this post. All credit for the app and core ideas goes to Marshall.</p>
+        </div>
+    </article>
+
+    <nav class="post-nav">
+        <a href="/blog/">← All posts</a>
+    </nav>
+
+    <footer>
+        <p>Built with curiosity and a $30 phone</p>
+    </footer>
+</body>
+</html>
