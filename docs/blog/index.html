@@ -345,8 +345,25 @@
             emptyState.style.display = visible === 0 ? 'block' : 'none';
         });
     });
+
+    // Handle tag filtering from URL hash (e.g. #tag-math)
+    function handleHashTag() {
+        const hash = window.location.hash;
+        if (hash.startsWith('#tag-')) {
+            const tag = hash.substring(5); // Remove '#tag-' prefix
+            const tagButton = document.querySelector(`[data-tag="${tag}"]`);
+            if (tagButton) {
+                buttons.forEach(b => b.classList.remove('active'));
+                tagButton.classList.add('active');
+                tagButton.click(); // Trigger the existing click handler
+            }
+        }
+    }
+
+    // Handle hash changes and initial load
+    window.addEventListener('hashchange', handleHashTag);
+    window.addEventListener('load', handleHashTag);
 </script>
-```
 
 </body>
 </html>
