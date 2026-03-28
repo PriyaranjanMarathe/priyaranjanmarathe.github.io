@@ -82,6 +82,8 @@ letter-spacing: 0.03em;
 width: 6px; height: 6px;
 background: var(–accent);
 border-radius: 50%;
+}
+.pretext-badge.active .dot {
 animation: pulse 2s ease-in-out infinite;
 }
 @keyframes pulse {
@@ -134,6 +136,8 @@ position: relative;
 overflow: hidden;
 text-decoration: none;
 color: inherit;
+opacity: 0;
+animation: cardIn 0.4s ease forwards;
 }
 .card::before {
 content: ‘’;
@@ -150,6 +154,10 @@ box-shadow: var(–shadow-hover);
 transform: translateY(-2px);
 }
 .card:hover::before { transform: scaleY(1); }
+@keyframes cardIn {
+from { opacity: 0; transform: translateY(12px); }
+to   { opacity: 1; transform: translateY(0); }
+}
 
 .card .date {
 font-family: ‘JetBrains Mono’, monospace;
@@ -211,14 +219,67 @@ opacity: 0.6;
 .site-footer a { color: var(–accent); text-decoration: none; }
 .site-footer a:hover { text-decoration: underline; }
 
-/* Card entrance animation */
-.card {
-opacity: 0;
-animation: cardIn 0.4s ease forwards;
+/* How-it-works section */
+.how-it-works {
+max-width: 1100px;
+margin: 0 auto;
+padding: 0 24px 40px;
 }
-@keyframes cardIn {
-from { opacity: 0; transform: translateY(12px); }
-to   { opacity: 1; transform: translateY(0); }
+.how-it-works details {
+border: 1px solid var(–border);
+border-radius: var(–radius);
+background: var(–card-bg);
+padding: 16px 20px;
+}
+.how-it-works summary {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.78rem;
+color: var(–accent);
+cursor: pointer;
+font-weight: 500;
+}
+.how-it-works .explanation {
+margin-top: 14px;
+font-size: 0.88rem;
+line-height: 1.6;
+color: var(–text-secondary);
+}
+.how-it-works .explanation strong {
+color: var(–text);
+font-weight: 600;
+}
+.how-it-works code {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.8em;
+background: var(–tag-bg);
+padding: 1px 5px;
+border-radius: 3px;
+}
+.how-it-works .step-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+margin-top: 12px;
+}
+@media (max-width: 520px) {
+.how-it-works .step-grid { grid-template-columns: 1fr; }
+}
+.how-it-works .step {
+background: var(–bg);
+border-radius: var(–radius);
+padding: 12px 14px;
+}
+.how-it-works .step-num {
+font-family: ‘JetBrains Mono’, monospace;
+font-size: 0.65rem;
+color: var(–accent);
+font-weight: 500;
+margin-bottom: 4px;
+}
+.how-it-works .step p {
+font-size: 0.82rem;
+line-height: 1.5;
+color: var(–text-secondary);
 }
 </style>
 
@@ -236,13 +297,13 @@ to   { opacity: 1; transform: translateY(0); }
 </header>
 
 <div class="pretext-banner">
-  <span class="pretext-badge">
+  <span class="pretext-badge" id="badge">
     <span class="dot"></span>
-    <span id="badge-text">Pretext masonry · zero DOM reflow</span>
+    <span id="badge-text">Pretext masonry · loading…</span>
   </span>
 </div>
 
-<div class="stats-bar" id="stats">
+<div class="stats-bar">
   <span><span class="label">posts</span> <span class="value" id="stat-posts">9</span></span>
   <span><span class="label">prepare()</span> <span class="value" id="stat-prepare">—</span></span>
   <span><span class="label">layout()</span> <span class="value" id="stat-layout">—</span></span>
@@ -250,6 +311,39 @@ to   { opacity: 1; transform: translateY(0); }
 </div>
 
 <div class="masonry" id="masonry"></div>
+
+<div class="how-it-works">
+  <details>
+    <summary>How does this page use Pretext?</summary>
+    <div class="explanation">
+      <p>
+        This page uses <a href="https://github.com/chenglou/pretext" style="color: var(--accent);">@chenglou/pretext</a>
+        to measure every card's title and excerpt height <strong>before rendering any DOM</strong>.
+        Normal web pages use <code>getBoundingClientRect()</code> to measure text — each call forces
+        the browser to do a synchronous <strong>layout reflow</strong>, one of the most expensive operations
+        in the browser. Pretext replaces that with pure arithmetic over cached canvas measurements.
+      </p>
+      <div class="step-grid">
+        <div class="step">
+          <div class="step-num">1 · prepare()</div>
+          <p>Segments text via <code>Intl.Segmenter</code>, measures each word via canvas <code>measureText()</code>, caches widths. Done once per text.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2 · layout()</div>
+          <p>Pure arithmetic over cached widths. Returns exact height and line count. ~0.0002ms per text. No DOM reads.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3 · Masonry</div>
+          <p>Card heights are known before render → CSS column masonry packs tightly with zero layout shift or reflow.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4 · Hover</div>
+          <p>Hover any card to see the Pretext measurement: line count and pixel height for title + excerpt.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+</div>
 
 <footer class="site-footer">
   © 2026 Ranjan Marathe · <a href="https://github.com/PriyaranjanMarathe">GitHub</a>
@@ -324,10 +418,10 @@ const posts = [
   }
 ]
 
-// ── Render cards immediately (no waiting on Pretext) ──
+// ── Render cards ──
 const container = document.getElementById('masonry')
 
-function renderCards(measurementData) {
+function renderCards(measurements) {
   const fragment = document.createDocumentFragment()
   posts.forEach((post, i) => {
     const card = document.createElement('a')
@@ -336,12 +430,12 @@ function renderCards(measurementData) {
     card.style.animationDelay = `${i * 0.06}s`
 
     let metaHtml = ''
-    if (measurementData && measurementData[i]) {
-      const m = measurementData[i]
+    if (measurements && measurements[i]) {
+      const m = measurements[i]
       metaHtml = `
         <div class="pretext-meta">
-          <span>title: ${m.titleLines}L ${m.titleHeight.toFixed(1)}px</span>
-          <span>excerpt: ${m.excerptLines}L ${m.excerptHeight.toFixed(1)}px</span>
+          <span>title: ${m.tl}L · ${m.th.toFixed(1)}px</span>
+          <span>excerpt: ${m.el}L · ${m.eh.toFixed(1)}px</span>
         </div>`
     }
 
@@ -357,17 +451,36 @@ function renderCards(measurementData) {
   container.appendChild(fragment)
 }
 
-// ── Try loading Pretext, render either way ──
-async function run() {
-  let pretextLoaded = false
-  try {
-    const pretext = await import('https://esm.sh/@chenglou/pretext')
-    const { prepare, layout } = pretext
-
-    if (document.fonts && document.fonts.ready) {
-      await document.fonts.ready
+// ── Try loading Pretext from multiple sources ──
+async function loadPretext() {
+  // Try local file first (same directory), then esm.sh
+  const sources = [
+    './pretext-lib.js',
+    'https://esm.sh/@chenglou/pretext',
+    'https://cdn.jsdelivr.net/npm/@chenglou/pretext/+esm'
+  ]
+  for (const src of sources) {
+    try {
+      const mod = await import(src)
+      if (mod.prepare && mod.layout) return mod
+    } catch (e) {
+      console.warn(`Pretext load failed from ${src}:`, e.message)
     }
+  }
+  return null
+}
 
+async function run() {
+  const badge = document.getElementById('badge')
+  const badgeText = document.getElementById('badge-text')
+
+  const pretext = await loadPretext()
+
+  if (pretext) {
+    // Wait for fonts
+    if (document.fonts?.ready) await document.fonts.ready
+
+    const { prepare, layout } = pretext
     const titleFont = '600 17.28px "Source Serif 4", Georgia, serif'
     const excerptFont = '14.08px "Source Serif 4", Georgia, serif'
     const textWidth = 298
@@ -376,30 +489,27 @@ async function run() {
 
     const t0 = performance.now()
     const prepared = posts.map(p => ({
-      title: prepare(p.title, titleFont),
-      excerpt: prepare(p.excerpt, excerptFont)
+      t: prepare(p.title, titleFont),
+      e: prepare(p.excerpt, excerptFont)
     }))
-    const prepareTime = (performance.now() - t0).toFixed(2)
+    const prepareMs = (performance.now() - t0).toFixed(2)
 
     const t1 = performance.now()
     const measurements = prepared.map(p => {
-      const t = layout(p.title, textWidth, titleLH)
-      const e = layout(p.excerpt, textWidth, excerptLH)
-      return {
-        titleLines: t.lineCount, titleHeight: t.height,
-        excerptLines: e.lineCount, excerptHeight: e.height
-      }
+      const tr = layout(p.t, textWidth, titleLH)
+      const er = layout(p.e, textWidth, excerptLH)
+      return { tl: tr.lineCount, th: tr.height, el: er.lineCount, eh: er.height }
     })
-    const layoutTime = (performance.now() - t1).toFixed(2)
+    const layoutMs = (performance.now() - t1).toFixed(2)
 
-    document.getElementById('stat-prepare').textContent = prepareTime + 'ms'
-    document.getElementById('stat-layout').textContent = layoutTime + 'ms'
-    pretextLoaded = true
+    document.getElementById('stat-prepare').textContent = prepareMs + 'ms'
+    document.getElementById('stat-layout').textContent = layoutMs + 'ms'
+    badgeText.textContent = 'Pretext masonry · zero DOM reflow'
+    badge.classList.add('active')
 
     renderCards(measurements)
-  } catch (err) {
-    console.warn('Pretext not available, rendering without measurements:', err.message)
-    document.getElementById('badge-text').textContent = 'Pretext masonry · fallback mode'
+  } else {
+    badgeText.textContent = 'Pretext masonry · visual-only (library not loaded)'
     document.getElementById('stat-prepare').textContent = 'n/a'
     document.getElementById('stat-layout').textContent = 'n/a'
     renderCards(null)
