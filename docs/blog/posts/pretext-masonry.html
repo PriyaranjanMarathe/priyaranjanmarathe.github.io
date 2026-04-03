@@ -40,6 +40,10 @@ body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(-
 .c .ex{font-size:.88rem;line-height:1.55;color:var(--text2);margin-bottom:12px}
 .c .tags{display:flex;flex-wrap:wrap;gap:5px}
 .c .tg{font-family:'JetBrains Mono',monospace;font-size:.62rem;background:var(--tag-bg);color:var(--tag-text);padding:2px 8px;border-radius:3px;letter-spacing:.02em}
+.post-tags{max-width:1100px;margin:0 auto;padding:0 24px 16px;display:flex;flex-wrap:wrap;gap:6px}
+.post-tags a{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:#ddf4ff;color:#0969da;padding:2px 10px;border-radius:2em;text-decoration:none;font-weight:500}
+.post-tags a:hover{background:#b6e3ff}
+@media(prefers-color-scheme:dark){.post-tags a{background:#1f3a5f;color:#58a6ff}.post-tags a:hover{background:#264a78}}
 .c .pm{margin-top:10px;padding-top:8px;border-top:1px dashed var(--border);font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--text2);opacity:0;transition:opacity .2s;display:flex;gap:12px;flex-wrap:wrap}
 .c:hover .pm{opacity:1}
 .ft{max-width:1100px;margin:0 auto;padding:0 24px 40px;font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--text2);text-align:center;opacity:.6}
@@ -74,6 +78,13 @@ body{font-family:'Source Serif 4',Georgia,serif;background:var(--bg);color:var(-
 <span><span class="l">prepare()</span> <span class="v" id="s1">—</span></span>
 <span><span class="l">layout()</span> <span class="v" id="s2">—</span></span>
 <span><span class="l">reflows</span> <span class="v">0</span></span>
+</div>
+<div class="post-tags">
+<a href="/blog/#tag-pretext">pretext</a>
+<a href="/blog/#tag-layout">layout</a>
+<a href="/blog/#tag-masonry">masonry</a>
+<a href="/blog/#tag-performance">performance</a>
+<a href="/blog/#tag-interactive">interactive</a>
 </div>
 <div class="m" id="mm"></div>
 <div class="hw"><details>

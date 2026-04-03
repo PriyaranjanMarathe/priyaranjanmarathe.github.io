@@ -55,6 +55,10 @@
             line-height: 1.5;
         }
 
+        .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 8px 0 4px; }
+        .tag { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 0.75rem; background: #ddf4ff; color: #0969da; padding: 0.1rem 0.5rem; border-radius: 2em; text-decoration: none; font-weight: 500; }
+        .tag:hover { background: #b6e3ff; }
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -146,6 +150,12 @@
 
     <div class="container">
         <div class="intro">
+            <div class="tags">
+                <a href="/blog/#tag-blog" class="tag">blog</a>
+                <a href="/blog/#tag-feeds" class="tag">feeds</a>
+                <a href="/blog/#tag-RSS" class="tag">RSS</a>
+                <a href="/blog/#tag-resources" class="tag">resources</a>
+            </div>
             <p><b>A collection of exceptional technical blogs curated by Andrej Karpathy.</b></p>
             <p>These are veteran programmers and writers who have been sharing their craft for decades. Their writings span systems programming, AI research, security, web development, software architecture, and deep technical explorations. Each has developed a distinctive voice and perspective worth following.</p>
         </div>

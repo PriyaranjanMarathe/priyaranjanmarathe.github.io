@@ -18,6 +18,13 @@
     .toolbar { display:flex; gap:.75rem; flex-wrap:wrap; align-items:end; }
     .toolbar > * { margin: 0; }
     .small { font-size: .92rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.75rem 0 1.5rem; }
+    .tag { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size: 0.75rem; background: #ddf4ff; color: #0969da; padding: 0.15rem 0.55rem; border-radius: 2em; text-decoration: none; font-weight: 500; }
+    .tag:hover { background: #b6e3ff; }
+    @media (prefers-color-scheme: dark) {
+      .tag { background: #1f3a5f; color: #58a6ff; }
+      .tag:hover { background: #264a78; }
+    }
 
     /* Oat grid has no breakpoint API; this tiny media rule makes cards go 1-up on phones. */
     @media (max-width: 720px) {
@@ -33,6 +40,14 @@
 
     <p class="muted">February 13, 2026</p>
     <h1>US State Demographics (ACS) in an Oat Grid</h1>
+
+    <div class="tags">
+      <a href="/blog/#tag-data" class="tag">data</a>
+      <a href="/blog/#tag-visualization" class="tag">visualization</a>
+      <a href="/blog/#tag-oat-ui" class="tag">oat-ui</a>
+      <a href="/blog/#tag-demographics" class="tag">demographics</a>
+    </div>
+
     <p class="muted small">
       Data: American Community Survey 1-year estimates (ACS 1-year API includes 2024).  [oai_citation:1‡Census.gov](https://www.census.gov/data/developers/data-sets/acs-1year.html)
       Layout: Oat UI 12-col grid (.container/.row/.col-N).  [oai_citation:2‡Oat](https://oat.ink/components/grid/)
