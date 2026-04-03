@@ -1,206 +1,246 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranjan Marathe</title>
     <meta name="description" content="Engineering, ML, and occasional thoughts.">
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-        --font-body: 'Georgia', 'Times New Roman', serif;
-        --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
-        --color-bg: #ffffff;
-        --color-text: #24292f;
-        --color-text-secondary: #57606a;
-        --color-link: #0969da;
-        --color-border: #d0d7de;
-        --color-tag-bg: #ddf4ff;
-        --color-tag-text: #0969da;
-        --color-tag-bg-hover: #b6e3ff;
-        --color-tag-active-bg: #0969da;
-        --color-tag-active-text: #ffffff;
-        --color-hr: #d8dee4;
-        --color-card-hover: #f6f8fa;
-        --max-width: 720px;
-    }
-
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --color-bg: #0d1117;
-            --color-text: #e6edf3;
-            --color-text-secondary: #8b949e;
-            --color-link: #58a6ff;
-            --color-border: #30363d;
-            --color-tag-bg: #1f3a5f;
-            --color-tag-text: #58a6ff;
-            --color-tag-bg-hover: #264a78;
-            --color-tag-active-bg: #58a6ff;
-            --color-tag-active-text: #0d1117;
-            --color-hr: #21262d;
-            --color-card-hover: #161b22;
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-    }
 
-    body {
-        font-family: var(--font-body);
-        background: var(--color-bg);
-        color: var(--color-text);
-        line-height: 1.7;
-        font-size: 17px;
-        -webkit-font-smoothing: antialiased;
-    }
+        :root {
+            --font-body: 'Georgia', 'Times New Roman', serif;
+            --font-heading: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+            --color-bg: #ffffff;
+            --color-text: #24292f;
+            --color-text-secondary: #57606a;
+            --color-link: #0969da;
+            --color-border: #d0d7de;
+            --color-tag-bg: #ddf4ff;
+            --color-tag-text: #0969da;
+            --color-tag-bg-hover: #b6e3ff;
+            --color-tag-active-bg: #0969da;
+            --color-tag-active-text: #ffffff;
+            --color-hr: #d8dee4;
+            --color-card-hover: #f6f8fa;
+            --max-width: 720px;
+        }
 
-    .container {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 2.5rem 1.5rem 4rem;
-    }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0d1117;
+                --color-text: #e6edf3;
+                --color-text-secondary: #8b949e;
+                --color-link: #58a6ff;
+                --color-border: #30363d;
+                --color-tag-bg: #1f3a5f;
+                --color-tag-text: #58a6ff;
+                --color-tag-bg-hover: #264a78;
+                --color-tag-active-bg: #58a6ff;
+                --color-tag-active-text: #0d1117;
+                --color-hr: #21262d;
+                --color-card-hover: #161b22;
+            }
+        }
 
-    /* Header */
-    .site-header {
-        margin-bottom: 2.5rem;
-    }
-    .site-title {
-        font-family: var(--font-heading);
-        font-size: 1.75rem;
-        font-weight: 700;
-        letter-spacing: -0.02em;
-        margin-bottom: 0.25rem;
-    }
-    .site-title a {
-        color: var(--color-text);
-        text-decoration: none;
-    }
-    .site-tagline {
-        font-size: 0.95rem;
-        color: var(--color-text-secondary);
-        margin-bottom: 1rem;
-    }
+        body {
+            font-family: var(--font-body);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.7;
+            font-size: 17px;
+            -webkit-font-smoothing: antialiased;
+        }
 
-    /* Nav */
-    .site-nav {
-        display: flex;
-        gap: 1.25rem;
-        font-family: var(--font-heading);
-        font-size: 0.875rem;
-    }
-    .site-nav a {
-        color: var(--color-link);
-        text-decoration: none;
-        font-weight: 500;
-    }
-    .site-nav a:hover { text-decoration: underline; }
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
 
-    /* Tag filter */
-    .tag-filter {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        margin-bottom: 2rem;
-        padding-bottom: 1.5rem;
-        border-bottom: 1px solid var(--color-hr);
-    }
-    .tag-filter-btn {
-        font-family: var(--font-heading);
-        font-size: 0.75rem;
-        background: var(--color-tag-bg);
-        color: var(--color-tag-text);
-        padding: 0.2rem 0.6rem;
-        border-radius: 2em;
-        border: none;
-        cursor: pointer;
-        font-weight: 500;
-        transition: background 0.15s, color 0.15s;
-    }
-    .tag-filter-btn:hover { background: var(--color-tag-bg-hover); }
-    .tag-filter-btn.active {
-        background: var(--color-tag-active-bg);
-        color: var(--color-tag-active-text);
-    }
+        /* Header */
+        .site-header {
+            margin-bottom: 2.5rem;
+        }
 
-    /* Post list */
-    .post-list {
-        list-style: none;
-    }
-    .post-item {
-        padding: 1.25rem 0;
-        border-bottom: 1px solid var(--color-hr);
-    }
-    .post-item:first-child {
-        padding-top: 0;
-    }
-    .post-item-date {
-        font-family: var(--font-heading);
-        font-size: 0.8rem;
-        color: var(--color-text-secondary);
-        margin-bottom: 0.25rem;
-    }
-    .post-item-title {
-        font-family: var(--font-heading);
-        font-size: 1.2rem;
-        font-weight: 600;
-        margin-bottom: 0.35rem;
-        letter-spacing: -0.01em;
-    }
-    .post-item-title a {
-        color: var(--color-text);
-        text-decoration: none;
-    }
-    .post-item-title a:hover { color: var(--color-link); }
-    .post-item-desc {
-        font-size: 0.92rem;
-        color: var(--color-text-secondary);
-        margin-bottom: 0.6rem;
-        line-height: 1.5;
-    }
-    .post-item-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.3rem;
-    }
-    .post-item-tag {
-        font-family: var(--font-heading);
-        font-size: 0.7rem;
-        background: var(--color-tag-bg);
-        color: var(--color-tag-text);
-        padding: 0.1rem 0.45rem;
-        border-radius: 2em;
-        font-weight: 500;
-    }
+        .site-title {
+            font-family: var(--font-heading);
+            font-size: 1.75rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
 
-    /* Empty state */
-    .empty-state {
-        color: var(--color-text-secondary);
-        font-style: italic;
-        padding: 2rem 0;
-        display: none;
-    }
+        .site-title a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
 
-    /* Footer */
-    .site-footer {
-        margin-top: 3rem;
-        padding-top: 1.5rem;
-        border-top: 1px solid var(--color-hr);
-        font-family: var(--font-heading);
-        font-size: 0.8rem;
-        color: var(--color-text-secondary);
-    }
-    .site-footer a {
-        color: var(--color-link);
-        text-decoration: none;
-    }
-    .site-footer a:hover { text-decoration: underline; }
+        .site-tagline {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1rem;
+        }
 
-    @media (max-width: 600px) {
-        .site-title { font-size: 1.5rem; }
-        .container { padding: 1.5rem 1rem 3rem; }
-    }
-</style>
+        /* Nav */
+        .site-nav {
+            display: flex;
+            gap: 1.25rem;
+            font-family: var(--font-heading);
+            font-size: 0.875rem;
+        }
+
+        .site-nav a {
+            color: var(--color-link);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Tag filter */
+        .tag-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--color-hr);
+        }
+
+        .tag-filter-btn {
+            font-family: var(--font-heading);
+            font-size: 0.75rem;
+            background: var(--color-tag-bg);
+            color: var(--color-tag-text);
+            padding: 0.2rem 0.6rem;
+            border-radius: 2em;
+            border: none;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .tag-filter-btn:hover {
+            background: var(--color-tag-bg-hover);
+        }
+
+        .tag-filter-btn.active {
+            background: var(--color-tag-active-bg);
+            color: var(--color-tag-active-text);
+        }
+
+        /* Post list */
+        .post-list {
+            list-style: none;
+        }
+
+        .post-item {
+            padding: 1.25rem 0;
+            border-bottom: 1px solid var(--color-hr);
+        }
+
+        .post-item:first-child {
+            padding-top: 0;
+        }
+
+        .post-item-date {
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .post-item-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
+            letter-spacing: -0.01em;
+        }
+
+        .post-item-title a {
+            color: var(--color-text);
+            text-decoration: none;
+        }
+
+        .post-item-title a:hover {
+            color: var(--color-link);
+        }
+
+        .post-item-desc {
+            font-size: 0.92rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.6rem;
+            line-height: 1.5;
+        }
+
+        .post-item-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+        }
+
+        .post-item-tag {
+            font-family: var(--font-heading);
+            font-size: 0.7rem;
+            background: var(--color-tag-bg);
+            color: var(--color-tag-text);
+            padding: 0.1rem 0.45rem;
+            border-radius: 2em;
+            font-weight: 500;
+        }
+
+        /* Empty state */
+        .empty-state {
+            color: var(--color-text-secondary);
+            font-style: italic;
+            padding: 2rem 0;
+            display: none;
+        }
+
+        /* Footer */
+        .site-footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--color-hr);
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            color: var(--color-text-secondary);
+        }
+
+        .site-footer a {
+            color: var(--color-link);
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .site-title {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 1.5rem 1rem 3rem;
+            }
+        }
+    </style>
 
 </head>
+
 <body>
     <div class="container">
         <header class="site-header">
@@ -213,244 +253,252 @@
             </nav>
         </header>
 
-    <div class="tag-filter">
-        <button class="tag-filter-btn active" data-tag="all">All</button>
-        <button class="tag-filter-btn" data-tag="learning">learning</button>
-        <button class="tag-filter-btn" data-tag="education">education</button>
-        <button class="tag-filter-btn" data-tag="mastery">mastery</button>
-        <button class="tag-filter-btn" data-tag="compounding">compounding</button>
-        <button class="tag-filter-btn" data-tag="parenting">parenting</button>
-        <button class="tag-filter-btn" data-tag="recruiting">recruiting</button>
-        <button class="tag-filter-btn" data-tag="LLM">LLM</button>
-        <button class="tag-filter-btn" data-tag="agentic-workflows">agentic-workflows</button>
-        <button class="tag-filter-btn" data-tag="hiring">hiring</button>
-        <button class="tag-filter-btn" data-tag="DSPy">DSPy</button>
-        <button class="tag-filter-btn" data-tag="math">math</button>
-        <button class="tag-filter-btn" data-tag="interactive">interactive</button>
-        <button class="tag-filter-btn" data-tag="smart-home">smart-home</button>
-        <button class="tag-filter-btn" data-tag="diy">diy</button>
-        <button class="tag-filter-btn" data-tag="android">android</button>
-        <button class="tag-filter-btn" data-tag="blog">blog</button>
-        <button class="tag-filter-btn" data-tag="feeds">feeds</button>
-        <button class="tag-filter-btn" data-tag="RSS">RSS</button>
-        <button class="tag-filter-btn" data-tag="resources">resources</button>
-        <button class="tag-filter-btn" data-tag="simplicity">simplicity</button>
-        <button class="tag-filter-btn" data-tag="data">data</button>
-        <button class="tag-filter-btn" data-tag="visualization">visualization</button>
-        <button class="tag-filter-btn" data-tag="oat-ui">oat-ui</button>
-        <button class="tag-filter-btn" data-tag="demographics">demographics</button>
-        <button class="tag-filter-btn" data-tag="marathi">marathi</button>
-        <button class="tag-filter-btn" data-tag="poetry">poetry</button>
-        <button class="tag-filter-btn" data-tag="literature">literature</button>
-        <button class="tag-filter-btn" data-tag="philosophy">philosophy</button>
-        <button class="tag-filter-btn" data-tag="test">test</button>
+        <div class="tag-filter">
+            <button class="tag-filter-btn active" data-tag="all">All</button>
+            <button class="tag-filter-btn" data-tag="learning">learning</button>
+            <button class="tag-filter-btn" data-tag="education">education</button>
+            <button class="tag-filter-btn" data-tag="mastery">mastery</button>
+            <button class="tag-filter-btn" data-tag="compounding">compounding</button>
+            <button class="tag-filter-btn" data-tag="parenting">parenting</button>
+            <button class="tag-filter-btn" data-tag="recruiting">recruiting</button>
+            <button class="tag-filter-btn" data-tag="LLM">LLM</button>
+            <button class="tag-filter-btn" data-tag="agentic-workflows">agentic-workflows</button>
+            <button class="tag-filter-btn" data-tag="hiring">hiring</button>
+            <button class="tag-filter-btn" data-tag="DSPy">DSPy</button>
+            <button class="tag-filter-btn" data-tag="math">math</button>
+            <button class="tag-filter-btn" data-tag="interactive">interactive</button>
+            <button class="tag-filter-btn" data-tag="smart-home">smart-home</button>
+            <button class="tag-filter-btn" data-tag="diy">diy</button>
+            <button class="tag-filter-btn" data-tag="android">android</button>
+            <button class="tag-filter-btn" data-tag="blog">blog</button>
+            <button class="tag-filter-btn" data-tag="feeds">feeds</button>
+            <button class="tag-filter-btn" data-tag="RSS">RSS</button>
+            <button class="tag-filter-btn" data-tag="resources">resources</button>
+            <button class="tag-filter-btn" data-tag="simplicity">simplicity</button>
+            <button class="tag-filter-btn" data-tag="data">data</button>
+            <button class="tag-filter-btn" data-tag="visualization">visualization</button>
+            <button class="tag-filter-btn" data-tag="oat-ui">oat-ui</button>
+            <button class="tag-filter-btn" data-tag="demographics">demographics</button>
+            <button class="tag-filter-btn" data-tag="marathi">marathi</button>
+            <button class="tag-filter-btn" data-tag="poetry">poetry</button>
+            <button class="tag-filter-btn" data-tag="literature">literature</button>
+            <button class="tag-filter-btn" data-tag="philosophy">philosophy</button>
+            <button class="tag-filter-btn" data-tag="test">test</button>
+        </div>
+
+        <ul class="post-list">
+
+            <!-- Place it at the TOP of your post list (newest first) -->
+            <li class="post-item" data-tags="js til llmtooling">
+                <div class="post-item-date">March 28, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/pretext-masonry.html">Pretext Masonry — Zero-Reflow Blog Layout</a></h2>
+                <p class="post-item-desc">
+                    A masonry blog index powered by Cheng Lou's Pretext library. All card heights
+                    are calculated with pure JavaScript arithmetic — zero DOM reflow, zero
+                    getBoundingClientRect calls. Hover cards to see live text measurement data.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">pretext</span>
+                    <span class="post-item-tag">layout</span>
+                    <span class="post-item-tag">masonry</span>
+                    <span class="post-item-tag">performance</span>
+                    <span class="post-item-tag">interactive</span>
+                </div>
+            </li>
+            <li class="post-item" data-tags="learning education mastery compounding parenting">
+                <div class="post-item-date">March 1, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/long-game-of-learning.html">The Long Game of
+                        Learning</a></h2>
+                <p class="post-item-desc">
+                    Deep competence is a forty-year project. Why mastery isn't binary, early exposure builds
+                    scaffolding, and the real rewards compound over decades.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">learning</span>
+                    <span class="post-item-tag">education</span>
+                    <span class="post-item-tag">mastery</span>
+                    <span class="post-item-tag">compounding</span>
+                    <span class="post-item-tag">parenting</span>
+                </div>
+            </li>
+            <li class="post-item" data-tags="parenting education learning simplicity">
+                <div class="post-item-date">February 15, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/dont-dumb-it-down.html">Don't Dumb It Down: Kids Can
+                        Handle Complexity</a></h2>
+                <p class="post-item-desc">
+                    Simple approach for new parents: don't shrink the world for kids. Keep it true,
+                    keep it kind, keep it interactive. Don't simplify the truth—simplify the path into it.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">parenting</span>
+                    <span class="post-item-tag">education</span>
+                    <span class="post-item-tag">learning</span>
+                    <span class="post-item-tag">simplicity</span>
+                </div>
+            </li>
+            <li class="post-item" data-tags="data visualization oat-ui demographics">
+                <div class="post-item-date">February 13, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/oat-grid-demo.html">US State Demographics — Oat
+                        Grid</a></h2>
+                <p class="post-item-desc">
+                    Interactive demo showcasing US state demographics using American Community Survey data
+                    in a clean Oat UI 12-column grid layout.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">data</span>
+                    <span class="post-item-tag">visualization</span>
+                    <span class="post-item-tag">oat-ui</span>
+                    <span class="post-item-tag">demographics</span>
+                </div>
+            </li>
+            <li class="post-item" data-tags="marathi LLM education poetry literature">
+                <div class="post-item-date">February 8, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/kekavali-viparit-exercise.html">विपरीत केकावली — A
+                        Creative Marathi Exercise with LLMs</a></h2>
+                <p class="post-item-desc">
+                    A creative homework exercise for Marathi students: compose the viparit (corollary)
+                    of Moropant's Kekavali using LLM tools while deepening understanding of classical poetry.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">marathi</span>
+                    <span class="post-item-tag">LLM</span>
+                    <span class="post-item-tag">education</span>
+                    <span class="post-item-tag">poetry</span>
+                    <span class="post-item-tag">literature</span>
+                </div>
+            </li>
+            <li class="post-item" data-tags="recruiting LLM agentic-workflows hiring education DSPy">
+                <div class="post-item-date">February 20, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/llm-recruiting.html">LLMs in Recruiting</a></h2>
+                <p class="post-item-desc">
+                    The Application as Audition — Lessons from Unravel Tech and the विपरीत केकावली.
+                    The process of using the AI is the test.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">recruiting</span>
+                    <span class="post-item-tag">LLM</span>
+                    <span class="post-item-tag">agentic-workflows</span>
+                    <span class="post-item-tag">hiring</span>
+                    <span class="post-item-tag">education</span>
+                    <span class="post-item-tag">DSPy</span>
+                </div>
+            </li>
+            <li class="post-item" data-tags="blog feeds RSS resources">
+                <div class="post-item-date">February 2, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/blog-feeds.html">Blog Feeds in OPML and HTML</a></h2>
+                <p class="post-item-desc">
+                    Discover a curated collection of technical blogs with OPML and a readable HTML listing.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">blog</span>
+                    <span class="post-item-tag">feeds</span>
+                    <span class="post-item-tag">RSS</span>
+                    <span class="post-item-tag">resources</span>
+                </div>
+            </li>
+            <li class="post-item" data-tags="smart-home diy android">
+                <div class="post-item-date">January 24, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/vibemonitor-smart-sensor.html">Turn a $30 Phone into a
+                        Smart Home Sensor</a></h2>
+                <p class="post-item-desc">
+                    Use VibeMonitor to transform a cheap prepaid smartphone into a vibration sensor
+                    for your dryer, washer, or any appliance.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">smart-home</span>
+                    <span class="post-item-tag">diy</span>
+                    <span class="post-item-tag">android</span>
+                </div>
+            </li>
+            <li class="post-item" data-tags="poetry philosophy test">
+                <div class="post-item-date">January 24, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/kipling-if-poem.html">Reflections on "If" by Rudyard
+                        Kipling</a></h2>
+                <p class="post-item-desc">
+                    Exploring the timeless wisdom in Rudyard Kipling's poem about character,
+                    resilience, and integrity. A test of the blog posting workflow.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">poetry</span>
+                    <span class="post-item-tag">philosophy</span>
+                    <span class="post-item-tag">test</span>
+                </div>
+            </li>
+            <li class="post-item" data-tags="math learning interactive">
+                <div class="post-item-date">January 23, 2026</div>
+                <h2 class="post-item-title"><a href="/blog/posts/math-chapter1.html">Chapter 1: Logarithms, Exponentials
+                        &amp; Half-Life</a></h2>
+                <p class="post-item-desc">
+                    An interactive journey through growth, decay, and the mathematics of change.
+                    Explore exponential functions, logarithms, and half-life with visual experiments.
+                </p>
+                <div class="post-item-tags">
+                    <span class="post-item-tag">math</span>
+                    <span class="post-item-tag">learning</span>
+                    <span class="post-item-tag">interactive</span>
+                </div>
+            </li>
+
+            <!-- ─── Paste this into your blog/index.html post list ─── -->
+
+
+            <!-- ─── END snippet ─── -->
+
+        </ul>
+
+        <p class="empty-state" id="empty-state">No posts found.</p>
+
+        <footer class="site-footer">
+            © 2026 Ranjan Marathe · <a href="https://github.com/PriyaranjanMarathe">GitHub</a>
+        </footer>
     </div>
 
-    <ul class="post-list">
-        <li class="post-item" data-tags="learning education mastery compounding parenting">
-            <div class="post-item-date">March 1, 2026</div>
-            <h2 class="post-item-title"><a href="/blog/posts/long-game-of-learning.html">The Long Game of Learning</a></h2>
-            <p class="post-item-desc">
-                Deep competence is a forty-year project. Why mastery isn't binary, early exposure builds
-                scaffolding, and the real rewards compound over decades.
-            </p>
-            <div class="post-item-tags">
-                <span class="post-item-tag">learning</span>
-                <span class="post-item-tag">education</span>
-                <span class="post-item-tag">mastery</span>
-                <span class="post-item-tag">compounding</span>
-                <span class="post-item-tag">parenting</span>
-            </div>
-        </li>
-        <li class="post-item" data-tags="parenting education learning simplicity">
-            <div class="post-item-date">February 15, 2026</div>
-            <h2 class="post-item-title"><a href="/blog/posts/dont-dumb-it-down.html">Don't Dumb It Down: Kids Can Handle Complexity</a></h2>
-            <p class="post-item-desc">
-                Simple approach for new parents: don't shrink the world for kids. Keep it true,
-                keep it kind, keep it interactive. Don't simplify the truth—simplify the path into it.
-            </p>
-            <div class="post-item-tags">
-                <span class="post-item-tag">parenting</span>
-                <span class="post-item-tag">education</span>
-                <span class="post-item-tag">learning</span>
-                <span class="post-item-tag">simplicity</span>
-            </div>
-        </li>
-        <li class="post-item" data-tags="data visualization oat-ui demographics">
-            <div class="post-item-date">February 13, 2026</div>
-            <h2 class="post-item-title"><a href="/blog/posts/oat-grid-demo.html">US State Demographics — Oat Grid</a></h2>
-            <p class="post-item-desc">
-                Interactive demo showcasing US state demographics using American Community Survey data
-                in a clean Oat UI 12-column grid layout.
-            </p>
-            <div class="post-item-tags">
-                <span class="post-item-tag">data</span>
-                <span class="post-item-tag">visualization</span>
-                <span class="post-item-tag">oat-ui</span>
-                <span class="post-item-tag">demographics</span>
-            </div>
-        </li>
-        <li class="post-item" data-tags="marathi LLM education poetry literature">
-            <div class="post-item-date">February 8, 2026</div>
-            <h2 class="post-item-title"><a href="/blog/posts/kekavali-viparit-exercise.html">विपरीत केकावली — A Creative Marathi Exercise with LLMs</a></h2>
-            <p class="post-item-desc">
-                A creative homework exercise for Marathi students: compose the viparit (corollary)
-                of Moropant's Kekavali using LLM tools while deepening understanding of classical poetry.
-            </p>
-            <div class="post-item-tags">
-                <span class="post-item-tag">marathi</span>
-                <span class="post-item-tag">LLM</span>
-                <span class="post-item-tag">education</span>
-                <span class="post-item-tag">poetry</span>
-                <span class="post-item-tag">literature</span>
-            </div>
-        </li>
-        <li class="post-item" data-tags="recruiting LLM agentic-workflows hiring education DSPy">
-            <div class="post-item-date">February 20, 2026</div>
-            <h2 class="post-item-title"><a href="/blog/posts/llm-recruiting.html">LLMs in Recruiting</a></h2>
-            <p class="post-item-desc">
-                The Application as Audition — Lessons from Unravel Tech and the विपरीत केकावली.
-                The process of using the AI is the test.
-            </p>
-            <div class="post-item-tags">
-                <span class="post-item-tag">recruiting</span>
-                <span class="post-item-tag">LLM</span>
-                <span class="post-item-tag">agentic-workflows</span>
-                <span class="post-item-tag">hiring</span>
-                <span class="post-item-tag">education</span>
-                <span class="post-item-tag">DSPy</span>
-            </div>
-        </li>
-        <li class="post-item" data-tags="blog feeds RSS resources">
-            <div class="post-item-date">February 2, 2026</div>
-            <h2 class="post-item-title"><a href="/blog/posts/blog-feeds.html">Blog Feeds in OPML and HTML</a></h2>
-            <p class="post-item-desc">
-                Discover a curated collection of technical blogs with OPML and a readable HTML listing.
-            </p>
-            <div class="post-item-tags">
-                <span class="post-item-tag">blog</span>
-                <span class="post-item-tag">feeds</span>
-                <span class="post-item-tag">RSS</span>
-                <span class="post-item-tag">resources</span>
-            </div>
-        </li>
-        <li class="post-item" data-tags="smart-home diy android">
-            <div class="post-item-date">January 24, 2026</div>
-            <h2 class="post-item-title"><a href="/blog/posts/vibemonitor-smart-sensor.html">Turn a $30 Phone into a Smart Home Sensor</a></h2>
-            <p class="post-item-desc">
-                Use VibeMonitor to transform a cheap prepaid smartphone into a vibration sensor
-                for your dryer, washer, or any appliance.
-            </p>
-            <div class="post-item-tags">
-                <span class="post-item-tag">smart-home</span>
-                <span class="post-item-tag">diy</span>
-                <span class="post-item-tag">android</span>
-            </div>
-        </li>
-        <li class="post-item" data-tags="poetry philosophy test">
-            <div class="post-item-date">January 24, 2026</div>
-            <h2 class="post-item-title"><a href="/blog/posts/kipling-if-poem.html">Reflections on "If" by Rudyard Kipling</a></h2>
-            <p class="post-item-desc">
-                Exploring the timeless wisdom in Rudyard Kipling's poem about character,
-                resilience, and integrity. A test of the blog posting workflow.
-            </p>
-            <div class="post-item-tags">
-                <span class="post-item-tag">poetry</span>
-                <span class="post-item-tag">philosophy</span>
-                <span class="post-item-tag">test</span>
-            </div>
-        </li>
-        <li class="post-item" data-tags="math learning interactive">
-            <div class="post-item-date">January 23, 2026</div>
-            <h2 class="post-item-title"><a href="/blog/posts/math-chapter1.html">Chapter 1: Logarithms, Exponentials &amp; Half-Life</a></h2>
-            <p class="post-item-desc">
-                An interactive journey through growth, decay, and the mathematics of change.
-                Explore exponential functions, logarithms, and half-life with visual experiments.
-            </p>
-            <div class="post-item-tags">
-                <span class="post-item-tag">math</span>
-                <span class="post-item-tag">learning</span>
-                <span class="post-item-tag">interactive</span>
-            </div>
-        </li>
-        
-        <!-- ─── Paste this into your blog/index.html post list ─── -->
+    <script>
+        // Tag filtering
+        const buttons = document.querySelectorAll('.tag-filter-btn');
+        const posts = document.querySelectorAll('.post-item');
+        const emptyState = document.getElementById('empty-state');
 
-<!-- Place it at the TOP of your post list (newest first) -->
-
-<li>
-  <span class="date">March 28, 2026</span>
-  <h2><a href="posts/pretext-masonry.html">Pretext Masonry — Zero-Reflow Blog Layout</a></h2>
-  <p class="excerpt">
-    A masonry blog index powered by Cheng Lou's Pretext library. All card heights
-    are calculated with pure JavaScript arithmetic — zero DOM reflow, zero
-    getBoundingClientRect calls. Hover cards to see live text measurement data.
-  </p>
-  <div class="tags">
-    <span class="tag">pretext</span>
-    <span class="tag">layout</span>
-    <span class="tag">masonry</span>
-    <span class="tag">performance</span>
-    <span class="tag">interactive</span>
-  </div>
-</li>
-
-<!-- ─── END snippet ─── -->
-        
-    </ul>
-
-    <p class="empty-state" id="empty-state">No posts found.</p>
-
-    <footer class="site-footer">
-        © 2026 Ranjan Marathe · <a href="https://github.com/PriyaranjanMarathe">GitHub</a>
-    </footer>
-</div>
-
-<script>
-    // Tag filtering
-    const buttons = document.querySelectorAll('.tag-filter-btn');
-    const posts = document.querySelectorAll('.post-item');
-    const emptyState = document.getElementById('empty-state');
-
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            buttons.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const tag = btn.dataset.tag;
-            let visible = 0;
-
-            posts.forEach(post => {
-                if (tag === 'all' || post.dataset.tags.split(' ').includes(tag)) {
-                    post.style.display = '';
-                    visible++;
-                } else {
-                    post.style.display = 'none';
-                }
-            });
-
-            emptyState.style.display = visible === 0 ? 'block' : 'none';
-        });
-    });
-
-    // Handle tag filtering from URL hash (e.g. #tag-math)
-    function handleHashTag() {
-        const hash = window.location.hash;
-        if (hash.startsWith('#tag-')) {
-            const tag = hash.substring(5); // Remove '#tag-' prefix
-            const tagButton = document.querySelector(`[data-tag="${tag}"]`);
-            if (tagButton) {
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
                 buttons.forEach(b => b.classList.remove('active'));
-                tagButton.classList.add('active');
-                tagButton.click(); // Trigger the existing click handler
+                btn.classList.add('active');
+
+                const tag = btn.dataset.tag;
+                let visible = 0;
+
+                posts.forEach(post => {
+                    if (tag === 'all' || post.dataset.tags.split(' ').includes(tag)) {
+                        post.style.display = '';
+                        visible++;
+                    } else {
+                        post.style.display = 'none';
+                    }
+                });
+
+                emptyState.style.display = visible === 0 ? 'block' : 'none';
+            });
+        });
+
+        // Handle tag filtering from URL hash (e.g. #tag-math)
+        function handleHashTag() {
+            const hash = window.location.hash;
+            if (hash.startsWith('#tag-')) {
+                const tag = hash.substring(5); // Remove '#tag-' prefix
+                const tagButton = document.querySelector(`[data-tag="${tag}"]`);
+                if (tagButton) {
+                    buttons.forEach(b => b.classList.remove('active'));
+                    tagButton.classList.add('active');
+                    tagButton.click(); // Trigger the existing click handler
+                }
             }
         }
-    }
 
-    // Handle hash changes and initial load
-    window.addEventListener('hashchange', handleHashTag);
-    window.addEventListener('load', handleHashTag);
-</script>
+        // Handle hash changes and initial load
+        window.addEventListener('hashchange', handleHashTag);
+        window.addEventListener('load', handleHashTag);
+    </script>
 
 </body>
+
 </html>
