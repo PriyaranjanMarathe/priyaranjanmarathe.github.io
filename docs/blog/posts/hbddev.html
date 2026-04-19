@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>वाढदिवसाच्या हार्दिक शुभेच्छा - Dev Saheb Ji</title>
+<link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Tiro+Devanagari+Marathi:ital@0;1&family=Yatra+One&family=Cinzel+Decorative:wght@700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+background: #1a0a00;
+padding: 20px;
+font-family: ‘Tiro Devanagari Marathi’, serif;
+}
+
+.banner {
+width: 100%;
+max-width: 1200px;
+aspect-ratio: 16 / 10;
+position: relative;
+overflow: hidden;
+border: 8px solid #ffd700;
+outline: 4px solid #8b0000;
+outline-offset: 4px;
+background:
+radial-gradient(ellipse at center, #ffb347 0%, #ff8c00 25%, #ff6b00 50%, #d84315 80%, #8b2500 100%);
+box-shadow:
+0 0 60px rgba(255, 140, 0, 0.6),
+inset 0 0 120px rgba(139, 0, 0, 0.4);
+}
+
+/* Sunburst rays radiating from center */
+.rays {
+position: absolute;
+inset: 0;
+background:
+repeating-conic-gradient(
+from 0deg at 50% 50%,
+rgba(255, 235, 150, 0.35) 0deg,
+rgba(255, 235, 150, 0.35) 6deg,
+transparent 6deg,
+transparent 18deg
+);
+animation: spin 60s linear infinite;
+}
+
+@keyframes spin {
+to { transform: rotate(360deg); }
+}
+
+/* Golden border frame */
+.frame {
+position: absolute;
+inset: 16px;
+border: 3px double #ffd700;
+pointer-events: none;
+z-index: 2;
+}
+.frame::before, .frame::after {
+content: ‘❁’;
+position: absolute;
+font-size: 28px;
+color: #ffd700;
+text-shadow: 0 0 10px #ff0;
+}
+.frame::before { top: -18px; left: -18px; }
+.frame::after { bottom: -18px; right: -18px; }
+
+/* Marigold garland (toran) across the top */
+.garland {
+position: absolute;
+top: 4px;
+left: 0; right: 0;
+display: flex;
+justify-content: space-around;
+font-size: 22px;
+z-index: 3;
+filter: drop-shadow(0 2px 2px rgba(0,0,0,0.4));
+}
+.garland span:nth-child(odd)  { color: #ff6a00; }
+.garland span:nth-child(even) { color: #ffcc00; }
+
+/* Top Marathi wish line */
+.top-wish {
+position: absolute;
+top: 42px;
+left: 50%;
+transform: translateX(-50%);
+font-family: ‘Yatra One’, cursive;
+font-size: clamp(20px, 3.2vw, 36px);
+color: #fff8dc;
+text-shadow:
+2px 2px 0 #8b0000,
+4px 4px 0 #5a0000,
+0 0 20px rgba(255, 215, 0, 0.8);
+letter-spacing: 2px;
+white-space: nowrap;
+z-index: 5;
+}
+
+/* Honorific */
+.honorific {
+position: absolute;
+top: 28%;
+left: 50%;
+transform: translateX(-50%);
+font-family: ‘Rozha One’, serif;
+font-size: clamp(22px, 3.5vw, 38px);
+color: #ffeb3b;
+text-shadow: 2px 2px 0 #8b0000, 0 0 15px rgba(255,255,0,0.7);
+z-index: 6;
+}
+
+/* The NAME — the main event */
+.name-block {
+position: absolute;
+top: 38%;
+left: 50%;
+transform: translateX(-50%);
+text-align: center;
+z-index: 6;
+width: 92%;
+}
+
+.name-en {
+font-family: ‘Cinzel Decorative’, serif;
+font-weight: 900;
+font-size: clamp(42px, 8vw, 96px);
+background: linear-gradient(180deg, #fff9c4 0%, #ffd700 40%, #ff8c00 70%, #b8860b 100%);
+-webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+letter-spacing: 4px;
+text-shadow:
+0 0 30px rgba(255, 215, 0, 0.9),
+0 4px 0 rgba(139, 0, 0, 0.3);
+filter: drop-shadow(3px 3px 0 #8b0000) drop-shadow(5px 5px 0 #5a0000);
+line-height: 1;
+display: block;
+}
+
+.name-mr {
+font-family: ‘Yatra One’, cursive;
+font-size: clamp(22px, 3.8vw, 42px);
+color: #fff;
+text-shadow:
+2px 2px 0 #8b0000,
+3px 3px 0 #5a0000,
+0 0 18px rgba(255, 200, 0, 0.9);
+margin-top: 8px;
+letter-spacing: 3px;
+}
+
+/* “Ji” flourish */
+.ji {
+display: inline-block;
+color: #fff;
+-webkit-text-fill-color: #fff;
+font-style: italic;
+font-size: 0.85em;
+text-shadow: 2px 2px 0 #8b0000;
+}
+
+/* Happy Birthday english subline */
+.hbd {
+position: absolute;
+top: 66%;
+left: 50%;
+transform: translateX(-50%);
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(20px, 3vw, 34px);
+color: #ffeb3b;
+letter-spacing: 8px;
+text-shadow: 2px 2px 0 #8b0000, 0 0 15px rgba(255,235,59,0.7);
+z-index: 6;
+}
+
+.hbd::before, .hbd::after {
+content: ‘✦’;
+color: #fff;
+margin: 0 14px;
+text-shadow: 0 0 10px #ffd700;
+}
+
+/* Well-wishers block */
+.well-wishers {
+position: absolute;
+bottom: 32px;
+left: 50%;
+transform: translateX(-50%);
+text-align: center;
+z-index: 6;
+width: 90%;
+}
+
+.wishers-label {
+font-family: ‘Yatra One’, cursive;
+font-size: clamp(16px, 2.2vw, 24px);
+color: #fff;
+background: linear-gradient(90deg, transparent, #8b0000 20%, #8b0000 80%, transparent);
+padding: 4px 20px;
+display: inline-block;
+margin-bottom: 6px;
+letter-spacing: 2px;
+border-top: 1px solid #ffd700;
+border-bottom: 1px solid #ffd700;
+}
+
+.wishers-list {
+font-family: ‘Tiro Devanagari Marathi’, serif;
+font-size: clamp(11px, 1.4vw, 15px);
+color: #fff8dc;
+letter-spacing: 0.5px;
+line-height: 1.5;
+text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
+}
+
+.wishers-list span {
+margin: 0 8px;
+white-space: nowrap;
+}
+
+/* Sparkles scattered around */
+.sparkle {
+position: absolute;
+color: #fff;
+text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700;
+z-index: 4;
+animation: twinkle 2s ease-in-out infinite;
+}
+
+@keyframes twinkle {
+0%, 100% { opacity: 0.3; transform: scale(0.8); }
+50% { opacity: 1; transform: scale(1.2); }
+}
+
+.s1 { top: 12%; left: 8%; font-size: 24px; animation-delay: 0s; }
+.s2 { top: 18%; right: 10%; font-size: 18px; animation-delay: 0.4s; }
+.s3 { top: 52%; left: 6%; font-size: 28px; animation-delay: 0.8s; }
+.s4 { top: 48%; right: 7%; font-size: 22px; animation-delay: 1.2s; }
+.s5 { bottom: 28%; left: 12%; font-size: 20px; animation-delay: 0.2s; }
+.s6 { bottom: 32%; right: 14%; font-size: 26px; animation-delay: 0.6s; }
+.s7 { top: 30%; left: 18%; font-size: 16px; animation-delay: 1.0s; }
+.s8 { top: 30%; right: 18%; font-size: 16px; animation-delay: 1.4s; }
+
+/* Side medallions — where the photos would go in a real Pune banner */
+.medallion {
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+width: clamp(80px, 12vw, 130px);
+height: clamp(80px, 12vw, 130px);
+border-radius: 50%;
+background:
+radial-gradient(circle, #fff4c4 0%, #ffd700 50%, #b8860b 100%);
+border: 5px solid #8b0000;
+box-shadow:
+0 0 0 3px #ffd700,
+0 0 30px rgba(255, 215, 0, 0.8),
+inset 0 0 20px rgba(139, 0, 0, 0.3);
+display: flex;
+align-items: center;
+justify-content: center;
+font-family: ‘Rozha One’, serif;
+font-size: clamp(30px, 5vw, 56px);
+color: #8b0000;
+z-index: 5;
+text-shadow: 2px 2px 0 rgba(255,215,0,0.6);
+}
+
+.medallion.left  { left: 3%; }
+.medallion.right { right: 3%; }
+
+.medallion::before {
+content: ‘✦’;
+position: absolute;
+top: -28px;
+left: 50%;
+transform: translateX(-50%);
+color: #ffd700;
+font-size: 24px;
+text-shadow: 0 0 10px #ffd700;
+}
+
+/* Lotus at bottom corners */
+.lotus {
+position: absolute;
+bottom: 80px;
+font-size: 34px;
+z-index: 4;
+filter: drop-shadow(0 0 8px rgba(255,215,0,0.6));
+}
+.lotus.left  { left: 2%; }
+.lotus.right { right: 2%; }
+
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <div class="rays"></div>
+
+  <div class="garland">
+    <span>❁</span><span>✺</span><span>❁</span><span>✺</span><span>❁</span><span>✺</span><span>❁</span>
+    <span>✺</span><span>❁</span><span>✺</span><span>❁</span><span>✺</span><span>❁</span><span>✺</span>
+    <span>❁</span><span>✺</span><span>❁</span><span>✺</span><span>❁</span><span>✺</span><span>❁</span>
+  </div>
+
+  <div class="frame"></div>
+
+  <!-- Sparkles -->
+
+  <div class="sparkle s1">✦</div>
+  <div class="sparkle s2">✧</div>
+  <div class="sparkle s3">✦</div>
+  <div class="sparkle s4">✧</div>
+  <div class="sparkle s5">✦</div>
+  <div class="sparkle s6">✧</div>
+  <div class="sparkle s7">✶</div>
+  <div class="sparkle s8">✶</div>
+
+  <!-- Side medallions -->
+
+  <div class="medallion left">DS</div>
+  <div class="medallion right">DS</div>
+
+  <!-- Top Marathi greeting -->
+
+  <div class="top-wish">✦ वाढदिवसाच्या हार्दिक शुभेच्छा ✦</div>
+
+  <!-- Honorific -->
+
+  <div class="honorific">॥ मा. श्री. ॥</div>
+
+  <!-- The name -->
+
+  <div class="name-block">
+    <span class="name-en">DEV SAHEB<span class="ji"> Ji</span></span>
+    <div class="name-mr">देव साहेब जी</div>
+  </div>
+
+  <!-- English HBD -->
+
+  <div class="hbd">HAPPY BIRTHDAY</div>
+
+  <!-- Lotus corners -->
+
+  <div class="lotus left">🪷</div>
+  <div class="lotus right">🪷</div>
+
+  <!-- Well-wishers -->
+
+  <div class="well-wishers">
+    <div class="wishers-label">॥ शुभेच्छुक ॥</div>
+    <div class="wishers-list">
+      <span>प्रियरंजन मराठे</span> • <span>आणि समस्त मित्रपरिवार</span> • <span>कोलोराडो मराठी मंडळ</span> • <span>शेजारी-पाजारी</span> • <span>चाहते वर्ग</span> • <span>अनेक हितचिंतक</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
