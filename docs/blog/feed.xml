@@ -5,7 +5,15 @@
     <description>Engineering, ML, and occasional thoughts</description>
     <link>https://priyaranjanmarathe.github.io/blog/</link>
     <atom:link href="https://priyaranjanmarathe.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
-    <lastBuildDate>Sat, 01 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Aug 2026 00:00:00 +0000</lastBuildDate>
+
+    <item>
+      <title>Denver Lawns and Data Centers: A Quantitative Check</title>
+      <link>https://priyaranjanmarathe.github.io/blog/posts/denver-lawns-data-centers.html</link>
+      <pubDate>Mon, 10 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>https://priyaranjanmarathe.github.io/blog/posts/denver-lawns-data-centers.html</guid>
+      <description>A sourced comparison of Denver-area outdoor water use and data-center electricity demand—what the public numbers support, what they do not, and what neighbors should ask.</description>
+    </item>
 
     <item>
       <title>The Long Game of Learning</title>
