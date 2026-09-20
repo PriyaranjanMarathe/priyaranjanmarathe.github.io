@@ -27,12 +27,18 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m pip install requests==2.32.5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --prefix receiver --ignore-scripts
+      - run: npm test --prefix receiver
       - name: Test importer
         run: python -m unittest discover -s tests -v
       - name: Import selected messages
         env:
           WHATSAPP_INBOX_URL: ${{ vars.WHATSAPP_INBOX_URL }}
           INBOX_READ_TOKEN: ${{ secrets.INBOX_READ_TOKEN }}
+          BLOB_MEDIA_READ_WRITE_TOKEN: ${{ secrets.BLOB_MEDIA_READ_WRITE_TOKEN }}
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
           CAPTURE_START: ${{ vars.WHATSAPP_CAPTURE_START }}
@@ -44,18 +50,22 @@ jobs:
             python scripts/meta_finds.py
           fi
       - name: Commit selected content
+        id: commit
         if: github.event_name == 'schedule' || inputs.publish
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add docs/finds
+          if ! git diff --cached --quiet -- docs/finds/index.html docs/finds/finds.json docs/finds/media; then
+            echo "site_changed=true" >> "$GITHUB_OUTPUT"
+          fi
           if ! git diff --cached --quiet; then
             git commit -m 'Save selected WhatsApp finds'
             git push origin HEAD:gh-pages
           fi
       # GITHUB_TOKEN commits do not trigger legacy Pages builds automatically.
       - name: Request Pages build
-        if: github.event_name == 'schedule' || inputs.publish
+        if: steps.commit.outputs.site_changed == 'true'
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
