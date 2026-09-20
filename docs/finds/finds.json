@@ -28,7 +28,10 @@
     "attachments": [
       {
         "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/46c085bd0a0f9f271f924c94.mp4",
-        "type": "video/mp4"
+        "type": "video/mp4",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/46c085bd0a0f9f271f924c94.mp4",
+        "sha256": "f40342d099d2d1c6c9b7af0b97fe05e42bc8fdf2ce78285ea9bd503483a82aa5",
+        "size": 8194636
       }
     ],
     "revision": [
@@ -49,7 +52,10 @@
     "attachments": [
       {
         "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/c01d58eeebf364edb6bf83d9.jpg",
-        "type": "image/jpeg"
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/c01d58eeebf364edb6bf83d9.jpg",
+        "sha256": "41baca4bdcb6153c6c4264f59d21c068507ac1c9d31fb3c1b48f2f9f9b04233f",
+        "size": 185353
       }
     ],
     "revision": [
