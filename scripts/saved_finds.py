@@ -68,12 +68,14 @@ def selections(messages, owner, destination, start):
 
 
 class Twilio:
-    def __init__(self, sid, token):
+    def __init__(self, sid, token, key_sid=None):
         if not re.fullmatch(r'AC[0-9a-fA-F]{32}', sid):
             raise ValueError('Invalid account SID')
         self.prefix = f'/2010-04-01/Accounts/{sid}/'
         self.session = requests.Session()
-        self.session.auth = (sid, token)
+        if key_sid and not re.fullmatch(r'SK[0-9a-fA-F]{32}', key_sid):
+            raise ValueError('Invalid API key SID')
+        self.session.auth = (key_sid or sid, token)
 
     def get(self, path, stream=False):
         # Only Twilio API paths can receive credentials. requests removes auth on
@@ -195,7 +197,9 @@ def main():
     start = datetime.fromisoformat(os.environ['CAPTURE_START'].replace('Z', '+00:00'))
     if start.tzinfo is None:
         raise ValueError('CAPTURE_START requires a timezone')
-    api = Twilio(os.environ['TWILIO_ACCOUNT_SID'], os.environ['TWILIO_AUTH_TOKEN'])
+    key_sid = os.environ.get('TWILIO_API_KEY_SID')
+    credential = os.environ['TWILIO_API_KEY_SECRET'] if key_sid else os.environ['TWILIO_AUTH_TOKEN']
+    api = Twilio(os.environ['TWILIO_ACCOUNT_SID'], credential, key_sid)
     directory = ROOT / 'docs/finds'
     database = directory / 'finds.json'
     records = json.loads(database.read_text()) if database.exists() else []

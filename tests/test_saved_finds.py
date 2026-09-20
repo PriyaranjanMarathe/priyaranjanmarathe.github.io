@@ -67,6 +67,11 @@ class FindsTests(unittest.TestCase):
         self.assertIn('नमस्कार', page)
         self.assertIn('href="https://example.com/"', page)
 
+    def test_api_key_auth_keeps_account_resource_path(self):
+        client = f.Twilio('AC' + '0' * 32, 'secret', 'SK' + '1' * 32)
+        self.assertEqual(client.session.auth, ('SK' + '1' * 32, 'secret'))
+        self.assertIn('AC' + '0' * 32, client.prefix)
+
     def test_external_api_paths_rejected_before_request(self):
         client = f.Twilio('AC' + '0' * 32, 'test')
         with self.assertRaises(ValueError):
