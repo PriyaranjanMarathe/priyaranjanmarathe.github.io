@@ -126,5 +126,117 @@
       1789901355,
       "d833962ab8e322670a2c644964d7ba24865c9351a04840303e8731fbfb57e592"
     ]
+  },
+  {
+    "id": "152f2c60da003d5626455ad2",
+    "title": "विवेक: सह संपत्त्या विनयो विद्यया सह।",
+    "note": "",
+    "body": "विवेक: सह संपत्त्या विनयो विद्यया सह।\nप्रभुत्वं प्रश्रयोपेतं चिह्नमेतन्महात्मनाम्॥\n\nसंपत्तीसह शहाणपण, ज्ञानासह नम्रता आणि सामर्थ्यासह इतरांचे रक्षण, ही थोर माणसाची वैशिष्ट्ये आहेत.",
+    "saved_at": "2026-09-20T14:20:12+00:00",
+    "tags": [
+      "subhashitam"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1789914059,
+      "9391faf51451200f5703a2fad2da9c3c0c6280ebbc0888984bd644b98855c5af"
+    ]
+  },
+  {
+    "id": "21787d9d9573a4334e949541",
+    "title": "Ganapati Bappa Moraya",
+    "note": "Ganapati Bappa at my uncles place in Kudal, Sindhudurga.",
+    "body": "",
+    "saved_at": "2026-09-20T14:35:22+00:00",
+    "tags": [
+      "ganapati2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/21787d9d9573a4334e949541.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/21787d9d9573a4334e949541.jpg",
+        "sha256": "8b5638659d2097866b66f346c9b89ea12dfdb568865565feb978564e48a74b4f",
+        "size": 95611
+      }
+    ],
+    "revision": [
+      1789914995,
+      "c6e68a0617d990bff731ca85a6bb1969632fa22e57cf57702e2d6051a1b668ab"
+    ]
+  },
+  {
+    "id": "37cdc46b4f2a6e50c069c20d",
+    "title": "Ganapati Bappa Moraya",
+    "note": "Ganapati Bappa at my uncles place in Kudal, Sindhudurga.",
+    "body": "",
+    "saved_at": "2026-09-20T14:37:04+00:00",
+    "tags": [
+      "ganapati2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/37cdc46b4f2a6e50c069c20d.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/37cdc46b4f2a6e50c069c20d.jpg",
+        "sha256": "10d604e58d36d30948a95bb1e5b64fb8b3c5c9e2bc1bbd900edabc970e0c02c5",
+        "size": 95526
+      }
+    ],
+    "revision": [
+      1789915033,
+      "ac2f70f75c4d8f731bd49097818f903081d84c24a22dc3ffb0c9a7e69d6b4947"
+    ]
+  },
+  {
+    "id": "6ae632b32756dc13d77af611",
+    "title": "Aapla Ganapati, Nandiwade, Ratnagiri",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-09-20T14:41:33+00:00",
+    "tags": [
+      "ganapti2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/6ae632b32756dc13d77af611.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/6ae632b32756dc13d77af611.jpg",
+        "sha256": "9c3c62b10662ba26c52129a9cb2769c87f6d04af6e32c446dae4689fab4e17be",
+        "size": 174119
+      }
+    ],
+    "revision": [
+      1789915337,
+      "af632d3606de5de69618ceb922bef73ecde3bd9558c2fb4e17cf77c215ac91d6"
+    ]
+  },
+  {
+    "id": "c507ac3925d5e70d1f121196",
+    "title": "Sarvajanik Ganapati, Denver Colorado",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-09-20T14:43:04+00:00",
+    "tags": [
+      "ganapti2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/c507ac3925d5e70d1f121196.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/c507ac3925d5e70d1f121196.jpg",
+        "sha256": "0401e503c95e506066a286d1954881d73611191e9279da947de4f4ad697d83e0",
+        "size": 895759
+      }
+    ],
+    "revision": [
+      1789915419,
+      "6c3a25aaa8548e31329e60fb09bbbf97d7c486a906f1e3edff1aae6aaa7db87c"
+    ]
   }
 ]
