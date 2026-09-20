@@ -62,5 +62,29 @@
       1789896218,
       "9af62173309931a9420c15c35db9a84d0f5aff551afa72582a32ad0ddc812eb3"
     ]
+  },
+  {
+    "id": "39e5088429aacf48834a7587",
+    "title": "Richard Hemming - something everyone must read",
+    "note": "A must read. At least read the last chapter in the book. “You and your research.” Ilya Sutskever read and read it serveral times.",
+    "body": "",
+    "saved_at": "2026-09-20T10:24:10+00:00",
+    "tags": [
+      "reading"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/39e5088429aacf48834a7587.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/39e5088429aacf48834a7587.jpg",
+        "sha256": "8ddd41b6e7700ccd04fa2f9dee0549a4f1e2584a6f63ea30683fed59fd0fcf39",
+        "size": 930104
+      }
+    ],
+    "revision": [
+      1789899967,
+      "fc80d2877e86a65d7a0a6e3efde9b07d9fe956e8ec3e4fd669378191aec71902"
+    ]
   }
 ]
