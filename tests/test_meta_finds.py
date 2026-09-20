@@ -31,6 +31,11 @@ class MetaSelections(unittest.TestCase):
         self.assertEqual(list(selections([self.item, self.command], 900, 2000)), [])
 
 class CustomFields(unittest.TestCase):
+    def test_save_line_trailing_whitespace_before_fields(self):
+        from meta_finds import parse_command
+        self.assertEqual(parse_command('save #science \nTitle: My title\nNote: My note'),
+                         {'tags':['science'], 'title':'My title', 'note':'My note'})
+
     def test_title_multiline_note_and_tags(self):
         from meta_finds import parse_command
         self.assertEqual(parse_command('save #Science\nTitle: My title\nNote: First line\nSecond line'),

@@ -17,6 +17,7 @@ import media_storage
 
 def parse_command(body):
     lines = body.strip().splitlines()
+    if lines: lines[0] = lines[0].strip()
     if not lines or not re.fullmatch(r'save(?:\s+#[\w-]+)*', lines[0], re.I):
         return None
     result = {'tags': re.findall(r'#([\w-]+)', lines[0]), 'title': None, 'note': None}
