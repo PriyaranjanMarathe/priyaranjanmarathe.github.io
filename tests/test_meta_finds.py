@@ -66,7 +66,8 @@ class FailureIsolation(unittest.TestCase):
             if item['id']=='image':raise RuntimeError('test failure')
             return []
         with tempfile.TemporaryDirectory() as d, patch.object(meta_finds,'ROOT',Path(d)), patch.object(meta_finds.requests,'get',return_value=response), patch.object(meta_finds,'media_attachment',side_effect=attachment), patch('sys.argv',['meta_finds','--publish']), patch.dict(os.environ,{'WHATSAPP_INBOX_URL':'https://saved-finds-receiver.vercel.app/api/inbox','INBOX_READ_TOKEN':'test','CAPTURE_START':'2026-01-01T00:00:00Z'}):
-            meta_finds.main()
+            with patch("builtins.print"):
+                meta_finds.main()
             records=json.loads((Path(d)/'docs/finds/finds.json').read_text())
             state=json.loads((Path(d)/'docs/finds/import-state.json').read_text())
             self.assertEqual(len(records),1);self.assertEqual(records[0]['title'],'Custom');self.assertEqual(records[0]['note'],'My note')
