@@ -1,0 +1,61 @@
+name: Save WhatsApp finds
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish selected items (false only checks counts)
+        type: boolean
+        default: false
+  schedule:
+    - cron: '7,22,37,52 * * * *'
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: whatsapp-finds
+  cancel-in-progress: false
+jobs:
+  import:
+    if: vars.WHATSAPP_ENABLED == 'true' && (github.event_name == 'workflow_dispatch' || vars.WHATSAPP_AUTOPUBLISH == 'true')
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests==2.32.5
+      - name: Test importer
+        run: python -m unittest discover -s tests -v
+      - name: Import selected messages
+        env:
+          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
+          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
+          WHATSAPP_OWNER: ${{ secrets.WHATSAPP_OWNER }}
+          WHATSAPP_SANDBOX: ${{ secrets.WHATSAPP_SANDBOX }}
+          CAPTURE_START: ${{ vars.WHATSAPP_CAPTURE_START }}
+          PUBLISH: ${{ github.event_name == 'schedule' || inputs.publish }}
+        run: |
+          if [ "$PUBLISH" = true ]; then
+            python scripts/saved_finds.py --publish
+          else
+            python scripts/saved_finds.py
+          fi
+      - name: Commit selected content
+        if: github.event_name == 'schedule' || inputs.publish
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add docs/finds
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save selected WhatsApp finds'
+            git push origin HEAD:gh-pages
+          fi
+      # GITHUB_TOKEN commits do not trigger legacy Pages builds automatically.
+      - name: Request Pages build
+        if: github.event_name == 'schedule' || inputs.publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds"
