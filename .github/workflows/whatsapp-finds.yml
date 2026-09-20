@@ -26,7 +26,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: python -m pip install requests==2.32.5
+      - run: python -m pip install requests==2.32.5 boto3==1.40.40
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -39,6 +39,12 @@ jobs:
           WHATSAPP_INBOX_URL: ${{ vars.WHATSAPP_INBOX_URL }}
           INBOX_READ_TOKEN: ${{ secrets.INBOX_READ_TOKEN }}
           BLOB_MEDIA_READ_WRITE_TOKEN: ${{ secrets.BLOB_MEDIA_READ_WRITE_TOKEN }}
+          R2_BACKUP_ENABLED: ${{ vars.R2_BACKUP_ENABLED }}
+          R2_ACCOUNT_ID: ${{ vars.R2_ACCOUNT_ID }}
+          R2_BUCKET: ${{ vars.R2_BUCKET }}
+          R2_PUBLIC_BASE_URL: ${{ vars.R2_PUBLIC_BASE_URL }}
+          R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
           META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
           CAPTURE_START: ${{ vars.WHATSAPP_CAPTURE_START }}
