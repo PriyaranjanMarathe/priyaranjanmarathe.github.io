@@ -238,5 +238,71 @@
       1789915419,
       "6c3a25aaa8548e31329e60fb09bbbf97d7c486a906f1e3edff1aae6aaa7db87c"
     ]
+  },
+  {
+    "id": "348b096fd5857b1c9ee26640",
+    "title": "Friends Bappa, Denver, Colorado",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-09-20T14:48:52+00:00",
+    "tags": [
+      "ganapti2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/348b096fd5857b1c9ee26640.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/348b096fd5857b1c9ee26640.jpg",
+        "sha256": "9b39adefda439a7217dc6a25970f77816d935751e4f39df88476666ace7bba97",
+        "size": 806794
+      }
+    ],
+    "revision": [
+      1789915767,
+      "893fa2ab48af14fbf6ce6f2068b850eb913b2e566b31bec36d89e381394cfda4"
+    ]
+  },
+  {
+    "id": "a2c4a9d51f809791f44fcd21",
+    "title": "Society’s Ganapati, Pimple Saudagar, Pune",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-09-20T14:50:27+00:00",
+    "tags": [
+      "ganapati2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/a2c4a9d51f809791f44fcd21.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/a2c4a9d51f809791f44fcd21.jpg",
+        "sha256": "fdf6afe601eb4c29421c9bce56d361abc6ec2b59bf7e42244e0893daa5672c94",
+        "size": 380355
+      }
+    ],
+    "revision": [
+      1789915891,
+      "12694919cf662b1483fd6d9cff1453f90319b2ac21102e9f908fa31fcefc85e7"
+    ]
+  },
+  {
+    "id": "df459e62d273b7ef96839884",
+    "title": "Alpika - book on short poems",
+    "note": "Please check out this awesome book on short poems written by Shailesh Deshpande.",
+    "body": "​📖 Alpika - An Ekphrastic Journey\n\n​\"Alpika\" is my first e-book of 20 short poems and should take about 15 minutes to read. It is an ekphrastic journey through the micro-impact paintings of Dr. Sudhir Pillai — \"The Art of Consolation\". While the poems are written in Marathi, their English versions can be found below the main poem on each page.\n\n​The book is now available on Google Books and it's free to download. Please get your copy and let me know which of the Alpikas you like the most!\n\n​👉 Download your free copy here:\nhttps://play.google.com/books/reader?id=v4TZEQAAQBAJ&pg=GBS.PP1\n\n​Happy Reading,\nShailesh Deshpande\nRichmond, Virginia",
+    "saved_at": "2026-09-20T15:02:32+00:00",
+    "tags": [
+      "ganapti2026",
+      "marathi",
+      "reading"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1789916671,
+      "cfd01fcdcbadca8e674e3dbb6164139c9ca6e748979d5e774377c6d53ea48895"
+    ]
   }
 ]
