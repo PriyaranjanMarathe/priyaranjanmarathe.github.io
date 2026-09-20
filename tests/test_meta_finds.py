@@ -31,6 +31,22 @@ class MetaSelections(unittest.TestCase):
         self.assertEqual(list(selections([self.item, self.command], 900, 2000)), [])
 
 class CustomFields(unittest.TestCase):
+    def test_common_punctuation_and_field_typos(self):
+        from meta_finds import parse_command
+        for command in ['save: #science, #reading.\nTitel: My title\nNotes: My note',
+                        '**Save** #science; #reading\n**Title:** My title\n**Note**: My note']:
+            self.assertEqual(parse_command(command), {'tags':['science','reading'],'title':'My title','note':'My note'})
+
+    def test_only_one_recent_attachment_can_be_inferred(self):
+        from meta_finds import selections
+        image={'id':'image','type':'image','timestamp':1000,'body':'picture'}
+        command={'id':'save','type':'text','timestamp':1100,'body':'save #science'}
+        self.assertEqual(list(selections([image,command],900,2000)),[(image,['science'])])
+        another={**image,'id':'another'}
+        self.assertEqual(list(selections([image,another,command],900,2000)),[])
+        self.assertEqual(list(selections([image,{**command,'timestamp':1700}],900,2000)),[])
+        self.assertEqual(list(selections([image,{**command,'context':'missing'}],900,2000)),[])
+
     def test_common_whitespace_linebreak_and_case_variations(self):
         from meta_finds import parse_command
         for command in [
@@ -86,6 +102,23 @@ class CustomFields(unittest.TestCase):
             self.assertNotIn('<script>bad</script>',html)
 
 class FailureIsolation(unittest.TestCase):
+    def test_unlinked_save_recovers_attachment_from_previous_poll(self):
+        import tempfile, json, os, time
+        from unittest.mock import patch, MagicMock
+        import meta_finds
+        now=int(time.time())
+        command={'id':'save','timestamp':now-200,'type':'text','body':'save #science\nTitle: Inferred'}
+        image={'id':'image','timestamp':now-300,'type':'image','body':'picture'}
+        responses=[]
+        for messages in [[command],[image,command]]:
+            response=MagicMock(); response.__enter__.return_value=response; response.status_code=200
+            response.json.return_value={'messages':messages,'cursor':1234}; responses.append(response)
+        with tempfile.TemporaryDirectory() as d, patch.object(meta_finds,'ROOT',Path(d)), patch.object(meta_finds.requests,'get',side_effect=responses), patch.object(meta_finds,'media_attachment',return_value=[]), patch('sys.argv',['meta_finds','--publish']), patch('builtins.print'), patch.dict(os.environ,{'WHATSAPP_INBOX_URL':'https://saved-finds-receiver.vercel.app/api/inbox','INBOX_READ_TOKEN':'test','CAPTURE_START':'2026-01-01T00:00:00Z'}):
+            meta_finds.main()
+            records=json.loads((Path(d)/'docs/finds/finds.json').read_text())
+            self.assertEqual(len(records),1)
+            self.assertEqual(records[0]['title'],'Inferred')
+
     def test_failed_media_does_not_block_text_and_is_retried(self):
         import tempfile, json, os, time
         from unittest.mock import patch, MagicMock

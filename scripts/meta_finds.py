@@ -17,15 +17,18 @@ import media_storage
 
 def parse_command(body):
     lines = body.strip().lstrip('\ufeff').strip().splitlines()
-    if lines: lines[0] = lines[0].strip()
+    if lines:
+        lines[0] = re.sub(r'^\*{0,2}save\*{0,2}\s*:', 'save ', lines[0].strip(), flags=re.I)
+        lines[0] = re.sub(r'^\*{1,2}(save)\*{1,2}', r'\1', lines[0], flags=re.I)
+        lines[0] = re.sub(r'(?<=[\w-])[,;](?=\s|#|$)', ' ', lines[0]).rstrip(' .;,')
     if not lines or not re.fullmatch(r'save(?:\s+#[\w-]+)*', lines[0], re.I):
         return None
     result = {'tags': re.findall(r'#([\w-]+)', lines[0]), 'title': None, 'note': None}
     field = None
     for line in lines[1:]:
-        match = re.match(r'^\s*(Title|Note)\s*:\s*(.*)$', line, re.I)
+        match = re.match(r'^\s*\*{0,2}(Title|Titel|Note|Notes)\*{0,2}\s*:\*{0,2}\s*(.*)$', line, re.I)
         if match:
-            field = match[1].lower()
+            field = {'titel':'title', 'notes':'note'}.get(match[1].lower(), match[1].lower())
             if result[field] is not None: return None
             result[field] = match[2].strip() if field == 'title' else match[2]
         elif field == 'note': result['note'] += '\n' + line
@@ -33,6 +36,17 @@ def parse_command(body):
     if result['title'] is not None and not 1 <= len(result['title']) <= 200: return None
     if result['note'] is not None and len(result['note']) > 5000: return None
     return result
+
+
+def reply_target(command, unique, start):
+    if command.get('context'):
+        return unique.get(command['context'])
+    # An explicit save can select exactly one preceding attachment within ten minutes.
+    candidates = [m for m in unique.values()
+                  if m.get('type') in {'image','video','audio','document','sticker'}
+                  and m['timestamp'] >= start
+                  and 0 <= command['timestamp'] - m['timestamp'] <= 600]
+    return candidates[0] if len(candidates) == 1 else None
 
 
 def rejected_commands(messages, start, now):
@@ -45,8 +59,8 @@ def rejected_commands(messages, start, now):
         reason = None
         if parse_command(body) is None:
             reason = 'invalid format; use save #topic followed by Title: and Note: lines'
-        elif not command.get('context'):
-            reason = 'missing reply link; reply directly to the original message'
+        elif not command.get('context') and reply_target(command, unique, start) is None:
+            reason = 'no unique recent attachment; reply directly to the intended message'
         else:
             target = unique.get(command['context'])
             if target and (target['timestamp'] < start or not 0 <= command['timestamp'] - target['timestamp'] <= 86400):
@@ -60,8 +74,8 @@ def command_selections(messages, start, now):
     unique = {m['id']: m for m in messages}
     for command in sorted(unique.values(), key=lambda m: (m['timestamp'], m['id'])):
         options = parse_command(command.get('body', ''))
-        if options is None or not command.get('context'): continue
-        item = unique.get(command['context'])
+        if options is None: continue
+        item = reply_target(command, unique, start)
         if command['timestamp'] < start or command['timestamp'] > now - 120: continue
         if item and (item['timestamp'] < start or not 0 <= command['timestamp'] - item['timestamp'] <= 86400): continue
         yield command, item, options
@@ -148,6 +162,15 @@ def main():
         if response.status_code != 200: raise RuntimeError('Private inbox unavailable')
         inbox = response.json()
     start = datetime.fromisoformat(os.environ['CAPTURE_START'].replace('Z', '+00:00')).timestamp()
+    unlinked = [m for m in inbox['messages'] if parse_command(m.get('body', '')) is not None
+                and not m.get('context') and m['timestamp'] >= start]
+    if unlinked:
+        with requests.get(endpoint, headers={'Authorization':'Bearer ' + os.environ['INBOX_READ_TOKEN']},
+                          params={'after':max(start, min(m['timestamp'] for m in unlinked) - 660)},
+                          timeout=90, allow_redirects=False) as response:
+            if response.status_code != 200: raise RuntimeError('Recent attachment lookup unavailable')
+            inbox['messages'] = list({m['id']:m for m in inbox['messages'] + response.json()['messages']}.values())
+
     for reason, count in rejected_commands(inbox['messages'], start, datetime.now(timezone.utc).timestamp()).items():
         print(f'::warning::{count} save request(s) not published: {reason}.')
     database = directory / 'finds.json'
