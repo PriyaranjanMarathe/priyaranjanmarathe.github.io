@@ -9,5 +9,37 @@
     ],
     "tag_method": "chosen",
     "attachments": []
+  },
+  {
+    "id": "46c085bd0a0f9f271f924c94",
+    "title": "Saved attachment",
+    "body": "",
+    "saved_at": "2026-09-20T09:20:25+00:00",
+    "tags": [
+      "ganpati2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "/finds/media/46c085bd0a0f9f271f924c94.mp4",
+        "type": "video/mp4"
+      }
+    ]
+  },
+  {
+    "id": "c01d58eeebf364edb6bf83d9",
+    "title": "Saved attachment",
+    "body": "",
+    "saved_at": "2026-09-20T09:23:24+00:00",
+    "tags": [
+      "ganpati2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "/finds/media/c01d58eeebf364edb6bf83d9.jpg",
+        "type": "image/jpeg"
+      }
+    ]
   }
 ]
