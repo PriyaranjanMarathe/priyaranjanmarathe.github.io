@@ -2,17 +2,23 @@
   {
     "id": "13a8a797954443b6c525f431",
     "title": "https://simonwillison.net/2024/Dec/22/link-blog/",
+    "note": "",
     "body": "https://simonwillison.net/2024/Dec/22/link-blog/",
     "saved_at": "2026-09-20T09:14:29+00:00",
     "tags": [
       "blogging"
     ],
     "tag_method": "chosen",
-    "attachments": []
+    "attachments": [],
+    "revision": [
+      1789895683,
+      "33b3f48462725fd22814fae17124750b8e1ef0a5f8fbaba3a0d26beab811dde8"
+    ]
   },
   {
     "id": "46c085bd0a0f9f271f924c94",
     "title": "Saved attachment",
+    "note": "",
     "body": "",
     "saved_at": "2026-09-20T09:20:25+00:00",
     "tags": [
@@ -24,11 +30,16 @@
         "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/46c085bd0a0f9f271f924c94.mp4",
         "type": "video/mp4"
       }
+    ],
+    "revision": [
+      1789896044,
+      "9e8a5f373fce48084d5e6f978ddff4b65bda566a96c33efb7d84afa61bb55249"
     ]
   },
   {
     "id": "c01d58eeebf364edb6bf83d9",
     "title": "Saved attachment",
+    "note": "",
     "body": "",
     "saved_at": "2026-09-20T09:23:24+00:00",
     "tags": [
@@ -40,6 +51,10 @@
         "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/c01d58eeebf364edb6bf83d9.jpg",
         "type": "image/jpeg"
       }
+    ],
+    "revision": [
+      1789896218,
+      "9af62173309931a9420c15c35db9a84d0f5aff551afa72582a32ad0ddc812eb3"
     ]
   }
 ]
