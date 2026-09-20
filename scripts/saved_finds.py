@@ -82,8 +82,14 @@ class Twilio:
             raise ValueError('Unexpected API path')
         response = self.session.get('https://api.twilio.com' + path, timeout=45, stream=stream)
         if response.status_code != 200:
+            status = response.status_code
+            try:
+                code = int(response.json().get('code', 0))
+            except (ValueError, TypeError):
+                code = 0
             response.close()
-            raise RuntimeError(f'Twilio request failed (HTTP {response.status_code})')
+            print(f'Twilio API error: HTTP {status}; code {code}')
+            raise RuntimeError('Twilio request failed')
         return response
 
     def pages(self, path, key):
