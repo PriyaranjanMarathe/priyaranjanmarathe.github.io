@@ -7,7 +7,7 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: '7,22,37,52 * * * *'
+    - cron: '17 * * * *'
 permissions:
   contents: write
   pages: write
@@ -31,19 +31,17 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Import selected messages
         env:
-          TWILIO_API_KEY_SID: ${{ secrets.TWILIO_API_KEY_SID }}
-          TWILIO_API_KEY_SECRET: ${{ secrets.TWILIO_API_KEY_SECRET }}
-          TWILIO_ACCOUNT_SID: ${{ secrets.TWILIO_ACCOUNT_SID }}
-          TWILIO_AUTH_TOKEN: ${{ secrets.TWILIO_AUTH_TOKEN }}
-          WHATSAPP_OWNER: ${{ secrets.WHATSAPP_OWNER }}
-          WHATSAPP_SANDBOX: ${{ secrets.WHATSAPP_SANDBOX }}
+          WHATSAPP_INBOX_URL: ${{ vars.WHATSAPP_INBOX_URL }}
+          INBOX_READ_TOKEN: ${{ secrets.INBOX_READ_TOKEN }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_GRAPH_VERSION: ${{ vars.META_GRAPH_VERSION }}
           CAPTURE_START: ${{ vars.WHATSAPP_CAPTURE_START }}
           PUBLISH: ${{ github.event_name == 'schedule' || inputs.publish }}
         run: |
           if [ "$PUBLISH" = true ]; then
-            python scripts/saved_finds.py --publish
+            python scripts/meta_finds.py --publish
           else
-            python scripts/saved_finds.py
+            python scripts/meta_finds.py
           fi
       - name: Commit selected content
         if: github.event_name == 'schedule' || inputs.publish
