@@ -65,7 +65,7 @@ def media_attachment(item, directory, key):
     headers = {'Authorization': 'Bearer ' + os.environ['META_ACCESS_TOKEN']}
     with requests.get(f'https://graph.facebook.com/{version}/{media["id"]}', headers=headers, timeout=30) as response:
         if response.status_code != 200:
-            raise RuntimeError('Meta media metadata unavailable')
+            raise RuntimeError(f'Meta media metadata unavailable: HTTP {response.status_code}, API code {response.json().get("error", {}).get("code", 0)}')
         metadata = response.json()
     parsed = urlsplit(metadata['url'])
     if parsed.scheme != 'https' or parsed.hostname != 'lookaside.fbsbx.com' or parsed.username or parsed.password:
@@ -80,7 +80,7 @@ def media_attachment(item, directory, key):
     try:
         with requests.get(metadata['url'], headers=headers, timeout=45, stream=True, allow_redirects=False) as response:
             if response.status_code != 200:
-                raise RuntimeError('Meta media unavailable')
+                raise RuntimeError(f'Meta media unavailable: HTTP {response.status_code}')
             with temporary.open('wb') as output:
                 size = 0
                 for chunk in response.iter_content(65536):
@@ -159,7 +159,8 @@ def main():
             else: added += 1
         except Exception as error:
             retries.add(command_key)
-            print(f'::warning::One selected item deferred ({type(error).__name__}); other items continue.')
+            reason = str(error) if type(error) is RuntimeError and re.fullmatch(r'[A-Za-z0-9 :;,.-]{1,160}', str(error)) else type(error).__name__
+            print(f'::warning::One selected item deferred ({reason}); other items continue.')
     if len(retries) > 100: raise RuntimeError('Retry queue full; checkpoint not advanced')
     if args.publish:
         records = list(by_id.values())
