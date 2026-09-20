@@ -1,0 +1,7 @@
+{
+  "name": "saved-finds-media",
+  "main": "worker.mjs",
+  "compatibility_date": "2026-09-20",
+  "workers_dev": true,
+  "r2_buckets": [{"binding":"MEDIA", "bucket_name":"saved-finds-media-backup"}]
+}

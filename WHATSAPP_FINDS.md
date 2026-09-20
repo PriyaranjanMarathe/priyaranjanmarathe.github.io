@@ -53,3 +53,15 @@ The importer persists an upload-time cursor plus hashed pending-command identifi
 New selected media is stored in a separate public Vercel Blob store using `BLOB_MEDIA_READ_WRITE_TOKEN` in GitHub Actions. File names are deterministic, so retries overwrite the same object. The existing 20 MB attachment cap remains. Public media has its own storage and bandwidth quotas; this change does not create unlimited free video hosting. Uploads can remain unreferenced if a later Git commit fails. Only selected media is uploaded. A successful download is checked against Meta's SHA-256 before upload.
 
 The Meta access token must remain valid for new media downloads. The configured system-user token has no scheduled expiry. Revoking it or changing account permissions can still interrupt access. The manual “Verify Meta attachment token” workflow checks identity, expiry and retained selected-media downloads without publishing anything.
+
+## Optional R2 backup and capacity switch
+
+Activation requires `R2_BACKUP_ENABLED=true`, variables `R2_ACCOUNT_ID`, `R2_BUCKET`, `R2_PUBLIC_BASE_URL`, and encrypted Actions secrets `R2_ACCESS_KEY_ID` and `R2_SECRET_ACCESS_KEY`. Limit the credential to object read/write for the dedicated media bucket. Configure a production public delivery URL before activation; the R2 development URL is not a production CDN.
+
+While enabled, new selected attachments are uploaded to R2 and downloaded again to verify their SHA-256 before publication. Existing published attachments without a mirror are copied from Vercel on the next publishing run. The public JSON records the backup URL, checksum and size. The site continues using its Vercel URL initially.
+
+The importer lists the media Vercel store once per publishing run. At 900,000,000 bytes, or when new attachments would cross that threshold in the current batch, it verifies public R2 delivery and changes every attachment URL to R2. `media-state.json` persists this one-way transition. New attachments then upload only to R2. Existing Vercel files are retained; nothing is deleted. This measures the media store, not all account-wide Vercel usage, and leaves approximately 100 MB for other storage. It does not remove operation or bandwidth limits. Vercel continues to run the receiver and private inbox.
+
+The feature defaults to disabled until account setup, credentials, public delivery and a live backfill have been verified. A failed backup or delivery verification prevents committing an incomplete migration.
+
+R2 delivery uses the free `saved-finds-media` Worker with binding `MEDIA`, at https://saved-finds-media.marathepriyaranjan.workers.dev. It accepts only GET/HEAD for hashed media paths and implements video byte ranges. The bucket itself remains private. The uploader stops before the dedicated R2 bucket exceeds 9 GB, leaving room below the 10 GB free storage allowance. This is an application safeguard, not an account-wide billing cap.

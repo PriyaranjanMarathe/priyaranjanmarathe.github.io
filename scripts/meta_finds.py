@@ -12,6 +12,7 @@ from urllib.parse import urlsplit
 
 import requests
 from saved_finds import ROOT, TYPES, render, tags_for
+import media_storage
 
 
 def parse_command(body):
@@ -93,6 +94,11 @@ def media_attachment(item, directory, key):
         temporary.replace(directory / filename)
     finally:
         temporary.unlink(missing_ok=True)
+    mirrored = media_storage.backup(directory / filename, 'media/' + filename, mime) if media_storage.enabled() else {}
+    media_storage.reserve_vercel((directory / filename).stat().st_size)
+    if os.environ.get('MEDIA_PRIMARY') == 'r2':
+        media_storage.verify_public(mirrored)
+        return [{'url':mirrored['backup_url'], 'type':mime, **mirrored}]
     result = subprocess.run(['node', str(ROOT / 'receiver/scripts/upload-media.js'), str(directory / filename),
                              'media/' + filename, mime], capture_output=True, text=True, timeout=90)
     if result.returncode: raise RuntimeError('Public media upload failed')
@@ -100,7 +106,7 @@ def media_attachment(item, directory, key):
     parsed = urlsplit(url)
     if parsed.scheme != 'https' or not (parsed.hostname or '').endswith('.public.blob.vercel-storage.com'):
         raise ValueError('Unexpected public media URL')
-    return [{'url': url, 'type': mime}]
+    return [{'url': url, 'type': mime, **mirrored}]
 
 
 def main():
@@ -122,6 +128,8 @@ def main():
     start = datetime.fromisoformat(os.environ['CAPTURE_START'].replace('Z', '+00:00')).timestamp()
     database = directory / 'finds.json'
     records = json.loads(database.read_text()) if database.exists() else []
+    if args.publish:
+        media_storage.prepare(records, directory, ROOT)
     by_id = {r['id']: r for r in records}
     retries = set()
     added = updated = 0
@@ -155,6 +163,7 @@ def main():
     if len(retries) > 100: raise RuntimeError('Retry queue full; checkpoint not advanced')
     if args.publish:
         records = list(by_id.values())
+        media_storage.finish(records, directory)
         render(records, directory)
         database.write_text(json.dumps(records, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
         checkpoint_file.write_text(json.dumps({'cursor':inbox['cursor'], 'retry_commands':sorted(retries)}) + '\n')
