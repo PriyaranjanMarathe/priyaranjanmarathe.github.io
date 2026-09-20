@@ -1,0 +1,34 @@
+name: Check WhatsApp inbox delivery
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gh-pages
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install requests==2.32.5
+      - name: Check delivery and command format without exposing message text
+        env:
+          INBOX_READ_TOKEN: ${{ secrets.INBOX_READ_TOKEN }}
+        run: |
+          python - <<'PY'
+          import os, sys, json, re
+          from datetime import datetime, timezone
+          import requests
+          sys.path.insert(0, 'scripts')
+          from meta_finds import parse_command
+          response = requests.get('https://saved-finds-receiver.vercel.app/api/inbox', headers={'Authorization':'Bearer '+os.environ['INBOX_READ_TOKEN']}, timeout=90)
+          response.raise_for_status()
+          messages = response.json()['messages']
+          for m in sorted(messages, key=lambda m:m['timestamp'])[-8:]:
+              body = m.get('body', '')
+              print(json.dumps({'time':datetime.fromtimestamp(m['timestamp'],timezone.utc).isoformat(), 'type':m['type'], 'is_reply':bool(m.get('context')), 'valid_save':parse_command(body) is not None, 'starts_save':bool(re.match(r'^save\b', body,re.I)), 'has_title':bool(re.search(r'^Title:',body,re.M|re.I)), 'has_note':bool(re.search(r'^Note:',body,re.M|re.I)), 'has_media':bool(m.get('media'))}))
+          PY
