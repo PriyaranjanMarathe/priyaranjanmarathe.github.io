@@ -168,14 +168,15 @@ def render(records, directory):
         label = 'Suggested tags' if record['tag_method'] == 'suggested' else 'Tags'
         cards.append(f'''<article id="{record['id']}" data-tags="{e(json.dumps(record['tags']), quote=True)}">
 <h2><a href="#{record['id']}">{e(record['title'])}</a></h2>
-<p class="meta">Saved {e(record['saved_at'][:10])} · WhatsApp forward · Original author may be unknown</p>
+<p class="meta">Saved {e(record['saved_at'][:10])}</p>
 <div class="body">{linked_text(record['body'])}</div>{''.join(media)}
 <p class="meta">{label}: {tag_links}</p></article>''')
     page = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Saved finds · Ranjan Marathe</title><style>
 :root{color-scheme:light dark}body{max-width:760px;margin:40px auto;padding:0 20px;font:18px/1.65 Georgia,serif}a{color:light-dark(#075f9e,#8dcaff)}h1,h2,input,button,.meta{font-family:system-ui,sans-serif}h1{margin-bottom:0}h2{font-size:1.25rem;overflow-wrap:anywhere}.meta{font-size:.85rem;opacity:.8}article{border-top:1px solid #aaa6;padding:24px 0}.body{white-space:pre-wrap;overflow-wrap:anywhere}input{box-sizing:border-box;width:100%;padding:12px;font-size:1rem}button{cursor:pointer;padding:7px 12px;margin:4px;border:1px solid #aaa8;border-radius:18px;background:transparent;color:inherit}img,video,audio{max-width:100%;height:auto}img{margin-top:16px}#count{font:14px system-ui}nav{font:16px system-ui}</style>
 <nav><a href="/">Home</a> · <a href="/blog/">Blog</a></nav><h1>Saved finds</h1>
-<p>Things I found worth keeping. Forwarded text is preserved as received; inclusion does not verify its claims or authorship.</p>
+<p>Things I found worth keeping.</p>
+<p class="meta">Inspired by <a href="https://simonwillison.net/2024/Dec/22/link-blog/">Simon Willison’s link blog</a>.</p>
 <label for="search">Search words or tags</label><input id="search" type="search" placeholder="Try science, history, or a phrase"><p><button id="clear">Show all</button><span id="count" role="status"></span></p><main>'''
     page += ''.join(cards) or '<p>No finds published yet.</p>'
     page += '''</main><script>
