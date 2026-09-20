@@ -1,0 +1,8 @@
+{
+  "name": "saved-finds-receiver",
+  "private": true,
+  "type": "module",
+  "scripts": {"test": "node --test test/*.test.js"},
+  "engines": {"node": "22.x"},
+  "dependencies": {"@vercel/blob": "^2.3.0"}
+}

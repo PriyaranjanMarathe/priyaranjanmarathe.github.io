@@ -1,34 +1,33 @@
-# Save selected WhatsApp forwards
+# Saved Finds — Meta WhatsApp setup
 
-Forward one item to the Twilio sandbox, then send `save #science #history` within ten minutes. Each save selects exactly the immediately preceding incoming message from your configured number. Repeat for each item. To save plain text or a URL you can also paste it into the sandbox chat, followed by `save`. This does not read your groups or recover the original author's identity.
+Forward a single item to the connected Meta WhatsApp number, then use WhatsApp **Reply** on that item and send `save #science #history`. Reply context is required: an unquoted `save` deliberately publishes nothing. This selects the exact message even when webhooks arrive out of order. Send the reply within 24 hours; use the same configured owner phone. Groups are never read automatically.
 
-Explicit tags win. Bare `save` uses a small English keyword taxonomy; unmatched text is `untagged`. Suggested tags are visibly labeled and are not guaranteed correct. Marathi and other languages are preserved; supply your own hashtags for reliable categorization. Images are not OCRed, and audio/video are not transcribed. Edit `docs/finds/finds.json` and call `render` to correct saved tags.
+Explicit tags win. Bare `save` suggests tags with English keyword rules; unmatched items become `untagged`. Marathi and other languages are preserved; use your own hashtags for reliable tagging. Images are not OCRed and audio/video are not transcribed. Public text is escaped, and embedded URLs are linked but never fetched. Source authorship and factual claims are not verified.
 
-The public `/finds/` page supports text search, tag filters, source links contained in the forward, stable item anchors and common attachments. The original text is preserved as quoted material, with no claim that its authorship or factual assertions are verified. Sender numbers and Twilio account identifiers are not written to the public records; personal details present inside the forwarded content itself are preserved. Only select items you intend to make public. Git history retains published content even if later removed from the page.
+## Architecture
 
-## Activate after a real preview test
+Meta sends signed webhooks to `https://saved-finds-receiver.vercel.app/api/webhook`. The Node receiver verifies the raw-body HMAC, account, phone ID, capture cutoff and owner number, and stores normalized message records in a **private** Vercel Blob store. Delivery retries use deterministic hashed names. No raw message bodies or credentials are logged by the application. The private `/api/inbox` endpoint requires a random bearer token and sends no cacheable responses.
 
-1. Merge the feature into `gh-pages`, the site's existing publishing branch. Also install `.github/workflows/whatsapp-finds.yml` on `main`, because GitHub only schedules workflows from the default branch. Keep `WHATSAPP_ENABLED` unset until configuration is ready.
-2. In repository Actions secrets, set `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `WHATSAPP_OWNER` (your phone, `whatsapp:+countrycode...`) and `WHATSAPP_SANDBOX` (the console's sandbox number in the same format). Enter credentials directly into GitHub, not into source code or chat.
-For a restricted API key, use US1 and grant Read/List on `messages` and `messages.media` only. Store `TWILIO_API_KEY_SID` and `TWILIO_API_KEY_SECRET` in Actions secrets; these take precedence over the Auth Token. The account SID is still required.
+GitHub Actions polls hourly, applies explicit reply selection with a two-minute settling interval, and commits only selected items to `gh-pages` under `docs/finds`. Existing public IDs deduplicate publications. A failed run makes no commit. Inbox reads remove entries older than 24 hours; outages or a paused importer delay cleanup. Delayed imports may miss expired entries. Media downloads use the Meta token, verify checksums when supplied, and allow JPEG, PNG, GIF, WebP, PDF, MP4, MP3, Ogg and M4A up to 20 MB each. Unsupported media fails safely for investigation.
 
-3. Set Actions variable `WHATSAPP_CAPTURE_START` to the UTC instant at which you want capture to begin, e.g. `2026-09-20T18:00:00Z`. No historical items before this instant are eligible. Set `WHATSAPP_ENABLED=true` to allow manual tests. Keep `WHATSAPP_AUTOPUBLISH` unset during testing.
-4. Sign in to Twilio, confirm the correct account and sandbox, join it from your phone, and send a harmless test URL followed by `save #test`. Rejoin every three days. Twilio documents the sandbox as testing-only and charges standard messaging rates; use a registered sender for ongoing production use.
-5. Run “Save WhatsApp finds” manually with `publish=false` first. This retrieves messages but reports only selected counts and makes no files/commits. After confirming the count, run with `publish=true` and verify the item and any attachments at `/finds/` after the Pages build finishes.
-6. Set `WHATSAPP_AUTOPUBLISH=true` once the real publishing test passes and public automation is desired. The schedule requests a run every 15 minutes, but GitHub can delay runs. A public repository's schedule can be disabled after 60 days without activity. Disable capture at any time by setting `WHATSAPP_ENABLED=false`.
+Only select material intended for public sharing. Text or attachments may themselves contain personal information. Deletion from the page does not erase Git history. See `/finds/privacy/`.
 
-The importer reads Twilio's Messages API; no new webhook/server is required, and the existing sandbox webhook is not modified. If the old health tracker is active, it may still receive/reply to these messages. Check its routing before regular use. The sandbox cannot automatically access your existing WhatsApp groups.
+## Configuration
 
-## Reliability and limits
+Vercel production environment: `META_APP_SECRET`, `META_VERIFY_TOKEN`, `INBOX_READ_TOKEN`, `WHATSAPP_OWNER` (digits only), `META_WABA_ID`, `META_PHONE_ID`, `CAPTURE_START`; connected private Blob store with OIDC supplies `BLOB_STORE_ID`. The Meta access token is not needed in Vercel.
 
-Messages are paginated from the capture date, with repeated message IDs deduplicated using a hash. A failed import does not commit any part of that run. Media downloads require complete API results and are limited to 20 MB per attachment; unsupported types fail the run for investigation. Supported formats: JPEG, PNG, WebP, GIF, PDF, MP4 video, Ogg, MP3 and M4A audio. Content URLs supplied inside forwards are displayed, never fetched by the importer.
+GitHub encrypted Actions secrets: `INBOX_READ_TOKEN` and `META_ACCESS_TOKEN` (used only for selected media). Variables: `WHATSAPP_INBOX_URL`, `META_GRAPH_VERSION`, `WHATSAPP_CAPTURE_START`, `WHATSAPP_ENABLED=true`. Keep `WHATSAPP_AUTOPUBLISH=false` until a real publishing test passes. Temporary Meta access tokens expire; configure a suitable system-user token before relying on media automation.
 
-The workflow explicitly requests a legacy Pages rebuild because commits made by GITHUB_TOKEN do not themselves start a Pages build. That API step and actual Twilio access must be verified on the first live run. Git push conflicts fail safely for a later retry. The pipeline stores only selected material publicly and does not send any WhatsApp replies.
+Configure Meta webhook callback URL and matching verify token, subscribe to `messages`, and ensure the app is subscribed to the WABA. Complete Meta’s publishing requirements. No paid Vercel plan or outgoing WhatsApp messaging is required by this code. Provider quotas still apply; Hobby storage can pause at its free limits. Hourly polling uses fewer list operations than the earlier 15-minute Twilio design.
+
+The workflow must exist on default branch `main` for the schedule and uses checkout `gh-pages` for the site. It requests a Pages build explicitly after publication. Public repo schedules may stop after prolonged inactivity. GitHub may delay scheduled runs.
 
 ## Validation
 
-`python -m pip install requests==2.32.5`
+`python3 -m unittest discover -s tests -v`
 
-`python -m unittest discover -s tests -v`
+`cd receiver && npm ci && npm test`
 
-Sources: [Twilio Sandbox](https://www.twilio.com/docs/whatsapp/sandbox), [Messages API](https://www.twilio.com/docs/messaging/api/message-resource), [Media API](https://www.twilio.com/docs/messaging/api/media-resource), [GitHub scheduling](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule), [Simon Willison's link blog](https://simonwillison.net/2024/Dec/22/link-blog/).
+Start with a manual workflow preview, then publish a deliberately selected test item and verify the rendered page. The old Twilio importer remains for reference but is not invoked by the workflow.
+
+Sources: [Vercel private Blob](https://vercel.com/docs/vercel-blob/private-storage), [Vercel Blob limits](https://vercel.com/docs/vercel-blob/usage-and-pricing), [Meta Cloud API](https://developers.facebook.com/docs/whatsapp/cloud-api), [Simon Willison’s link blog](https://simonwillison.net/2024/Dec/22/link-blog/).
