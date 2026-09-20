@@ -62,7 +62,7 @@ def rejected_commands(messages, start, now):
         elif not command.get('context') and reply_target(command, unique, start) is None:
             reason = 'no unique recent attachment; reply directly to the intended message'
         else:
-            target = unique.get(command['context'])
+            target = reply_target(command, unique, start)
             if target and (target['timestamp'] < start or not 0 <= command['timestamp'] - target['timestamp'] <= 86400):
                 reason = 'reply outside the 24-hour selection window'
         if reason:
