@@ -27,7 +27,7 @@ jobs:
                   print('Request failed with HTTP',e.code)
                   raise SystemExit(1)
           who=json.loads(get('https://graph.facebook.com/v25.0/me?fields=id',token))
-          assert who.get('id')=='61594580491651','Unexpected token identity'
+          assert who.get('id')=='122097780579486016','Unexpected app-scoped system-user identity'
           print('Dedicated system-user identity: verified')
           debug=json.loads(get('https://graph.facebook.com/v25.0/debug_token?'+urllib.parse.urlencode({'input_token':token}),token))['data']
           print('Token valid:',debug.get('is_valid'))
@@ -35,6 +35,7 @@ jobs:
           print('Data access expiry timestamp:',debug.get('data_access_expires_at'))
           print('Token scopes:',','.join(debug.get('scopes',[])))
           assert debug.get('is_valid') is True
+          assert debug.get('type')=='SYSTEM_USER'
           assert debug.get('expires_at')==0,'Token has a scheduled expiry'
           assert debug.get('app_id')=='2092484468020400'
           messages=json.loads(get('https://saved-finds-receiver.vercel.app/api/inbox',os.environ['INBOX_READ_TOKEN']))['messages']
