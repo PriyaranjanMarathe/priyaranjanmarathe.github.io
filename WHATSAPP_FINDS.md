@@ -16,7 +16,7 @@ Only select material intended for public sharing. Text or attachments may themse
 
 Vercel production environment: `META_APP_SECRET`, `META_VERIFY_TOKEN`, `INBOX_READ_TOKEN`, `WHATSAPP_OWNER` (digits only), `META_WABA_ID`, `META_PHONE_ID`, `CAPTURE_START`; connected private Blob store with OIDC supplies `BLOB_STORE_ID`. The Meta access token is not needed in Vercel.
 
-GitHub encrypted Actions secrets: `INBOX_READ_TOKEN` and `META_ACCESS_TOKEN` (used only for selected media). Variables: `WHATSAPP_INBOX_URL`, `META_GRAPH_VERSION`, `WHATSAPP_CAPTURE_START`, `WHATSAPP_ENABLED=true`. Keep `WHATSAPP_AUTOPUBLISH=false` until a real publishing test passes. Temporary Meta access tokens expire; configure a suitable system-user token before relying on media automation.
+GitHub encrypted Actions secrets: `INBOX_READ_TOKEN` and `META_ACCESS_TOKEN` (used only for selected media). Variables: `WHATSAPP_INBOX_URL`, `META_GRAPH_VERSION`, `WHATSAPP_CAPTURE_START`, `WHATSAPP_ENABLED=true`. Keep `WHATSAPP_AUTOPUBLISH=false` until a real publishing test passes. Meta uses the Saved Finds Importer system-user token. On September 20, 2026, token inspection confirmed SYSTEM_USER, the correct app, expires_at=0 and data_access_expires_at=0; live image and video downloads passed checksum verification.
 
 Configure Meta webhook callback URL and matching verify token, subscribe to `messages`, and ensure the app is subscribed to the WABA. Complete Meta’s publishing requirements. No paid Vercel plan or outgoing WhatsApp messaging is required by this code. Provider quotas still apply; Hobby storage can pause at its free limits. Hourly polling uses fewer list operations than the earlier 15-minute Twilio design.
 
@@ -52,4 +52,4 @@ The importer persists an upload-time cursor plus hashed pending-command identifi
 
 New selected media is stored in a separate public Vercel Blob store using `BLOB_MEDIA_READ_WRITE_TOKEN` in GitHub Actions. File names are deterministic, so retries overwrite the same object. The existing 20 MB attachment cap remains. Public media has its own storage and bandwidth quotas; this change does not create unlimited free video hosting. Uploads can remain unreferenced if a later Git commit fails. Only selected media is uploaded. A successful download is checked against Meta's SHA-256 before upload.
 
-The Meta access token must remain valid for new media downloads. The currently configured dashboard token is temporary; a longer-lived system-user token is still required for ongoing attachment operation.
+The Meta access token must remain valid for new media downloads. The configured system-user token has no scheduled expiry. Revoking it or changing account permissions can still interrupt access. The manual “Verify Meta attachment token” workflow checks identity, expiry and retained selected-media downloads without publishing anything.
