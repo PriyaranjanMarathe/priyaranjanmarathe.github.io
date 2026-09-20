@@ -1,0 +1,35 @@
+name: Check Meta connection
+on:
+  workflow_dispatch:
+permissions: {}
+jobs:
+  connect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify account subscription
+        env:
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+        run: |
+          python3 - <<'PY'
+          import os,json,urllib.request,urllib.error
+          base='https://graph.facebook.com/v25.0/1804597963897385/subscribed_apps'
+          headers={'Authorization':'Bearer '+os.environ['META_ACCESS_TOKEN']}
+          def call(method):
+              req=urllib.request.Request(base,headers=headers,method=method,data=b'' if method=='POST' else None)
+              try:
+                  with urllib.request.urlopen(req,timeout=30) as r:return json.load(r)
+              except urllib.error.HTTPError as e:
+                  d=json.load(e).get('error',{})
+                  print('Meta request failed:',e.code,'code',d.get('code'),'subcode',d.get('error_subcode'))
+                  raise SystemExit(1)
+          def subscribed(data):
+              return any(a.get('whatsapp_business_api_data',{}).get('id')=='2092484468020400' for a in data.get('data',[]))
+          found=subscribed(call('GET'))
+          print('Saved Finds subscribed before check:',found)
+          if not found:
+              result=call('POST')
+              print('Subscription request accepted:',result.get('success') is True)
+          found=subscribed(call('GET'))
+          print('Saved Finds subscribed after check:',found)
+          if not found:raise SystemExit(1)
+          PY
