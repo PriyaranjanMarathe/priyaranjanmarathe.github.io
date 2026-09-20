@@ -29,3 +29,45 @@ class MetaSelections(unittest.TestCase):
     def test_unsupported_item_not_published(self):
         self.item['type'] = 'contacts'
         self.assertEqual(list(selections([self.item, self.command], 900, 2000)), [])
+
+class CustomFields(unittest.TestCase):
+    def test_title_multiline_note_and_tags(self):
+        from meta_finds import parse_command
+        self.assertEqual(parse_command('save #Science\nTitle: My title\nNote: First line\nSecond line'),
+                         {'tags':['Science'],'title':'My title','note':'First line\nSecond line'})
+    def test_ambiguous_fields_rejected(self):
+        from meta_finds import parse_command
+        for text in ['save\nSurprise', 'save\nTitle: a\nTitle: b', 'save\nTitle:']:
+            self.assertIsNone(parse_command(text))
+    def test_notes_and_titles_are_escaped(self):
+        import tempfile
+        from saved_finds import render
+        with tempfile.TemporaryDirectory() as d:
+            record={'id':'a','title':'<script>bad</script>','body':'hello','note':'<img onerror=bad>',
+                    'saved_at':'2026-09-20','tags':[],'tag_method':'chosen','attachments':[]}
+            render([record],Path(d))
+            html=(Path(d)/'index.html').read_text()
+            self.assertIn('&lt;img onerror=bad&gt;',html)
+            self.assertNotIn('<script>bad</script>',html)
+
+class FailureIsolation(unittest.TestCase):
+    def test_failed_media_does_not_block_text_and_is_retried(self):
+        import tempfile, json, os, time
+        from unittest.mock import patch, MagicMock
+        import meta_finds
+        now=int(time.time())
+        messages=[{'id':'image','timestamp':now-400,'type':'image','body':'image','media':{'id':'1'}},
+                  {'id':'text','timestamp':now-400,'type':'text','body':'text'},
+                  {'id':'save1','timestamp':now-200,'type':'text','body':'save #one','context':'image'},
+                  {'id':'save2','timestamp':now-200,'type':'text','body':'save #two\nTitle: Custom\nNote: My note','context':'text'}]
+        response=MagicMock();response.__enter__.return_value=response;response.status_code=200
+        response.json.return_value={'messages':messages,'cursor':1234}
+        def attachment(item,*args):
+            if item['id']=='image':raise RuntimeError('test failure')
+            return []
+        with tempfile.TemporaryDirectory() as d, patch.object(meta_finds,'ROOT',Path(d)), patch.object(meta_finds.requests,'get',return_value=response), patch.object(meta_finds,'media_attachment',side_effect=attachment), patch('sys.argv',['meta_finds','--publish']), patch.dict(os.environ,{'WHATSAPP_INBOX_URL':'https://saved-finds-receiver.vercel.app/api/inbox','INBOX_READ_TOKEN':'test','CAPTURE_START':'2026-01-01T00:00:00Z'}):
+            meta_finds.main()
+            records=json.loads((Path(d)/'docs/finds/finds.json').read_text())
+            state=json.loads((Path(d)/'docs/finds/import-state.json').read_text())
+            self.assertEqual(len(records),1);self.assertEqual(records[0]['title'],'Custom');self.assertEqual(records[0]['note'],'My note')
+            self.assertEqual(len(state['retry_commands']),1);self.assertEqual(state['cursor'],1234)

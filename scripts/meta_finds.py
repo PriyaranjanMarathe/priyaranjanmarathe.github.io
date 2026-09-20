@@ -5,26 +5,49 @@ import hashlib
 import json
 import os
 import re
+import subprocess
+import tempfile
+from pathlib import Path
 from urllib.parse import urlsplit
 
 import requests
 from saved_finds import ROOT, TYPES, render, tags_for
 
 
-def selections(messages, start, now):
+def parse_command(body):
+    lines = body.strip().splitlines()
+    if not lines or not re.fullmatch(r'save(?:\s+#[\w-]+)*', lines[0], re.I):
+        return None
+    result = {'tags': re.findall(r'#([\w-]+)', lines[0]), 'title': None, 'note': None}
+    field = None
+    for line in lines[1:]:
+        match = re.match(r'^(Title|Note):\s*(.*)$', line, re.I)
+        if match:
+            field = match[1].lower()
+            if result[field] is not None: return None
+            result[field] = match[2]
+        elif field == 'note': result['note'] += '\n' + line
+        elif line.strip(): return None
+    if result['title'] is not None and not 1 <= len(result['title']) <= 200: return None
+    if result['note'] is not None and len(result['note']) > 5000: return None
+    return result
+
+
+def command_selections(messages, start, now):
     unique = {m['id']: m for m in messages}
     for command in sorted(unique.values(), key=lambda m: (m['timestamp'], m['id'])):
-        text = command.get('body', '').strip()
-        if not re.fullmatch(r'save(?:\s+#[\w-]+)*', text, re.I):
-            continue
-        # Reply context names the exact forward; arrival ordering cannot select another item.
-        item = unique.get(command.get('context'))
-        if (not item or item['type'] not in {'text', 'image', 'video', 'audio', 'document', 'sticker'}
-                or item['timestamp'] < start or command['timestamp'] < start
-                or not 0 <= command['timestamp'] - item['timestamp'] <= 86400
-                or command['timestamp'] > now - 120):
-            continue
-        yield item, re.findall(r'#([\w-]+)', text)
+        options = parse_command(command.get('body', ''))
+        if options is None or not command.get('context'): continue
+        item = unique.get(command['context'])
+        if command['timestamp'] < start or command['timestamp'] > now - 120: continue
+        if item and (item['timestamp'] < start or not 0 <= command['timestamp'] - item['timestamp'] <= 86400): continue
+        yield command, item, options
+
+
+def selections(messages, start, now):
+    for command, item, options in command_selections(messages, start, now):
+        if item and item['type'] in {'text', 'image', 'video', 'audio', 'document', 'sticker'}:
+            yield item, options['tags']
 
 
 def media_attachment(item, directory, key):
@@ -70,7 +93,14 @@ def media_attachment(item, directory, key):
         temporary.replace(directory / filename)
     finally:
         temporary.unlink(missing_ok=True)
-    return [{'url': '/finds/media/' + filename, 'type': mime}]
+    result = subprocess.run(['node', str(ROOT / 'receiver/scripts/upload-media.js'), str(directory / filename),
+                             'media/' + filename, mime], capture_output=True, text=True, timeout=90)
+    if result.returncode: raise RuntimeError('Public media upload failed')
+    url = json.loads(result.stdout)['url']
+    parsed = urlsplit(url)
+    if parsed.scheme != 'https' or not (parsed.hostname or '').endswith('.public.blob.vercel-storage.com'):
+        raise ValueError('Unexpected public media URL')
+    return [{'url': url, 'type': mime}]
 
 
 def main():
@@ -81,35 +111,54 @@ def main():
     parsed = urlsplit(endpoint)
     if parsed.scheme != 'https' or parsed.hostname != 'saved-finds-receiver.vercel.app' or parsed.path != '/api/inbox':
         raise ValueError('Unexpected inbox URL')
-    with requests.get(endpoint, headers={'Authorization': 'Bearer ' + os.environ['INBOX_READ_TOKEN']},
-                      timeout=90, allow_redirects=False) as response:
-        if response.status_code != 200:
-            raise RuntimeError('Private inbox unavailable')
-        messages = response.json()['messages']
-    start = datetime.fromisoformat(os.environ['CAPTURE_START'].replace('Z', '+00:00')).timestamp()
     directory = ROOT / 'docs/finds'
+    checkpoint_file = directory / 'import-state.json'
+    checkpoint = json.loads(checkpoint_file.read_text()) if checkpoint_file.exists() else {}
+    with requests.get(endpoint, headers={'Authorization': 'Bearer ' + os.environ['INBOX_READ_TOKEN']},
+                      params={'after': checkpoint.get('cursor', 0), 'retry': ','.join(checkpoint.get('retry_commands', []))},
+                      timeout=90, allow_redirects=False) as response:
+        if response.status_code != 200: raise RuntimeError('Private inbox unavailable')
+        inbox = response.json()
+    start = datetime.fromisoformat(os.environ['CAPTURE_START'].replace('Z', '+00:00')).timestamp()
     database = directory / 'finds.json'
     records = json.loads(database.read_text()) if database.exists() else []
-    existing = {r['id'] for r in records}
-    added = 0
-    for item, explicit in selections(messages, start, datetime.now(timezone.utc).timestamp()):
+    by_id = {r['id']: r for r in records}
+    retries = set()
+    added = updated = 0
+    for command, item, options in command_selections(inbox['messages'], start, datetime.now(timezone.utc).timestamp()):
+        command_key = hashlib.sha256(command['id'].encode()).hexdigest()
+        if not item:
+            retries.add(command_key); continue
         key = hashlib.sha256(item['id'].encode()).hexdigest()[:24]
-        if key in existing:
-            continue
-        existing.add(key)
-        added += 1
+        old = by_id.get(key)
+        revision = [command['timestamp'], command_key]
+        if old and old.get('revision', [0, '']) >= revision: continue
         if not args.publish:
+            if not old: added += 1
+            else: updated += 1
             continue
-        body = item['body']
-        tags, method = tags_for(body, explicit)
-        records.append({'id': key, 'title': body.strip().split('\n')[0][:120] or 'Saved attachment',
-                        'body': body, 'saved_at': datetime.fromtimestamp(item['timestamp'], timezone.utc).isoformat(),
-                        'tags': tags, 'tag_method': method,
-                        'attachments': media_attachment(item, directory / 'media', key)})
+        try:
+            body = item['body']
+            tags, method = tags_for(body, options['tags'])
+            with tempfile.TemporaryDirectory() as temporary:
+                attachments = old['attachments'] if old else media_attachment(item, Path(temporary), key)
+            record = {'id':key, 'title':options['title'] or (old or {}).get('title') or body.strip().split('\n')[0][:120] or 'Saved attachment',
+                      'note': options['note'] if options['note'] is not None else (old or {}).get('note', ''),
+                      'body':body, 'saved_at':datetime.fromtimestamp(item['timestamp'],timezone.utc).isoformat(),
+                      'tags':tags, 'tag_method':method, 'attachments':attachments, 'revision':revision}
+            by_id[key] = record
+            if old: updated += 1
+            else: added += 1
+        except Exception as error:
+            retries.add(command_key)
+            print(f'::warning::One selected item deferred ({type(error).__name__}); other items continue.')
+    if len(retries) > 100: raise RuntimeError('Retry queue full; checkpoint not advanced')
     if args.publish:
+        records = list(by_id.values())
         render(records, directory)
         database.write_text(json.dumps(records, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-    print(f'{added} new selected item(s); mode={"publish" if args.publish else "preview"}.')
+        checkpoint_file.write_text(json.dumps({'cursor':inbox['cursor'], 'retry_commands':sorted(retries)}) + '\n')
+    print(f'{added} new selected item(s); {updated} updated; {len(retries)} deferred; mode={"publish" if args.publish else "preview"}.')
 
 
 if __name__ == '__main__':
