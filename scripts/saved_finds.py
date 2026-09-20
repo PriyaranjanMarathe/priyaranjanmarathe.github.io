@@ -166,6 +166,11 @@ def render(records, directory):
             else:
                 media.append(f'<p><a href="{url}">Open saved PDF</a></p>')
         note = f'<div class="note">{linked_text(record.get("note", ""))}</div>' if record.get('note') else ''
+        for preview in record.get('link_previews', []):
+            if preview.get('source') != 'inaturalist': continue
+            media.append(f'<figure><a href="{e(preview["url"], quote=True)}"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="{e(preview["image_url"], quote=True)}" alt="{e(preview["title"], quote=True)}"></a>'
+                         f'<figcaption class="meta"><a href="{e(preview["url"], quote=True)}">{e(preview["title"])}</a> · iNaturalist'
+                         f' · Observed by {e(preview["observer"])} · <a href="{e(preview["photo_url"], quote=True)}">{e(preview["attribution"] or preview["license"].upper())}</a></figcaption></figure>')
         label = 'Suggested tags' if record['tag_method'] == 'suggested' else 'Tags'
         cards.append(f'''<article id="{record['id']}" data-tags="{e(json.dumps(record['tags']), quote=True)}">
 <h2><a href="#{record['id']}">{e(record['title'])}</a></h2>

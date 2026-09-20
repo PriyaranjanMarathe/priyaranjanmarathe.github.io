@@ -13,6 +13,7 @@ from urllib.parse import urlsplit
 import requests
 from saved_finds import ROOT, TYPES, render, tags_for
 import media_storage
+import inaturalist_preview
 
 
 def parse_command(body):
@@ -211,6 +212,7 @@ def main():
     if len(retries) > 100: raise RuntimeError('Retry queue full; checkpoint not advanced')
     if args.publish:
         records = list(by_id.values())
+        inaturalist_preview.enrich(records)
         media_storage.finish(records, directory)
         render(records, directory)
         database.write_text(json.dumps(records, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
