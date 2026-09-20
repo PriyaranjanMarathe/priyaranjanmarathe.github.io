@@ -31,6 +31,36 @@ class MetaSelections(unittest.TestCase):
         self.assertEqual(list(selections([self.item, self.command], 900, 2000)), [])
 
 class CustomFields(unittest.TestCase):
+    def test_common_whitespace_linebreak_and_case_variations(self):
+        from meta_finds import parse_command
+        for command in [
+            '  SAVE\t#Science  \r\n\r\n  title :  My title  \r\n  NOTE : My note',
+            '\ufeffsave\u00a0#Science\u00a0\nTitle: My title\nNote: My note',
+            '\n\nsave #Science\n\nTitle: My title\n\nNote: My note\n',
+        ]:
+            with self.subTest(command=command):
+                self.assertEqual(parse_command(command), {'tags':['Science'],'title':'My title','note':'My note'})
+
+    def test_invalid_or_ambiguous_commands_stay_unpublished(self):
+        from meta_finds import parse_command
+        for command in ['save #science\nTitle:   \nNote: hello',
+                        'save #science\nTitle: One\n title : Two',
+                        'save #science\nNote: One\n NOTE : Two',
+                        'save #science\nTitle: ' + 'a'*201,
+                        'save #science\nNote: ' + 'a'*5001,
+                        'save this image', 'save #science\nUnexpected field']:
+            with self.subTest(command=command[:50]):
+                self.assertIsNone(parse_command(command))
+
+    def test_rejection_diagnostics_exclude_private_text_and_deduplicate(self):
+        from meta_finds import rejected_commands
+        invalid={'id':'a','timestamp':1000,'body':'save private text','context':'target'}
+        unlinked={'id':'b','timestamp':1000,'body':'save #science'}
+        result=rejected_commands([invalid,invalid,unlinked],900,2000)
+        self.assertEqual(sum(result.values()),2)
+        self.assertNotIn('private text',str(result))
+        self.assertEqual(rejected_commands([invalid],900,1001),{})
+
     def test_save_line_trailing_whitespace_before_fields(self):
         from meta_finds import parse_command
         self.assertEqual(parse_command('save #science \nTitle: My title\nNote: My note'),

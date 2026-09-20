@@ -16,23 +16,44 @@ import media_storage
 
 
 def parse_command(body):
-    lines = body.strip().splitlines()
+    lines = body.strip().lstrip('\ufeff').strip().splitlines()
     if lines: lines[0] = lines[0].strip()
     if not lines or not re.fullmatch(r'save(?:\s+#[\w-]+)*', lines[0], re.I):
         return None
     result = {'tags': re.findall(r'#([\w-]+)', lines[0]), 'title': None, 'note': None}
     field = None
     for line in lines[1:]:
-        match = re.match(r'^(Title|Note):\s*(.*)$', line, re.I)
+        match = re.match(r'^\s*(Title|Note)\s*:\s*(.*)$', line, re.I)
         if match:
             field = match[1].lower()
             if result[field] is not None: return None
-            result[field] = match[2]
+            result[field] = match[2].strip() if field == 'title' else match[2]
         elif field == 'note': result['note'] += '\n' + line
         elif line.strip(): return None
     if result['title'] is not None and not 1 <= len(result['title']) <= 200: return None
     if result['note'] is not None and len(result['note']) > 5000: return None
     return result
+
+
+def rejected_commands(messages, start, now):
+    counts = {}
+    unique = {m['id']:m for m in messages}
+    for command in unique.values():
+        body = command.get('body', '').strip().lstrip('\ufeff').strip()
+        if not re.match(r'^save\b', body, re.I) or not start <= command['timestamp'] <= now - 120:
+            continue
+        reason = None
+        if parse_command(body) is None:
+            reason = 'invalid format; use save #topic followed by Title: and Note: lines'
+        elif not command.get('context'):
+            reason = 'missing reply link; reply directly to the original message'
+        else:
+            target = unique.get(command['context'])
+            if target and (target['timestamp'] < start or not 0 <= command['timestamp'] - target['timestamp'] <= 86400):
+                reason = 'reply outside the 24-hour selection window'
+        if reason:
+            counts[reason] = counts.get(reason, 0) + 1
+    return counts
 
 
 def command_selections(messages, start, now):
@@ -127,6 +148,8 @@ def main():
         if response.status_code != 200: raise RuntimeError('Private inbox unavailable')
         inbox = response.json()
     start = datetime.fromisoformat(os.environ['CAPTURE_START'].replace('Z', '+00:00')).timestamp()
+    for reason, count in rejected_commands(inbox['messages'], start, datetime.now(timezone.utc).timestamp()).items():
+        print(f'::warning::{count} save request(s) not published: {reason}.')
     database = directory / 'finds.json'
     records = json.loads(database.read_text()) if database.exists() else []
     if args.publish:
