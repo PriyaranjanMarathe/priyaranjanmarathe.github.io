@@ -495,5 +495,22 @@
       1790031261,
       "74cd3d880b216e8c7e96ee60efe03e5aeb7eadff4c3a15b71b6910241fcecf2c"
     ]
+  },
+  {
+    "id": "e4e66801859a9a7fe7985edf",
+    "title": "Some material to understand a bit more about data centers.",
+    "note": "This is collection of information on data centers discussion. It’s a hot topic and I am sharing these so that one can a more nuanced view on the topic.",
+    "body": "Been thinking/reading a bit on the “Data Center”discussion. With 2/3 of AI built still left to be done, this has become an interesting political economy question. Every important podcast and newsletter is talking about it. \n\nSharing few which I found to be very interesting. \n\n1. Bloomberg Odd lots - https://podcasts.apple.com/us/podcast/odd-lots/id1056200096?i=1000784746275\n2. Dwarkesh Patel approaches the data center issue from a technical standpoint. He invited Casey Handmer to his podcast - https://podcasts.apple.com/us/podcast/dwarkesh-podcast/id1516093381?i=1000722101753 \n3. Note from my colleague about one LLM query costing a water bottle led to checking these out. It doesn’t. Andy Masley - https://blog.andymasley.com/ liked his nuanced take on the podcast https://podcasts.apple.com/us/podcast/scaling-laws/id1607949880?i=1000775770135\n4. John McAuliff https://podcasts.apple.com/us/podcast/scaling-laws/id1607949880?i=1000769054929 I liked McAuliff’s thinking on how communities can study the data centers needs and try to get deal for local communities. \n5. Commissioner Teal - SMR study - https://www.denver7.com/news/local-news/in-your-community/dougco/douglas-county-commissioners-exploring-possibility-of-small-nuclear-reactors \n5. Simon Willison’s blog posts about it https://simonwillison.net/tags/andy-masley/",
+    "saved_at": "2026-09-22T02:42:09+00:00",
+    "tags": [
+      "andymasley",
+      "datacenters"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1790045035,
+      "778310126b9628a4b80640892f416ff5933a34c991f88662fc01e0c550282cf2"
+    ]
   }
 ]
