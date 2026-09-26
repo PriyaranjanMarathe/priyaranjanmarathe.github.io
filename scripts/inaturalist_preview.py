@@ -9,7 +9,7 @@ PHOTO_HOSTS = {'static.inaturalist.org', 'inaturalist-open-data.s3.amazonaws.com
 
 def observation_ids(body):
     ids = []
-    for url in re.findall(r'https?://[^\s<>]+', body):
+    for url in re.findall(r'https?://[^\s<>\[\]()]+', body):
         try:
             parsed = urlsplit(url.rstrip(').,;]'))
         except ValueError:

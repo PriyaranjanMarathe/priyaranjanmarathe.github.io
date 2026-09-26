@@ -46,3 +46,6 @@ class ObservationPreviews(unittest.TestCase):
   self.assertEqual(records[0]['body'],'Forward with https://[broken')
   self.assertEqual(records[1]['link_previews'],[{'title':'Butterfly'}])
   fetch.assert_called_once_with('123')
+
+ def test_markdown_observation_links(self):
+  self.assertEqual(preview.observation_ids('[https://www.inaturalist.org](https://www.inaturalist.org/observations/123) and [another](https://inaturalist.org/observations/456)'), ['123','456'])
