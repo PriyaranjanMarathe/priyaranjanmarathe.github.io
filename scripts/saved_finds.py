@@ -178,16 +178,18 @@ def render(records, directory):
 {note}<div class="body">{linked_text(record['body'])}</div>{''.join(media)}
 <p class="meta">{label}: {tag_links}</p></article>''')
     page = '''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Saved finds · Ranjan Marathe</title><style>
-:root{color-scheme:light dark}body{max-width:760px;margin:40px auto;padding:0 20px;font:18px/1.65 Georgia,serif}a{color:light-dark(#075f9e,#8dcaff)}h1,h2,input,button,.meta{font-family:system-ui,sans-serif}h1{margin-bottom:0}h2{font-size:1.25rem;overflow-wrap:anywhere}.meta{font-size:.85rem;opacity:.8}article{border-top:1px solid #aaa6;padding:24px 0}.note{white-space:pre-wrap;border-left:3px solid #aaa8;padding:0 16px;margin:16px 0}.body{white-space:pre-wrap;overflow-wrap:anywhere}input{box-sizing:border-box;width:100%;padding:12px;font-size:1rem}button{cursor:pointer;padding:7px 12px;margin:4px;border:1px solid #aaa8;border-radius:18px;background:transparent;color:inherit}img,video,audio{max-width:100%;height:auto}img{margin-top:16px}#count{font:14px system-ui}nav{font:16px system-ui}</style>
-<nav><a href="/">Home</a> · <a href="/blog/">Blog</a></nav><h1>Saved finds</h1>
-<p>Social media is here to stay, I curate the best here.</p>
-<p class="meta">Inspired by <a href="https://simonwillison.net/2024/Dec/22/link-blog/">Simon Willison’s link blog</a>.</p>
+<title>Linked Blog · Ranjan Marathe</title><style>
+:root{color-scheme:light dark}body{max-width:760px;margin:40px auto;padding:0 20px;font:18px/1.65 Georgia,serif}a{color:light-dark(#075f9e,#8dcaff)}h1,h2,input,button,.meta{font-family:system-ui,sans-serif}h1{margin-bottom:0}h2{font-size:1.25rem;overflow-wrap:anywhere}.meta{font-size:.85rem;opacity:.8}article{border-top:1px solid #aaa6;padding:24px 0}.note{white-space:pre-wrap;border-left:3px solid #aaa8;padding:0 16px;margin:16px 0}.body{white-space:pre-wrap;overflow-wrap:anywhere}input{box-sizing:border-box;width:100%;padding:12px;font-size:1rem}button{cursor:pointer;padding:7px 12px;margin:4px;border:1px solid #aaa8;border-radius:18px;background:transparent;color:inherit}img,video,audio{max-width:100%;height:auto}img{margin-top:16px}#count{font:14px system-ui}nav{font:16px system-ui}
+.intro{padding:34px 0 28px}.intro h1{font-size:clamp(2.4rem,7vw,3.5rem);line-height:1.1;letter-spacing:-.045em;margin:0 0 20px;font-weight:750}.tagline{font-size:clamp(1.15rem,3vw,1.4rem);line-height:1.55;max-width:36rem;margin:0 0 12px}.intro .meta{margin:0;font-size:.9rem;opacity:1;color:light-dark(#60656c,#b5bcc5)}label[for="search"]{display:block;font:600 .85rem/1.5 system-ui,sans-serif;margin:0 0 8px;color:light-dark(#484e57,#c8cdd4)}input[type="search"]{border:1px solid light-dark(#cbd2da,#59616d);border-radius:10px;background:light-dark(#f8fafc,#1c222a);color:inherit;padding:14px 16px;outline-offset:3px}input[type="search"]:focus{outline:2px solid light-dark(#075f9e,#8dcaff)}figure{margin:24px 0}figcaption{margin-top:8px}@media(max-width:520px){body{margin:24px auto}.intro{padding:28px 0 24px}}
+</style>
+<nav><a href="/">Home</a> · <a href="/blog/">Blog</a></nav><header class="intro"><h1>Linked Blog</h1>
+<p class="tagline">Social media is here to stay, I curate the best here.</p>
+<p class="meta">Inspired by <a href="https://simonwillison.net/2024/Dec/22/link-blog/">Simon Willison’s link blog</a>.</p></header>
 <label for="search">Search words or tags</label><input id="search" type="search" placeholder="Try science, history, or a phrase"><p><button id="clear">Show all</button><span id="count" role="status"></span></p><main>'''
     page += ''.join(cards) or '<p>No finds published yet.</p>'
     page += '''</main><script>
 const search=document.querySelector('#search'),cards=[...document.querySelectorAll('article')];let selected='';
-function filter(){const q=search.value.toLocaleLowerCase();let n=0;cards.forEach(c=>{c.hidden=!(c.textContent.toLocaleLowerCase().includes(q)&&(!selected||JSON.parse(c.dataset.tags).includes(selected)));if(!c.hidden)n++});document.querySelector('#count').textContent=n+' saved finds'+(selected?' · #'+selected:'')}
+function filter(){const q=search.value.toLocaleLowerCase();let n=0;cards.forEach(c=>{c.hidden=!(c.textContent.toLocaleLowerCase().includes(q)&&(!selected||JSON.parse(c.dataset.tags).includes(selected)));if(!c.hidden)n++});document.querySelector('#count').textContent=n+(n===1?' post':' posts')+(selected?' · #'+selected:'')}
 search.addEventListener('input',filter);document.querySelectorAll('[data-tag]').forEach(b=>b.addEventListener('click',()=>{selected=b.dataset.tag;filter()}));document.querySelector('#clear').addEventListener('click',()=>{selected='';search.value='';filter()});filter();
 </script></html>'''
     (directory / 'index.html').write_text(page, encoding='utf-8')
