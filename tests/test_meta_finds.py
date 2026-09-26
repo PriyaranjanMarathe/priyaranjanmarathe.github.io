@@ -140,3 +140,11 @@ class FailureIsolation(unittest.TestCase):
             state=json.loads((Path(d)/'docs/finds/import-state.json').read_text())
             self.assertEqual(len(records),1);self.assertEqual(records[0]['title'],'Custom');self.assertEqual(records[0]['note'],'My note')
             self.assertEqual(len(state['retry_commands']),1);self.assertEqual(state['cursor'],1234)
+
+class PostAliasTests(unittest.TestCase):
+    def test_post_alias_preserves_multiline_comment(self):
+        from meta_finds import parse_command
+        self.assertEqual(parse_command('save #nature\nTitle: Garter snake\nPost: Look at the eyes 👀\nSecond line'), {'tags':['nature'], 'title':'Garter snake', 'note':'Look at the eyes 👀\nSecond line'})
+    def test_post_and_note_cannot_silently_overwrite(self):
+        from meta_finds import parse_command
+        self.assertIsNone(parse_command('save #nature\nPost: First\nNote: Second'))

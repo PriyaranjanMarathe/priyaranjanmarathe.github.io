@@ -28,9 +28,9 @@ def parse_command(body):
     result = {'tags': re.findall(r'#([\w-]+)', lines[0]), 'title': None, 'note': None}
     field = None
     for line in lines[1:]:
-        match = re.match(r'^\s*\*{0,2}(Title|Titel|Note|Notes)\*{0,2}\s*:\*{0,2}\s*(.*)$', line, re.I)
+        match = re.match(r'^\s*\*{0,2}(Title|Titel|Note|Notes|Post)\*{0,2}\s*:\*{0,2}\s*(.*)$', line, re.I)
         if match:
-            field = {'titel':'title', 'notes':'note'}.get(match[1].lower(), match[1].lower())
+            field = {'titel':'title', 'notes':'note', 'post':'note'}.get(match[1].lower(), match[1].lower())
             if result[field] is not None: return None
             result[field] = match[2].strip() if field == 'title' else match[2]
         elif field == 'note': result['note'] += '\n' + line
