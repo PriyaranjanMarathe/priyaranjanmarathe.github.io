@@ -34,3 +34,15 @@ class ObservationPreviews(unittest.TestCase):
    render([record],Path(d));page=(Path(d)/'index.html').read_text()
    self.assertIn(item['image_url'],page);self.assertIn('referrerpolicy="no-referrer"',page)
    self.assertNotIn('<script>bad</script>',page);self.assertIn('&lt;script&gt;',page)
+
+ def test_malformed_links_do_not_hide_valid_observations(self):
+  for malformed in ['https://[broken', 'https://[not-an-ip]/', 'https://example.com：443/path']:
+   with self.subTest(url=malformed):
+    self.assertEqual(preview.observation_ids(malformed + ' https://inaturalist.org/observations/123'), ['123'])
+ def test_malformed_post_does_not_block_other_previews(self):
+  records=[{'body':'Forward with https://[broken', 'note':''}, {'body':'https://inaturalist.org/observations/123'}]
+  with patch.object(preview,'fetch_preview',return_value={'title':'Butterfly'}) as fetch:
+   preview.enrich(records)
+  self.assertEqual(records[0]['body'],'Forward with https://[broken')
+  self.assertEqual(records[1]['link_previews'],[{'title':'Butterfly'}])
+  fetch.assert_called_once_with('123')

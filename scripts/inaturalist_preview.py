@@ -10,7 +10,11 @@ PHOTO_HOSTS = {'static.inaturalist.org', 'inaturalist-open-data.s3.amazonaws.com
 def observation_ids(body):
     ids = []
     for url in re.findall(r'https?://[^\s<>]+', body):
-        parsed = urlsplit(url.rstrip(').,;]'))
+        try:
+            parsed = urlsplit(url.rstrip(').,;]'))
+        except ValueError:
+            # A malformed URL in a forward must not abort unrelated imports.
+            continue
         if parsed.hostname not in {'inaturalist.org', 'www.inaturalist.org', 'm.inaturalist.org'} or parsed.username or parsed.password:
             continue
         match = re.fullmatch(r'/observations/(\d+)/?', parsed.path)
