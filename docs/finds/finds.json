@@ -716,5 +716,61 @@
       1790379735,
       "7f1d3daaffc713867739e5f98415b8e49025c5bf5f0a492982c1da57a94cc3f8"
     ]
+  },
+  {
+    "id": "58265e90cda97fbd0c5159c6",
+    "title": "Garter snake",
+    "note": "Stumbled upon the Garter Mahoday yesterday. Take a look at the eyes, 👀, he is upto something for sure.",
+    "body": "http://www.inaturalist.org/observations/401679534",
+    "saved_at": "2026-09-20T14:52:30+00:00",
+    "tags": [
+      "nature"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1789916029,
+      "45f997df8cb05eeb49f92dd5a4d3c2fc8edd1917a675c90c2385c07d5c26033f"
+    ],
+    "link_previews": [
+      {
+        "source": "inaturalist",
+        "url": "https://www.inaturalist.org/observations/401679534",
+        "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/737276301/large.jpg",
+        "title": "Wandering Garter Snake",
+        "attribution": "(c) ranjanmarathe, some rights reserved (CC BY-NC)",
+        "observer": "ranjanmarathe",
+        "license": "cc-by-nc",
+        "photo_url": "https://www.inaturalist.org/photos/737276301"
+      }
+    ]
+  },
+  {
+    "id": "bcbeeb79a71c36541427cdc9",
+    "title": "Garter snake",
+    "note": "Stumbled upon the Garter Mahoday yesterday. Take a look at the eyes, 👀, he is upto something for sure.",
+    "body": "http://www.inaturalist.org/observations/401679534",
+    "saved_at": "2026-09-21T22:23:34+00:00",
+    "tags": [
+      "nature"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1790029531,
+      "a35552e7b55d5be0245785547b6f10096b84a6e7679c7d50b0659fa7644460f2"
+    ],
+    "link_previews": [
+      {
+        "source": "inaturalist",
+        "url": "https://www.inaturalist.org/observations/401679534",
+        "image_url": "https://inaturalist-open-data.s3.amazonaws.com/photos/737276301/large.jpg",
+        "title": "Wandering Garter Snake",
+        "attribution": "(c) ranjanmarathe, some rights reserved (CC BY-NC)",
+        "observer": "ranjanmarathe",
+        "license": "cc-by-nc",
+        "photo_url": "https://www.inaturalist.org/photos/737276301"
+      }
+    ]
   }
 ]
