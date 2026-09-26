@@ -820,5 +820,22 @@
       1790439032,
       "07ceab9f29983d549e115212031be8b9f11e855e26c0c9f0fdcc7935a17a7cc0"
     ]
+  },
+  {
+    "id": "b34272801f11a8059b4783f9",
+    "title": "Bapat Sound Tests",
+    "note": "Sound pollution remains significant problem during Ganesh festival time in Pune and in USA too. I saw at least one new Dhol Tasha band this Ganpati season. One is reminded of the line by Ramdas Phutane, “Ha Samaj Kirtanane Sudharla Nahi ani Tamashane Sudharla Nahi”. This interview by Ramdas Phutane is great. https://youtu.be/zCp7I1_YvYY?is=4aOfbsBlvnCuD-oA",
+    "body": "Bapat report out. \n**Bapat: A small sound experiment**\n\nNine reports captured about seven minutes of sound activity.\n\n| Report | Average level (dBFS) |\n|---|---:|\n| MMNY Ganesh Chaturthi—sample 1 | −38.0 |\n| MMNY Ganesh Chaturthi—sample 2 | −29.7 |\n| MMNY Ganesh Chaturthi—sample 3 | −30.0 |\n| Coors Field—pregame | −39.2 |\n| Coors Field—later | −50.5 |\n| Kahat Kabira / JLF | −39.5 |\n| Unspecified location—Sept 12 | −49.7 |\n| Unspecified location—Sept 13 | −49.1 |\n| Test | −25.3 |\n\n**These are uncalibrated digital microphone levels (dBFS), not environmental decibels (dBA).** Less-negative numbers indicate a stronger recorded signal, but differences between phones and recording conditions prevent reliable venue comparisons.\n\nA useful first exercise in collecting—and interpreting—sound data.\n\n[Explore Bapat](https://bapat.ranjanmarathe.chatgpt.site)",
+    "saved_at": "2026-09-26T17:35:44+00:00",
+    "tags": [
+      "bapat",
+      "soundpollution"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1790444562,
+      "c2d2dccdf1e5777e35d288f4897f2d3b7212b5abe70b18fd38ca36c8efdce369"
+    ]
   }
 ]
