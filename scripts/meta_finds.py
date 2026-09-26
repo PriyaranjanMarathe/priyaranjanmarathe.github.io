@@ -7,6 +7,7 @@ import os
 import re
 import subprocess
 import tempfile
+import traceback
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -224,5 +225,7 @@ if __name__ == '__main__':
     try:
         main()
     except Exception as error:
-        print(f'Import failed ({type(error).__name__}); no content committed. Check receiver or Meta credentials.')
+        print(f'Import failed ({type(error).__name__}); no content committed.')
+        for frame in traceback.extract_tb(error.__traceback__):
+            print(f'  at {Path(frame.filename).name}:{frame.lineno} in {frame.name}')
         raise SystemExit(1)
