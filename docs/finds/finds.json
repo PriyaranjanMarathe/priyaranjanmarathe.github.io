@@ -1096,5 +1096,30 @@
       1790793665,
       "9d32ddf0beac0bf80e42bfa08ce3c74175aac692edb971543e6f7eb01bf124bd"
     ]
+  },
+  {
+    "id": "ffdfcad91c4ca635928bd8f3",
+    "title": "Shyamchi Aai ani Durdamya",
+    "note": "Got these two from Amazon Kindle. All for $3. Awesome. ",
+    "body": "",
+    "saved_at": "2026-10-01T22:52:06+00:00",
+    "tags": [
+      "books",
+      "marathi"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/ffdfcad91c4ca635928bd8f3.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/ffdfcad91c4ca635928bd8f3.jpg",
+        "sha256": "00ceae530bc2b59eff3b3a1a7aeaa0c4e9c74eb0287bdb92d10626c14f29de4e",
+        "size": 95233
+      }
+    ],
+    "revision": [
+      1790895192,
+      "5e3d59b537d052e5aaf96649388251603d0b27d2ee3805d028e0bb3e3f41475f"
+    ]
   }
 ]
