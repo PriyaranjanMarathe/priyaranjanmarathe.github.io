@@ -1121,5 +1121,61 @@
       1790895192,
       "5e3d59b537d052e5aaf96649388251603d0b27d2ee3805d028e0bb3e3f41475f"
     ]
+  },
+  {
+    "id": "109a4b581fbbf6d6f5ff9eb9",
+    "title": "Saved attachment",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-10-02T00:05:40+00:00",
+    "tags": [
+      "thoughts"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/109a4b581fbbf6d6f5ff9eb9.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/109a4b581fbbf6d6f5ff9eb9.jpg",
+        "sha256": "f1d21d2bd4dd8e16d4a3c5f3ab12ec2e9ffd03829b09174237b38921dcf4b3b1",
+        "size": 529380
+      }
+    ],
+    "revision": [
+      1790911901,
+      "1aebcd21fa312c6829a18b196d139445862fb410240a604eae7e77f2739c0769"
+    ]
+  },
+  {
+    "id": "2aca42deb72aba8ab148129f",
+    "title": "अकृत्वा परसन्तापं अगत्वा खलानम्रताम् |",
+    "note": "",
+    "body": "अकृत्वा परसन्तापं अगत्वा खलानम्रताम् |\nअनुसृत्य सतां वर्त्म यदल्पमपि तद्बहु ||\n\nदुसर्‍याला त्रास न देता, दुष्टांशी लाचारी न करता जरी थोडंच [मिळालं] तरी ते पुष्कळ आहे. [नेहेमी आपले आचरण शुध्द ठेवावे मग फळ जरी थोडे कमी मिळाले तरी चालेल.]",
+    "saved_at": "2026-10-02T03:31:24+00:00",
+    "tags": [
+      "subhashitam"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1790911922,
+      "92ef72e6e22a07926cb000994671f0099c7afd8bd5360280aa68db76b0e268a3"
+    ]
+  },
+  {
+    "id": "16980a50b0d050c5d05e48af",
+    "title": "जोडोनियां धन उत्तम व्यवहारे । ",
+    "note": "",
+    "body": "जोडोनियां धन उत्तम व्यवहारे । \nउदास विचारें वेच करी ॥१॥\nउत्तम चि गती तो एक पावेल । \nउत्तम भोगील जीव खाणी ॥ध्रु.॥\nपरउपकारी नेणें परनिंदा । \nपरस्त्रीया सदा बहिणी माया ॥२॥\nभूतदया गाईपशूचें पालन । \nतान्हेल्या जीवन वनामाजी॥३॥\nशांतिरूपें नव्हे कोणाचा वाईट । \nवाढवी महत्त्व वडिलांचें ॥४॥\nतुका म्हणे हेंचि आश्रमाचें फळ । \nपरमपद बळ वैराग्याचें ॥५॥\n\n- तुकाराम महाराज.",
+    "saved_at": "2026-10-02T03:32:21+00:00",
+    "tags": [
+      "subhashitam"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1790911954,
+      "465bb3a195b2c5249aed5c21e38b07cb5cab0fb67f1f7092cc702544b2775b8c"
+    ]
   }
 ]
