@@ -1196,5 +1196,24 @@
       1790934696,
       "c94edf44af1cc51af79ed1115dee1924f7077624c9772114276aa04d16d02046"
     ]
+  },
+  {
+    "id": "f094eeab5b5fc80b29afe099",
+    "title": "Dr. Uday Khire’s interview in BMM Vrutta — a few interesting points/TILs:",
+    "note": "",
+    "body": "Dr. Uday Khire’s interview in BMM Vrutta — a few interesting points/TILs:\n1. Original interview: Dr. Gautam Pangu and Komal Kulkarni interviewed Dr. Uday Khire in the October 2026 BMM Vrutta, pp. 4–7. Khire received BMM’s 2026 Science, Technology, Education & Research Award.     BMMNewsletterOct2026docx\n   BMM Vrutta — October 2026:\n   https://bmmonline.org/wp-content/uploads/2026/10/BMMNewsletterOct2026docx.pdf\n2. Pune → Nobel laureate’s lab → UC Irvine: Khire completed his PhD at CSIR-NCL, Pune. He came to the US in 1991 and did postdoctoral research at Purdue with Herbert C. Brown, winner of the 1979 Nobel Prize in Chemistry, followed by a second postdoc with Scott Rychnovsky at UC Irvine. Khire says these experiences gave him a deep grounding in complex synthetic chemistry.     BMMNewsletterOct2026docx\n3. What is a kinase inhibitor? And the Nexavar connection: Kinases are enzymes involved in cellular signaling—for example, telling cells when to grow or divide. In some cancers, these signaling pathways become abnormally activated. Kinase inhibitors are targeted drugs designed to interfere with these signals. Khire spent about 11 years at Bayer working in cancer drug discovery, including on a B-Raf kinase inhibitor that progressed from preclinical development to clinical trials and eventually became an approved drug.     BMMNewsletterOct2026docx Patent records connect Khire’s Bayer work to sorafenib (Nexavar); he is a named inventor on relevant Bayer RAF-kinase patents.\n4. An interesting, though indirect, connection to Katalin Karikó: Karikó’s breakthrough involved making therapeutic mRNA work effectively in cells, while Khire’s work has largely involved small-molecule medicinal chemistry and kinase inhibitors. These are different technologies, so there isn’t a direct research connection. But there is a broader conceptual connection: both involve understanding molecular machinery inside cells well enough to intervene selectively and turn that knowledge into medicines.\n5. What comes next is perhaps even more interesting: Khire’s Pune lab is now researching proximity-induced protein degradation. Instead of merely blocking a disease-causing protein, the idea is to harness the cell’s own machinery to degrade and remove the protein itself. Khire also makes an interesting observation about India: Pune/NCL provides excellent scientific talent, but funding innovative drug discovery remains challenging because India’s VC ecosystem is still developing.     BMMNewsletterOct2026docx",
+    "saved_at": "2026-10-04T02:09:33+00:00",
+    "tags": [
+      "bmmvrutta",
+      "kariko",
+      "research",
+      "udaykhire"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1791079806,
+      "4c24518692d6c3841e51dfbe458c29c8da7d10d60f2a61f5d5a42031ebaddcad"
+    ]
   }
 ]
