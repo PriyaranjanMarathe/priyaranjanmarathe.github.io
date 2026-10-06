@@ -1232,5 +1232,30 @@
       1791109264,
       "7cf8414ff4cb21674da491964a672bac24828ac619e9c398ca8e042dc1e00f8f"
     ]
+  },
+  {
+    "id": "f696ba4dc907d2800f7115ea",
+    "title": "A Konkani Joke - Gangubai",
+    "note": "This is an excellent ice breaker, and takes exactly 1 minute. I loved telling it to this Sunday.",
+    "body": "",
+    "saved_at": "2026-10-06T01:28:00+00:00",
+    "tags": [
+      "jokes",
+      "konkani"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/f696ba4dc907d2800f7115ea.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/f696ba4dc907d2800f7115ea.jpg",
+        "sha256": "254a9a5404dd4707c375d3f8ca9e14a3d79d1ab8bd7820af742892db1193c228",
+        "size": 298910
+      }
+    ],
+    "revision": [
+      1791250186,
+      "d58714e600a3aec56a47d65ea3001ac4d26bf7ddc64f33b175dd1ae7d114622d"
+    ]
   }
 ]
