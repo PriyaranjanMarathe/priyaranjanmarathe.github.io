@@ -37,12 +37,12 @@ class CustomFields(unittest.TestCase):
                         '**Save** #science; #reading\n**Title:** My title\n**Note**: My note']:
             self.assertEqual(parse_command(command), {'tags':['science','reading'],'title':'My title','note':'My note'})
 
-    def test_only_one_recent_attachment_can_be_inferred(self):
+    def test_separate_recent_attachments_remain_ambiguous(self):
         from meta_finds import selections
         image={'id':'image','type':'image','timestamp':1000,'body':'picture'}
         command={'id':'save','type':'text','timestamp':1100,'body':'save #science'}
         self.assertEqual(list(selections([image,command],900,2000)),[(image,['science'])])
-        another={**image,'id':'another'}
+        another={**image,'id':'another','timestamp':1020}
         self.assertEqual(list(selections([image,another,command],900,2000)),[])
         self.assertEqual(list(selections([image,{**command,'timestamp':1700}],900,2000)),[])
         self.assertEqual(list(selections([image,{**command,'context':'missing'}],900,2000)),[])
@@ -148,3 +148,38 @@ class PostAliasTests(unittest.TestCase):
     def test_post_and_note_cannot_silently_overwrite(self):
         from meta_finds import parse_command
         self.assertIsNone(parse_command('save #nature\nPost: First\nNote: Second'))
+
+class PhotoGroups(unittest.TestCase):
+    def messages(self):
+        photos=[{'id':str(i),'timestamp':1000+i//2,'type':'image','body':'caption' if i==0 else ''} for i in range(3)]
+        command={'id':'save','timestamp':1053,'type':'text','body':'save #nature\nTitle: Album\nNote: My note'}
+        return photos,command
+    def test_photo_burst_one_selection_stable_order(self):
+        from meta_finds import command_selections
+        photos,command=self.messages()
+        found=list(command_selections([command]+list(reversed(photos))+[photos[0]],900,2000))
+        self.assertEqual(len(found),1)
+        self.assertEqual([p['id'] for p in found[0][1]['_photos']],['0','1','2'])
+        self.assertEqual(found[0][1]['body'],'caption')
+        self.assertEqual(found[0][2]['note'],'My note')
+    def test_separate_groups_or_mixed_media_are_ambiguous(self):
+        from meta_finds import reply_target
+        for change in ['time','type']:
+            photos,command=self.messages()
+            if change=='time': photos[-1]['timestamp']=1020
+            else: photos[-1]['type']='video'
+            self.assertIsNone(reply_target(command,{p['id']:p for p in photos},900))
+    def test_gallery_failure_does_not_return_partial_attachments(self):
+        from meta_finds import selected_attachments
+        from unittest.mock import patch
+        photos,_=self.messages()
+        with patch('meta_finds.media_attachment',side_effect=[[{'url':'one'}],RuntimeError('failed')]):
+            with self.assertRaises(RuntimeError): selected_attachments({'_photos':photos},Path('/tmp'))
+    def test_all_photos_get_distinct_storage_keys(self):
+        from meta_finds import selected_attachments
+        from unittest.mock import patch
+        photos,_=self.messages()
+        with patch('meta_finds.media_attachment',side_effect=lambda p,d,k:[{'url':k}]) as upload:
+            result=selected_attachments({'_photos':photos},Path('/tmp'))
+        self.assertEqual(len({a['url'] for a in result}),3)
+        self.assertEqual(upload.call_count,3)

@@ -48,7 +48,20 @@ def reply_target(command, unique, start):
                   if m.get('type') in {'image','video','audio','document','sticker'}
                   and m['timestamp'] >= start
                   and 0 <= command['timestamp'] - m['timestamp'] <= 600]
-    return candidates[0] if len(candidates) == 1 else None
+    if len(candidates) == 1:
+        return candidates[0]
+    # Meta delivers album photos separately. Infer only a tightly timed photo burst,
+    # never a mixture of attachments or separate groups in the selection window.
+    if 2 <= len(candidates) <= 20 and all(m['type'] == 'image' for m in candidates):
+        ordered = sorted(candidates, key=lambda m: (m['timestamp'], m['id']))
+        if ordered[-1]['timestamp'] - ordered[0]['timestamp'] <= 2:
+            first, last = ordered[0]['timestamp'], command['timestamp']
+            if any(first < m['timestamp'] < last and m['id'] != command['id']
+                   and m.get('type') == 'text' for m in unique.values()):
+                return None
+            return {**ordered[0], '_photos': ordered,
+                    'body': '\n\n'.join(dict.fromkeys(m.get('body', '') for m in ordered if m.get('body', '').strip()))}
+    return None
 
 
 def rejected_commands(messages, start, now):
@@ -147,6 +160,15 @@ def media_attachment(item, directory, key):
     return [{'url': url, 'type': mime, **mirrored}]
 
 
+def selected_attachments(item, directory):
+    # Build the whole gallery before committing a post; partial failures retry it.
+    attachments = []
+    for photo in item.get('_photos', [item]):
+        key = hashlib.sha256(photo['id'].encode()).hexdigest()[:24]
+        attachments.extend(media_attachment(photo, directory, key))
+    return attachments
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--publish', action='store_true')
@@ -198,7 +220,7 @@ def main():
             body = item['body']
             tags, method = tags_for(body, options['tags'])
             with tempfile.TemporaryDirectory() as temporary:
-                attachments = old['attachments'] if old else media_attachment(item, Path(temporary), key)
+                attachments = old['attachments'] if old else selected_attachments(item, Path(temporary))
             record = {'id':key, 'title':options['title'] or (old or {}).get('title') or body.strip().split('\n')[0][:120] or 'Saved attachment',
                       'note': options['note'] if options['note'] is not None else (old or {}).get('note', ''),
                       'body':body, 'saved_at':datetime.fromtimestamp(item['timestamp'],timezone.utc).isoformat(),
