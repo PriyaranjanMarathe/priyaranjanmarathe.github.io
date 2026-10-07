@@ -1257,5 +1257,44 @@
       1791250186,
       "d58714e600a3aec56a47d65ea3001ac4d26bf7ddc64f33b175dd1ae7d114622d"
     ]
+  },
+  {
+    "id": "f82aac3018ab34e1071d4dc0",
+    "title": "On Gandhiji",
+    "note": "Gandhiji doesn’t need anyone to defend him, nor does Sane Guruji. Both stood tall and gave their life for Bharat. One literally feels pain when both are unjustly rediculed. No reading would assuage those who mock these stalwarts of Indian social thought and all one can do is to remember Gandhiji on his birthday and spend good 15 minutes writing what one feels about them down. And then double down with photo of an elocution competition I won speaking about “Relevance of Gandhian thoughts”, back in 1999. He Ram 🙏",
+    "body": "",
+    "saved_at": "2026-10-06T12:25:58+00:00",
+    "tags": [
+      "gandhiji",
+      "karkedekho"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/f82aac3018ab34e1071d4dc0.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/f82aac3018ab34e1071d4dc0.jpg",
+        "sha256": "01b66cad27d43d3a2d46926bbea98043f752d1fe0b6e7069a8dce93a9ef406a9",
+        "size": 454645
+      },
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/8df5ffd0707d347bb9400b63.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/8df5ffd0707d347bb9400b63.jpg",
+        "sha256": "3e5ec2265720460fa5af8f82d76157fef79c20fe4101fc97185a0f38d3fd94f0",
+        "size": 392162
+      },
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/c74663d37b333f2aae34c033.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/c74663d37b333f2aae34c033.jpg",
+        "sha256": "a36cf612eb31a9179cdaeb16317294d85be7e55835bbd9d4bedb7c91e49d0448",
+        "size": 148537
+      }
+    ],
+    "revision": [
+      1791289612,
+      "6a3748f0b3fd6f407560458997c8fbd3f9c50fc0f4b5980f8586d505dc413dd5"
+    ]
   }
 ]
