@@ -1581,5 +1581,46 @@
       1792215580,
       "175096d725d083cfcc149d5a9d8ee41b301333d9cbb07cb24d8c9c4f5df7ca05"
     ]
+  },
+  {
+    "id": "ae8050e54941373f82651dae",
+    "title": "विपत्तिवाचको दुर्गश्च",
+    "note": "",
+    "body": "विपत्तिवाचको दुर्गश्च\nआकारो नाशवाचक:|\nदुर्गं नश्यंति या नित्यं\nसा दुर्गा परिकीर्तिता ||\n\nदुर्ग शब्द संकटवाचक (दुर्गती) आहे आणि आकार शब्द नाशवाचक आहे. जी दुर्ग अर्थात संकटांचा नाश करणारी आहे किंवा दुर्गतिपासून वाचवणारी आहे, त्या देवीला दुर्गादेवी म्हणतात.",
+    "saved_at": "2026-10-17T14:00:08+00:00",
+    "tags": [
+      "subhashitam"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1792245632,
+      "ab3aa3c0a3dec828f1d7e5b8af81913d0e270c4129586b27fe1961559aa35cff"
+    ]
+  },
+  {
+    "id": "7ac6eb5e05d45d1bb0b3196c",
+    "title": "Saved attachment",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-10-17T14:01:52+00:00",
+    "tags": [
+      "jokes",
+      "pune"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/7ac6eb5e05d45d1bb0b3196c.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/7ac6eb5e05d45d1bb0b3196c.jpg",
+        "sha256": "7ac52f385e9ce78181c61a8d741b39f763a86c3452036dae5a52a468a20f3076",
+        "size": 624833
+      }
+    ],
+    "revision": [
+      1792245724,
+      "8d1ff191dddb5e0da961f76f504f810fe3c32fc1ecbeedbbdf505fb002414d5a"
+    ]
   }
 ]
