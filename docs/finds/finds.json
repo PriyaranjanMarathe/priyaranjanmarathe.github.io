@@ -1622,5 +1622,45 @@
       1792245724,
       "8d1ff191dddb5e0da961f76f504f810fe3c32fc1ecbeedbbdf505fb002414d5a"
     ]
+  },
+  {
+    "id": "5ca79a24f7c2b405c5b32083",
+    "title": "नान्नोदकसमं दानं",
+    "note": "",
+    "body": "नान्नोदकसमं दानं\nन तिथिर्द्वादशी समा |\nन गायत्र्या:परो मन्त्रो\nन मातुदैवतं परम् ||\n\nअन्न आणि जलदानासारखे दुसरे दान नाही. द्वादशीसारखी दुसरी तिथी नाही. गायत्री मंत्रासारखा दुसरा मंत्र नाही आणि आईपेक्षा मोठे दैवत नाही.",
+    "saved_at": "2026-10-18T13:30:05+00:00",
+    "tags": [
+      "subhashitam"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1792330223,
+      "8d9ca02f13dfa83152b07363dbf4be34bc3acab0750b1711274984fa1ec4f80b"
+    ]
+  },
+  {
+    "id": "cbf7af0340c15f306e9adf1e",
+    "title": "Saved attachment",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-10-18T14:10:57+00:00",
+    "tags": [
+      "mahalaxmi2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/cbf7af0340c15f306e9adf1e.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/cbf7af0340c15f306e9adf1e.jpg",
+        "sha256": "1ffcc960929e8e9341433c0893b299cb1ce97af3c099896c076aa105591d00cf",
+        "size": 159549
+      }
+    ],
+    "revision": [
+      1792332678,
+      "eeb025007307d91e994a5984c71300bfe3e7a4cc14f9b891ef03a199996040b7"
+    ]
   }
 ]
