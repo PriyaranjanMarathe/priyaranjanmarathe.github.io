@@ -1736,5 +1736,46 @@
       1792511607,
       "7346acbe71b576c11238a871ad8099ed26a02b3f9e1626cab2504eb0573d4cf9"
     ]
+  },
+  {
+    "id": "0d498810fce199971df69069",
+    "title": "Why fact checking mostly doesn’t work?",
+    "note": "https://x.com/blackhc/status/1876756951805329413?s=46",
+    "body": "Ever wondered why presenting more facts can sometimes *worsen* disagreements, even among rational people? 🤔\n\nIt turns out, Bayesian reasoning has some surprising answers - no cognitive biases needed! Let's explore this fascinating paradox quickly ☺️",
+    "saved_at": "2026-10-21T12:40:55+00:00",
+    "tags": [
+      "bayesianreasoning",
+      "factchecking"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/0d498810fce199971df69069.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/0d498810fce199971df69069.jpg",
+        "sha256": "a76377ec0e94f50b040bc02376f729160e7d6c5e589dd9edde361426cd93757d",
+        "size": 183133
+      }
+    ],
+    "revision": [
+      1792586580,
+      "dae0eddf8ae77e5be3e5c88e80c78cae8470174467fcc899c5df35e1ebf7fc02"
+    ]
+  },
+  {
+    "id": "f75d894be2eee4854144eccb",
+    "title": "जननी जन्मभूमिश्च जाह्नवी च जनार्दन:|",
+    "note": "",
+    "body": "जननी जन्मभूमिश्च जाह्नवी च जनार्दन:|\nजनक: पञ्चमश्चैव जकारा: नित्य पूजिता:||\n\nजननी [आई], जन्मभूमी [मायदेश], जाह्नवी [गंगा नदी], जनार्दन [विष्णु], जनक [वडील] या \"ज\" ने सुरू होणाऱ्या पाच गोष्टींची नेहमी  पूजा करावी.",
+    "saved_at": "2026-10-21T15:04:51+00:00",
+    "tags": [
+      "subhashitam"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1792595106,
+      "5ba5632a77055543e0d56f6e85368709a51a612a2ac11204f18b7f98c8a3d9a6"
+    ]
   }
 ]
