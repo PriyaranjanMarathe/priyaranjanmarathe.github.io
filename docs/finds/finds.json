@@ -1793,5 +1793,31 @@
       1792702961,
       "55bd558c81a0b94d73e8d6c41462236e68070a339a2b02fb5fcb1e7e0a54288d"
     ]
+  },
+  {
+    "id": "a7ba8819d7d7dd602e2b667c",
+    "title": "Shelly’s Ozymendias",
+    "note": "",
+    "body": "Nice poem. Thanks for sharing.",
+    "saved_at": "2026-10-23T12:51:01+00:00",
+    "tags": [
+      "ozymendias",
+      "poem",
+      "shelly"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/a7ba8819d7d7dd602e2b667c.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/a7ba8819d7d7dd602e2b667c.jpg",
+        "sha256": "65ca9a4b351aef436d01593207273cf26c85e7ee8bc03af32a81a7e3eda01239",
+        "size": 431235
+      }
+    ],
+    "revision": [
+      1792759908,
+      "20eec9c22f6bc1a854140ea5fcc19c7cca1a4586441f3ce725334a23b587f780"
+    ]
   }
 ]
