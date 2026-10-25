@@ -1853,5 +1853,48 @@
       1792944618,
       "d198e94b6037e1a335fefd8dacd15b5b3cc829eba646603ae57d0cc9a82499e4"
     ]
+  },
+  {
+    "id": "5654774d99fe9343ef9d001f",
+    "title": "Saved attachment",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-10-25T17:04:56+00:00",
+    "tags": [
+      "daawat",
+      "diwali2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/5654774d99fe9343ef9d001f.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/5654774d99fe9343ef9d001f.jpg",
+        "sha256": "8925050d9370c6ec7b0d0532e26df1b1f59db54e3b101065b38e30d1cf1d54cb",
+        "size": 134975
+      }
+    ],
+    "revision": [
+      1792947916,
+      "939f9d59be2ef61f5bf0f73a5c152053b74c1a2ed940a9ebac3f2da919274170"
+    ]
+  },
+  {
+    "id": "76c399ee12cd668072c774dd",
+    "title": "LLMs and Tukaram Maharaj",
+    "note": "Grok seems to be quite good at telling you how it got to an answer.  Draught and all.",
+    "body": "https://x.com/grok/status/2114404957432467913?s=46\n\nTitle: How LLMs answer a question involving quote from Saint Tukaram?",
+    "saved_at": "2026-10-25T17:17:34+00:00",
+    "tags": [
+      "abhangs",
+      "llm",
+      "tukarammaharaj"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1792948731,
+      "886fe095ec9948c205df6b526d1ccd4bf7c0792fe01d7d77aca16a44461dad54"
+    ]
   }
 ]
