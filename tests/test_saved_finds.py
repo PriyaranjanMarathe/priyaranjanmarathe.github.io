@@ -67,6 +67,17 @@ class FindsTests(unittest.TestCase):
         self.assertIn('नमस्कार', page)
         self.assertIn('href="https://example.com/"', page)
 
+    def test_display_labels_preserve_normalized_filter_keys(self):
+        record = {'id': 'story', 'title': 'Story', 'body': '', 'saved_at': '2026-10-27',
+                  'tags': ['whatsappideas', 'science'], 'tag_labels': {'whatsappideas': 'WhatsAppIdeas'},
+                  'tag_method': 'chosen', 'attachments': []}
+        with tempfile.TemporaryDirectory() as directory:
+            f.render([record], Path(directory))
+            page = (Path(directory) / 'index.html').read_text(encoding='utf-8')
+        self.assertIn('data-tag="whatsappideas">#WhatsAppIdeas</button>', page)
+        self.assertIn('data-tag="science">#science</button>', page)
+        self.assertEqual(f.tags_for('', ['WhatsAppIdeas']), (['whatsappideas'], 'chosen'))
+
     def test_api_key_auth_keeps_account_resource_path(self):
         client = f.Twilio('AC' + '0' * 32, 'secret', 'SK' + '1' * 32)
         self.assertEqual(client.session.auth, ('SK' + '1' * 32, 'secret'))

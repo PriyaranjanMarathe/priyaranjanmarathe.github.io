@@ -154,7 +154,7 @@ def render(records, directory):
     cards = []
     for record in sorted(records, key=lambda r: r['saved_at'], reverse=True):
         e = html.escape
-        tag_links = ' '.join(f'<button class="tag" data-tag="{e(t, quote=True)}">#{e(t)}</button>' for t in record['tags'])
+        tag_links = ' '.join(f'<button class="tag" data-tag="{e(t, quote=True)}">#{e(record.get("tag_labels", {}).get(t, t))}</button>' for t in record['tags'])
         media = []
         for attachment in record['attachments']:
             url, mime = e(attachment['url'], quote=True), attachment['type']
