@@ -2075,5 +2075,47 @@
       1793717831,
       "7d2b928f73a73c8a8668a13bebe614ebed323578574966732bb6f4b46fedada3"
     ]
+  },
+  {
+    "id": "4517b1ed7873b7390e5fc1fd",
+    "title": "How Tos for creating a linked blog",
+    "note": "Agent friendly guide on creating a linked blog. The idea is from Simon Willison.",
+    "body": "Help me build my own WhatsApp-powered archive and link blog\n\nI am not technical. Work with me step by step to build and operate this. Explain unfamiliar terms in plain English, ask only the questions needed for the next step, and do the implementation yourself wherever your tools allow.\n\nExample of the experience I want:\nhttps://priyaranjanmarathe.github.io/finds/\n\nUse this website as a reference for the user experience only. Build an independent implementation for my accounts. Do not inspect, copy, or depend on its owner’s source repository, code, credentials, or infrastructure.\n\nWhat I want\n\nI receive useful links, messages, photos, videos, audio, and documents on WhatsApp. I want to forward selected items to a dedicated WhatsApp number, then choose which ones to publish to my own searchable GitHub Pages website.\n\nThis should process only what I deliberately send to that number. It should not require access to my existing chats, contacts, or groups.\n\nMy everyday workflow\n\n1. I forward an item to the dedicated number.\n2. I reply directly to that item with a command such as:\n\nsave #books #science\nTitle: An interesting discovery\nNote: My commentary on why this is worth keeping.\n\n3. The selected item appears on my website after processing.\n\nRequire a direct reply so the system knows exactly which item I selected. Never guess the target from nearby messages. Forwarding something alone must not publish it.\n\nLet me revise titles, notes, and tags, and remove published items. Explain the supported commands and any time limits. If an old post can no longer be edited through WhatsApp, provide a simple alternative.\n\nWebsite requirements\n\n* Newest posts first, with a permanent link to each post.\n* Titles, original text or links, my commentary, dates, and clickable tags.\n* Full-text search and tag filtering.\n* Images and appropriate audio/video players or document links.\n* A mobile-friendly layout with readable Marathi, Hindi, and English.\n* Clear handling of unsupported or oversized attachments.\n* Exportable records so I can move my archive later.\n\nPrivacy and publication\n\nExplain the difference between a private archive and a public website before setup. Ask me to confirm which content I want public. Do not describe a public GitHub Pages site as private storage.\n\nKeep unselected messages, sender numbers, credentials, and internal inbox data out of the public repository and website. Warn me that selected messages and attachments may themselves contain personal information.\n\nExplain what removing a post does—and what may remain in Git history, attachment storage, caches, or downloaded copies.\n\nHow to work with me\n\nStart by asking:\n\n* What computer do I use, and what agent tools are available?\n* Do I already have GitHub and Meta accounts?\n* Do I have a suitable WhatsApp number for this setup?\n* What should the website be called?\n* What monthly budget am I comfortable with?\n\nRecommend the simplest maintainable architecture. GitHub Pages should host the website; use suitable services for receiving WhatsApp messages, keeping the inbox private, and storing public attachments. Explain the role of Meta’s WhatsApp Cloud API and whether Vercel, Cloudflare, or another service is needed.\n\nCheck current official documentation before giving account instructions, pricing, or platform restrictions. Explain test-number limitations, production requirements, token expiry or revocation, storage and bandwidth limits, and possible charges. Do not assume everything is free or that paid AI subscriptions are required.\n\nGive me one manageable setup step at a time. When I must sign in, verify a number, approve access, or configure a secret, tell me exactly what to do. Never ask me to paste passwords or access tokens into chat. Store credentials using the appropriate platform’s secret settings.\n\nSecurity and reliability\n\nVerify incoming webhook signatures and accept messages only from my authorized sender number. Protect the private inbox, prevent duplicate posts on retries, retry failed imports, and avoid logging private content or credentials.\n\nSet a clear retention period for unselected messages. Make publication failures visible to me without exposing private data.\n\nExplain the expected publishing delay. Scheduled processing is acceptable; include a manual way to run it.\n\nCompletion and handoff\n\nImplement the complete flow and test it with my permission using deliberately chosen sample content:\n\n* A text/link post.\n* An image post.\n* An update to a published post.\n* Removal of a test post.\n* An unselected message that must remain unpublished.\n* A repeated delivery that must not create a duplicate.\n\nShow me the actual published results and report anything that remains untested.\n\nFinish with short instructions covering how to save, edit, remove, search, export, and troubleshoot. Record which accounts and services I own, where settings are managed, and what maintenance may be needed—without including secret values.\n\nBegin by checking my starting setup and guiding me through the first step.",
+    "saved_at": "2026-11-03T16:27:03+00:00",
+    "tags": [
+      "linkedinblog",
+      "simonwillison"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1793723375,
+      "70273d88c368ca32c6209bfd61bae146291407eef733b120352537083c322f45"
+    ]
+  },
+  {
+    "id": "26e28664435812b5ea6af6ab",
+    "title": "Saved attachment",
+    "note": "Great explainer on type 1 and type 2 errors. Refer this post from\nMilan Janosav too. https://lnkd.in/p/g8q_857N",
+    "body": "",
+    "saved_at": "2026-11-03T18:42:17+00:00",
+    "tags": [
+      "errors",
+      "statistics"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/26e28664435812b5ea6af6ab.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/26e28664435812b5ea6af6ab.jpg",
+        "sha256": "d436de9092c3579c79fb3aafbddbcb8bbed7bd72cb846e9a4b555d00d5474866",
+        "size": 170968
+      }
+    ],
+    "revision": [
+      1793731403,
+      "8f6266e71b5c1e1b55d5572806445c64ef1efd9ff0d10cd7daf9f397b5ef03d4"
+    ]
   }
 ]

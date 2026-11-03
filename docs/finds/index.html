@@ -6,7 +6,103 @@
 <nav><a href="/">Home</a> · <a href="/blog/">Blog</a></nav><header class="intro"><h1>Linked Blog</h1>
 <p class="tagline">Social media is here to stay, I curate the best here.</p>
 <p class="meta">Inspired by <a href="https://simonwillison.net/2024/Dec/22/link-blog/">Simon Willison’s link blog</a>.</p></header>
-<label for="search">Search words or tags</label><input id="search" type="search" placeholder="Try science, history, or a phrase"><p><button id="clear">Show all</button><span id="count" role="status"></span></p><main><article id="72779f7392ada1f109e755b9" data-tags="[&quot;agewell&quot;]">
+<label for="search">Search words or tags</label><input id="search" type="search" placeholder="Try science, history, or a phrase"><p><button id="clear">Show all</button><span id="count" role="status"></span></p><main><article id="26e28664435812b5ea6af6ab" data-tags="[&quot;errors&quot;, &quot;statistics&quot;]">
+<h2><a href="#26e28664435812b5ea6af6ab">Saved attachment</a></h2>
+<p class="meta">Saved 2026-11-03</p>
+<div class="note">Great explainer on type 1 and type 2 errors. Refer this post from
+Milan Janosav too. <a href="https://lnkd.in/p/g8q_857N" rel="noreferrer noopener">https://lnkd.in/p/g8q_857N</a></div><div class="body"></div><a href="https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/26e28664435812b5ea6af6ab.jpg"><img loading="lazy" src="https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/26e28664435812b5ea6af6ab.jpg" alt="Saved image; see accompanying text for context"></a>
+<p class="meta">Tags: <button class="tag" data-tag="errors">#errors</button> <button class="tag" data-tag="statistics">#statistics</button></p></article><article id="4517b1ed7873b7390e5fc1fd" data-tags="[&quot;linkedinblog&quot;, &quot;simonwillison&quot;]">
+<h2><a href="#4517b1ed7873b7390e5fc1fd">How Tos for creating a linked blog</a></h2>
+<p class="meta">Saved 2026-11-03</p>
+<div class="note">Agent friendly guide on creating a linked blog. The idea is from Simon Willison.</div><div class="body">Help me build my own WhatsApp-powered archive and link blog
+
+I am not technical. Work with me step by step to build and operate this. Explain unfamiliar terms in plain English, ask only the questions needed for the next step, and do the implementation yourself wherever your tools allow.
+
+Example of the experience I want:
+<a href="https://priyaranjanmarathe.github.io/finds/" rel="noreferrer noopener">https://priyaranjanmarathe.github.io/finds/</a>
+
+Use this website as a reference for the user experience only. Build an independent implementation for my accounts. Do not inspect, copy, or depend on its owner’s source repository, code, credentials, or infrastructure.
+
+What I want
+
+I receive useful links, messages, photos, videos, audio, and documents on WhatsApp. I want to forward selected items to a dedicated WhatsApp number, then choose which ones to publish to my own searchable GitHub Pages website.
+
+This should process only what I deliberately send to that number. It should not require access to my existing chats, contacts, or groups.
+
+My everyday workflow
+
+1. I forward an item to the dedicated number.
+2. I reply directly to that item with a command such as:
+
+save #books #science
+Title: An interesting discovery
+Note: My commentary on why this is worth keeping.
+
+3. The selected item appears on my website after processing.
+
+Require a direct reply so the system knows exactly which item I selected. Never guess the target from nearby messages. Forwarding something alone must not publish it.
+
+Let me revise titles, notes, and tags, and remove published items. Explain the supported commands and any time limits. If an old post can no longer be edited through WhatsApp, provide a simple alternative.
+
+Website requirements
+
+* Newest posts first, with a permanent link to each post.
+* Titles, original text or links, my commentary, dates, and clickable tags.
+* Full-text search and tag filtering.
+* Images and appropriate audio/video players or document links.
+* A mobile-friendly layout with readable Marathi, Hindi, and English.
+* Clear handling of unsupported or oversized attachments.
+* Exportable records so I can move my archive later.
+
+Privacy and publication
+
+Explain the difference between a private archive and a public website before setup. Ask me to confirm which content I want public. Do not describe a public GitHub Pages site as private storage.
+
+Keep unselected messages, sender numbers, credentials, and internal inbox data out of the public repository and website. Warn me that selected messages and attachments may themselves contain personal information.
+
+Explain what removing a post does—and what may remain in Git history, attachment storage, caches, or downloaded copies.
+
+How to work with me
+
+Start by asking:
+
+* What computer do I use, and what agent tools are available?
+* Do I already have GitHub and Meta accounts?
+* Do I have a suitable WhatsApp number for this setup?
+* What should the website be called?
+* What monthly budget am I comfortable with?
+
+Recommend the simplest maintainable architecture. GitHub Pages should host the website; use suitable services for receiving WhatsApp messages, keeping the inbox private, and storing public attachments. Explain the role of Meta’s WhatsApp Cloud API and whether Vercel, Cloudflare, or another service is needed.
+
+Check current official documentation before giving account instructions, pricing, or platform restrictions. Explain test-number limitations, production requirements, token expiry or revocation, storage and bandwidth limits, and possible charges. Do not assume everything is free or that paid AI subscriptions are required.
+
+Give me one manageable setup step at a time. When I must sign in, verify a number, approve access, or configure a secret, tell me exactly what to do. Never ask me to paste passwords or access tokens into chat. Store credentials using the appropriate platform’s secret settings.
+
+Security and reliability
+
+Verify incoming webhook signatures and accept messages only from my authorized sender number. Protect the private inbox, prevent duplicate posts on retries, retry failed imports, and avoid logging private content or credentials.
+
+Set a clear retention period for unselected messages. Make publication failures visible to me without exposing private data.
+
+Explain the expected publishing delay. Scheduled processing is acceptable; include a manual way to run it.
+
+Completion and handoff
+
+Implement the complete flow and test it with my permission using deliberately chosen sample content:
+
+* A text/link post.
+* An image post.
+* An update to a published post.
+* Removal of a test post.
+* An unselected message that must remain unpublished.
+* A repeated delivery that must not create a duplicate.
+
+Show me the actual published results and report anything that remains untested.
+
+Finish with short instructions covering how to save, edit, remove, search, export, and troubleshoot. Record which accounts and services I own, where settings are managed, and what maintenance may be needed—without including secret values.
+
+Begin by checking my starting setup and guiding me through the first step.</div>
+<p class="meta">Tags: <button class="tag" data-tag="linkedinblog">#linkedinblog</button> <button class="tag" data-tag="simonwillison">#simonwillison</button></p></article><article id="72779f7392ada1f109e755b9" data-tags="[&quot;agewell&quot;]">
 <h2><a href="#72779f7392ada1f109e755b9">सेप्टोलेसेंट म्हणजे काय? - मराठी अनुवाद</a></h2>
 <p class="meta">Saved 2026-11-03</p>
 <div class="body">सेप्टोलेसेंट म्हणजे काय? - मराठी अनुवाद
