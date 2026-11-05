@@ -1,0 +1,523 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
+<title>Run for Your Life — What the Data Says About Marathon Deaths</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,800;1,6..72,400&amp;family=Public+Sans:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f3ec; --surface:#fffdf8; --surface2:#efe9db;
+    --ink:#1c2430; --ink2:#4c5563; --line:#ddd5c2;
+    --teal:#0d7462; --teal-soft:#dcefe9;
+    --rust:#b63e24; --rust-soft:#f7e3dc;
+    --amber:#a86e0c; --amber-soft:#f6ecd4;
+    --shadow:0 1px 2px rgba(28,36,48,.06),0 10px 30px -18px rgba(28,36,48,.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --bg:#131720; --surface:#1b212d; --surface2:#232b39;
+      --ink:#ece7da; --ink2:#a9b0bc; --line:#333d4d;
+      --teal:#3ec2a8; --teal-soft:#173b34;
+      --rust:#f0836a; --rust-soft:#452720;
+      --amber:#e5b95c; --amber-soft:#3d3319;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -18px rgba(0,0,0,.7);
+    }
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+  .narrow{max-width:720px;margin:0 auto}
+  h1,h2,h3{font-family:"Newsreader",Georgia,serif;line-height:1.12;margin:0}
+  h2{font-size:clamp(28px,4.4vw,40px);font-weight:800;letter-spacing:-.01em;margin-bottom:14px}
+  h3{font-size:22px;font-weight:700}
+  p{margin:0 0 16px}
+  .lede{font-size:clamp(18px,2.4vw,21px);color:var(--ink2);line-height:1.6}
+  .mono{font-family:"IBM Plex Mono",ui-monospace,monospace}
+  a{color:var(--teal);text-underline-offset:3px}
+  section{padding:52px 0 8px}
+  .sec-head{margin-bottom:8px}
+  .sec-head .tag{display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);margin-bottom:10px}
+  .sec-head.teal .tag{color:var(--teal)}
+
+  /* hero */
+  .hero{padding:44px 0 0}
+  .hero .dateline{font-family:"IBM Plex Mono",monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+  .hero .dateline b{color:var(--rust);font-weight:600}
+  h1{font-size:clamp(40px,7vw,68px);font-weight:800;letter-spacing:-.015em;margin-bottom:18px}
+  h1 .life{color:var(--teal)}
+  .hero-fig{margin:30px 0 0}
+  .hero-fig img{width:100%;height:auto;display:block;border-radius:10px;box-shadow:var(--shadow)}
+  figcaption{font-size:13px;color:var(--ink2);padding-top:9px;line-height:1.5}
+  figcaption b{color:var(--ink)}
+
+  /* verdict strip */
+  .verdict-strip{margin:34px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px 22px;box-shadow:var(--shadow)}
+  .verdict-strip p{margin:0;font-family:"Newsreader",serif;font-size:clamp(19px,2.6vw,23px);line-height:1.45}
+  .verdict-strip p b{color:var(--teal)}
+
+  /* timeline */
+  .timeline{margin-top:26px;border:1px solid var(--line);border-radius:10px;background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+  .timeline ol{list-style:none;margin:0;padding:0}
+  .timeline li{display:grid;grid-template-columns:118px 1fr;gap:0;border-bottom:1px solid var(--line)}
+  .timeline li:last-child{border-bottom:none}
+  .timeline .when{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--rust);padding:16px 14px 16px 20px;border-right:1px solid var(--line);background:var(--surface2)}
+  .timeline .what{padding:14px 20px}
+  .timeline .what b{display:block;font-size:16px}
+  .timeline .what span{color:var(--ink2);font-size:15px}
+  .note{font-size:14px;color:var(--ink2);border-left:3px solid var(--amber);padding:4px 0 4px 14px;margin:20px 0}
+  .note b{color:var(--ink)}
+
+  /* big stats */
+  .stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:26px 0 6px}
+  .stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;box-shadow:var(--shadow)}
+  .stat .num{font-family:"Newsreader",serif;font-weight:800;font-size:clamp(34px,5vw,48px);line-height:1;color:var(--ink)}
+  .stat .num.rust{color:var(--rust)} .stat .num.teal{color:var(--teal)}
+  .stat .lab{margin-top:8px;font-size:14px;color:var(--ink2);line-height:1.5}
+  .stat .lab b{color:var(--ink)}
+
+  /* explorer */
+  .panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:24px;margin-top:24px}
+  .panel h3{margin-bottom:6px}
+  .panel .sub{color:var(--ink2);font-size:15px;margin-bottom:18px}
+  .tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+  .tabs button{font:inherit;font-size:14.5px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);color:var(--ink);cursor:pointer}
+  .tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .tabs button:focus-visible,.seg button:focus-visible,input[type=range]:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+  .explorer-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;align-items:start}
+  .big-rate{font-family:"Newsreader",serif;font-size:clamp(46px,7vw,64px);font-weight:800;line-height:1;color:var(--rust)}
+  .big-rate small{display:block;font-family:"Public Sans",sans-serif;font-size:14px;font-weight:600;color:var(--ink2);margin-top:8px;line-height:1.5}
+  .one-in{font-family:"IBM Plex Mono",monospace;font-size:15px;margin-top:14px}
+  .one-in b{font-size:19px}
+  .bar-track{margin-top:8px}
+  .bar-row{display:grid;grid-template-columns:118px 1fr 62px;gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .bar-row:last-child{border-bottom:none}
+  .bar-row .fillwrap{height:14px;background:var(--surface2);border-radius:4px;overflow:hidden}
+  .bar-row .fill{height:100%;background:var(--rust);border-radius:4px;transition:width .5s ease}
+  .bar-row.dim{opacity:.45}
+  .bar-row .val{font-family:"IBM Plex Mono",monospace;font-weight:600;text-align:right}
+  .per-million{font-size:14.5px;color:var(--ink2)}
+  .per-million b{color:var(--ink)}
+
+  /* period toggle */
+  .seg{display:inline-flex;max-width:100%;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--surface2)}
+  .seg button{min-width:0;font:inherit;font-size:14.5px;font-weight:600;padding:9px 18px;border:none;background:transparent;color:var(--ink2);cursor:pointer}
+  .seg button[aria-pressed="true"]{background:var(--rust);color:#fff}
+  @media (prefers-color-scheme: dark){.seg button[aria-pressed="true"]{color:#131720}}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+  .compare .cell{background:var(--surface2);border-radius:10px;padding:18px}
+  .compare .cell .k{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+  .compare .cell .v{font-family:"Newsreader",serif;font-size:42px;font-weight:800;line-height:1.1;margin:4px 0}
+  .compare .cell .d{font-size:14px;color:var(--ink2);line-height:1.5}
+  .meter{height:12px;border-radius:6px;background:var(--surface);overflow:hidden;margin-top:10px;border:1px solid var(--line)}
+  .meter i{display:block;height:100%;background:var(--rust);transition:width .5s ease}
+  .meter.teal i{background:var(--teal)}
+
+  /* course strip */
+  .course{margin-top:22px}
+  .course .track{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .course .q{background:var(--surface2);border:1px solid var(--line);border-radius:8px;padding:14px;text-align:center}
+  .course .q.hot{background:var(--rust-soft);border-color:var(--rust)}
+  .course .q .km{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--ink2)}
+  .course .q .lab2{font-weight:700;font-size:15px;margin-top:2px}
+  .course .q.hot .lab2{color:var(--rust)}
+  .course .finish{margin-top:6px;background:var(--ink);color:var(--bg);border-radius:8px;padding:10px 14px;text-align:center;font-weight:700;font-size:15px}
+
+  /* paradox + benefits */
+  .trio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+  .trio .cell{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:20px;box-shadow:var(--shadow)}
+  .trio .cell .n{font-family:"Newsreader",serif;font-size:40px;font-weight:800;line-height:1}
+  .trio .cell p{font-size:14.5px;color:var(--ink2);margin:8px 0 0}
+  .trio .cell p b{color:var(--ink)}
+  .benefit-bars{margin-top:8px}
+  .bbar{margin:18px 0}
+  .bbar .head{display:flex;justify-content:space-between;gap:12px;font-size:15px;flex-wrap:wrap}
+  .bbar .head b{font-weight:700}
+  .bbar .head .pct{font-family:"IBM Plex Mono",monospace;font-weight:600;color:var(--teal)}
+  .bbar .track2{height:16px;background:var(--surface2);border-radius:5px;overflow:hidden;margin-top:7px}
+  .bbar .fill2{height:100%;background:var(--teal);border-radius:5px}
+  .bbar .cap{font-size:13.5px;color:var(--ink2);margin-top:5px}
+
+  /* slider */
+  .slider-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:6px 0 16px}
+  input[type=range]{flex:1;min-width:0;width:100%;accent-color:var(--teal);height:28px}
+  .slider-out{font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:16px}
+  .expect{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .expect .cell{background:var(--surface2);border-radius:10px;padding:18px;text-align:left}
+  .expect .v{font-family:"Newsreader",serif;font-size:40px;font-weight:800;line-height:1}
+  .expect .k{font-size:14px;color:var(--ink2);margin-top:6px;line-height:1.5}
+
+  /* checklist */
+  .smart{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .smart li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px 20px;box-shadow:var(--shadow)}
+  .smart li b{display:block;font-size:16.5px;margin-bottom:4px}
+  .smart li span{font-size:14.5px;color:var(--ink2);line-height:1.55;display:block}
+  .smart li .n2{font-family:"IBM Plex Mono",monospace;color:var(--teal);font-weight:600;font-size:13px}
+
+  /* closing */
+  .closing{background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:var(--shadow);padding:30px;margin-top:26px}
+  .closing .big{font-family:"Newsreader",serif;font-size:clamp(23px,3.4vw,30px);line-height:1.4;font-weight:600}
+  .closing .big em{color:var(--teal);font-style:normal}
+  .hyder-fig{margin-top:26px}
+  .hyder-fig img{width:100%;height:auto;display:block;border-radius:10px;box-shadow:var(--shadow)}
+
+  .sources{margin-top:20px;border-top:1px solid var(--line);padding-top:18px;font-size:14px;color:var(--ink2)}
+  .sources h3{font-size:17px;margin-bottom:10px;color:var(--ink)}
+  .sources li{margin-bottom:8px;line-height:1.55}
+  footer{padding:36px 0 54px;color:var(--ink2);font-size:13.5px}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    .bar-row .fill,.meter i{transition:none}
+  }
+  @media (max-width:420px){
+    .wrap{padding:0 14px}.panel{padding:16px}.closing{padding:20px}
+    .seg{border-radius:14px}.seg button{font-size:12px;padding:9px 10px}
+    .bar-row{grid-template-columns:86px 1fr 44px;gap:6px}
+    .timeline .what{padding:12px}.one-in b{font-size:16px}
+  }
+  @media (max-width:760px){
+    .stat-row,.trio{grid-template-columns:1fr}
+    .explorer-grid,.compare,.expect,.smart{grid-template-columns:1fr}
+    .timeline li{grid-template-columns:92px 1fr}
+    .timeline .when{padding-left:14px;font-size:12px}
+    .course .track{grid-template-columns:1fr 1fr}
+    .bar-row{grid-template-columns:96px 1fr 54px}
+    section{padding-top:42px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="dateline"><span>Hyderabad · Research</span><b>A data story about running and risk</b></div>
+    <h1>Run for your <span class="life">life</span> —<br>what the data says about risk.</h1>
+    <p class="lede narrow" style="margin:0">According to local reports citing police, <b style="color:var(--ink)">Kommineni Gopi</b>, a 36-year-old software engineer with IBM, died minutes after finishing the Hyderabad Hi-Tech Full Marathon on Sunday, 1 November 2026 — he had crossed the line at Gachibowli Stadium, collected his finisher's medal, and collapsed walking toward breakfast. His death is a tragedy, and it is also the kind of headline that makes millions of runners quietly wonder whether the sport they love is dangerous. So we put the headline next to a large US registry addressing race-associated cardiac arrest — the <b style="color:var(--ink)">RACER registry's analysis of 29.3 million race finishes</b> (Kim et al., <i>JAMA</i> 2025) — and this is what it actually shows.</p>
+    <div class="verdict-strip">
+      <p>The short version: <b>race-associated cardiac death is rare, but the risk is not zero</b>. In two US registry periods, its rate fell from 0.39 to 0.20 per 100,000 race finishes. Separately, regular running is associated with longer life. <b>That does not establish that running a marathon is safer than not entering one.</b></p>
+    </div>
+  </header>
+
+  <!-- 1. HYDERABAD -->
+  <section aria-labelledby="h-hyd" >
+    <div class="sec-head"><span class="tag">What happened</span>
+      <h2 id="h-hyd">Sunday morning in Hyderabad</h2>
+    </div>
+    <div class="narrow" style="margin:0">
+      <p><b>Kommineni Gopi</b>, 36, was a software engineer with IBM and, in the words of those close to him, a fitness enthusiast. Originally from Ravinuthala village in Khammam district, he had settled in Hyderabad with his family — at Alkapur Colony in Manikonda. On 1 November 2026 he ran the 8th edition of the <b>Hyderabad Hi-Tech Full Marathon</b> at Gachibowli Stadium. He did the hardest part. Then, minutes after it was over, he died.</p>
+    </div>
+    <div class="timeline" role="group" aria-label="Timeline of Kommineni Gopi's marathon morning">
+      <ol>
+        <li><div class="when">The race</div><div class="what"><b>42.2 km, completed</b><span>Gopi ran the full marathon at Gachibowli Stadium and crossed the finish line.</span></div></li>
+        <li><div class="when">Minutes later</div><div class="what"><b>Medal collected, then collapse</b><span>He collected his finisher's medal and was walking toward the breakfast area when he collapsed.</span></div></li>
+        <li><div class="when">On the spot</div><div class="what"><b>CPR by the organising team</b><span>Members of the organising team gave him CPR where he fell, before he was moved to a nearby private hospital in Gachibowli (reported as CARE Hospital).</span></div></li>
+        <li><div class="when">~8:45 AM</div><div class="what"><b>Declared dead at hospital</b><span>Doctors declared him dead at around 8:45 am.</span></div></li>
+        <li><div class="when">Afterwards</div><div class="what"><b>Cause not yet confirmed</b><span>Gachibowli police said preliminary information suggests a heart attack; a post-mortem examination was initiated to establish the exact cause.</span></div></li>
+      </ol>
+    </div>
+    <p class="note"><b>A reported collapse is not a confirmed diagnosis.</b> Contemporary news reports say Gopi collapsed after finishing. They do not establish his underlying medical condition. Cardiac arrest means the heart has stopped pumping effectively; a heart attack is one possible cause, not a synonym. The registry below tracks cardiac arrests during races and up to an hour afterwards.</p>
+    <p class="narrow" style="margin:0">His death has shaken Hyderabad's running community and put medical screening and emergency support at mass-participation races back in focus. Our thoughts are with his family, his friends, and everyone who ran alongside him on Sunday. His story deserves care; population data can add context without explaining an individual death.</p>
+  </section>
+
+  <!-- 2. THE DENOMINATOR -->
+  <section aria-labelledby="h-denom" >
+    <div class="sec-head"><span class="tag">The denominator</span>
+      <h2 id="h-denom">One death is a tragedy. 29.3 million finishes are the context.</h2>
+    </div>
+    <p class="narrow" style="margin:0">News reports count deaths one at a time, with no denominator. The <b>Race Associated Cardiac Event Registry (RACER)</b> counts both. In March 2025, <b>Jonathan H. Kim of Emory University and colleagues</b> published a new registry analysis in <i>JAMA</i>: cardiac arrests identified through systematic surveillance at US marathons and half-marathons from 2010 to 2023, set against every finisher.</p>
+    <div class="stat-row">
+      <div class="stat"><div class="num">29.3M</div><div class="lab"><b>Race finishes</b> — 29,311,597 marathon and half-marathon finishers in the US, 2010–2023. This counts finishes, not unique people; one runner may enter many races.</div></div>
+      <div class="stat"><div class="num rust">176</div><div class="lab"><b>Cardiac arrests</b> in all those races over 14 years — about <b>1 in every 166,500 finishes</b>.</div></div>
+      <div class="stat"><div class="num teal">66%</div><div class="lab"><b>Survived.</b> 117 of 176 people with a recorded cardiac arrest survived to hospital discharge (66%), compared with 29% in the earlier registry.</div></div>
+    </div>
+    <p class="narrow" style="margin:0">In rate terms: <b>0.60 cardiac arrests per 100,000 race finishes</b>, and <b>0.20 cardiac deaths per 100,000</b> — one death per roughly 500,000 finishes. To feel what that means at the scale of a single race, use the explorer below. Every figure comes from Kim et al., <i>JAMA</i> 2025.</p>
+
+    <div class="panel" aria-labelledby="h-explore">
+      <h3 id="h-explore">The risk explorer: who, and which race?</h3>
+      <p class="sub">Cardiac arrests per 100,000 race finishes, RACER 2010–2023. Pick a group — the bars keep every group on the same scale so you can compare honestly.</p>
+      <div class="tabs" role="group" aria-label="Runner group">
+        <button type="button" aria-pressed="true" data-key="all">All runners</button>
+        <button type="button" aria-pressed="false" data-key="marathon">Marathon</button>
+        <button type="button" aria-pressed="false" data-key="half">Half-marathon</button>
+        <button type="button" aria-pressed="false" data-key="men">Men</button>
+        <button type="button" aria-pressed="false" data-key="women">Women</button>
+      </div>
+      <div class="explorer-grid">
+        <div>
+          <div class="big-rate"><span id="rateNum">0.60</span><small>cardiac arrests per 100,000 race finishes</small></div>
+          <div class="one-in" id="oneIn">≈ <b>1 arrest per 166,700</b> finishes</div>
+          <p class="per-million" id="perMillion" style="margin-top:12px">Scaled to one million race finishes, the study rates correspond to about <b>6 arrests, 4 survivors and 2 deaths</b>. These are population averages, not individual predictions.</p>
+        </div>
+        <div class="bar-track" id="barTrack" aria-hidden="true">
+          <div class="bar-row dim" data-k="men"><span>Men</span><div class="fillwrap"><div class="fill" data-w="100" style="width: 100%;"></div></div><span class="val">1.12</span></div>
+          <div class="bar-row dim" data-k="marathon"><span>Marathon</span><div class="fillwrap"><div class="fill" data-w="93" style="width: 93%;"></div></div><span class="val">1.04</span></div>
+          <div class="bar-row" data-k="all"><span>All runners</span><div class="fillwrap"><div class="fill" data-w="54" style="width: 54%;"></div></div><span class="val">0.60</span></div>
+          <div class="bar-row dim" data-k="half"><span>Half-marathon</span><div class="fillwrap"><div class="fill" data-w="42" style="width: 42%;"></div></div><span class="val">0.47</span></div>
+          <div class="bar-row dim" data-k="women"><span>Women</span><div class="fillwrap"><div class="fill" data-w="17" style="width: 17%;"></div></div><span class="val">0.19</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. DEATHS HALVED -->
+  <section aria-labelledby="h-halved" >
+    <div class="sec-head"><span class="tag">The trend</span>
+      <h2 id="h-halved">Similar arrest rates. A roughly halved cardiac death rate.</h2>
+    </div>
+    <p class="narrow" style="margin:0">The two registry reports found similar overall cardiac arrest rates: 0.54 and 0.60 per 100,000 race finishes. The cardiac death rate fell from 0.39 to 0.20 per 100,000. This is a comparison between study periods, not evidence that risk falls every year. The original report covered 2000 through May 2010; the later report covers 2010–2023. The 2025 paper labels its historical comparator “2000–2009”; the button below gives the date range stated in the original 2012 report.</p>
+    <div class="panel">
+      <div class="seg" role="group" aria-label="Time period">
+        <button type="button" aria-pressed="true" data-period="old">2000–May 2010 · RACER 1</button>
+        <button type="button" aria-pressed="false" data-period="new">2010–2023 · RACER 2</button>
+      </div>
+      <div class="compare">
+        <div class="cell"><div class="k">Cardiac arrests / 100k</div><div class="v" id="pArrest">0.54</div><div class="d" id="pArrestD">59 arrests among 10.9 million race finishes.</div><div class="meter"><i id="mArrest" style="width:90%"></i></div></div>
+        <div class="cell"><div class="k">Cardiac deaths / 100k</div><div class="v" id="pDeath">0.39</div><div class="d" id="pDeathD">The arrest, too often, was the end of the story.</div><div class="meter"><i id="mDeath" style="width:100%"></i></div></div>
+        <div class="cell"><div class="k">Of cardiac arrest cases, died</div><div class="v" id="pFatal">71%</div><div class="d" id="pFatalD">42 of 59 cardiac arrest cases were fatal.</div><div class="meter"><i id="mFatal" style="width:71%"></i></div></div>
+        <div class="cell"><div class="k">Of cardiac arrest cases, survived</div><div class="v" id="pSurv" style="color:var(--teal)">29%</div><div class="d" id="pSurvD">Survival was the exception, not the rule.</div><div class="meter teal"><i id="mSurv" style="width:29%"></i></div></div>
+      </div>
+      <p style="margin:20px 0 0;font-size:15px;color:var(--ink2)">Why did survival improve? The authors point to <b style="color:var(--ink)">rapid CPR, AED access and emergency planning</b> as plausible contributors. Detailed clinical and emergency-response information was available for only 36 cases, so the registry cannot prove how much each change caused the improvement. The practical lesson is to prepare for a fast response along the whole course and at the finish.</p>
+    </div>
+  </section>
+
+  <!-- 4. WHERE RISK CONCENTRATES -->
+  <section aria-labelledby="h-where" >
+    <div class="sec-head"><span class="tag">The pattern inside the rarity</span>
+      <h2 id="h-where">Rare everywhere — but not evenly rare</h2>
+    </div>
+    <p class="narrow" style="margin:0">A rate of 0.60 per 100,000 is an average over very different runners and very different miles. In the 2010–2023 report:</p>
+    <div class="trio">
+      <div class="cell"><div class="n" style="color:var(--rust)">~6×</div><p><b>Men vs women:</b> 1.12 arrests per 100,000 male finishes vs 0.19 per 100,000 female finishes. Sex was known in 146 of 176 cases: 127 men and 19 women; 30 were unknown. The published rates account for missing data using imputation.</p></div>
+      <div class="cell"><div class="n" style="color:var(--rust)">~2.2×</div><p><b>Marathon vs half:</b> 1.04 per 100,000 in the full marathon vs 0.47 in the half. The observed marathon rate was about 2.2 times the half-marathon rate. This does not isolate the effect of distance from differences between runners or events.</p></div>
+      <div class="cell"><div class="n" style="color:var(--rust)">40%</div><p><b>Coronary artery disease</b> was the most common identified cause: 27 of 67 cases with an established cause, about 40%. A cause was known for only 67 of the 176 arrests, so this is not 40% of all cases.</p></div>
+    </div>
+    <div class="course" aria-label="Schematic of race quarters, not a measured distribution">
+      <p class="note">Schematic of a marathon course, not a measured distribution of arrests.</p>
+      <div class="track">
+        <div class="q"><div class="km">0 – 10.5 KM</div><div class="lab2">Settling in</div></div>
+        <div class="q"><div class="km">10.5 – 21 KM</div><div class="lab2">Cruising</div></div>
+        <div class="q"><div class="km">21 – 31.5 KM</div><div class="lab2">The grind</div></div>
+        <div class="q hot"><div class="km">31.5 – 42.2 KM</div><div class="lab2">Final quarter</div></div>
+      </div>
+      <div class="finish">Late-race and finish areas deserve particular emergency-response attention</div>
+      <p style="font-size:14.5px;color:var(--ink2);margin-top:12px">Race-associated cardiac arrests often cluster in the <b style="color:var(--ink)">final quarter and near the finish</b>. This supports strong medical and AED coverage there, alongside a rehearsed response throughout the course. These data do not establish that a finishing sprint or an abrupt stop causes the pattern.</p>
+    </div>
+  </section>
+
+  <!-- 5. THE PARADOX -->
+  <section aria-labelledby="h-paradox" >
+    <div class="sec-head"><span class="tag">The exercise paradox</span>
+      <h2 id="h-paradox">Yes, the risk spikes during a run. That's only half the sentence.</h2>
+    </div>
+    <p class="narrow" style="margin:0">The <b>exercise paradox</b> is that vigorous exertion can briefly raise cardiac-event risk, especially in susceptible people, while regular physical activity supports long-term cardiovascular health. <b>Siscovick and colleagues (<i>NEJM</i>, 1984)</b> studied men without known heart disease. Their historical estimates were:</p>
+    <div class="trio">
+      <div class="cell"><div class="n" style="color:var(--rust)">56×</div><p>Relative risk of cardiac arrest <b>during</b> vigorous exercise for men who were usually <b>sedentary</b> compared with the same group at other times.</p></div>
+      <div class="cell"><div class="n" style="color:var(--amber)">5×</div><p>The same during-exercise spike for men who exercised vigorously <b>habitually</b>. The exertion-related relative risk was much smaller in this group, but this was not a randomized training trial.</p></div>
+      <div class="cell"><div class="n" style="color:var(--teal)">0.4×</div><p>The habitual exercisers' <b>overall</b> risk of cardiac arrest — during exercise and at rest combined — was just <b>40% of the sedentary men's</b>.</p></div>
+    </div>
+    <p class="narrow" style="margin:22px 0 0">These historical relative risks are not an individual's chance of dying, and they cannot diagnose what happened to Gopi. A race can trigger an event in someone with an underlying condition, but neither fitness nor a lack of symptoms guarantees protection. Regular activity, gradual preparation and attention to warning symptoms are more useful takeaways than treating a marathon as a medical stress test.</p>
+  </section>
+
+  <!-- 6. THE OTHER SIDE -->
+  <section aria-labelledby="h-other" >
+    <div class="sec-head teal"><span class="tag">The other side of the ledger</span>
+      <h2 id="h-other">What long-term running studies show</h2>
+    </div>
+    <p class="narrow" style="margin:0">Not running is not the same as being inactive: walking, cycling and other activities also count. <b>Lee and colleagues (<i>Journal of the American College of Cardiology</i>, 2014)</b> followed 55,137 adults for an average of 15 years. After adjustment for measured differences, runners had these associations compared with non-runners:</p>
+    <div class="benefit-bars">
+      <div class="bbar"><div class="head"><b>Lower observed all-cause mortality</b><span class="pct">−30%</span></div><div class="track2"><div class="fill2" style="width:70%"></div></div><div class="cap">Bar shows runners' risk relative to non-runners = 100%. Lee et al., JACC 2014.</div></div>
+      <div class="bbar"><div class="head"><b>Lower observed cardiovascular mortality</b><span class="pct">−45%</span></div><div class="track2"><div class="fill2" style="width:55%"></div></div><div class="cap">An observational association, not proof that running itself caused the whole difference.</div></div>
+      <div class="bbar"><div class="head"><b>Longer life expectancy</b><span class="pct">+3 years</span></div><div class="track2"><div class="fill2" style="width:100%"></div></div><div class="cap">Estimated difference between runners and non-runners in this cohort, not a guaranteed gain for an individual.</div></div>
+    </div>
+    <p class="narrow" style="margin:0">And it isn't one study standing alone. <b>Pedisic and colleagues' meta-analysis (<i>British Journal of Sports Medicine</i>, 2020)</b> pooled 14 reports from six prospective cohorts with 232,149 people and found running associated with <b>27% lower all-cause mortality, 30% lower cardiovascular mortality, and 23% lower cancer mortality</b> than not running. These observational studies cannot rule out residual confounding or establish the extra benefit of marathon racing. In Lee's data, the association appeared at much smaller amounts than marathon training: Running <b>even 5–10 minutes a day, at a slow pace under 6 mph</b>, was associated with meaningfully lower risk. There is no need to enter a marathon to be physically active.</p>
+
+    <div class="panel" aria-labelledby="h-scale">
+      <h3 id="h-scale">Scale it to a race you might actually run</h3>
+      <p class="sub">Using RACER 2's combined rates for marathons and half-marathons (0.60 arrests and 0.20 deaths per 100,000 finishes), here is what a field of finishers statistically "expects." These are averages across many races — most individual races see none at all.</p>
+      <div class="slider-row">
+        <input type="range" id="fieldSize" min="5000" max="100000" step="5000" value="25000" aria-label="Number of finishers">
+        <span class="slider-out"><span id="fieldOut">25,000</span> finishers</span>
+      </div>
+      <div class="expect">
+        <div class="cell"><div class="v" style="color:var(--rust)" id="expArrest">0.15</div><div class="k">expected cardiac arrests across a field this size — <b id="expArrestTxt">roughly one arrest in every 7 races of this size</b>.</div></div>
+        <div class="cell"><div class="v" style="color:var(--teal)" id="expDeath">0.05</div><div class="k">expected cardiac deaths — <b id="expDeathTxt">roughly one death in every 20 races of this size</b>. These figures do not count every other medical emergency, injury or non-finisher.</div></div>
+      </div>
+    </div>
+
+    <p class="narrow" style="margin:26px 0 0">For historical context, <b>Dan Tunstall Pedoe</b> reported about <b>one cardiac death per 80,000 completed runs</b> across roughly 650,000 London Marathon finishes in 1981–2006. That single-marathon series is not directly comparable with the later US registry, which is mostly half-marathon finishes. Within the US reports, survival after cardiac arrest improved; the newer survival figure refers to cardiac arrest, not to every type of race emergency.</p>
+  </section>
+
+  <!-- 7. RUN SMARTER -->
+  <section aria-labelledby="h-smart" >
+    <div class="sec-head"><span class="tag">What the data asks of you</span>
+      <h2 id="h-smart">Not "don't run." Run like the numbers are watching.</h2>
+    </div>
+    <p class="narrow" style="margin:0">Low population risk is not a reason for complacency, and it does not determine any one person's risk. The evidence points to a short, concrete list:</p>
+    <ul class="smart">
+      <li><span class="n2">01</span><b>Build gradually; arrive trained</b><span>The during-exercise spike is largest in people unaccustomed to vigorous effort (56× in Siscovick's sedentary group vs 5× in the habitually active). Build exercise intensity and duration gradually; avoid a sudden jump into strenuous exercise.</span></li>
+      <li><span class="n2">02</span><b>Know your family history — and say it out loud</b><span>Early heart disease in close relatives, unexplained fainting, or a family death at a young age are reasons to talk to a doctor before a first marathon, not after a scare.</span></li>
+      <li><span class="n2">03</span><b>Treat symptoms as data, not weakness</b><span>Stop exercising and seek medical attention for chest pain or pressure, unusual breathlessness, dizziness, fainting or concerning palpitations. Severe or persistent symptoms call for emergency help. Do not train or race through them.</span></li>
+      <li><span class="n2">04</span><b>Respect the last quarter — and the finish</b><span>Arrests often occur late in a race, but warning symptoms matter at any point. Stop and alert the medical team rather than merely slowing down or trying to reach the line.</span></li>
+      <li><span class="n2">05</span><b>Don't race sick, and don't debut at 42.2 km on a dare</b><span>Do not race with a fever or when acutely unwell; seek medical advice when needed. Choose a distance suited to your training. The lower average arrest rate in half-marathons is not a personal safety guarantee.</span></li>
+      <li><span class="n2">06</span><b>Learn CPR. You are the intervention.</b><span>If someone is unresponsive and not breathing normally, summon emergency help, start CPR and get an AED. Follow its prompts. CPR/AED training can help you respond; it cannot guarantee survival.</span></li>
+    </ul>
+    <p class="note" style="margin-top:22px"><b>A note on screening:</b> Discuss symptoms, existing conditions and a family history of premature heart disease or sudden death with a qualified clinician, especially before a major increase in exercise. Screening cannot detect every condition or guarantee safety; the right assessment depends on the individual. Organizers also need a rehearsed emergency plan, trained responders and accessible AEDs.</p>
+  </section>
+
+  <!-- 8. VERDICT -->
+  <section aria-labelledby="h-verdict" >
+    <div class="sec-head"><span class="tag">The verdict</span>
+      <h2 id="h-verdict">Keep running in perspective. Take symptoms seriously.</h2>
+    </div>
+    <div class="closing">
+      <p class="big">Kommineni Gopi's death is a human loss, not a statistic to explain away. <em>The population evidence still matters:</em> race-associated cardiac death was rare in this US registry, and most people with a recorded arrest survived. Separately, habitual running was associated with lower long-term mortality. Neither result tells us why he died or guarantees that a marathon is safe for a particular runner.</p>
+      <p style="margin:18px 0 0">Enjoy physical activity, build gradually, pay attention to symptoms and choose events with sound medical preparation. You do not need 42.2 kilometres to gain from an active life. For personal risk or medical clearance, talk with a qualified clinician.</p>
+    </div>
+
+    <div class="sources">
+      <h3>Sources &amp; method</h3>
+      <ul>
+        <li><b>The Hyderabad report</b> — Kommineni Gopi's death as given in the news item this story is built on, cross-checked against <a href="https://www.telanganatribune.com/hyderabad-techie-dies-minutes-after-completing-42-km-marathon-at-gachibowli-stadium/" target="_blank" rel="noopener noreferrer">Telangana Tribune</a> and <a href="https://hyderabadmail.com/hyderabad-marathon-ibm-engineer-dies-gachibowli/" target="_blank" rel="noopener noreferrer">Hyderabad Mail</a> (hospital named as CARE Hospital; cause awaiting post-mortem).</li>
+        <li><b>Kim JH, Rim AJ, Miller JT, et al. "Cardiac Arrest During Long-Distance Running Races." <i>JAMA</i>, 2025</b> — RACER 2: 29,311,597 finishers, 2010–2023; 176 arrests (0.60/100,000); deaths 0.20/100,000; case fatality 34% vs 71%; men 1.12 vs women 0.19; marathon 1.04 vs half-marathon 0.47; coronary artery disease the most common identified cause. <a href="https://jamanetwork.com/journals/jama/fullarticle/2832121" target="_blank" rel="noopener noreferrer">jamanetwork.com</a> · Summary: <a href="https://breakthroughsforphysicians.nm.org/orthopaedics-research-article-fewer-long-distance-runners-die-of-cardiac-arrest.html" target="_blank" rel="noopener noreferrer">Northwestern Medicine</a> · <a href="https://clinician.nejm.org/nejm-jw.NA58630" target="_blank" rel="noopener noreferrer">NEJM Journal Watch</a></li>
+        <li><b>Kim JH, Malhotra R, Chiampas G, et al. "Cardiac Arrest during Long-Distance Running Races." <i>New England Journal of Medicine</i>, 2012</b> — RACER 1: 10.9 million race finishes, 2000–May 2010; 59 arrests (0.54/100,000); deaths 0.39/100,000. <a href="https://pubmed.ncbi.nlm.nih.gov/22236223/" target="_blank" rel="noopener noreferrer">PubMed</a> <a href="https://blogs.bmj.com/heart/2012/01/29/cardiac-arrest-in-marathon-runners-investigated/" target="_blank" rel="noopener noreferrer">BMJ Heart blog summary</a></li>
+        <li><b>Lee D-c, Pate RR, Lavie CJ, et al. "Leisure-Time Running Reduces All-Cause and Cardiovascular Mortality Risk." <i>Journal of the American College of Cardiology</i>, 2014</b> — 55,137 adults, mean 15-year follow-up: −30% all-cause, −45% cardiovascular mortality, ~3-year estimated life-expectancy difference; associations seen even at 5–10 min/day at slow speeds. <a href="https://pubmed.ncbi.nlm.nih.gov/25082581/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+        <li><b>Pedisic Z, et al. "Is running associated with a lower risk of all-cause, cardiovascular and cancer mortality…" <i>British Journal of Sports Medicine</i>, 2020</b> — meta-analysis, 14 reports from six cohorts, 232,149 participants: −27% all-cause, −30% cardiovascular, −23% cancer mortality. <a href="https://pubmed.ncbi.nlm.nih.gov/31685526/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+        <li><b>Siscovick DS, Weiss NS, Fletcher RH, Lasky T. "The Incidence of Primary Cardiac Arrest during Vigorous Exercise." <i>NEJM</i>, 1984</b> — relative risk during vigorous exercise 56 (low habitual activity) vs 5 (highest habitual activity); overall risk 0.40 in the habitually vigorous vs sedentary. <a href="https://pubmed.ncbi.nlm.nih.gov/6472399/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+        <li><b>Tunstall Pedoe DS. "Marathon Cardiac Deaths: The London Experience." <i>Sports Medicine</i>, 2007</b> — London Marathon 1981–2006, 650,000 completed runs, cardiac death rate about 1 per 80,000 finishers. <a href="https://pubmed.ncbi.nlm.nih.gov/17465632/" target="_blank" rel="noopener noreferrer">PubMed</a></li>
+        <li><b>Practical exercise safety:</b> American Heart Association, 2020 scientific statement. <a href="https://professional.heart.org/en/science-news/exercise-related-acute-cardiovascular-events-and-potential-deleterious-adaptations/top-things-to-know" target="_blank" rel="noopener noreferrer">Summary and warning symptoms</a>.</li>
+        <li><b>Method note:</b> RACER figures cover US marathons and half-marathons and count arrests during the race or within an hour of finishing; rates use race finishes as the denominator, not unique people. The registry may miss unreported cases, and findings from US races do not directly establish risk at an Indian event. Sex and race-distance rates use imputation for missing case data. "Expected" values in the race-size panel are simple rate × field-size averages, not predictions for any individual event. This story is data journalism, not medical advice — for personal risk, talk to your doctor.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    Built from the RACER registry and the studies named above. Adapted from the Muse story, with factual and medical-risk wording reviewed and corrected on 5 November 2026. 
+  </footer>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  /* ---------- Risk explorer ---------- */
+  var groups = {
+    all:      { rate: 0.60, label: "All runners",  pm: "Scaled to one million race finishes, the study rates correspond to about <b>6 arrests, 4 survivors and 2 deaths</b>. These are population averages, not individual predictions." },
+    marathon: { rate: 1.04, label: "Marathon",     pm: "Per million marathon finishers: about <b>10 arrests</b>. The observed rate is about 2.2 times the half-marathon rate; this does not prove distance alone caused the difference." },
+    half:     { rate: 0.47, label: "Half-marathon", pm: "Per million half-marathon finishers: about <b>5 arrests</b> — a lower average rate than in full marathons, not an individual safety guarantee." },
+    men:      { rate: 1.12, label: "Men",          pm: "Per million male finishers: about <b>11 arrests</b> — a higher observed rate than for women. The study does not provide an individual risk calculator." },
+    women:    { rate: 0.19, label: "Women",        pm: "Per million female finishers: about <b>2 arrests</b>. Women's race cardiac-arrest rate is roughly one-sixth of men's." }
+  };
+  var rateNum = document.getElementById('rateNum'),
+      oneIn = document.getElementById('oneIn'),
+      perMillion = document.getElementById('perMillion');
+  function fmt(n){ return n.toLocaleString('en-US'); }
+  function setGroup(key){
+    var g = groups[key]; if(!g) return;
+    rateNum.textContent = g.rate.toFixed(2);
+    var one = Math.round(100000 / g.rate / 100) * 100;
+    oneIn.innerHTML = "\u2248 <b>1 arrest per " + fmt(one) + "</b> finishes";
+    perMillion.innerHTML = g.pm;
+    var rows = document.querySelectorAll('#barTrack .bar-row');
+    for (var i=0;i<rows.length;i++){
+      rows[i].classList.toggle('dim', rows[i].getAttribute('data-k') !== key);
+    }
+    var tabs = document.querySelectorAll('[data-key]');
+    for (var j=0;j<tabs.length;j++){
+      tabs[j].setAttribute('aria-pressed', tabs[j].getAttribute('data-key') === key ? 'true' : 'false');
+    }
+  }
+  var tabBtns = document.querySelectorAll('[data-key]');
+  for (var t=0;t<tabBtns.length;t++){
+    tabBtns[t].addEventListener('click', function(){ setGroup(this.getAttribute('data-key')); });
+  }
+  // bar widths (relative to max 1.12)
+  var fills = document.querySelectorAll('#barTrack .fill');
+  for (var f=0;f<fills.length;f++){ fills[f].style.width = fills[f].getAttribute('data-w') + '%'; }
+  setGroup('all');
+
+  /* ---------- Period toggle ---------- */
+  var periods = {
+    old: { arrest:'0.54', arrestD:'59 arrests among 10.9 million race finishes.', mArrest:'90%',
+           death:'0.39', deathD:'The arrest, too often, was the end of the story.', mDeath:'100%',
+           fatal:'71%', fatalD:'42 of 59 cardiac arrest cases were fatal.', mFatal:'71%',
+           surv:'29%', survD:'Survival was the exception, not the rule.', mSurv:'29%' },
+    new: { arrest:'0.60', arrestD:'176 arrests among 29.3 million race finishes; similar overall rate to the earlier study.', mArrest:'100%',
+           death:'0.20', deathD:'59 deaths; the rate per race finish was about half the earlier rate.', mDeath:'51%',
+           fatal:'34%', fatalD:'59 of 176 arrests were fatal (34%), compared with 42 of 59 (71%) earlier.', mFatal:'34%',
+           surv:'66%', survD:'117 of 176 cardiac arrest cases survived. Rapid CPR and AED use may help explain the improvement.', mSurv:'66%' }
+  };
+  function setPeriod(key){
+    var p = periods[key]; if(!p) return;
+    document.getElementById('pArrest').textContent = p.arrest;
+    document.getElementById('pArrestD').textContent = p.arrestD;
+    document.getElementById('mArrest').style.width = p.mArrest;
+    document.getElementById('pDeath').textContent = p.death;
+    document.getElementById('pDeathD').textContent = p.deathD;
+    document.getElementById('mDeath').style.width = p.mDeath;
+    document.getElementById('pFatal').textContent = p.fatal;
+    document.getElementById('pFatalD').textContent = p.fatalD;
+    document.getElementById('mFatal').style.width = p.mFatal;
+    document.getElementById('pSurv').textContent = p.surv;
+    document.getElementById('pSurvD').textContent = p.survD;
+    document.getElementById('mSurv').style.width = p.mSurv;
+    var btns = document.querySelectorAll('[data-period]');
+    for (var i=0;i<btns.length;i++){
+      btns[i].setAttribute('aria-pressed', btns[i].getAttribute('data-period') === key ? 'true' : 'false');
+    }
+  }
+  var pBtns = document.querySelectorAll('[data-period]');
+  for (var q=0;q<pBtns.length;q++){
+    pBtns[q].addEventListener('click', function(){ setPeriod(this.getAttribute('data-period')); });
+  }
+  setPeriod('old');
+
+  /* ---------- Field-size slider ---------- */
+  var slider = document.getElementById('fieldSize'),
+      fieldOut = document.getElementById('fieldOut'),
+      expArrest = document.getElementById('expArrest'),
+      expDeath = document.getElementById('expDeath');
+  function updateSlider(){
+    var n = parseInt(slider.value, 10);
+    fieldOut.textContent = fmt(n);
+    var ea = n * 0.60 / 100000, ed = n * 0.20 / 100000;
+    expArrest.textContent = ea.toFixed(2);
+    expDeath.textContent = ed.toFixed(2);
+    document.getElementById('expArrestTxt').textContent =
+      ea >= 1 ? 'roughly ' + ea.toFixed(1) + ' arrests somewhere in a typical field this size' :
+                'roughly one arrest in every ' + Math.round(1/ea) + ' races of this size';
+    document.getElementById('expDeathTxt').textContent =
+      ed >= 1 ? 'roughly ' + ed.toFixed(1) + ' deaths somewhere in a typical field this size' :
+                'roughly one death in every ' + Math.round(1/ed) + ' races of this size';
+  }
+  slider.addEventListener('input', updateSlider);
+  updateSlider();
+
+  /* Keep the full article visible inside its inline blog frame. */
+})();
+</script>
+
+
+
+<script>
+(function(){
+  if(window.parent===window)return;
+  var wrap=document.querySelector('.wrap'),pending=false;
+  function reportHeight(){
+    if(pending)return; pending=true;
+    requestAnimationFrame(function(){pending=false;window.parent.postMessage({type:'linked-blog-story-resize',height:Math.ceil(wrap.getBoundingClientRect().bottom+window.scrollY)},'*');});
+  }
+  new ResizeObserver(reportHeight).observe(wrap);
+  window.addEventListener('load',reportHeight);
+  window.addEventListener('resize',reportHeight);
+  if(document.fonts)document.fonts.ready.then(reportHeight);
+  reportHeight();
+})();
+</script>
+</body></html>

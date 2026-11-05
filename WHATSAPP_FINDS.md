@@ -17,7 +17,7 @@ Only select material intended for public sharing. Text or attachments may themse
 Manually added records can include `embedded_story` with a `path` under
 `/finds/stories/` (a lowercase, hyphenated `.html` filename) and a `title`.
 The renderer displays the story directly in the post using an isolated
-`sandbox="allow-scripts"` iframe. Story pages report their content height with
+`sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"` iframe. Story pages report their content height with
 `postMessage({type: 'linked-blog-story-resize', height: ...}, '*')`; the parent
 accepts messages only from its own story frames. Optional `search_text` keeps
 the embedded story's text searchable from the main linked-blog search field.

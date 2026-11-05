@@ -171,7 +171,7 @@ def render(records, directory):
         story = record.get('embedded_story', {})
         story_path = story.get('path', '') if isinstance(story, dict) else ''
         if isinstance(story_path, str) and re.fullmatch(r'/finds/stories/[a-z0-9][a-z0-9-]*\.html', story_path):
-            media.append(f'<iframe class="embedded-story" src="{e(story_path, quote=True)}" title="{e(story.get("title", record["title"]), quote=True)}" sandbox="allow-scripts" loading="lazy" referrerpolicy="no-referrer"></iframe>')
+            media.append(f'<iframe class="embedded-story" src="{e(story_path, quote=True)}" title="{e(story.get("title", record["title"]), quote=True)}" sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox" loading="lazy" referrerpolicy="no-referrer"></iframe>')
         for preview in record.get('link_previews', []):
             if preview.get('source') != 'inaturalist': continue
             media.append(f'<figure><a href="{e(preview["url"], quote=True)}"><img loading="lazy" decoding="async" referrerpolicy="no-referrer" src="{e(preview["image_url"], quote=True)}" alt="{e(preview["title"], quote=True)}"></a>'

@@ -92,7 +92,7 @@ class FindsTests(unittest.TestCase):
             f.render([record], Path(directory))
             page = (Path(directory) / 'index.html').read_text()
         self.assertIn('src="/finds/stories/vice-presidents.html"', page)
-        self.assertIn('sandbox="allow-scripts"', page)
+        self.assertIn('sandbox="allow-scripts allow-popups allow-popups-to-escape-sandbox"', page)
         self.assertNotIn('allow-same-origin', page)
         self.assertIn('title="Sixteen &quot;VPs&quot;"', page)
         self.assertIn('data-search="Harry Truman &lt;script&gt;bad&lt;/script&gt;"', page)
