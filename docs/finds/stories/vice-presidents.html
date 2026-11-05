@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="icon" href="data:,">
+    <meta name="description" content="An interactive data story about the sixteen U.S. vice presidents from Harry Truman through Kamala Harris and their paths to the presidency.">
+    <title>Vice Presidents Data Story — Ten of Sixteen Never Became President</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800;900&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg: #f6f4ee;
+        --surface: #fffdf8;
+        --surface-2: #efeadf;
+        --ink: #1a2138;
+        --ink-soft: #454e66;
+        --ink-faint: #6d7488;
+        --rule: #d8d2c2;
+        --rule-strong: #b9b09a;
+        --gold: #8f6a10;
+        --gold-bg: #f3e8c8;
+        --lost: #33587e;
+        --lost-bg: #dbe5f0;
+        --never: #7a7261;
+        --never-bg: #e7e2d5;
+        --dem: #2e5f8a;
+        --rep: #a0402c;
+        --accent: #a03a2a;
+        --shadow: 0 1px 2px rgba(26, 33, 56, .06), 0 8px 24px rgba(26, 33, 56, .06);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #10141f;
+          --surface: #171d2c;
+          --surface-2: #1e2638;
+          --ink: #ece9df;
+          --ink-soft: #b9bdc9;
+          --ink-faint: #8d93a5;
+          --rule: #2c3549;
+          --rule-strong: #46536e;
+          --gold: #d9ab3c;
+          --gold-bg: #3a3013;
+          --lost: #8db1d8;
+          --lost-bg: #22354d;
+          --never: #b3ab99;
+          --never-bg: #2c2c26;
+          --dem: #7fb0dd;
+          --rep: #e08a76;
+          --accent: #e08a76;
+          --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.25);
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: 17px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+      .sans { font-family: "Libre Franklin", "Helvetica Neue", Arial, sans-serif; }
+      .wrap { max-width: 1060px; margin: 0 auto; padding: 0 20px; }
+
+      /* ---------- Hero ---------- */
+      .hero { padding: 56px 0 8px; }
+      .dateline {
+        display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline;
+        border-top: 3px double var(--rule-strong); border-bottom: 1px solid var(--rule);
+        padding: 10px 0; margin-bottom: 34px;
+        font-family: "Libre Franklin", sans-serif; font-size: 12px; font-weight: 600;
+        letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft);
+      }
+      .dateline .right { margin-left: auto; letter-spacing: .08em; text-transform: none; font-weight: 500; color: var(--ink-faint); }
+      h1 {
+        font-family: "Libre Franklin", sans-serif; font-weight: 900;
+        font-size: clamp(40px, 7.2vw, 76px); line-height: 1.02; letter-spacing: -.015em;
+        margin: 0 0 18px; max-width: 13ch;
+      }
+      h1 .ten { color: var(--accent); }
+      .lede { font-size: clamp(19px, 2.6vw, 23px); line-height: 1.5; color: var(--ink-soft); max-width: 62ch; margin: 0 0 14px; }
+      .lede strong { color: var(--ink); }
+
+      /* ---------- Big count / waffle ---------- */
+      .countband {
+        display: grid; grid-template-columns: 300px 1fr; gap: 34px;
+        align-items: center; padding: 30px 0 8px;
+      }
+      .bignum { font-family: "Libre Franklin", sans-serif; line-height: .9; }
+      .bignum .n { font-size: 118px; font-weight: 900; letter-spacing: -.03em; color: var(--accent); }
+      .bignum .of { font-size: 30px; font-weight: 800; color: var(--ink); display: block; margin-top: 6px; }
+      .bignum .cap { display: block; margin-top: 10px; font-size: 13px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); line-height: 1.5; }
+      .waffle-head { font-family: "Libre Franklin", sans-serif; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px; }
+      .waffle { display: grid; grid-template-columns: repeat(8, 1fr); gap: 7px; max-width: 560px; }
+      .waffle button {
+        appearance: none; border: 1px solid transparent; cursor: pointer;
+        aspect-ratio: 1; border-radius: 6px; padding: 0;
+        font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 13px;
+        display: flex; align-items: center; justify-content: center;
+        transition: transform .12s ease, outline-color .12s ease;
+        color: #fff;
+      }
+      .waffle button:hover, .waffle button:focus-visible { transform: translateY(-2px); outline: 2px solid var(--ink); outline-offset: 2px; }
+      .waffle button.dim { opacity: .22; }
+      .w-pres { background: var(--gold); }
+      .w-lost { background: var(--lost); }
+      .w-never { background: var(--never); }
+      .waffle-note { min-height: 52px; margin-top: 14px; font-size: 15.5px; color: var(--ink-soft); max-width: 56ch; }
+      .waffle-note strong { color: var(--ink); font-family: "Libre Franklin", sans-serif; font-size: 15px; }
+      .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 6px; font-family: "Libre Franklin", sans-serif; font-size: 12.5px; font-weight: 600; color: var(--ink-soft); }
+      .legend span { display: inline-flex; align-items: center; gap: 7px; }
+      .swatch { width: 13px; height: 13px; border-radius: 3px; display: inline-block; }
+
+      /* ---------- Sections ---------- */
+      section { padding: 44px 0 6px; }
+      .sec-head { display: flex; align-items: baseline; gap: 16px; border-bottom: 2px solid var(--ink); padding-bottom: 10px; margin-bottom: 8px; }
+      .sec-num { font-family: "Libre Franklin", sans-serif; font-weight: 900; font-size: 15px; color: var(--accent); }
+      h2 { font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: clamp(25px, 4vw, 34px); line-height: 1.12; margin: 0; letter-spacing: -.01em; }
+      .sec-sub { color: var(--ink-soft); max-width: 68ch; margin: 14px 0 24px; }
+
+      /* ---------- Three fates ---------- */
+      .fates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+      .fate { background: var(--surface); border: 1px solid var(--rule); border-top: 5px solid var(--never); border-radius: 4px; padding: 22px 22px 18px; box-shadow: var(--shadow); }
+      .fate.pres { border-top-color: var(--gold); }
+      .fate.lost { border-top-color: var(--lost); }
+      .fate .count { font-family: "Libre Franklin", sans-serif; font-size: 54px; font-weight: 900; line-height: 1; }
+      .fate.pres .count { color: var(--gold); }
+      .fate.lost .count { color: var(--lost); }
+      .fate.never .count { color: var(--never); }
+      .fate h3 { font-family: "Libre Franklin", sans-serif; font-size: 16.5px; font-weight: 800; margin: 10px 0 8px; line-height: 1.3; }
+      .fate p { margin: 0 0 12px; font-size: 15.5px; color: var(--ink-soft); }
+      .fate .names { font-family: "Libre Franklin", sans-serif; font-size: 13.5px; font-weight: 600; line-height: 1.75; color: var(--ink); border-top: 1px solid var(--rule); padding-top: 10px; }
+
+      /* ---------- Roster ---------- */
+      .filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 20px; }
+      .filters button {
+        appearance: none; cursor: pointer; border: 1px solid var(--rule-strong);
+        background: var(--surface); color: var(--ink);
+        font-family: "Libre Franklin", sans-serif; font-size: 13px; font-weight: 700;
+        padding: 8px 14px; border-radius: 999px;
+      }
+      .filters button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+      .filters button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+      .roster { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .card {
+        background: var(--surface); border: 1px solid var(--rule); border-radius: 4px;
+        padding: 18px 20px; box-shadow: var(--shadow); display: flex; gap: 16px;
+      }
+      .card[hidden] { display: none; }
+      .mono {
+        flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 16px; color: #fff;
+      }
+      .mono.pres { background: var(--gold); } .mono.lost { background: var(--lost); } .mono.never { background: var(--never); }
+      .card h3 { font-family: "Libre Franklin", sans-serif; font-size: 17.5px; font-weight: 800; margin: 1px 0 3px; line-height: 1.25; }
+      .card .meta { font-family: "Libre Franklin", sans-serif; font-size: 12.5px; font-weight: 600; color: var(--ink-faint); letter-spacing: .02em; margin-bottom: 7px; }
+      .pdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin: 0 3px 1px 6px; }
+      .pdot.d { background: var(--dem); } .pdot.r { background: var(--rep); }
+      .card p { margin: 0; font-size: 15px; color: var(--ink-soft); line-height: 1.55; }
+      .tag {
+        display: inline-block; font-family: "Libre Franklin", sans-serif; font-size: 11px; font-weight: 800;
+        letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; margin-top: 10px;
+      }
+      .tag.pres { background: var(--gold-bg); color: var(--gold); }
+      .tag.lost { background: var(--lost-bg); color: var(--lost); }
+      .tag.never { background: var(--never-bg); color: var(--never); }
+      .roster-count { font-family: "Libre Franklin", sans-serif; font-size: 13px; font-weight: 600; color: var(--ink-faint); margin: 14px 0 0; }
+
+      /* ---------- Party split ---------- */
+      .partybars { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; box-shadow: var(--shadow); padding: 24px 24px 20px; }
+      .pbar-row { margin-bottom: 22px; }
+      .pbar-row:last-child { margin-bottom: 6px; }
+      .pbar-label { display: flex; justify-content: space-between; align-items: baseline; font-family: "Libre Franklin", sans-serif; margin-bottom: 8px; }
+      .pbar-label .party { font-weight: 800; font-size: 16px; }
+      .pbar-label .total { font-size: 13px; font-weight: 600; color: var(--ink-faint); }
+      .pbar { display: flex; height: 44px; border-radius: 4px; overflow: hidden; }
+      .pbar div { display: flex; align-items: center; justify-content: center; color: #fff; font-family: "Libre Franklin", sans-serif; font-weight: 800; font-size: 15px; min-width: 0; }
+      .seg-pres { background: var(--gold); } .seg-lost { background: var(--lost); } .seg-never { background: var(--never); }
+      .pbar-caps { display: flex; margin-top: 7px; font-family: "Libre Franklin", sans-serif; font-size: 12px; font-weight: 600; color: var(--ink-soft); }
+      .pbar-caps span { min-width: 0; }
+      .party-note { font-size: 15.5px; color: var(--ink-soft); margin: 16px 0 0; max-width: 72ch; }
+      .party-note strong { color: var(--ink); }
+
+      /* ---------- Paths to the presidency ---------- */
+      .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      .path { background: var(--surface); border: 1px solid var(--rule); border-radius: 4px; box-shadow: var(--shadow); padding: 22px; }
+      .path h3 { font-family: "Libre Franklin", sans-serif; font-size: 17px; font-weight: 800; margin: 0 0 4px; }
+      .path .sub { font-family: "Libre Franklin", sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+      .path ul { list-style: none; margin: 0; padding: 0; }
+      .path li { padding: 11px 0; border-top: 1px solid var(--rule); font-size: 15.5px; color: var(--ink-soft); }
+      .path li:first-child { border-top: none; padding-top: 2px; }
+      .path li strong { color: var(--ink); font-family: "Libre Franklin", sans-serif; font-size: 15px; display: block; }
+      .delay { margin-top: 16px; background: var(--surface-2); border: 1px solid var(--rule); border-radius: 4px; padding: 20px 22px; }
+      .delay h3 { font-family: "Libre Franklin", sans-serif; font-size: 16.5px; font-weight: 800; margin: 0 0 8px; }
+      .delay p { margin: 0; font-size: 16px; color: var(--ink-soft); max-width: 76ch; }
+      .delay p strong { color: var(--ink); }
+
+      /* ---------- Wrinkle ---------- */
+      .wrinkle {
+        border: 1.5px solid var(--ink); border-radius: 4px; padding: 28px 30px; margin-top: 8px;
+        background: var(--surface);
+      }
+      .wrinkle .k { font-family: "Libre Franklin", sans-serif; font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+      .wrinkle h3 { font-family: "Libre Franklin", sans-serif; font-size: clamp(21px, 3.4vw, 27px); font-weight: 800; margin: 0 0 12px; line-height: 1.2; }
+      .wrinkle p { margin: 0 0 12px; color: var(--ink-soft); max-width: 74ch; }
+      .wrinkle p:last-child { margin-bottom: 0; }
+      .wrinkle strong { color: var(--ink); }
+      .cycle { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 6px; font-family: "Libre Franklin", sans-serif; }
+      .cycle .step { flex: 1 1 150px; border: 1px solid var(--rule); border-radius: 4px; padding: 12px 14px; background: var(--bg); }
+      .cycle .yr { font-size: 22px; font-weight: 900; display: block; }
+      .cycle .what { font-size: 12.5px; font-weight: 600; color: var(--ink-soft); line-height: 1.45; display: block; margin-top: 3px; }
+      .cycle .arrow { align-self: center; color: var(--ink-faint); font-weight: 900; flex: 0 0 auto; }
+
+      /* ---------- Footer ---------- */
+      footer { margin-top: 52px; border-top: 3px double var(--rule-strong); padding: 22px 0 44px; }
+      footer h3 { font-family: "Libre Franklin", sans-serif; font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 10px; }
+      footer p { font-size: 14.5px; color: var(--ink-soft); max-width: 78ch; margin: 0 0 8px; }
+      footer p:last-child { margin-bottom: 0; }
+
+      @media (max-width: 760px) {
+        .countband { grid-template-columns: 1fr; gap: 20px; }
+        .bignum .n { font-size: 92px; }
+        .fates, .paths { grid-template-columns: 1fr; }
+        .roster { grid-template-columns: 1fr; }
+        .waffle { grid-template-columns: repeat(4, 1fr); max-width: 340px; }
+        .cycle .arrow { display: none; }
+        .hero { padding-top: 36px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .waffle button { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <!-- ================= HERO ================= -->
+      <header class="hero">
+        <div class="dateline">
+          <span>Post–World War II</span>
+          <span>Truman → Harris</span>
+          <span class="right">Sixteen vice presidents, three fates</span>
+        </div>
+        <h1><span class="ten">Ten of sixteen</span> never became President</h1>
+        <p class="lede">
+          The vice presidency is often called a heartbeat away from the Oval Office — but since 1945,
+          the heartbeat has usually been where the story ends. Of the <strong>16 people</strong> who have
+          held the office from Harry Truman through Kamala Harris, <strong>10 never became President</strong>.
+          And they failed in two very different ways.
+        </p>
+      </header>
+
+      <div class="countband">
+        <div class="bignum" aria-label="10 of 16 vice presidents never became President">
+          <span class="n" id="bignum">10</span>
+          <span class="of">of 16</span>
+          <span class="cap">Vice presidents since WWII<br>who never reached<br>the presidency — 62.5%</span>
+        </div>
+        <div>
+          <div class="waffle-head">Every post-WWII vice president, in order — tap a square</div>
+          <div class="waffle" id="waffle" role="group" aria-label="Grid of the sixteen vice presidents"><button type="button" class="w-pres" aria-label="Harry S. Truman — Became President">1</button><button type="button" class="w-never" aria-label="Alben W. Barkley — Never nominated">2</button><button type="button" class="w-pres" aria-label="Richard Nixon — Became President">3</button><button type="button" class="w-pres" aria-label="Lyndon B. Johnson — Became President">4</button><button type="button" class="w-lost" aria-label="Hubert Humphrey — Nominated, lost the general">5</button><button type="button" class="w-never" aria-label="Spiro Agnew — Never nominated">6</button><button type="button" class="w-pres" aria-label="Gerald Ford — Became President">7</button><button type="button" class="w-never" aria-label="Nelson Rockefeller — Never nominated">8</button><button type="button" class="w-lost" aria-label="Walter Mondale — Nominated, lost the general">9</button><button type="button" class="w-pres" aria-label="George H. W. Bush — Became President">10</button><button type="button" class="w-never" aria-label="Dan Quayle — Never nominated">11</button><button type="button" class="w-lost" aria-label="Al Gore — Nominated, lost the general">12</button><button type="button" class="w-never" aria-label="Dick Cheney — Never nominated">13</button><button type="button" class="w-pres" aria-label="Joe Biden — Became President">14</button><button type="button" class="w-never" aria-label="Mike Pence — Never nominated">15</button><button type="button" class="w-lost" aria-label="Kamala Harris — Nominated, lost the general">16</button></div>
+          <p class="waffle-note" id="waffleNote">
+            <strong>Reading the grid:</strong> gold squares became President, blue squares won their party's
+            nomination but lost the general election, and gray squares never won the nomination at all.
+            Tap any square to see who it is.
+          </p>
+          <div class="legend">
+            <span><i class="swatch w-pres"></i> Became President · 6</span>
+            <span><i class="swatch w-lost"></i> Nominated, lost · 4</span>
+            <span><i class="swatch w-never"></i> Never nominated · 6</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================= THREE FATES ================= -->
+      <section aria-labelledby="fates-h">
+        <div class="sec-head"><span class="sec-num">01</span><h2 id="fates-h">The three fates</h2></div>
+        <p class="sec-sub">
+          Every one of the sixteen lands in exactly one of three buckets. The largest group never got close
+          enough to lose — their own party never handed them the nomination.
+        </p>
+        <div class="fates">
+          <article class="fate pres">
+            <div class="count">6</div>
+            <h3>Became President</h3>
+            <p>Made it to the top job — three by succession, three at the ballot box. This is the group the
+            office is famous for producing, and it is the minority.</p>
+            <div class="names">Harry Truman · Richard Nixon · Lyndon Johnson · Gerald Ford · George H. W. Bush · Joe Biden</div>
+          </article>
+          <article class="fate lost">
+            <div class="count">4</div>
+            <h3>Won the nomination, lost the election</h3>
+            <p>Got the one thing the other six never did — a national ticket of their own — and then lost
+            the general election. The most recent was just one cycle ago.</p>
+            <div class="names">Hubert Humphrey, 1968 · Walter Mondale, 1984 · Al Gore, 2000 · Kamala Harris, 2024</div>
+          </article>
+          <article class="fate never">
+            <div class="count">6</div>
+            <h3>Never even nominated</h3>
+            <p>Never won their party's presidential nomination — some never seriously tried, some tried and
+            stalled, and one resigned the vice presidency itself.</p>
+            <div class="names">Alben Barkley · Spiro Agnew · Nelson Rockefeller · Dan Quayle · Dick Cheney · Mike Pence</div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ================= ROSTER ================= -->
+      <section aria-labelledby="roster-h">
+        <div class="sec-head"><span class="sec-num">02</span><h2 id="roster-h">All sixteen, in order</h2></div>
+        <p class="sec-sub">
+          Chronological by vice-presidential term, Truman (1945) through Harris (2021–25).
+          JD Vance is not counted — his post-VP cycle hasn't happened yet. Filter by outcome to
+          isolate each group.
+        </p>
+        <div class="filters" role="group" aria-label="Filter the roster by outcome">
+          <button type="button" data-filter="all" aria-pressed="true">All 16</button>
+          <button type="button" data-filter="pres" aria-pressed="false">Became President · 6</button>
+          <button type="button" data-filter="lost" aria-pressed="false">Nominated, lost · 4</button>
+          <button type="button" data-filter="never" aria-pressed="false">Never nominated · 6</button>
+        </div>
+        <div class="roster" id="roster"><article class="card" data-fate="pres"><div class="mono pres" aria-hidden="true">HT</div><div><h3>Harry S. Truman</h3><div class="meta">VP 1945 · under Franklin D. Roosevelt<span class="pdot d" aria-hidden="true"></span> Democrat</div><p>Vice president for only 82 days before Roosevelt's death made him President. Won a full term of his own in the famous 1948 upset.</p><span class="tag pres">Became President · 1945</span></div></article><article class="card" data-fate="never"><div class="mono never" aria-hidden="true">AB</div><div><h3>Alben W. Barkley</h3><div class="meta">VP 1949–53 · under Harry Truman<span class="pdot d" aria-hidden="true"></span> Democrat</div><p>Truman's folksy Kentucky running mate. He sought the 1952 nomination at 74, but labor opposition and his age ended the bid before the convention.</p><span class="tag never">Never nominated</span></div></article><article class="card" data-fate="pres"><div class="mono pres" aria-hidden="true">RN</div><div><h3>Richard Nixon</h3><div class="meta">VP 1953–61 · under Dwight Eisenhower<span class="pdot r" aria-hidden="true"></span> Republican</div><p>Lost the presidency to Kennedy in 1960, lost the California governorship in 1962 — then won the White House in 1968, eight years out of the vice presidency.</p><span class="tag pres">Became President · 1969</span></div></article><article class="card" data-fate="pres"><div class="mono pres" aria-hidden="true">LBJ</div><div><h3>Lyndon B. Johnson</h3><div class="meta">VP 1961–63 · under John F. Kennedy<span class="pdot d" aria-hidden="true"></span> Democrat</div><p>Sworn in aboard Air Force One after Kennedy's assassination, then won one of the largest landslides in U.S. history in 1964.</p><span class="tag pres">Became President · 1963</span></div></article><article class="card" data-fate="lost"><div class="mono lost" aria-hidden="true">HH</div><div><h3>Hubert Humphrey</h3><div class="meta">VP 1965–69 · under Lyndon Johnson<span class="pdot d" aria-hidden="true"></span> Democrat</div><p>Won the 1968 nomination without entering a single primary, amid chaos in Chicago, then lost a razor-close race to Nixon.</p><span class="tag lost">Nominated · Lost 1968</span></div></article><article class="card" data-fate="never"><div class="mono never" aria-hidden="true">SA</div><div><h3>Spiro Agnew</h3><div class="meta">VP 1969–73 · under Richard Nixon<span class="pdot r" aria-hidden="true"></span> Republican</div><p>The only VP here to resign the office itself — he quit in 1973 and pleaded no contest to tax evasion, ending any presidential future.</p><span class="tag never">Never nominated</span></div></article><article class="card" data-fate="pres"><div class="mono pres" aria-hidden="true">GF</div><div><h3>Gerald Ford</h3><div class="meta">VP 1973–74 · under Richard Nixon<span class="pdot r" aria-hidden="true"></span> Republican</div><p>Appointed VP under the 25th Amendment, then succeeded Nixon. The only president never elected as president or vice president; lost to Carter in 1976.</p><span class="tag pres">Became President · 1974</span></div></article><article class="card" data-fate="never"><div class="mono never" aria-hidden="true">NR</div><div><h3>Nelson Rockefeller</h3><div class="meta">VP 1974–77 · under Gerald Ford<span class="pdot r" aria-hidden="true"></span> Republican</div><p>A four-term New York governor who had chased the Republican nomination three times before Ford appointed him — and was dropped from the 1976 ticket.</p><span class="tag never">Never nominated</span></div></article><article class="card" data-fate="lost"><div class="mono lost" aria-hidden="true">WM</div><div><h3>Walter Mondale</h3><div class="meta">VP 1977–81 · under Jimmy Carter<span class="pdot d" aria-hidden="true"></span> Democrat</div><p>Reinvented the VP's office as a governing partner, then won the 1984 nomination — and carried only Minnesota and D.C. against Reagan.</p><span class="tag lost">Nominated · Lost 1984</span></div></article><article class="card" data-fate="pres"><div class="mono pres" aria-hidden="true">GB</div><div><h3>George H. W. Bush</h3><div class="meta">VP 1981–89 · under Ronald Reagan<span class="pdot r" aria-hidden="true"></span> Republican</div><p>The exception that defines the rule: the only one of the sixteen elected President directly from the vice presidency, in 1988.</p><span class="tag pres">Became President · 1989</span></div></article><article class="card" data-fate="never"><div class="mono never" aria-hidden="true">DQ</div><div><h3>Dan Quayle</h3><div class="meta">VP 1989–93 · under George H. W. Bush<span class="pdot r" aria-hidden="true"></span> Republican</div><p>Launched a run for the 2000 nomination but withdrew months before the first primary as support failed to materialize.</p><span class="tag never">Never nominated</span></div></article><article class="card" data-fate="lost"><div class="mono lost" aria-hidden="true">AG</div><div><h3>Al Gore</h3><div class="meta">VP 1993–2001 · under Bill Clinton<span class="pdot d" aria-hidden="true"></span> Democrat</div><p>Won the national popular vote in 2000 but lost the Electoral College 271–266 after the Florida recount fight reached the Supreme Court.</p><span class="tag lost">Nominated · Lost 2000</span></div></article><article class="card" data-fate="never"><div class="mono never" aria-hidden="true">DC</div><div><h3>Dick Cheney</h3><div class="meta">VP 2001–09 · under George W. Bush<span class="pdot r" aria-hidden="true"></span> Republican</div><p>Perhaps the most powerful VP on this list — and the clearest non-candidate. He stated plainly and repeatedly that he would never run for President.</p><span class="tag never">Never nominated</span></div></article><article class="card" data-fate="pres"><div class="mono pres" aria-hidden="true">JB</div><div><h3>Joe Biden</h3><div class="meta">VP 2009–17 · under Barack Obama<span class="pdot d" aria-hidden="true"></span> Democrat</div><p>Sat out 2016, then won the nomination and the presidency in 2020 — the delayed path that keeps him out of the “never” count.</p><span class="tag pres">Became President · 2021</span></div></article><article class="card" data-fate="never"><div class="mono never" aria-hidden="true">MP</div><div><h3>Mike Pence</h3><div class="meta">VP 2017–21 · under Donald Trump<span class="pdot r" aria-hidden="true"></span> Republican</div><p>Ran for the 2024 Republican nomination against his former running mate and withdrew before a single primary vote was cast.</p><span class="tag never">Never nominated</span></div></article><article class="card" data-fate="lost"><div class="mono lost" aria-hidden="true">KH</div><div><h3>Kamala Harris</h3><div class="meta">VP 2021–25 · under Joe Biden<span class="pdot d" aria-hidden="true"></span> Democrat</div><p>Became the Democratic nominee in the summer of 2024 after Biden withdrew, then lost the general election to Donald Trump — the fourth VP to win a nomination and lose.</p><span class="tag lost">Nominated · Lost 2024</span></div></article></div>
+        <p class="roster-count" id="rosterCount" aria-live="polite">Showing all 16 vice presidents.</p>
+      </section>
+
+      <!-- ================= PARTY SPLIT ================= -->
+      <section aria-labelledby="party-h">
+        <div class="sec-head"><span class="sec-num">03</span><h2 id="party-h">Same eight, opposite bottlenecks</h2></div>
+        <p class="sec-sub">
+          The sixteen split perfectly evenly by party — eight Democrats, eight Republicans — and each party
+          produced exactly three presidents. But the ten who fell short failed at opposite stages.
+        </p>
+        <div class="partybars">
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="party" style="color:var(--dem)">Democrats</span><span class="total">8 vice presidents</span></div>
+            <div class="pbar" role="img" aria-label="Democrats: 3 became President, 4 were nominated and lost, 1 was never nominated">
+              <div class="seg-pres" style="width:37.5%">3</div>
+              <div class="seg-lost" style="width:50%">4</div>
+              <div class="seg-never" style="width:12.5%">1</div>
+            </div>
+            <div class="pbar-caps">
+              <span style="width:37.5%">President</span>
+              <span style="width:50%">Nominated, lost</span>
+              <span style="width:12.5%">Never nom.</span>
+            </div>
+          </div>
+          <div class="pbar-row">
+            <div class="pbar-label"><span class="party" style="color:var(--rep)">Republicans</span><span class="total">8 vice presidents</span></div>
+            <div class="pbar" role="img" aria-label="Republicans: 3 became President, 0 were nominated and lost, 5 were never nominated">
+              <div class="seg-pres" style="width:37.5%">3</div>
+              <div class="seg-never" style="width:62.5%">5</div>
+            </div>
+            <div class="pbar-caps">
+              <span style="width:37.5%">President</span>
+              <span style="width:62.5%">Never nominated</span>
+            </div>
+          </div>
+          <p class="party-note">
+            <strong>Every VP who won a nomination and then lost the presidency is a Democrat</strong> —
+            Humphrey, Mondale, Gore, and Harris. Republican VPs, by contrast, mostly never got the
+            nomination at all: five of the six “never nominated” names are Republicans. (The one wrinkle
+            in that clean line: Richard Nixon <em>did</em> lose a general election as the nominee, in
+            1960 — but he came back and won in 1968, so his final outcome is President.)
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= PATHS ================= -->
+      <section aria-labelledby="paths-h">
+        <div class="sec-head"><span class="sec-num">04</span><h2 id="paths-h">How the six got there</h2></div>
+        <p class="sec-sub">
+          Even among the six who made it, half never won the office as a vice president running for
+          promotion — they inherited it mid-term.
+        </p>
+        <div class="paths">
+          <article class="path">
+            <h3>Inherited the office</h3>
+            <div class="sub">Succession · 3 of 6</div>
+            <ul>
+              <li><strong>Harry Truman, 1945</strong> Vice president for just 82 days before Franklin Roosevelt died; then won a term of his own in 1948.</li>
+              <li><strong>Lyndon Johnson, 1963</strong> Sworn in hours after John F. Kennedy's assassination; then won a landslide term of his own in 1964.</li>
+              <li><strong>Gerald Ford, 1974</strong> Succeeded Richard Nixon on his resignation — the only president in this set never elected to either national office. He lost his bid for a full term in 1976.</li>
+            </ul>
+          </article>
+          <article class="path">
+            <h3>Won it at the ballot box</h3>
+            <div class="sub">Election · 3 of 6</div>
+            <ul>
+              <li><strong>Richard Nixon, 1968</strong> Lost the presidency in 1960, eight years after leaving the vice presidency he won it — the first “second act” on this list.</li>
+              <li><strong>George H. W. Bush, 1988</strong> The only one of the sixteen to move straight from the vice presidency into an elected presidency — the first sitting VP to do it since Martin Van Buren in 1836.</li>
+              <li><strong>Joe Biden, 2020</strong> Won four years after leaving office, after sitting out the 2016 cycle entirely. See the wrinkle below.</li>
+            </ul>
+          </article>
+        </div>
+        <div class="delay">
+          <h3>The direct handoff is the rarest path of all</h3>
+          <p>
+            Strip it down and only <strong>one of the sixteen — George H. W. Bush — was elected President
+            directly from the vice presidency</strong> in the next election. Truman, Johnson, and Ford were
+            already president when they won (or, in Ford's case, lost) their elections; Nixon waited eight
+            years and Biden four. The “VP as heir apparent” story is mostly a story about succession and
+            comebacks, not coronations.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= WRINKLE ================= -->
+      <section aria-labelledby="wrinkle-h">
+        <div class="sec-head"><span class="sec-num">05</span><h2 id="wrinkle-h">The Biden wrinkle</h2></div>
+        <div class="wrinkle" style="margin-top:22px">
+          <div class="k">Counting rule that matters</div>
+          <h3>Not the nominee in 2016 — President anyway</h3>
+          <p>
+            If you counted only the <em>immediate</em> post-VP cycle, Joe Biden would look like a miss:
+            in <strong>2016</strong> he didn't run at all, and Hillary Clinton took the Democratic
+            nomination. But the count here is about final outcomes, not first cycles. In
+            <strong>2020</strong> Biden won the nomination and the presidency — so he belongs with the
+            six who made it, not the ten who didn't.
+          </p>
+          <div class="cycle" aria-label="Biden's path: 2009 to 2017 vice president, 2016 sat out, 2020 elected president">
+            <div class="step"><span class="yr">2009–17</span><span class="what">Vice president under Barack Obama, two terms</span></div>
+            <span class="arrow" aria-hidden="true">→</span>
+            <div class="step"><span class="yr">2016</span><span class="what">First post-VP cycle: doesn't run; Clinton is the nominee</span></div>
+            <span class="arrow" aria-hidden="true">→</span>
+            <div class="step"><span class="yr">2020</span><span class="what">Runs, wins the nomination, wins the presidency</span></div>
+          </div>
+          <p>
+            He's not the only delayed case, either — Nixon lost in 1960 and won in 1968. What makes Biden
+            unique in the sixteen is that he skipped his first cycle altogether and still came back to win,
+            which is exactly why he stays out of the “never became President” count.
+          </p>
+        </div>
+      </section>
+
+      <!-- ================= FOOTER ================= -->
+      <footer>
+        <h3>How this was counted</h3>
+        <p>
+          Distinct individuals who served as vice president from the end of World War II onward, starting
+          with Harry Truman (who took the office in January 1945) and ending with Kamala Harris. Each person
+          is counted once, by final outcome, regardless of how many cycles they contested. JD Vance is
+          excluded because his post-vice-presidency cycle has not yet occurred.
+        </p>
+        <p>
+          Outcomes: <strong>became President</strong> (by succession or election, at any point);
+          <strong>nominated, lost</strong> (won a major-party presidential nomination and lost the general
+          election, and never became President); <strong>never nominated</strong> (never won a major-party
+          presidential nomination). Richard Nixon lost the 1960 general election as the Republican nominee
+          before winning in 1968; he is counted by his final outcome, as President.
+        </p>
+      </footer>
+
+    </div>
+
+    <script>
+      var VPS = [
+        { name: "Harry S. Truman", ini: "HT", vp: "1945", under: "Franklin D. Roosevelt", party: "d", partyName: "Democrat",
+          fate: "pres", tag: "Became President · 1945",
+          note: "Vice president for only 82 days before Roosevelt's death made him President. Won a full term of his own in the famous 1948 upset." },
+        { name: "Alben W. Barkley", ini: "AB", vp: "1949–53", under: "Harry Truman", party: "d", partyName: "Democrat",
+          fate: "never", tag: "Never nominated",
+          note: "Truman's folksy Kentucky running mate. He sought the 1952 nomination at 74, but labor opposition and his age ended the bid before the convention." },
+        { name: "Richard Nixon", ini: "RN", vp: "1953–61", under: "Dwight Eisenhower", party: "r", partyName: "Republican",
+          fate: "pres", tag: "Became President · 1969",
+          note: "Lost the presidency to Kennedy in 1960, lost the California governorship in 1962 — then won the White House in 1968, eight years out of the vice presidency." },
+        { name: "Lyndon B. Johnson", ini: "LBJ", vp: "1961–63", under: "John F. Kennedy", party: "d", partyName: "Democrat",
+          fate: "pres", tag: "Became President · 1963",
+          note: "Sworn in aboard Air Force One after Kennedy's assassination, then won one of the largest landslides in U.S. history in 1964." },
+        { name: "Hubert Humphrey", ini: "HH", vp: "1965–69", under: "Lyndon Johnson", party: "d", partyName: "Democrat",
+          fate: "lost", tag: "Nominated · Lost 1968",
+          note: "Won the 1968 nomination without entering a single primary, amid chaos in Chicago, then lost a razor-close race to Nixon." },
+        { name: "Spiro Agnew", ini: "SA", vp: "1969–73", under: "Richard Nixon", party: "r", partyName: "Republican",
+          fate: "never", tag: "Never nominated",
+          note: "The only VP here to resign the office itself — he quit in 1973 and pleaded no contest to tax evasion, ending any presidential future." },
+        { name: "Gerald Ford", ini: "GF", vp: "1973–74", under: "Richard Nixon", party: "r", partyName: "Republican",
+          fate: "pres", tag: "Became President · 1974",
+          note: "Appointed VP under the 25th Amendment, then succeeded Nixon. The only president never elected as president or vice president; lost to Carter in 1976." },
+        { name: "Nelson Rockefeller", ini: "NR", vp: "1974–77", under: "Gerald Ford", party: "r", partyName: "Republican",
+          fate: "never", tag: "Never nominated",
+          note: "A four-term New York governor who had chased the Republican nomination three times before Ford appointed him — and was dropped from the 1976 ticket." },
+        { name: "Walter Mondale", ini: "WM", vp: "1977–81", under: "Jimmy Carter", party: "d", partyName: "Democrat",
+          fate: "lost", tag: "Nominated · Lost 1984",
+          note: "Reinvented the VP's office as a governing partner, then won the 1984 nomination — and carried only Minnesota and D.C. against Reagan." },
+        { name: "George H. W. Bush", ini: "GB", vp: "1981–89", under: "Ronald Reagan", party: "r", partyName: "Republican",
+          fate: "pres", tag: "Became President · 1989",
+          note: "The exception that defines the rule: the only one of the sixteen elected President directly from the vice presidency, in 1988." },
+        { name: "Dan Quayle", ini: "DQ", vp: "1989–93", under: "George H. W. Bush", party: "r", partyName: "Republican",
+          fate: "never", tag: "Never nominated",
+          note: "Launched a run for the 2000 nomination but withdrew months before the first primary as support failed to materialize." },
+        { name: "Al Gore", ini: "AG", vp: "1993–2001", under: "Bill Clinton", party: "d", partyName: "Democrat",
+          fate: "lost", tag: "Nominated · Lost 2000",
+          note: "Won the national popular vote in 2000 but lost the Electoral College 271–266 after the Florida recount fight reached the Supreme Court." },
+        { name: "Dick Cheney", ini: "DC", vp: "2001–09", under: "George W. Bush", party: "r", partyName: "Republican",
+          fate: "never", tag: "Never nominated",
+          note: "Perhaps the most powerful VP on this list — and the clearest non-candidate. He stated plainly and repeatedly that he would never run for President." },
+        { name: "Joe Biden", ini: "JB", vp: "2009–17", under: "Barack Obama", party: "d", partyName: "Democrat",
+          fate: "pres", tag: "Became President · 2021",
+          note: "Sat out 2016, then won the nomination and the presidency in 2020 — the delayed path that keeps him out of the “never” count." },
+        { name: "Mike Pence", ini: "MP", vp: "2017–21", under: "Donald Trump", party: "r", partyName: "Republican",
+          fate: "never", tag: "Never nominated",
+          note: "Ran for the 2024 Republican nomination against his former running mate and withdrew before a single primary vote was cast." },
+        { name: "Kamala Harris", ini: "KH", vp: "2021–25", under: "Joe Biden", party: "d", partyName: "Democrat",
+          fate: "lost", tag: "Nominated · Lost 2024",
+          note: "Became the Democratic nominee in the summer of 2024 after Biden withdrew, then lost the general election to Donald Trump — the fourth VP to win a nomination and lose." }
+      ];
+
+      var FATE_LABEL = { pres: "Became President", lost: "Nominated, lost the general", never: "Never nominated" };
+
+      /* ---- Waffle ---- */
+      var waffle = document.getElementById("waffle");
+      var waffleNote = document.getElementById("waffleNote");
+      var defaultNote = waffleNote.innerHTML;
+      waffle.replaceChildren();
+      VPS.forEach(function (vp, i) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "w-" + vp.fate;
+        b.textContent = i + 1;
+        b.setAttribute("aria-label", vp.name + " — " + FATE_LABEL[vp.fate]);
+        b.addEventListener("click", function () {
+          waffleNote.innerHTML = "<strong>" + (i + 1) + ". " + vp.name + "</strong> — VP " + vp.vp +
+            " under " + vp.under + " (" + vp.partyName + "). " + FATE_LABEL[vp.fate] + ". " + vp.note;
+          var cells = waffle.querySelectorAll("button");
+          cells.forEach(function (c, j) { c.classList.toggle("dim", j !== i); });
+        });
+        waffle.appendChild(b);
+      });
+      waffle.addEventListener("mouseleave", function () {
+        waffleNote.innerHTML = defaultNote;
+        waffle.querySelectorAll("button").forEach(function (c) { c.classList.remove("dim"); });
+      });
+
+      /* ---- Roster ---- */
+      var roster = document.getElementById("roster");
+      var rosterCount = document.getElementById("rosterCount");
+      roster.replaceChildren();
+      VPS.forEach(function (vp) {
+        var card = document.createElement("article");
+        card.className = "card";
+        card.setAttribute("data-fate", vp.fate);
+        card.innerHTML =
+          '<div class="mono ' + vp.fate + '" aria-hidden="true">' + vp.ini + "</div>" +
+          "<div><h3>" + vp.name + "</h3>" +
+          '<div class="meta">VP ' + vp.vp + " · under " + vp.under +
+          '<span class="pdot ' + vp.party + '" aria-hidden="true"></span> ' + vp.partyName + "</div>" +
+          "<p>" + vp.note + "</p>" +
+          '<span class="tag ' + vp.fate + '">' + vp.tag + "</span></div>";
+        roster.appendChild(card);
+      });
+
+      function setFilter(f) {
+        var shown = 0;
+        roster.querySelectorAll(".card").forEach(function (card) {
+          var show = f === "all" || card.getAttribute("data-fate") === f;
+          card.hidden = !show;
+          if (show) shown++;
+        });
+        document.querySelectorAll(".filters button").forEach(function (btn) {
+          btn.setAttribute("aria-pressed", btn.getAttribute("data-filter") === f ? "true" : "false");
+        });
+        rosterCount.textContent = f === "all"
+          ? "Showing all 16 vice presidents."
+          : "Showing " + shown + " of 16 — " + FATE_LABEL[f].charAt(0).toLowerCase() + FATE_LABEL[f].slice(1) + ".";
+      }
+      document.querySelectorAll(".filters button").forEach(function (btn) {
+        btn.addEventListener("click", function () { setFilter(btn.getAttribute("data-filter")); });
+      });
+      setFilter("all");
+
+      /* ---- Count-up for the hero number (skipped under reduced motion) ---- */
+      (function () {
+        var el = document.getElementById("bignum");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        var start = null, dur = 900;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          el.textContent = Math.round(10 * (1 - Math.pow(1 - p, 3)));
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      })();
+    </script>
+  
+
+
+    <script>
+      // Let the linked-blog parent fit this sandboxed story without a second scrollbar.
+      (function () {
+        if (window.parent === window) return;
+        var pending = false;
+        function reportHeight() {
+          if (pending) return;
+          pending = true;
+          requestAnimationFrame(function () {
+            pending = false;
+            var wrap = document.querySelector('.wrap');
+            var height = Math.ceil(wrap.getBoundingClientRect().bottom + window.scrollY);
+            window.parent.postMessage({type: 'linked-blog-story-resize', height: height}, '*');
+          });
+        }
+        new ResizeObserver(reportHeight).observe(document.querySelector('.wrap'));
+        window.addEventListener('load', reportHeight);
+        window.addEventListener('resize', reportHeight);
+        if (document.fonts) document.fonts.ready.then(reportHeight);
+        reportHeight();
+      })();
+    </script>
+</body></html>

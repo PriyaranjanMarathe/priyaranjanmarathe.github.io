@@ -12,6 +12,19 @@ GitHub Actions polls hourly, applies explicit reply selection with a two-minute 
 
 Only select material intended for public sharing. Text or attachments may themselves contain personal information. Deletion from the page does not erase Git history. See `/finds/privacy/`.
 
+## Hosted interactive stories
+
+Manually added records can include `embedded_story` with a `path` under
+`/finds/stories/` (a lowercase, hyphenated `.html` filename) and a `title`.
+The renderer displays the story directly in the post using an isolated
+`sandbox="allow-scripts"` iframe. Story pages report their content height with
+`postMessage({type: 'linked-blog-story-resize', height: ...}, '*')`; the parent
+accepts messages only from its own story frames. Optional `search_text` keeps
+the embedded story's text searchable from the main linked-blog search field.
+Keep the HTML file, record, and regenerated index together in the same commit.
+Normal imports retain these manual records; WhatsApp revisions rebuild their
+own records and are not the editing route for manually hosted stories.
+
 ## Configuration
 
 Vercel production environment: `META_APP_SECRET`, `META_VERIFY_TOKEN`, `INBOX_READ_TOKEN`, `WHATSAPP_OWNER` (digits only), `META_WABA_ID`, `META_PHONE_ID`, `CAPTURE_START`; connected private Blob store with OIDC supplies `BLOB_STORE_ID`. The Meta access token is not needed in Vercel.

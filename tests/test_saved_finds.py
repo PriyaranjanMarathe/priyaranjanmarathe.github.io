@@ -83,6 +83,33 @@ class FindsTests(unittest.TestCase):
         self.assertEqual(client.session.auth, ('SK' + '1' * 32, 'secret'))
         self.assertIn('AC' + '0' * 32, client.prefix)
 
+    def test_local_story_embeds_inline_with_sandbox_and_search_text(self):
+        record = {'id': 'story', 'title': 'VP story', 'body': '', 'saved_at': '2026-11-05',
+                  'tags': ['history'], 'tag_method': 'suggested', 'attachments': [],
+                  'search_text': 'Harry Truman <script>bad</script>',
+                  'embedded_story': {'path': '/finds/stories/vice-presidents.html', 'title': 'Sixteen "VPs"'}}
+        with tempfile.TemporaryDirectory() as directory:
+            f.render([record], Path(directory))
+            page = (Path(directory) / 'index.html').read_text()
+        self.assertIn('src="/finds/stories/vice-presidents.html"', page)
+        self.assertIn('sandbox="allow-scripts"', page)
+        self.assertNotIn('allow-same-origin', page)
+        self.assertIn('title="Sixteen &quot;VPs&quot;"', page)
+        self.assertIn('data-search="Harry Truman &lt;script&gt;bad&lt;/script&gt;"', page)
+        self.assertIn('f.contentWindow===event.source', page)
+        self.assertIn('Number.isFinite(data.height)', page)
+
+    def test_story_embed_rejects_external_or_unsafe_paths(self):
+        record = {'id': 'story', 'title': 'VP story', 'body': '', 'saved_at': '2026-11-05',
+                  'tags': [], 'tag_method': 'chosen', 'attachments': []}
+        for path in ['https://evil.example/story.html', '//evil.example/story.html',
+                     '/finds/stories/../private.html', '/finds/stories/x.html?code=bad',
+                     'javascript:alert(1)', '/finds/stories/x.html" onload="bad', None]:
+            with self.subTest(path=path), tempfile.TemporaryDirectory() as directory:
+                record['embedded_story'] = {'path': path}
+                f.render([record], Path(directory))
+                self.assertNotIn('<iframe', (Path(directory) / 'index.html').read_text())
+
     def test_external_api_paths_rejected_before_request(self):
         client = f.Twilio('AC' + '0' * 32, 'test')
         with self.assertRaises(ValueError):
