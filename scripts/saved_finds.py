@@ -199,6 +199,8 @@ def render(records, directory):
 const search=document.querySelector('#search'),cards=[...document.querySelectorAll('article')];let selected='';
 // Sandboxed frames have an opaque origin, so validate the sending window instead.
 window.addEventListener('message',event=>{const data=event.data;if(!data||data.type!=='linked-blog-story-resize'||!Number.isFinite(data.height)||data.height<100||data.height>50000)return;const frame=[...document.querySelectorAll('iframe.embedded-story')].find(f=>f.contentWindow===event.source);if(frame)frame.style.height=Math.ceil(data.height)+'px'});
+// A full-height story frame cannot scroll its own chapter links into view.
+window.addEventListener('message',event=>{const data=event.data;if(!data||data.type!=='linked-blog-story-scroll'||!Number.isFinite(data.top)||data.top<0||data.top>50000)return;const frame=[...document.querySelectorAll('iframe.embedded-story')].find(f=>f.contentWindow===event.source);if(frame&&data.top<=frame.offsetHeight)window.scrollTo({top:window.scrollY+frame.getBoundingClientRect().top+data.top-16,behavior:'instant'})});
 function filter(){const q=search.value.toLocaleLowerCase();let n=0;cards.forEach(c=>{c.hidden=!((c.textContent+' '+(c.dataset.search||'')).toLocaleLowerCase().includes(q)&&(!selected||JSON.parse(c.dataset.tags).includes(selected)));if(!c.hidden)n++});document.querySelector('#count').textContent=n+(n===1?' post':' posts')+(selected?' · #'+selected:'')}
 search.addEventListener('input',filter);document.querySelectorAll('[data-tag]').forEach(b=>b.addEventListener('click',()=>{selected=b.dataset.tag;filter()}));document.querySelector('#clear').addEventListener('click',()=>{selected='';search.value='';filter()});filter();
 </script></html>'''

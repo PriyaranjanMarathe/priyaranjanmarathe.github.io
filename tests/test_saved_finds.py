@@ -98,6 +98,9 @@ class FindsTests(unittest.TestCase):
         self.assertIn('data-search="Harry Truman &lt;script&gt;bad&lt;/script&gt;"', page)
         self.assertIn('f.contentWindow===event.source', page)
         self.assertIn('Number.isFinite(data.height)', page)
+        self.assertIn("data.type!=='linked-blog-story-scroll'", page)
+        self.assertIn('Number.isFinite(data.top)', page)
+        self.assertIn('data.top<=frame.offsetHeight', page)
 
     def test_story_embed_rejects_external_or_unsafe_paths(self):
         record = {'id': 'story', 'title': 'VP story', 'body': '', 'saved_at': '2026-11-05',

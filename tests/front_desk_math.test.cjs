@@ -1,0 +1,26 @@
+const {test}=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs'), vm=require('node:vm'),path=require('node:path');
+const html=fs.readFileSync(path.join(__dirname,'../docs/finds/stories/front-desk-money.html'),'utf8');
+const source=html.match(/<script id="motel-model">([\s\S]*?)<\/script>/)[1];
+const context=vm.createContext({});vm.runInContext(source+'\nglobalThis.model=MotelMath;',context);const M=context.model;
+test('600 shares raise $300,000; 6 shares own 1% and pay $60',()=>{const r=M.shares(6,12000);assert.equal(600*500,300000);assert.equal(r.investment,3000);assert.equal(r.portion,.01);assert.equal(r.pool,6000);assert.equal(r.dividend,60);});
+test('share extremes and dividend losses',()=>{for(let n=1;n<=60;n++){for(const p of [-6000,12000,30000]){let r=M.shares(n,p);assert.ok(Math.abs(r.dividend-M.shares(1,p).dividend*n)<1e-9);assert.equal(r.pool+r.retained,Math.max(0,p));}}assert.equal(M.shares(60,-6000).dividend,0);});
+test('simple and compound arithmetic across slider, cents rounding',()=>{for(let y=1;y<=5;y++){let r=M.loan(y);assert.ok(r.compound>=r.simple-1e-9);}assert.equal(Math.round(M.loan(3).compound),1331);assert.equal(Math.round(M.loan(5).compound*100),161051);assert.equal(Math.round(1000*1.1**12*100),313843);});
+test('secondary sales never give the company money',()=>{for(let p=100;p<=900;p+=50){assert.equal(M.trade(p).companyReceives,0);assert.equal(M.trade(p).gain,p-500);}});
+test('every bookkeeping state balances',()=>{for(let i=0;i<=6;i++){const b=M.balance(i);assert.equal(b.assets,b.debt+b.equity);}const b=M.balance(6);assert.equal(b.cash,1250);assert.equal(b.equipment,300);assert.equal(b.debt,400);assert.equal(b.equity,1150);assert.equal(b.profit,150);});
+test('loan receipt and principal repayment never change profit',()=>{assert.equal(M.balance(2).profit,M.balance(1).profit);assert.equal(M.balance(6).profit,M.balance(5).profit);assert.equal(M.entries.length,6);});
+test('story has accessible labels, safe external links and inline resizing',()=>{assert.equal((html.match(/<h1>/g)||[]).length,1);for(const id of ['shareCount','profitCase','resalePrice','years'])assert.ok(html.includes('for="'+id+'"'));assert.ok(html.includes('linked-blog-story-resize'));assert.ok(html.includes('prefers-reduced-motion'));assert.ok(html.includes('aria-live="polite"'));assert.equal((html.match(/target="_blank"/g)||[]).length,(html.match(/rel="noopener"/g)||[]).length);});
+test('inline resize and chapter navigation only accept bounded messages from story windows',()=>{
+ const index=fs.readFileSync(path.join(__dirname,'../docs/finds/index.html'),'utf8');
+ const script=index.match(/<script>([\s\S]*?)<\/script>/)[1];const callbacks=[],scrolls=[],sender={};
+ const frame={contentWindow:sender,offsetHeight:12000,style:{},getBoundingClientRect:()=>({top:300})};
+ const control={value:'',addEventListener(){}};const status={};
+ const document={querySelector:s=>s==='#count'?status:control,querySelectorAll:s=>s==='iframe.embedded-story'?[frame]:[]};
+ const window={scrollY:100,addEventListener:(type,fn)=>callbacks.push(fn),scrollTo:v=>scrolls.push(v)};
+ vm.runInNewContext(script,{document,window});
+ const send=(data,source=sender)=>callbacks.forEach(fn=>fn({data,source}));
+ send({type:'linked-blog-story-scroll',top:200},{});send({type:'linked-blog-story-scroll',top:-1});send({type:'linked-blog-story-scroll',top:13000});send({type:'linked-blog-story-scroll',top:NaN});assert.equal(scrolls.length,0);
+ send({type:'linked-blog-story-scroll',top:200});assert.equal(scrolls.length,1);assert.equal(scrolls[0].top,584);
+ send({type:'linked-blog-story-resize',height:15000});assert.equal(frame.style.height,'15000px');send({type:'linked-blog-story-resize',height:60000});assert.equal(frame.style.height,'15000px');
+});
