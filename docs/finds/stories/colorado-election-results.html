@@ -1,0 +1,820 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light dark">
+    <link rel="icon" href="data:,">
+    <title>Colorado 2026 Election Results — The Full Ballot</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,700;6..72,800&amp;family=Public+Sans:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@500;600&amp;display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --paper: #f6f2ea;
+        --surface: #fffdf7;
+        --surface-2: #efe9db;
+        --ink: #1d1f24;
+        --muted: #5d6068;
+        --faint: #8a8578;
+        --line: #ddd2bd;
+        --line-strong: #c9b992;
+        --dem: #1e56a8;
+        --dem-dark: #173f7c;
+        --dem-soft: #dbe7f7;
+        --rep: #b23a2e;
+        --rep-dark: #8c2b21;
+        --rep-soft: #f7e0dc;
+        --gold: #9a7410;
+        --gold-soft: #f3e8c8;
+        --pass: #177245;
+        --pass-soft: #dcf0e3;
+        --fail: #9c2b2b;
+        --fail-soft: #f6e1de;
+        --open: #8a5a00;
+        --open-soft: #f7ecc9;
+        --shadow: 0 1px 2px rgba(60, 48, 20, .08), 0 8px 24px -12px rgba(60, 48, 20, .18);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --paper: #14161a;
+          --surface: #1e2127;
+          --surface-2: #262a31;
+          --ink: #ede8dc;
+          --muted: #a9aeb8;
+          --faint: #7d828c;
+          --line: #3a3e47;
+          --line-strong: #4c515c;
+          --dem: #6ea3e8;
+          --dem-dark: #9dc0f2;
+          --dem-soft: #24344d;
+          --rep: #e88a7d;
+          --rep-dark: #f2a99f;
+          --rep-soft: #472824;
+          --gold: #d9b45a;
+          --gold-soft: #3d3418;
+          --pass: #5ec78d;
+          --pass-soft: #1e3a2a;
+          --fail: #ef9a92;
+          --fail-soft: #422422;
+          --open: #e0b558;
+          --open-soft: #3d3418;
+          --shadow: 0 1px 2px rgba(0,0,0,.4), 0 8px 24px -12px rgba(0,0,0,.6);
+        }
+      }
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        * { transition: none !important; animation: none !important; }
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Public Sans", system-ui, sans-serif;
+        font-size: 16px;
+        line-height: 1.55;
+      }
+      .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px 72px; }
+      a { color: var(--dem); }
+      @media (prefers-color-scheme: dark) { a { color: var(--dem); } }
+
+      /* ---------- Header ---------- */
+      header.hero { padding: 44px 0 8px; }
+      .dateline {
+        font-family: "IBM Plex Mono", monospace; font-size: 12.5px; letter-spacing: .04em;
+        color: var(--muted); text-transform: uppercase;
+        display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 14px;
+      }
+      .dateline b { color: var(--gold); font-weight: 600; }
+      h1 {
+        font-family: "Newsreader", Georgia, serif; font-weight: 800;
+        font-size: clamp(38px, 6.5vw, 62px); line-height: 1.02; letter-spacing: -0.01em;
+        margin: 0 0 14px;
+      }
+      h1 .accent { color: var(--dem); }
+      .lede { font-size: clamp(16.5px, 2.4vw, 19px); color: var(--muted); max-width: 46em; margin: 0 0 22px; }
+      .lede strong { color: var(--ink); }
+
+      .status-strip {
+        display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 0 0 8px;
+      }
+      .unofficial {
+        display: inline-flex; align-items: center; gap: 8px;
+        background: var(--open-soft); color: var(--open);
+        border: 1px solid var(--line-strong); border-radius: 6px;
+        font-weight: 700; font-size: 13.5px; padding: 8px 13px;
+      }
+      .unofficial::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--open); flex: none; }
+      .status-note { font-size: 13.5px; color: var(--muted); align-self: center; max-width: 62ch; }
+
+      .stat-grid {
+        display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1px; background: var(--line); border: 1px solid var(--line);
+        border-radius: 10px; overflow: hidden; margin: 22px 0 6px; box-shadow: var(--shadow);
+      }
+      .stat { background: var(--surface); padding: 16px 16px 13px; }
+      .stat .num { font-family: "Newsreader", serif; font-weight: 800; font-size: 30px; line-height: 1; }
+      .stat .lbl { font-size: 12.5px; color: var(--muted); margin-top: 6px; line-height: 1.35; }
+      .stat .num.dem { color: var(--dem); } .stat .num.rep { color: var(--rep); } .stat .num.gold { color: var(--gold); }
+
+      nav.toc {
+        display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 4px;
+        position: sticky; top: 0; padding: 10px 0; background: var(--paper); z-index: 20;
+      }
+      nav.toc a {
+        text-decoration: none; color: var(--ink); font-size: 13.5px; font-weight: 600;
+        border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 13px; background: var(--surface);
+      }
+      nav.toc a:hover { border-color: var(--gold); color: var(--gold); }
+
+      /* ---------- Sections ---------- */
+      section { margin-top: 52px; }
+      .sec-head { border-bottom: 3px solid var(--ink); padding-bottom: 10px; margin-bottom: 8px; display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+      .sec-head .kicker { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--gold); letter-spacing: .08em; }
+      h2 { font-family: "Newsreader", serif; font-weight: 800; font-size: clamp(27px, 4vw, 36px); margin: 0; line-height: 1.1; }
+      .sec-sub { color: var(--muted); font-size: 15.5px; max-width: 62em; margin: 10px 0 20px; }
+      h3 { font-family: "Newsreader", serif; font-size: 21px; font-weight: 700; margin: 30px 0 10px; }
+
+      /* ---------- Scorecard ---------- */
+      .score-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      @media (max-width: 720px) { .score-grid { grid-template-columns: 1fr; } }
+      .score-card { background: var(--surface); border: 1px solid var(--line); border-top: 5px solid var(--line-strong); border-radius: 10px; padding: 20px 22px; box-shadow: var(--shadow); }
+      .score-card.dem { border-top-color: var(--dem); }
+      .score-card.rep { border-top-color: var(--rep); }
+      .score-card h3 { margin: 0 0 4px; font-size: 23px; }
+      .score-card.dem h3 { color: var(--dem); } .score-card.rep h3 { color: var(--rep); }
+      .score-card .tag { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+      .score-card ul { margin: 0; padding-left: 19px; }
+      .score-card li { margin: 7px 0; font-size: 14.5px; }
+      .score-card li::marker { color: var(--faint); }
+
+      /* ---------- Badges ---------- */
+      .badge {
+        display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: .05em;
+        text-transform: uppercase; border-radius: 4px; padding: 3px 8px; white-space: nowrap; vertical-align: middle;
+      }
+      .badge.pass { background: var(--pass-soft); color: var(--pass); }
+      .badge.fail { background: var(--fail-soft); color: var(--fail); }
+      .badge.open { background: var(--open-soft); color: var(--open); }
+      .badge.dem { background: var(--dem-soft); color: var(--dem-dark); }
+      .badge.rep { background: var(--rep-soft); color: var(--rep-dark); }
+      .badge.flip { background: var(--gold-soft); color: var(--gold); }
+      .badge.neutral { background: var(--surface-2); color: var(--muted); }
+
+      /* ---------- Measure controls ---------- */
+      .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin: 4px 0 16px; }
+      .chips { display: flex; flex-wrap: wrap; gap: 7px; }
+      .chip {
+        font: inherit; font-size: 13.5px; font-weight: 600; cursor: pointer;
+        border: 1px solid var(--line-strong); background: var(--surface); color: var(--ink);
+        border-radius: 999px; padding: 7px 14px;
+      }
+      .chip[aria-pressed="true"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+      .chip:focus-visible, button:focus-visible, input:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+      .searchbox { flex: 1 1 220px; min-width: 180px; }
+      .searchbox input {
+        width: 100%; font: inherit; font-size: 14.5px; padding: 9px 13px;
+        border: 1px solid var(--line-strong); border-radius: 8px; background: var(--surface); color: var(--ink);
+      }
+      .count-line { font-size: 13px; color: var(--faint); font-family: "IBM Plex Mono", monospace; }
+
+      /* ---------- Measure cards ---------- */
+      .measure-list { display: grid; gap: 12px; }
+      .measure {
+        background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+        padding: 18px 20px 16px; box-shadow: var(--shadow);
+      }
+      .measure[hidden] { display: none; }
+      .m-top { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; margin-bottom: 6px; }
+      .m-name { font-family: "Newsreader", serif; font-weight: 800; font-size: 21px; }
+      .m-desc { font-size: 15.5px; margin: 2px 0 12px; max-width: 68ch; }
+      .m-desc .origin { color: var(--faint); font-size: 13.5px; }
+      .bar-zone { position: relative; margin: 14px 0 6px; }
+      .bar-track { display: flex; height: 22px; border-radius: 5px; overflow: hidden; background: var(--surface-2); border: 1px solid var(--line); }
+      .bar-yes { background: var(--pass); height: 100%; transition: width .8s ease; }
+      .bar-no { background: color-mix(in srgb, var(--fail) 55%, var(--surface-2)); height: 100%; flex: 1; }
+      .threshold {
+        position: absolute; top: -5px; bottom: -5px; width: 2px; background: var(--ink);
+      }
+      .threshold::after {
+        content: attr(data-label); position: absolute; top: -17px; left: 50%; transform: translateX(-50%);
+        font-family: "IBM Plex Mono", monospace; font-size: 10.5px; color: var(--ink); white-space: nowrap; font-weight: 600;
+      }
+      .bar-labels { display: flex; justify-content: space-between; gap: 10px; font-size: 13.5px; margin-top: 5px; flex-wrap: wrap; }
+      .bar-labels .yes { color: var(--pass); font-weight: 700; }
+      .bar-labels .no { color: var(--fail); font-weight: 700; }
+      .bar-labels .votes { font-family: "IBM Plex Mono", monospace; font-weight: 500; color: var(--muted); font-size: 12.5px; }
+      .m-note { font-size: 13.5px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 9px; margin-top: 10px; }
+      .m-note strong { color: var(--ink); }
+
+      /* ---------- Tables ---------- */
+      .table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); box-shadow: var(--shadow); }
+      table { border-collapse: collapse; width: 100%; font-size: 14.5px; min-width: 640px; }
+      @media (max-width: 720px) {
+        .table-scroll { overflow-x: visible; }
+        table { min-width: 0; }
+        table thead { display: none; }
+        table, table tbody, table tr, table td { display: block; width: 100%; }
+        table tr { padding: 8px 0; border-bottom: 2px solid var(--line-strong); }
+        table tr:last-child { border-bottom: none; }
+        table td { border-bottom: none; padding: 7px 16px; }
+        table td::before {
+          content: attr(data-label); display: block; font-size: 11px; font-weight: 700;
+          text-transform: uppercase; letter-spacing: .06em; color: var(--faint); margin-bottom: 2px;
+        }
+      }
+      th { text-align: left; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); padding: 12px 16px 8px; border-bottom: 2px solid var(--line-strong); }
+      td { padding: 12px 16px; border-bottom: 1px solid var(--line); vertical-align: top; }
+      tr:last-child td { border-bottom: none; }
+      td.winner { font-weight: 700; }
+      .party-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 7px; }
+      .party-dot.d { background: var(--dem); } .party-dot.r { background: var(--rep); }
+      .num-cell { font-family: "IBM Plex Mono", monospace; font-size: 13.5px; white-space: nowrap; }
+      .sub { display: block; font-size: 12.5px; color: var(--faint); font-weight: 400; margin-top: 2px; }
+
+      /* ---------- House cards ---------- */
+      .house-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px; }
+      .district { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; box-shadow: var(--shadow); }
+      .district.spotlight { border: 2px solid var(--gold); grid-column: span 2; }
+      @media (max-width: 720px) { .district.spotlight { grid-column: span 1; } }
+      .d-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 10px; }
+      .d-num { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--gold); font-weight: 600; letter-spacing: .06em; }
+      .cand { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 5px 0; }
+      .cand .who { font-weight: 600; font-size: 15px; }
+      .cand .who .inc { font-weight: 400; color: var(--faint); font-size: 12.5px; }
+      .cand .pct { font-family: "IBM Plex Mono", monospace; font-size: 14px; font-weight: 600; }
+      .cand.winner .who { font-weight: 800; }
+      .splitbar { display: flex; height: 10px; border-radius: 4px; overflow: hidden; margin: 8px 0 10px; background: var(--surface-2); }
+      .splitbar .d { background: var(--dem); } .splitbar .r { background: var(--rep); } .splitbar .o { background: var(--line-strong); }
+      .d-foot { font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+      .d-foot .margin { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; }
+
+      /* ---------- Legislature bars ---------- */
+      .chamber-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+      @media (max-width: 720px) { .chamber-grid { grid-template-columns: 1fr; } }
+      .chamber { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 20px 22px; box-shadow: var(--shadow); }
+      .chamber h3 { margin-top: 0; }
+      .seat-row { margin: 14px 0; }
+      .seat-row .when { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 700; margin-bottom: 5px; display: flex; justify-content: space-between; }
+      .seat-row .when .tot { font-family: "IBM Plex Mono", monospace; text-transform: none; letter-spacing: 0; }
+      .seatbar { display: flex; height: 26px; border-radius: 5px; overflow: hidden; position: relative; }
+      .seatbar .d { background: var(--dem); color: #fff; }
+      .seatbar .r { background: var(--rep); color: #fff; }
+      .seatbar span { display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px; min-width: 34px; }
+      .super-line { position: relative; height: 16px; }
+      .super-line .mark { position: absolute; top: 0; transform: translateX(-50%); font-size: 11px; color: var(--gold); font-weight: 700; white-space: nowrap; }
+      .super-line .mark::before { content: "▲"; display: block; text-align: center; font-size: 9px; line-height: 1; }
+      .flip-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+      .flip-list li { background: var(--surface); border: 1px solid var(--line); border-left: 5px solid var(--gold); border-radius: 8px; padding: 12px 16px; font-size: 14.5px; box-shadow: var(--shadow); }
+      .flip-list .fd { font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--gold); font-weight: 600; display: block; margin-bottom: 3px; }
+
+      /* ---------- Judges / boards ---------- */
+      .mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+      .mini-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; box-shadow: var(--shadow); }
+      .mini-card h4 { margin: 0 0 6px; font-family: "Newsreader", serif; font-size: 18px; }
+      .mini-card p { margin: 5px 0; font-size: 14px; color: var(--muted); }
+      .mini-card p strong { color: var(--ink); }
+
+      /* ---------- Timeline ---------- */
+      .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+      .timeline::before { content: ""; position: absolute; left: 7px; top: 8px; bottom: 8px; width: 2px; background: var(--line-strong); }
+      .timeline li { position: relative; padding: 0 0 20px 34px; }
+      .timeline li::before { content: ""; position: absolute; left: 0; top: 5px; width: 16px; height: 16px; border-radius: 50%; background: var(--surface); border: 3px solid var(--gold); }
+      .timeline .t-date { font-family: "IBM Plex Mono", monospace; font-size: 12.5px; font-weight: 600; color: var(--gold); }
+      .timeline .t-body { font-size: 15px; }
+      .timeline .t-body strong { display: block; font-size: 15.5px; }
+
+      /* ---------- Q&A ---------- */
+      details.qa { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin-bottom: 10px; box-shadow: var(--shadow); }
+      details.qa summary { cursor: pointer; font-weight: 700; font-size: 16px; padding: 16px 20px; list-style: none; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+      details.qa summary::-webkit-details-marker { display: none; }
+      details.qa summary::after { content: "+"; font-family: "IBM Plex Mono", monospace; font-size: 20px; color: var(--gold); flex: none; }
+      details.qa[open ] summary::after { content: "–"; }
+      details.qa .a { padding: 0 20px 18px; color: var(--muted); font-size: 15px; max-width: 68ch; }
+      details.qa .a strong { color: var(--ink); }
+
+      /* ---------- Sources / footer ---------- */
+      .sources { font-size: 13.5px; color: var(--muted); }
+      .sources li { margin: 6px 0; overflow-wrap: anywhere; }
+      .caveat { background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 16px 20px; font-size: 14px; color: var(--muted); margin-top: 18px; }
+      .caveat strong { color: var(--ink); }
+      footer { margin-top: 56px; border-top: 1px solid var(--line-strong); padding-top: 18px; font-size: 13px; color: var(--faint); }
+
+      .empty-msg { display: none; padding: 26px; text-align: center; color: var(--muted); background: var(--surface); border: 1px dashed var(--line-strong); border-radius: 10px; }
+      .empty-msg.show { display: block; }
+
+      /* Fit both phone screens and the existing inline blog frame. */
+      .house-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr))}
+      .mini-grid{grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))}
+      .d-head,.seat-row .when{flex-wrap:wrap}.cand .who{min-width:0}.cand .pct{flex:none}
+      .toc a,.sources a{overflow-wrap:anywhere}
+      @media(max-width:420px){.wrap{padding:0 14px 44px}.measure,.district,.chamber{padding:16px 14px}.score-card{padding:18px 16px}.badge{max-width:100%;white-space:normal}.num-cell{white-space:normal}.bar-labels{gap:5px}.status-note{min-width:0}.stat-grid{grid-template-columns:1fr 1fr}h1{font-size:36px}}
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <header class="hero">
+        <div class="dateline">
+          <span>General election · <b>Tuesday, November 3, 2026</b></span>
+          <span>Colorado statewide ballot</span>
+          <span>Compiled Nov. 6, 2026</span>
+        </div>
+        <h1>Colorado 2026:<br>the <span class="accent">whole ballot</span>, not just the winners</h1>
+        <p class="lede">Every statewide measure with what it would have done and where it stood in the count, every statewide office, the Senate race, all eight U.S. House districts, the legislature's before-and-after party math, the boards and the judges — <strong>14 ballot measures were split 7–7 between passing and failing</strong>, while Democrats swept the statewide offices and U.S. Senate race and stand to take two-thirds supermajorities in both chambers of the legislature.</p>
+
+        <div class="status-strip">
+          <span class="unofficial">Unofficial results — nothing here is certified</span>
+          <span class="status-note">Vote figures retain the Muse story’s reported Secretary of State snapshot, compiled by Rocky Mountain Voice as of <strong>6:25 p.m. MST, Thursday, Nov. 5, 2026</strong>, with original call labels from that snapshot except CD-3, updated to AP’s Nov. 6 call. This is a dated snapshot, not a live results feed. Ballots cured for signature/ID problems and military/overseas ballots can still arrive through Nov. 12; state certification is Nov. 30.</span>
+        </div>
+
+<div class="caveat"><strong>Publication update · Nov. 6, 2026:</strong> This inline edition preserves the original vote-count snapshot. It updates AP’s call for Jeff Hurd in CD-3, corrects threshold and recount arithmetic, clarifies provisional outcomes and board-seat math, and repairs the statewide-office table. <a href="#sources">Sources and verification limits</a>.</div>
+        <div class="stat-grid">
+          <div class="stat"><div class="num">2,618,500</div><div class="lbl">ballots counted in the Nov. 5 snapshot — 64.05% of active voters; all 64 counties reported</div></div>
+          <div class="stat"><div class="num gold">7 – 7</div><div class="lbl">statewide ballot measures passing vs. failing, out of 14</div></div>
+          <div class="stat"><div class="num dem">4 of 4</div><div class="lbl">statewide offices won by Democrats — all open seats, all by 17–27 points</div></div>
+          <div class="stat"><div class="num dem">7–1</div><div class="lbl">possible U.S. House delegation, from 4–4, if the Democratic lead in CD-4 holds; AP has called six for Democrats and one for Republicans</div></div>
+          <div class="stat"><div class="num dem">+7</div><div class="lbl">projected legislative gains, Republican → Democratic, if all Nov. 5 leads hold; none projected the other way</div></div>
+          <div class="stat"><div class="num rep">1</div><div class="lbl">U.S. House race still uncalled by AP on Nov. 6: the 4th (D leading)</div></div>
+        </div>
+
+        <nav class="toc" aria-label="Sections">
+          <a href="#scorecard">Party scorecard</a>
+          <a href="#measures">Ballot measures</a>
+          <a href="#offices">Statewide offices</a>
+          <a href="#senate">U.S. Senate</a>
+          <a href="#house">U.S. House</a>
+          <a href="#legislature">State legislature</a>
+          <a href="#boards">Boards &amp; judges</a>
+          <a href="#next">Still open · what's next</a>
+          <a href="#qa">Questions &amp; answers</a>
+          <a href="#sources">Sources</a>
+        </nav>
+      </header>
+
+      <!-- ============ SCORECARD ============ -->
+      <section id="scorecard">
+        <div class="sec-head"><span class="kicker">§ 1</span><h2>What each party actually did</h2></div>
+        <p class="sec-sub">The split personality of the night: Democrats won the statewide offices, the U.S. Senate race and most U.S. House seats, while several conservative citizen initiatives passed anyway. Voters separated the people from the policies.</p>
+        <div class="score-grid">
+          <div class="score-card dem">
+            <h3>Democrats</h3>
+            <div class="tag">Won the people — offices, Congress, legislature</div>
+            <ul>
+              <li><strong>Swept all four statewide offices</strong> — Governor, Attorney General, Secretary of State, Treasurer — each an open seat and a Democratic hold, by 17 to 27 points.</li>
+              <li><strong>Re-elected Sen. John Hickenlooper</strong> by 24.7 points.</li>
+              <li><strong>Flipped two Republican U.S. House seats</strong> — CD-5 (Colorado Springs, first Democrat ever to win it) and CD-8 — and lead in a third, CD-4, where Lauren Boebert trails.</li>
+              <li><strong>On Nov. 5 leads: 7 gains, no losses:</strong> +1 in the Senate (24–11) and +6 in the House (49–16) on current leads — two-thirds supermajorities in both chambers.</li>
+              <li><strong>Held their existing board seats:</strong> all three CU Regent seats; State Board of Education retains a Democratic majority: 5–4 if Wright wins CD-3, 6–3 if Clementi wins.</li>
+              <li><strong>On measures:</strong> the graduated income tax (Amendment 87) and K-12 funding (Proposition NN) are passing; the 4.4% tax cap (Prop. 136) is failing.</li>
+            </ul>
+          </div>
+          <div class="score-card rep">
+            <h3>Republicans</h3>
+            <div class="tag">Lost the offices — but won several policy fights</div>
+            <ul>
+              <li><strong>Lost all four statewide offices</strong> and the Senate race by roughly 25 points.</li>
+              <li><strong>Two House incumbents defeated</strong> (Jeff Crank in CD-5, Gabe Evans in CD-8); a third, Lauren Boebert in CD-4, trails in an uncalled race. AP called CD-3 for Jeff Hurd on Nov. 6.</li>
+              <li><strong>Were on course to lose 7 legislative seats</strong> and with them the numbers needed to block veto overrides and referred amendments in either chamber.</li>
+              <li><strong>Four conservative propositions were passing:</strong> Prop. 132 (fentanyl penalties), Prop. 133 (life without parole for trafficking a minor — the biggest Yes of the night at 62.15%), Prop. 134 (school sports by biological sex) and Prop. 135 (barring sex-altering surgery on minors).</li>
+              <li><strong>But all six Republican-backed constitutional amendments were below their passing threshold</strong> — Amendments 81–86 — and the income-tax cap, Prop. 136, was trailing while Amendment 87’s graduated tax was leading. Uncalled measures remain provisional.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ MEASURES ============ -->
+      <section id="measures">
+        <div class="sec-head"><span class="kicker">§ 2</span><h2>All 14 statewide ballot measures</h2></div>
+        <p class="sec-sub">The part of the ballot that changes the law. <strong>Amendments 81–86</strong> would add language to the state constitution, so each needed <strong>55% Yes</strong> — a threshold Amendment 85 was below despite a Yes majority. <strong>Amendment 87</strong> and all seven <strong>propositions</strong> needed only a simple majority. Thirteen of the 14 were citizen-initiated; only Proposition NN was referred by the legislature (Senate Bill 26-135). Filter or search to explore.</p>
+
+        <div class="controls">
+          <div class="chips" role="group" aria-label="Filter measures">
+            <button class="chip" data-filter="all" aria-pressed="true">All 14</button>
+            <button class="chip" data-filter="pass" aria-pressed="false">Passing · 7</button>
+            <button class="chip" data-filter="fail" aria-pressed="false">Failing · 7</button>
+            <button class="chip" data-filter="amendment" aria-pressed="false">Amendments</button>
+            <button class="chip" data-filter="proposition" aria-pressed="false">Propositions</button>
+            <button class="chip" data-filter="close" aria-pressed="false">Close calls</button>
+          </div>
+          <div class="searchbox">
+            <input type="search" id="measure-search" placeholder="Search measures — try “tax”, “fentanyl”, “hunt”…" aria-label="Search ballot measures">
+          </div>
+        </div>
+        <p class="count-line" id="measure-count" role="status" aria-live="polite">Showing 14 of 14 measures</p>
+
+        <div class="measure-list" id="measure-list"><article class="measure" data-kind="amendment" data-result="fail" data-close="0" data-search="amendment 81 require law enforcement to notify the u.s. department of homeland security when a person who cannot be shown to be lawfully present is charged with a violent crime — or with any crime, if they have a prior felony."><div class="m-top"><span class="m-name">Amendment 81</span><span class="badge fail">Failed · AP called</span><span class="badge neutral">Constitutional amendment · needs 55%</span></div><p class="m-desc">Require law enforcement to notify the U.S. Department of Homeland Security when a person who cannot be shown to be lawfully present is charged with a violent crime — or with any crime, if they have a prior felony.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:44.96%"></div><div class="bar-no"></div></div><div class="threshold" data-label="55% needed" style="left:55%"></div></div><div class="bar-labels"><span class="yes">Yes 44.96% <span class="votes">1,145,731</span></span><span class="no">No 55.04% <span class="votes">1,402,744</span></span></div><p class="m-note">One of six citizen-initiated constitutional amendments below 55% in this snapshot.</p></article><article class="measure" data-kind="amendment" data-result="fail" data-close="0" data-search="amendment 82 create a constitutional right to buy and sell natural gas for cooking and heating in homes and businesses."><div class="m-top"><span class="m-name">Amendment 82</span><span class="badge fail">Failed · AP called</span><span class="badge neutral">Constitutional amendment · needs 55%</span></div><p class="m-desc">Create a constitutional right to buy and sell natural gas for cooking and heating in homes and businesses.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:46.44%"></div><div class="bar-no"></div></div><div class="threshold" data-label="55% needed" style="left:55%"></div></div><div class="bar-labels"><span class="yes">Yes 46.44% <span class="votes">1,171,838</span></span><span class="no">No 53.56% <span class="votes">1,351,709</span></span></div></article><article class="measure" data-kind="amendment" data-result="fail" data-close="0" data-search="amendment 83 create a constitutional right to hunt, fish and harvest wildlife, and name those activities the preferred means of wildlife management."><div class="m-top"><span class="m-name">Amendment 83</span><span class="badge fail">Failed · AP called</span><span class="badge neutral">Constitutional amendment · needs 55%</span></div><p class="m-desc">Create a constitutional right to hunt, fish and harvest wildlife, and name those activities the preferred means of wildlife management.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:45.24%"></div><div class="bar-no"></div></div><div class="threshold" data-label="55% needed" style="left:55%"></div></div><div class="bar-labels"><span class="yes">Yes 45.24% <span class="votes">1,143,055</span></span><span class="no">No 54.76% <span class="votes">1,383,542</span></span></div></article><article class="measure" data-kind="amendment" data-result="fail" data-close="0" data-search="amendment 84 require voters to write the last 4 digits of their social security number, or their colorado driver's licence / id number, on the outside of a mail ballot; ballots not cured under the process would not be counted."><div class="m-top"><span class="m-name">Amendment 84</span><span class="badge fail">Failed · AP called</span><span class="badge neutral">Constitutional amendment · needs 55%</span></div><p class="m-desc">Require voters to write the last 4 digits of their Social Security number, or their Colorado driver's licence / ID number, on the outside of a mail ballot; ballots not cured under the process would not be counted.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:36.82%"></div><div class="bar-no"></div></div><div class="threshold" data-label="55% needed" style="left:55%"></div></div><div class="bar-labels"><span class="yes">Yes 36.82% <span class="votes">939,341</span></span><span class="no">No 63.18% <span class="votes">1,612,154</span></span></div><p class="m-note"><strong>Lowest Yes share of any measure on the ballot</strong> — rejected by nearly two to one.</p></article><article class="measure" data-kind="amendment" data-result="fail" data-close="1" data-search="amendment 85 require state and local ballot questions to be written in plain language at no higher than an 8th-grade reading level."><div class="m-top"><span class="m-name">Amendment 85</span><span class="badge fail">Failing · below 55%, uncalled</span><span class="badge neutral">Constitutional amendment · needs 55%</span><span class="badge open">Close</span></div><p class="m-desc">Require state and local ballot questions to be written in plain language at no higher than an 8th-grade reading level.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:51.17%"></div><div class="bar-no"></div></div><div class="threshold" data-label="55% needed" style="left:55%"></div></div><div class="bar-labels"><span class="yes">Yes 51.17% <span class="votes">1,295,588</span></span><span class="no">No 48.83% <span class="votes">1,236,143</span></span></div><p class="m-note"><strong>The night's strangest result:</strong> Yes leads by 59,445 votes, but amendments adding constitutional language need 55% — the snapshot is 3.83 points short. The story’s source listed it as uncalled; this is not a final result.</p></article><article class="measure" data-kind="amendment" data-result="fail" data-close="0" data-search="amendment 86 add safeguards for congressional redistricting outside the regular once-a-decade process, including three public meetings, limits on dividing communities and partisan favoritism, and approval by both the redistricting commission and colorado supreme court."><div class="m-top"><span class="m-name">Amendment 86</span><span class="badge fail">Failing · uncalled</span><span class="badge neutral">Constitutional amendment · needs 55%</span></div><p class="m-desc">Add safeguards for congressional redistricting outside the regular once-a-decade process, including three public meetings, limits on dividing communities and partisan favoritism, and approval by both the redistricting commission and Colorado Supreme Court.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:46.93%"></div><div class="bar-no"></div></div><div class="threshold" data-label="55% needed" style="left:55%"></div></div><div class="bar-labels"><span class="yes">Yes 46.93% <span class="votes">1,164,972</span></span><span class="no">No 53.07% <span class="votes">1,317,548</span></span></div><p class="m-note">Unlike Amendment 85, this one also has fewer Yes than No votes in the snapshot.</p></article><article class="measure" data-kind="amendment" data-result="pass" data-close="1" data-search="amendment 87 replace colorado's flat 4.4% income tax with graduated rates (reported range 3.7%–8.4%) by amending tabor's single-rate rule, and let the state keep and spend roughly $2.7 billion a year more on k-12 education, health care and early childhood."><div class="m-top"><span class="m-name">Amendment 87</span><span class="badge pass">Passing · uncalled</span><span class="badge neutral">Constitutional amendment · needs a majority</span><span class="badge open">Close</span></div><p class="m-desc">Replace Colorado's flat 4.4% income tax with graduated rates (reported range 3.7%–8.4%) by amending TABOR's single-rate rule, and let the state keep and spend roughly $2.7 billion a year more on K-12 education, health care and early childhood.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:51.2%"></div><div class="bar-no"></div></div><div class="threshold" data-label="50% needed" style="left:50%"></div></div><div class="bar-labels"><span class="yes">Yes 51.20% <span class="votes">1,300,201</span></span><span class="no">No 48.80% <span class="votes">1,239,335</span></span></div><p class="m-note"><strong>Closest passing measure by Yes–No vote gap</strong> — a 60,866-vote margin. It needs only a simple majority (see Q&amp;A: it repeals rather than adds constitutional language), while its rival, the Prop. 136 tax cap, is trailing in this snapshot; neither outcome is treated as final here.</p></article><article class="measure" data-kind="proposition" data-result="pass" data-close="0" data-search="proposition nn raise k-12 investment funding 2% a year for 10 years by raising the state's tabor spending limit by the k-12 amount, with an annual audit. the only measure referred by the legislature (senate bill 26-135); the other 13 were citizen initiatives."><div class="m-top"><span class="m-name">Proposition NN</span><span class="badge pass">Passed · AP called</span><span class="badge neutral">Proposition · needs a majority</span></div><p class="m-desc">Raise K-12 investment funding 2% a year for 10 years by raising the state's TABOR spending limit by the K-12 amount, with an annual audit. <span class="origin">The only measure referred by the legislature (Senate Bill 26-135); the other 13 were citizen initiatives.</span></p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:56.44%"></div><div class="bar-no"></div></div><div class="threshold" data-label="50% needed" style="left:50%"></div></div><div class="bar-labels"><span class="yes">Yes 56.44% <span class="votes">1,432,911</span></span><span class="no">No 43.56% <span class="votes">1,106,068</span></span></div></article><article class="measure" data-kind="proposition" data-result="pass" data-close="1" data-search="proposition 132 raise felony classifications for fentanyl and synthetic-opioid distribution, manufacture, sale and possession; mandate treatment for some possession felonies; narrow sentencing exemptions."><div class="m-top"><span class="m-name">Proposition 132</span><span class="badge pass">Passing · uncalled</span><span class="badge neutral">Proposition · needs a majority</span><span class="badge open">Close</span></div><p class="m-desc">Raise felony classifications for fentanyl and synthetic-opioid distribution, manufacture, sale and possession; mandate treatment for some possession felonies; narrow sentencing exemptions.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:52.76%"></div><div class="bar-no"></div></div><div class="threshold" data-label="50% needed" style="left:50%"></div></div><div class="bar-labels"><span class="yes">Yes 52.76% <span class="votes">1,334,377</span></span><span class="no">No 47.24% <span class="votes">1,194,613</span></span></div><p class="m-note">Passing by 139,764 votes on the Nov. 5 count; AP had not yet called it.</p></article><article class="measure" data-kind="proposition" data-result="pass" data-close="0" data-search="proposition 133 expand human trafficking of a minor for sexual servitude to include trading anything of value for sexual activity with a minor, and raise the penalty to life without parole."><div class="m-top"><span class="m-name">Proposition 133</span><span class="badge pass">Passed · AP called</span><span class="badge neutral">Proposition · needs a majority</span></div><p class="m-desc">Expand human trafficking of a minor for sexual servitude to include trading anything of value for sexual activity with a minor, and raise the penalty to life without parole.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:62.15%"></div><div class="bar-no"></div></div><div class="threshold" data-label="50% needed" style="left:50%"></div></div><div class="bar-labels"><span class="yes">Yes 62.15% <span class="votes">1,571,254</span></span><span class="no">No 37.85% <span class="votes">956,940</span></span></div><p class="m-note"><strong>Highest Yes share of the 14 measures</strong>, and the first measure AP projected — at 9:08 p.m. on election night.</p></article><article class="measure" data-kind="proposition" data-result="pass" data-close="1" data-search="proposition 134 require k-12 and college sports teams to be designated male, female or coed, and limit participation to the team matching an athlete's sex by biological reproductive system (females may join male teams where no female team exists). takes effect jan. 1, 2027."><div class="m-top"><span class="m-name">Proposition 134</span><span class="badge pass">Passed · AP called Nov. 5</span><span class="badge neutral">Proposition · needs a majority</span><span class="badge open">Close</span></div><p class="m-desc">Require K-12 and college sports teams to be designated male, female or coed, and limit participation to the team matching an athlete's sex by biological reproductive system (females may join male teams where no female team exists). Takes effect Jan. 1, 2027.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:52.44%"></div><div class="bar-no"></div></div><div class="threshold" data-label="50% needed" style="left:50%"></div></div><div class="bar-labels"><span class="yes">Yes 52.44% <span class="votes">1,326,812</span></span><span class="no">No 47.56% <span class="votes">1,203,266</span></span></div></article><article class="measure" data-kind="proposition" data-result="pass" data-close="1" data-search="proposition 135 prohibit surgery on a minor to alter biological sex characteristics, and bar state or federal funds, medicaid and insurance from paying for it."><div class="m-top"><span class="m-name">Proposition 135</span><span class="badge pass">Passing · opponents conceded</span><span class="badge neutral">Proposition · needs a majority</span><span class="badge open">Close</span></div><p class="m-desc">Prohibit surgery on a minor to alter biological sex characteristics, and bar state or federal funds, Medicaid and insurance from paying for it.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:52.12%"></div><div class="bar-no"></div></div><div class="threshold" data-label="50% needed" style="left:50%"></div></div><div class="bar-labels"><span class="yes">Yes 52.12% <span class="votes">1,320,316</span></span><span class="no">No 47.88% <span class="votes">1,212,817</span></span></div><p class="m-note">Passing by 107,499 votes. AP had not formally called it, but opponents conceded defeat on Thursday afternoon (CPR).</p></article><article class="measure" data-kind="proposition" data-result="fail" data-close="0" data-search="proposition 136 cap the state income tax rate at 4.4% of federal taxable income for individuals and corporations — locking in the current flat rate."><div class="m-top"><span class="m-name">Proposition 136</span><span class="badge fail">Failing · uncalled</span><span class="badge neutral">Proposition · needs a majority</span></div><p class="m-desc">Cap the state income tax rate at 4.4% of federal taxable income for individuals and corporations — locking in the current flat rate.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:47.37%"></div><div class="bar-no"></div></div><div class="threshold" data-label="50% needed" style="left:50%"></div></div><div class="bar-labels"><span class="yes">Yes 47.37% <span class="votes">1,183,460</span></span><span class="no">No 52.63% <span class="votes">1,314,883</span></span></div><p class="m-note">The only proposition trailing. If it fails while Amendment 87 passes, that would avoid a conflict between the two tax measures.</p></article><article class="measure" data-kind="proposition" data-result="pass" data-close="1" data-search="proposition 137 let the state keep and spend sporting-goods sales-tax revenue above the tabor limit — about $175 million a year from july 1, 2027 — as a voter-approved revenue change for water, land and forest conservation, wildfire prevention and outdoor recreation."><div class="m-top"><span class="m-name">Proposition 137</span><span class="badge pass">Passing · uncalled</span><span class="badge neutral">Proposition · needs a majority</span><span class="badge open">Close</span></div><p class="m-desc">Let the state keep and spend sporting-goods sales-tax revenue above the TABOR limit — about $175 million a year from July 1, 2027 — as a voter-approved revenue change for water, land and forest conservation, wildfire prevention and outdoor recreation.</p><div class="bar-zone"><div class="bar-track"><div class="bar-yes" style="width:51.47%"></div><div class="bar-no"></div></div><div class="threshold" data-label="50% needed" style="left:50%"></div></div><div class="bar-labels"><span class="yes">Yes 51.47% <span class="votes">1,294,050</span></span><span class="no">No 48.53% <span class="votes">1,219,996</span></span></div><p class="m-note"><strong>Second-closest passing measure by Yes–No vote gap</strong> — a 74,054-vote margin.</p></article></div>
+        <div class="empty-msg" id="measure-empty">No measure matches that search. Try a different word — “tax”, “school”, “wildlife”.</div>
+
+        <div class="caveat"><strong>Read the “passing / failing” labels carefully.</strong> AP had formally called 7 of the 14 by Nov. 5 (Amendments 81–84 rejected; Propositions NN, 133 and 134 approved). The other seven are shown by where the Nov. 5 count stands: “Passing” and “Failing” describe the current totals relative to the measure’s threshold; they are not final outcomes or AP calls. Amendment 85 has a Yes majority but is below 55% in this snapshot. Remaining ballots can change totals.</div>
+      </section>
+
+      <!-- ============ OFFICES ============ -->
+      <section id="offices">
+        <div class="sec-head"><span class="kicker">§ 3</span><h2>Statewide offices</h2></div>
+        <p class="sec-sub">All four constitutional offices were open seats — no incumbent ran for re-election to any of them — and all four stayed Democratic. Every race below is AP-called; all figures unofficial.</p>
+        <div class="table-scroll"><table><thead><tr><th scope="col">Office</th><th scope="col">Winner</th><th scope="col">Runner-up</th><th scope="col">Margin</th><th scope="col">Why the seat was open</th></tr></thead><tbody><tr><td data-label="Office"><strong>Governor / Lt. Governor</strong><span class="sub">Joint ticket</span></td><td data-label="Winner" class="winner"><span class="party-dot d"></span>Phil Weiser / Lesley Dahlkemper (D)<span class="sub num-cell">1,558,328 · 60.75%</span></td><td data-label="Runner-up">Victor Marx / George Washington Markert (R)<span class="sub num-cell">862,353 · 33.62%</span><span class="sub">Five other tickets split the remaining ~5.6%</span></td><td data-label="Margin" class="num-cell">27.13 pts<span class="sub">695,975 votes</span></td><td data-label="Why the seat was open">Gov. Jared Polis (D) term-limited. Weiser, the outgoing Attorney General, becomes Colorado's 44th governor. AP called it at 7 p.m. as polls closed.</td></tr><tr><td data-label="Office"><strong>Attorney General</strong></td><td data-label="Winner" class="winner"><span class="party-dot d"></span>Jena Griswold (D)<span class="sub num-cell">1,482,264 · 58.55%</span></td><td data-label="Runner-up">Michael J. Allen (R)<span class="sub num-cell">1,049,369 · 41.45%</span><span class="sub">4th Judicial District DA</span></td><td data-label="Margin" class="num-cell">17.10 pts</td><td data-label="Why the seat was open">Phil Weiser (D) left to run for governor. Griswold moves over from Secretary of State after two terms there.</td></tr><tr><td data-label="Office"><strong>Secretary of State</strong></td><td data-label="Winner" class="winner"><span class="party-dot d"></span>Amanda Gonzalez (D)<span class="sub num-cell">1,520,200 · 59.78%</span></td><td data-label="Runner-up">James Wiley (R)<span class="sub num-cell">945,400 · 37.18%</span><span class="sub">Libertarian, American Constitution and Forward candidates split ~3%</span></td><td data-label="Margin" class="num-cell">22.60 pts</td><td data-label="Why the seat was open">Jena Griswold (D) left to run for Attorney General. Gonzalez is the Jefferson County Clerk and Recorder.</td></tr><tr><td data-label="Office"><strong>State Treasurer</strong></td><td data-label="Winner" class="winner"><span class="party-dot d"></span>Jeff Bridges (D)<span class="sub num-cell">1,475,515 · 58.42%</span></td><td data-label="Runner-up">Kevin Grantham (R)<span class="sub num-cell">985,078 · 39.00%</span><span class="sub">Fremont County commissioner, former Senate president</span></td><td data-label="Margin" class="num-cell">19.42 pts<span class="sub">490,437 votes</span></td><td data-label="Why the seat was open">Treasurer Dave Young (D) term-limited. Bridges is a state senator and Joint Budget Committee chair.</td></tr></tbody></table></div>
+      </section>
+
+      <!-- ============ SENATE ============ -->
+      <section id="senate">
+        <div class="sec-head"><span class="kicker">§ 4</span><h2>U.S. Senate</h2></div>
+        <p class="sec-sub">One of Colorado's two Senate seats was up. It was never close.</p>
+        <div class="district" style="max-width: 640px;">
+          <div class="d-head"><span class="d-num">U.S. SENATE · STATEWIDE</span><span class="badge pass">AP called · 7 p.m. election night</span></div>
+          <div class="cand winner"><span class="who"><span class="party-dot d"></span>John Hickenlooper (D) <span class="inc">incumbent</span></span><span class="pct">60.10%</span></div>
+          <div class="cand"><span class="who"><span class="party-dot r"></span>Mark Baisley (R)</span><span class="pct">35.43%</span></div>
+          <div class="splitbar"><div class="d" style="width:60.10%"></div><div class="r" style="width:35.43%"></div><div class="o" style="width:4.47%"></div></div>
+          <div class="d-foot"><span class="margin">Hickenlooper 1,548,768 · Baisley 913,062 · margin 24.67 pts</span><span>Forward, Libertarian, Unity and Approval Voting candidates took the remaining 4.47%. Democratic hold — Hickenlooper re-elected to a second term.</span></div>
+        </div>
+      </section>
+
+      <!-- ============ HOUSE ============ -->
+      <section id="house">
+        <div class="sec-head"><span class="kicker">§ 5</span><h2>U.S. House — all 8 districts</h2></div>
+        <p class="sec-sub">Colorado’s delegation was split <strong>4–4</strong> going in. AP has now called seven races: six Democratic wins — four holds plus the flips in the 5th and 8th — and Republican Jeff Hurd’s re-election in the 3rd on Nov. 6. If the Democratic lead in the still-uncalled 4th holds, the delegation would be <strong>7–1 Democratic</strong>; that final seat remains unresolved.</p>
+
+        <div class="house-grid">
+          <div class="district spotlight">
+            <div class="d-head"><span class="d-num">DISTRICT 4 · EASTERN PLAINS / DOUGLAS COUNTY</span><span class="badge open">Too close to call</span></div>
+            <div class="cand winner"><span class="who"><span class="party-dot d"></span>Eileen Laubacher (D) — leading</span><span class="pct">48.75%</span></div>
+            <div class="cand"><span class="who"><span class="party-dot r"></span>Lauren Boebert (R) <span class="inc">incumbent</span></span><span class="pct">47.95%</span></div>
+            <div class="splitbar"><div class="d" style="width:48.75%"></div><div class="r" style="width:47.95%"></div><div class="o" style="width:3.30%"></div></div>
+            <div class="d-foot">
+              <span class="margin">Laubacher 184,103 · Boebert 181,079 · lead 3,024 votes (0.80 pts) · ~97% counted</span>
+              <span>The remaining uncalled congressional race. Laubacher leads the incumbent with most ballots counted; Libertarian Douglas Mangeris holds 12,465 votes (3.30%). The lead widened from roughly 2,400–2,500 in earlier Thursday snapshots to 3,024 — and at 3,024 it sits <strong>well outside the automatic-recount threshold of ~920 votes</strong> (0.5% of the leader's total), so no recount is triggered on current figures. Boebert had not conceded in any Colorado source indexed as of Nov. 6. Remaining ballots are mainly signature-cure and overseas ballots, due by Nov. 12.</span>
+            </div>
+          </div>
+
+          <div class="district">
+            <div class="d-head"><span class="d-num">DISTRICT 3 · WESTERN SLOPE</span><span class="badge hold">Republican hold · AP Nov. 6</span></div>
+            <div class="cand winner"><span class="who"><span class="party-dot r"></span>Jeff Hurd (R) <span class="inc">incumbent</span> — AP called</span><span class="pct">49.31%</span></div>
+            <div class="cand"><span class="who"><span class="party-dot d"></span>Dwayne L. Romero (D)</span><span class="pct">47.43%</span></div>
+            <div class="splitbar"><div class="r" style="width:49.31%"></div><div class="d" style="width:47.43%"></div><div class="o" style="width:3.26%"></div></div>
+            <div class="d-foot"><span class="margin">Hurd 162,669 · Romero 156,472 · lead 6,197 (1.88 pts)</span><span>Romero led most of election night; the lead flipped overnight. Decision Desk HQ called it for Hurd on Nov. 5; AP called it on Nov. 6. Vote totals here remain the Nov. 5 snapshot. Outside recount territory.</span></div>
+          </div>
+
+          <div class="district">
+            <div class="d-head"><span class="d-num">DISTRICT 5 · COLORADO SPRINGS</span><span class="badge flip">Flip · R → D</span></div>
+            <div class="cand winner"><span class="who"><span class="party-dot d"></span>Jessica Killin (D)</span><span class="pct">50.52%</span></div>
+            <div class="cand"><span class="who"><span class="party-dot r"></span>Jeff Crank (R) <span class="inc">incumbent</span></span><span class="pct">45.80%</span></div>
+            <div class="splitbar"><div class="d" style="width:50.52%"></div><div class="r" style="width:45.80%"></div><div class="o" style="width:3.68%"></div></div>
+            <div class="d-foot"><span class="margin">Killin 155,598 · Crank 141,074 · margin 14,524 (4.72 pts)</span><span>AP called Thursday afternoon, Nov. 5; Crank conceded. Killin is the <strong>first Democrat ever elected in this district</strong>.</span></div>
+          </div>
+
+          <div class="district">
+            <div class="d-head"><span class="d-num">DISTRICT 8 · NORTH METRO / GREELEY</span><span class="badge flip">Flip · R → D</span></div>
+            <div class="cand winner"><span class="who"><span class="party-dot d"></span>Manny Rutinel (D)</span><span class="pct">54.88%</span></div>
+            <div class="cand"><span class="who"><span class="party-dot r"></span>Gabe Evans (R) <span class="inc">incumbent</span></span><span class="pct">41.24%</span></div>
+            <div class="splitbar"><div class="d" style="width:54.88%"></div><div class="r" style="width:41.24%"></div><div class="o" style="width:3.89%"></div></div>
+            <div class="d-foot"><span class="margin">Rutinel 150,941 · Evans 113,417 · margin 37,524 (13.64 pts)</span><span>AP called on election night. The state's marquee battleground — Evans won it by under 4,000 votes in 2024 — wasn't competitive this time.</span></div>
+          </div>
+
+          <div class="district">
+            <div class="d-head"><span class="d-num">DISTRICT 1 · DENVER</span><span class="badge dem">Democratic hold</span></div>
+            <div class="cand winner"><span class="who"><span class="party-dot d"></span>Melat Kiros (D)</span><span class="pct">78.30%</span></div>
+            <div class="cand"><span class="who"><span class="party-dot r"></span>Christy Peterson (R)</span><span class="pct">14.10%</span></div>
+            <div class="splitbar"><div class="d" style="width:78.30%"></div><div class="r" style="width:14.10%"></div><div class="o" style="width:7.60%"></div></div>
+            <div class="d-foot"><span class="margin">Kiros 228,081 · Peterson 41,059 · margin 64.2 pts</span><span>AP called. No incumbent on the ballot — Rep. Diana DeGette (D) lost the Democratic primary to Kiros.</span></div>
+          </div>
+
+          <div class="district">
+            <div class="d-head"><span class="d-num">DISTRICT 2 · BOULDER / FORT COLLINS</span><span class="badge dem">Democratic hold</span></div>
+            <div class="cand winner"><span class="who"><span class="party-dot d"></span>Joe Neguse (D) <span class="inc">incumbent</span></span><span class="pct">74.28%</span></div>
+            <div class="cand"><span class="who"><span class="party-dot r"></span>Kelley Anne Dennison (R)</span><span class="pct">23.90%</span></div>
+            <div class="splitbar"><div class="d" style="width:74.28%"></div><div class="r" style="width:23.90%"></div><div class="o" style="width:1.82%"></div></div>
+            <div class="d-foot"><span class="margin">Neguse 256,567 · Dennison 82,566 · margin 50.4 pts</span><span>AP called.</span></div>
+          </div>
+
+          <div class="district">
+            <div class="d-head"><span class="d-num">DISTRICT 6 · AURORA / SOUTH METRO</span><span class="badge dem">Democratic hold</span></div>
+            <div class="cand winner"><span class="who"><span class="party-dot d"></span>Jason Crow (D) <span class="inc">incumbent</span></span><span class="pct">65.55%</span></div>
+            <div class="cand"><span class="who"><span class="party-dot r"></span>Jason Clark (R)</span><span class="pct">31.61%</span></div>
+            <div class="splitbar"><div class="d" style="width:65.55%"></div><div class="r" style="width:31.61%"></div><div class="o" style="width:2.84%"></div></div>
+            <div class="d-foot"><span class="margin">Crow 169,591 · Clark 81,793 · margin 33.9 pts</span><span>AP called.</span></div>
+          </div>
+
+          <div class="district">
+            <div class="d-head"><span class="d-num">DISTRICT 7 · JEFFERSON / BROOMFIELD</span><span class="badge dem">Democratic hold</span></div>
+            <div class="cand winner"><span class="who"><span class="party-dot d"></span>Brittany Pettersen (D) <span class="inc">incumbent</span></span><span class="pct">60.73%</span></div>
+            <div class="cand"><span class="who"><span class="party-dot r"></span>Tim Bennett (R)</span><span class="pct">36.15%</span></div>
+            <div class="splitbar"><div class="d" style="width:60.73%"></div><div class="r" style="width:36.15%"></div><div class="o" style="width:3.12%"></div></div>
+            <div class="d-foot"><span class="margin">Pettersen 228,250 · Bennett 135,870 · margin 24.6 pts</span><span>AP called — Pettersen's third term.</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ LEGISLATURE ============ -->
+      <section id="legislature">
+        <div class="sec-head"><span class="kicker">§ 6</span><h2>State legislature — before and after</h2></div>
+        <p class="sec-sub">Democrats didn't just hold the Capitol — on current leads they reach the <strong>two-thirds supermajority in both chambers</strong>: enough to override a governor's veto and to refer constitutional amendments to the ballot without a single Republican vote. The Senate needs 24 of its 35 seats to meet a two-thirds threshold (24/35 is about 68.6%); the Nov. 5 snapshot includes two then-uncalled Democratic leads. The House clears its 44-seat bar on AP calls alone.</p>
+
+        <div class="chamber-grid">
+          <div class="chamber">
+            <h3>State Senate · 35 seats</h3>
+            <p style="font-size:13.5px;color:var(--muted);margin:0;">21 seats were up in 2026; 14 members were not on the ballot. Net: <strong style="color:var(--dem)">Democrats +1</strong></p>
+            <div class="seat-row">
+              <div class="when"><span>Before · Nov. 3</span><span class="tot">23 D – 12 R</span></div>
+              <div class="seatbar"><div class="d" style="width:65.7%"><span>23</span></div><div class="r" style="width:34.3%"><span>12</span></div></div>
+            </div>
+            <div class="seat-row">
+              <div class="when"><span>After · projected on Nov. 5 leads</span><span class="tot">24 D – 11 R</span></div>
+              <div class="seatbar"><div class="d" style="width:68.6%"><span>24</span></div><div class="r" style="width:31.4%"><span>11</span></div></div>
+              <div class="super-line"><div class="mark" style="left:68.57%">two-thirds threshold: 24</div></div>
+            </div>
+            <p style="font-size:13.5px;color:var(--muted);">In the original Nov. 5 snapshot, AP had called 19 of the 21 Senate races. The projection needs both uncalled Democratic leads to hold: SD-11 (Tony Exum Sr., 60.46%) and the SD-30 flip below. Democrats defended all 15 of their seats on the ballot, including targeted SD-3, SD-15 and SD-21.</p>
+          </div>
+          <div class="chamber">
+            <h3>State House · 65 seats</h3>
+            <p style="font-size:13.5px;color:var(--muted);margin:0;">All 65 seats were up. Net: <strong style="color:var(--dem)">Democrats +6</strong></p>
+            <div class="seat-row">
+              <div class="when"><span>Before · Nov. 3</span><span class="tot">43 D – 22 R</span></div>
+              <div class="seatbar"><div class="d" style="width:66.2%"><span>43</span></div><div class="r" style="width:33.8%"><span>22</span></div></div>
+            </div>
+            <div class="seat-row">
+              <div class="when"><span>After · projected on Nov. 5 leads</span><span class="tot">49 D – 16 R</span></div>
+              <div class="seatbar"><div class="d" style="width:75.4%"><span>49</span></div><div class="r" style="width:24.6%"><span>16</span></div></div>
+              <div class="super-line"><div class="mark" style="left:67.7%">two-thirds threshold: 44</div></div>
+            </div>
+            <p style="font-size:13.5px;color:var(--muted);">In the original Nov. 5 snapshot, AP had called 55 of 65 House races; counting the leaders in the 10 uncalled races gives 49–16 — a total agreed across the Secretary of State compilation and two independent analyses.</p>
+          </div>
+        </div>
+
+        <h3>The 7 projected flips — every one Republican → Democratic</h3>
+        <p class="sec-sub" style="margin-top:0;">No Democratic-held seat was projected to flip in either chamber in this snapshot. Two of the winners had lost the same seat in 2024 by recount-sized margins.</p>
+        <ul class="flip-list">
+          <li><span class="fd">SENATE DISTRICT 30 · HIGHLANDS RANCH / LONE TREE · LEADING, NOT YET CALLED</span><strong>Kevin Leung (D)</strong> leads incumbent <strong>John Carson (R)</strong> — appointed to the seat in 2025 — by 48,356 (52.39%) to 43,947 (47.61%), about 4,400 votes. The projected Senate flip that reaches the 24-seat two-thirds threshold.</li>
+          <li><span class="fd">HOUSE DISTRICT 15 · LEADING</span><strong>Jeff K. Livingston (D)</strong> leads Pricella Tiegen (R) 16,615 (49.15%) to 16,053 (47.49%) in an open seat (Rep. Scott Bottoms, R, ran for governor) that Republicans carried by 16–18 points in the last two cycles.</li>
+          <li><span class="fd">HOUSE DISTRICT 16 · COLORADO SPRINGS · AP CALLED</span><strong>Steph Vigil (D)</strong> beat Jill Haffley (R) 18,006 (56.42%) to 13,187 (41.32%). Vigil lost this seat in 2024 by <strong>3 votes</strong> after a recount.</li>
+          <li><span class="fd">HOUSE DISTRICT 19 · AP CALLED</span><strong>Jillaire McMillan (D)</strong> beat incumbent Dan Woog (R) 25,083 (58.92%) to 17,485 (41.08%). McMillan lost to Woog in 2024 by 110 votes after a recount.</li>
+          <li><span class="fd">HOUSE DISTRICT 21 · COLORADO SPRINGS · LEADING</span><strong>Michelle Tweed (D)</strong> leads Brenda Miller (R) 10,782 (50.56%) to 10,542 (49.44%) — <strong>240 votes, the closest House race in the state</strong>, still outside the recount threshold.</li>
+          <li><span class="fd">HOUSE DISTRICT 50 · GREELEY · LEADING</span><strong>Tommy Butler (D)</strong> leads incumbent Ryan Gonzalez (R) 10,146 (59.48%) to 6,911 (40.52%).</li>
+          <li><span class="fd">HOUSE DISTRICT 51 · LOVELAND · LEADING</span><strong>Jacki Marsh (D)</strong> leads Amy Parks (R) 21,524 (51.80%) to 20,030 (48.20%) in an open seat (Rep. Ron Weinberg, R, did not run again).</li>
+        </ul>
+      </section>
+
+      <!-- ============ BOARDS & JUDGES ============ -->
+      <section id="boards">
+        <div class="sec-head"><span class="kicker">§ 7</span><h2>Boards &amp; judges</h2></div>
+        <p class="sec-sub">The bottom of the ballot. No at-large seat was up on either board this cycle; each elected three members by congressional district.</p>
+
+        <h3>University of Colorado Board of Regents — all three seats Democratic, board stays 5–4 D</h3>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>Regent · District 2</h4><p><strong>Edie Hooton (D)</strong> — 230,809 · 70.23%</p><p>over Marty Neilson (R) — 86,992 · 26.47%. Open seat; AP called.</p></div>
+          <div class="mini-card"><h4>Regent · District 6</h4><p><strong>Ilana Spiegel (D, inc.)</strong> — 156,372 · 62.57%</p><p>over Veanessa Burbage (R) — 83,115 · 33.26%. AP called.</p></div>
+          <div class="mini-card"><h4>Regent · District 7</h4><p><strong>Nolbert Chavez (D, inc.)</strong> — 206,516 · 57.29%</p><p>over Paul Mueller (R) — 138,996 · 38.56%. AP called.</p></div>
+        </div>
+
+        <h3>State Board of Education — Democratic majority holds either way</h3>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>Board · District 1</h4><p><strong>Lisa Escárcega (D)</strong> — 235,512 · 82.54%</p><p>over Frederick Espinoza (R) — 44,395 · 15.56%. AP called.</p></div>
+          <div class="mini-card"><h4>Board · District 7</h4><p><strong>Karla Esser (D)</strong> — 217,238 · 59.98%</p><p>over Steve Barton (R) — 133,257 · 36.80%. AP called.</p></div>
+          <div class="mini-card"><h4>Board · District 3 <span class="badge open">Uncalled</span></h4><p><strong>Sherri M. Wright (R)</strong> leading — 163,407 · 50.96%</p><p>over Barb Clementi (D) — 157,235 · 49.04%, a 6,172-vote lead. Early Wednesday this race sat exactly on the recount line; it has since moved away from it.</p></div>
+        </div>
+
+        <h3>Judicial retention — 120 of 124 leading for retention; 4 trailing</h3>
+        <p class="sec-sub" style="margin-top:0;">Retention needs only a majority of Yes votes, and Colorado voters almost always give it. Four judges were below 50% Yes on Nov. 5 — as of the count, they would not be retained. All statewide appellate judges were leading for retention, led by Supreme Court Justice William W. Hood III at 65.85% Yes; the six Court of Appeals judges ranged from 66.61% to 68.68% Yes. AP does not call retention races.</p>
+        <div class="mini-grid">
+          <div class="mini-card"><h4>William David Alexander</h4><p>District Court · 10th Judicial District (Pueblo)</p><p><strong>41.44% Yes</strong> — 24,416 Yes / 34,496 No</p></div>
+          <div class="mini-card"><h4>Dina M. Christiansen</h4><p>District Court · 13th Judicial District</p><p><strong>41.80% Yes</strong> — 10,253 Yes / 14,275 No. Her local evaluation commission found she did not meet standards; the state commission found that local process violated the rules and recommended retention — voters had both findings.</p></div>
+          <div class="mini-card"><h4>Jeremy P. Boyce</h4><p>County Court · Crowley County</p><p><strong>43.06% Yes</strong> — 506 Yes / 669 No. Boyce resigned while voting was underway; the governor will appoint his successor regardless.</p></div>
+          <div class="mini-card"><h4>JenniLynn E. Lawrence</h4><p>District Court · 21st Judicial District (Mesa County)</p><p><strong>48.55% Yes</strong> — 29,046 Yes / 30,779 No, trailing by 1,733 votes — the closest of the four, and outside recount margin.</p></div>
+        </div>
+      </section>
+
+      <!-- ============ STILL OPEN ============ -->
+      <section id="next">
+        <div class="sec-head"><span class="kicker">§ 8</span><h2>Still open — and what happens next</h2></div>
+        <p class="sec-sub"><strong>The cited Nov. 5 compilation showed no statewide, federal or legislative race inside the automatic-recount margin</strong> (a lead of 0.5% or less of the winner's vote total). Two local measures identified in the cited snapshot were within the margin: <strong>Jefferson County Schools Ballot Issue 5A</strong>, where No leads Yes by <strong>3 votes</strong> (150,894 to 150,891), and <strong>Bennett Fire District Ballot Issue 7F</strong>, where Yes leads by <strong>5 votes</strong> (1,857 to 1,852). Both recounts can only be ordered after county canvass. Reports that the Boebert or Evans campaigns would seek recounts rest on single secondary sources and were not confirmed in Colorado outlets — treat them as talk, not filings.</p>
+        <ul class="timeline">
+          <li><span class="t-date">THU · NOV 12</span><div class="t-body"><strong>Last ballots arrive</strong>Signature-cure and military/overseas ballots can still be received and counted through Nov. 12. These are the main ballots left in close races like CD-4.</div></li>
+          <li><span class="t-date">BY WED · NOV 25</span><div class="t-body"><strong>County canvass boards certify</strong>Each county's canvass board reviews and certifies its results — the step that makes recount math official.</div></li>
+          <li><span class="t-date">BY FRI · NOV 27</span><div class="t-body"><strong>Recount deadline</strong>The Secretary of State must order any mandatory recount by Nov. 27. Recount eligibility is determined from the completed canvass, not this early snapshot.</div></li>
+          <li><span class="t-date">MON · NOV 30</span><div class="t-body"><strong>Statewide certification</strong>Statewide results are scheduled for certification. Mandatory recounts must finish by Dec. 4; requested recounts by Dec. 8. Recount results can alter the final totals.</div></li>
+        </ul>
+        <div class="caveat"><strong>One regional measure worth knowing:</strong> Ballot Issue 7A — a 0.333% sales tax in the Front Range Passenger Rail District to fund the Pueblo–Fort Collins “Colorado Connector” — was leading at roughly 55–57% Yes on partial district totals. It's a district measure, not one of the 14 statewide measures above.</div>
+      </section>
+
+      <!-- ============ Q&A ============ -->
+      <section id="qa">
+        <div class="sec-head"><span class="kicker">§ 9</span><h2>Questions &amp; answers</h2></div>
+        <p class="sec-sub">The parts of these results that don't explain themselves.</p>
+
+        <details class="qa">
+          <summary>Amendment 85 has more Yes than No votes. Why is it marked failing?</summary>
+          <div class="a">Because of the 55% rule. Since 2016, any amendment that <strong>adds language</strong> to the Colorado constitution needs 55% Yes, not a bare majority. Amendment 85 (plain-language ballot questions) has 51.17% Yes to 48.83% No in this snapshot — a lead of 59,445 votes — but is <strong>3.83 points below the threshold</strong>. That is why it is marked failing rather than passing. It was uncalled in the original snapshot, and remaining ballots can change the totals.</div>
+        </details>
+        <details class="qa">
+          <summary>Then why did Amendment 87 — also a constitutional amendment — need only a majority?</summary>
+          <div class="a">The 55% rule applies only to amendments that <strong>add</strong> language. The Secretary of State lists Amendment 87 as requiring a simple majority because it works by repealing the constitution's single-rate income-tax requirement rather than adding new language. In this snapshot, Amendment 87 is above its threshold at 51.20%, while the rival tax cap, Proposition 136, is below its threshold at 47.37%. Both were uncalled; these are not certified outcomes.</div>
+        </details>
+        <details class="qa">
+          <summary>Which passing measure had the smallest Yes–No vote gap?</summary>
+          <div class="a"><strong>Amendment 87</strong>, the graduated income tax: Yes leads by <strong>60,866 votes</strong> (51.20%–48.80%). Next is Proposition 137 (conservation funding from sporting-goods tax revenue) at 74,054 votes, then Proposition 135 at 107,499. Amendment 85 has a smaller Yes–No gap (59,445) but is below its separate 55% passing threshold, so a Yes–No gap alone does not rank how close a constitutional measure is to passing. At the other extreme, Proposition 133 drew the highest Yes share of the night — 62.15% — and Amendment 84 (mail-ballot ID numbers) the lowest, 36.82%.</div>
+        </details>
+        <details class="qa">
+          <summary>Is Lauren Boebert's race over?</summary>
+          <div class="a">Not officially. AP had <strong>not called CD-4</strong> as of Nov. 6: Eileen Laubacher (D) leads Boebert 184,103 (48.75%) to 181,079 (47.95%) with about 97% of the vote counted. The 3,024-vote lead is about three times the automatic-recount threshold (~920 votes), so no recount is triggered unless the margin collapses as cure and overseas ballots are counted through Nov. 12. Boebert had not conceded in any Colorado source indexed as of Nov. 6.</div>
+        </details>
+        <details class="qa">
+          <summary>How did Republicans lose the statewide offices while four conservative measures were passing?</summary>
+          <div class="a">Because measures aren't candidates. Props. 132–135 were citizen initiatives decided on their own merits, and each drew majority support — 52–62% Yes — from an electorate that simultaneously voted 59–61% Democratic for governor and senator. The pattern has a limit, though: when conservative ideas were packaged as <strong>constitutional amendments</strong> needing 55%, all six were below that threshold in the snapshot, and the tax cap (Prop. 136) was trailing too. Uncalled measures remain provisional. Voters picked Democratic people and a mixed bag of policies.</div>
+        </details>
+        <details class="qa">
+          <summary>What does a legislative supermajority actually let Democrats do?</summary>
+          <div class="a">Two things mainly: <strong>override a governor's veto</strong> and <strong>refer constitutional amendments to the ballot</strong>, both of which take two-thirds of each chamber. In the Senate, 24 of 35 meets the two-thirds threshold; the Nov. 5 projection includes the then-uncalled Democratic leads in SD-11 and SD-30. In the House, 49 of 65 clears the 44-seat bar with room to spare. Note the practical catch: Governor-elect Weiser is himself a Democrat, so veto overrides matter less than the amendment-referral power — which provides a legislative route to put future constitutional amendments before voters.</div>
+        </details>
+        <details class="qa">
+          <summary>When are these results final?</summary>
+          <div class="a"><strong>Statewide certification is scheduled for November 30.</strong> Cure materials and eligible military/overseas ballots are due Nov. 12; county canvasses must finish by Nov. 25. Mandatory recounts must be ordered by Nov. 27 and completed by Dec. 4; requested recounts must finish by Dec. 8. The figures here are unofficial. CD-3 was called by AP on Nov. 6, while CD-4 remained uncalled. Other call labels retain the dated source snapshot rather than claiming to be a live tally.</div>
+        </details>
+        <details class="qa">
+          <summary>Which local measures were within recount margins in this snapshot?</summary>
+          <div class="a">The cited snapshot identified two local measures within the automatic-recount margin: <strong>Jeffco Schools Issue 5A</strong>, trailing by 3 votes out of ~301,000 cast, and <strong>Bennett Fire Issue 7F</strong>, leading by 5 votes out of ~3,700. The closest legislative race, HD-21 at 240 votes, sounds tiny but is about 2.23% of the leader’s total — more than four times the 0.5% threshold. A losing candidate can also request and pay for a recount at a wider margin, but no formal request was verified in the sources as of Nov. 6.</div>
+        </details>
+      </section>
+
+      <!-- ============ SOURCES ============ -->
+      <section id="sources">
+        <div class="sec-head"><span class="kicker">§ 10</span><h2>Sources &amp; method</h2></div>
+        <p class="sec-sub">All vote figures are unofficial. Tables preserve the Muse story’s Nov. 5, 6:25 p.m. MST snapshot attributed to the Secretary of State through Rocky Mountain Voice; they have not been mixed with later totals. The official ENR portal was inaccessible during this publication check, so the raw totals could not be independently reverified directly. AP’s Nov. 6 CD-3 call, official ballot descriptions, election deadlines and arithmetic were checked separately.</p>
+        <ul class="sources">
+<li>Colorado automatic-recount rule: compare the margin with 0.5% of the largest candidate or Yes/No vote total — <a href="https://law.justia.com/codes/colorado/title-1/general-primary-recall-and-congressional-vacancy-elections/article-10-5/section-1-10-5-101/" target="_blank" rel="noopener noreferrer">C.R.S. 1-10.5-101</a>.</li>
+          <li>AP, Nov. 6 call for Jeff Hurd — <a href="https://apnews.com/article/5b16e53d2f9e4494b95166430a2703b2" target="_blank" rel="noopener noreferrer">AP call</a>.</li>
+          <li>Colorado Legislative Council, official 2026 Blue Book, ballot descriptions and thresholds — <a href="https://content.leg.colorado.gov/sites/default/files/2026-bluebook-english-accessible_1.pdf" target="_blank" rel="noopener noreferrer">Blue Book</a>.</li>
+          <li>Colorado Secretary of State, Nov. 12 receipt and cure deadline — <a href="https://content.govdelivery.com/accounts/COSOS/bulletins/42f27c3" target="_blank" rel="noopener noreferrer">voter deadline notice</a>.</li>
+          <li>Colorado Secretary of State, official canvass and recount calendar — <a href="https://www.sos.state.co.us/pubs/elections/calendars/2026ElectionCalendar.pdf" target="_blank" rel="noopener noreferrer">2026 election calendar</a>.</li>
+          <li>Colorado certification schedule and governing statutes — <a href="https://www.brennancenter.org/index.php/our-work/research-reports/colorado-election-certification-processes-and-guardrails" target="_blank" rel="noopener noreferrer">certification process</a>.</li>
+
+          <li>Colorado Secretary of State, Election Night Reporting (official results portal) — <a href="https://results.enr.clarityelections.com/CO/127407/web.345435/#/summary" target="_blank" rel="noopener noreferrer">results.enr.clarityelections.com/CO/127407</a></li>
+          <li>Rocky Mountain Voice, “Colorado 2026 election results: Every race on the ballot” (SOS ENR summary compilation; updated 6:25 p.m. MST, Nov. 5, 2026) — <a href="https://rockymountainvoice.com/2026/11/03/colorado-2026-election-results-every-race-on-the-ballot/" target="_blank" rel="noopener noreferrer">rockymountainvoice.com</a></li>
+          <li>Rocky Mountain Voice, “Colorado ballot measures 2026: 7 on track to pass, 7 on track to fail” — <a href="https://rockymountainvoice.com/2026/11/04/colorado-ballot-measures-2026-7-on-track-to-pass-7-on-track-to-fail/" target="_blank" rel="noopener noreferrer">rockymountainvoice.com</a></li>
+          <li>Rocky Mountain Voice, “Colorado Democrats hit two-thirds as Republicans lose 7 legislative seats” — <a href="https://rockymountainvoice.com/2026/11/04/colorado-democrats-hit-two-thirds-as-republicans-lose-7-legislative-seats/" target="_blank" rel="noopener noreferrer">rockymountainvoice.com</a></li>
+          <li>Associated Press, 2026 election results — U.S. House District 4 (uncalled; Laubacher 184,103 / Boebert 181,079) — <a href="https://apnews.com/projects/elections-2026/?ap_doc=ap%2Frg1%2FWyJhcC92Mi8yMDI2MTEwMy9sLzY2MTYvQ08vcyIsWyIxNzQ2MTgiLCI2ODg5NyJdXQ" target="_blank" rel="noopener noreferrer">apnews.com</a></li>
+          <li>Associated Press, 2026 election results — U.S. House District 3 (AP called Nov. 6; Nov. 5 snapshot: Hurd 162,669 / Romero 156,472) — <a href="https://apnews.com/projects/elections-2026/?ap_doc=ap%2Frg1%2FWyJhcC92Mi8yMDI2MTEwMy9sLzY2MTUvQ08vcyIsWyIxNjQxNTgiLCIxNzQ2MTciXV0" target="_blank" rel="noopener noreferrer">apnews.com</a></li>
+          <li>Associated Press, 2026 election results — Governor (called; Weiser) — <a href="https://apnews.com/projects/elections-2026/?ap_doc=ap%2Frg1%2FWyJhcC92Mi8yMDI2MTEwMy9sLzY2MTkvQ08vcyIsWyIxMDQzNjEiLCIxNzQ2MjQiLCIxNzc5MTMiLCIxNzg4MjIiLCIxNzg4MjMiLCI2NzA0MyIsIjcxNzk2Il1d" target="_blank" rel="noopener noreferrer">apnews.com</a></li>
+          <li>Associated Press, 2026 election results — U.S. Senate (called; Hickenlooper) — <a href="https://apnews.com/projects/elections-2026/?ap_doc=ap%2Fv2%2F20261103%2Fl%2F7168%2FCO%2Fs%2F60601" target="_blank" rel="noopener noreferrer">apnews.com</a></li>
+          <li>Decision Desk HQ, Colorado U.S. House 3 (called for Hurd, Nov. 5) — <a href="https://votes.decisiondeskhq.com/races/2026-11-03/colorado-us-house-3-general-election" target="_blank" rel="noopener noreferrer">votes.decisiondeskhq.com</a></li>
+          <li>CPR News, treasurer's race (Bridges / Grantham) — <a href="https://www.cpr.org/2026/11/03/colorado-election-results-treasurer-bridges-grantham/" target="_blank" rel="noopener noreferrer">cpr.org</a></li>
+          <li>CPR News, Propositions 134 and 135 (opponents concede) — <a href="https://www.cpr.org/2026/11/03/colorado-election-results-prop-134-prop-135-transgender-youth/" target="_blank" rel="noopener noreferrer">cpr.org</a></li>
+          <li>CPR News, Governor-elect Weiser transition (legislative supermajority) — <a href="https://www.cpr.org/2026/11/04/governor-elect-weiser-transfer-team/" target="_blank" rel="noopener noreferrer">cpr.org</a></li>
+          <li>The Sum and Substance, “Democrats capture supermajorities — and then some — in Colorado Legislature” — <a href="https://tsscolorado.com/democrats-capture-supermajorities-and-then-some-in-colorado-legislature/" target="_blank" rel="noopener noreferrer">tsscolorado.com</a></li>
+          <li>Chalkbeat Colorado, 2026 CU Board of Regents results (board stays 5–4 D) — <a href="https://www.chalkbeat.org/colorado/2026/11/03/2026-university-of-colorado-board-of-regents-election-results/" target="_blank" rel="noopener noreferrer">chalkbeat.org</a></li>
+          <li>Golden Transcript, “Jeffco school tax measure 5A trails by just 3 votes” — <a href="https://www.thegoldentranscript.com/news/education/jeffco-school-tax-measure-5a-trails-by-just-3-votes/article_05c0e791-a580-45f9-b2e6-d6cf8b951734.html" target="_blank" rel="noopener noreferrer">thegoldentranscript.com</a></li>
+          <li>KVNF (CPR affiliate), 2026 midterm election results — <a href="https://www.kvnf.org/kvnf-stories/2026-11-04/2026-mid-term-elections-results" target="_blank" rel="noopener noreferrer">kvnf.org</a></li>
+        </ul>
+        <div class="caveat"><strong>What couldn't be pinned down:</strong> the Colorado Sun and Denver Post live results pages were not directly retrievable during research, so their reporting is reflected only where other outlets quoted it — every number above instead traces to the Secretary of State compilation, AP, CPR, or the other sources listed. One compilation's internal House called-count disagrees with itself (44 vs. 45 Democrats called), but the 49–16 lead total used here is corroborated by two independent analyses. Vote figures remain unofficial until certification; recounts can produce later revisions.</div>
+      </section>
+
+      <footer>
+        Colorado general election · Tuesday, November 3, 2026 · Unofficial results compiled Friday, November 6, 2026, from the Secretary of State's Nov. 5 snapshot and AP calls. Certification: Nov. 30, 2026.
+      </footer>
+    </div>
+
+    <script>
+      var MEASURES = [
+        { id: "81", kind: "amendment", name: "Amendment 81", threshold: 55,
+          desc: "Require law enforcement to notify the U.S. Department of Homeland Security when a person who cannot be shown to be lawfully present is charged with a violent crime — or with any crime, if they have a prior felony.",
+          yes: 1145731, yesPct: 44.96, no: 1402744, noPct: 55.04,
+          result: "fail", badge: "Failed · AP called", close: false,
+          note: "One of six citizen-initiated constitutional amendments below 55% in this snapshot." },
+        { id: "82", kind: "amendment", name: "Amendment 82", threshold: 55,
+          desc: "Create a constitutional right to buy and sell natural gas for cooking and heating in homes and businesses.",
+          yes: 1171838, yesPct: 46.44, no: 1351709, noPct: 53.56,
+          result: "fail", badge: "Failed · AP called", close: false, note: "" },
+        { id: "83", kind: "amendment", name: "Amendment 83", threshold: 55,
+          desc: "Create a constitutional right to hunt, fish and harvest wildlife, and name those activities the preferred means of wildlife management.",
+          yes: 1143055, yesPct: 45.24, no: 1383542, noPct: 54.76,
+          result: "fail", badge: "Failed · AP called", close: false, note: "" },
+        { id: "84", kind: "amendment", name: "Amendment 84", threshold: 55,
+          desc: "Require voters to write the last 4 digits of their Social Security number, or their Colorado driver's licence / ID number, on the outside of a mail ballot; ballots not cured under the process would not be counted.",
+          yes: 939341, yesPct: 36.82, no: 1612154, noPct: 63.18,
+          result: "fail", badge: "Failed · AP called", close: false,
+          note: "<strong>Lowest Yes share of any measure on the ballot</strong> — rejected by nearly two to one." },
+        { id: "85", kind: "amendment", name: "Amendment 85", threshold: 55,
+          desc: "Require state and local ballot questions to be written in plain language at no higher than an 8th-grade reading level.",
+          yes: 1295588, yesPct: 51.17, no: 1236143, noPct: 48.83,
+          result: "fail", badge: "Failing · below 55%, uncalled", close: true,
+          note: "<strong>The night's strangest result:</strong> Yes leads by 59,445 votes, but amendments adding constitutional language need 55% — the snapshot is 3.83 points short. The story’s source listed it as uncalled; this is not a final result." },
+        { id: "86", kind: "amendment", name: "Amendment 86", threshold: 55,
+          desc: "Add safeguards for congressional redistricting outside the regular once-a-decade process, including three public meetings, limits on dividing communities and partisan favoritism, and approval by both the redistricting commission and Colorado Supreme Court.",
+          yes: 1164972, yesPct: 46.93, no: 1317548, noPct: 53.07,
+          result: "fail", badge: "Failing · uncalled", close: false,
+          note: "Unlike Amendment 85, this one also has fewer Yes than No votes in the snapshot." },
+        { id: "87", kind: "amendment", name: "Amendment 87", threshold: 50,
+          desc: "Replace Colorado's flat 4.4% income tax with graduated rates (reported range 3.7%–8.4%) by amending TABOR's single-rate rule, and let the state keep and spend roughly $2.7 billion a year more on K-12 education, health care and early childhood.",
+          yes: 1300201, yesPct: 51.20, no: 1239335, noPct: 48.80,
+          result: "pass", badge: "Passing · uncalled", close: true,
+          note: "<strong>Closest passing measure by Yes–No vote gap</strong> — a 60,866-vote margin. It needs only a simple majority (see Q&amp;A: it repeals rather than adds constitutional language), while its rival, the Prop. 136 tax cap, is trailing in this snapshot; neither outcome is treated as final here." },
+        { id: "NN", kind: "proposition", name: "Proposition NN", threshold: 50,
+          desc: "Raise K-12 investment funding 2% a year for 10 years by raising the state's TABOR spending limit by the K-12 amount, with an annual audit. <span class='origin'>The only measure referred by the legislature (Senate Bill 26-135); the other 13 were citizen initiatives.</span>",
+          yes: 1432911, yesPct: 56.44, no: 1106068, noPct: 43.56,
+          result: "pass", badge: "Passed · AP called", close: false, note: "" },
+        { id: "132", kind: "proposition", name: "Proposition 132", threshold: 50,
+          desc: "Raise felony classifications for fentanyl and synthetic-opioid distribution, manufacture, sale and possession; mandate treatment for some possession felonies; narrow sentencing exemptions.",
+          yes: 1334377, yesPct: 52.76, no: 1194613, noPct: 47.24,
+          result: "pass", badge: "Passing · uncalled", close: true,
+          note: "Passing by 139,764 votes on the Nov. 5 count; AP had not yet called it." },
+        { id: "133", kind: "proposition", name: "Proposition 133", threshold: 50,
+          desc: "Expand human trafficking of a minor for sexual servitude to include trading anything of value for sexual activity with a minor, and raise the penalty to life without parole.",
+          yes: 1571254, yesPct: 62.15, no: 956940, noPct: 37.85,
+          result: "pass", badge: "Passed · AP called", close: false,
+          note: "<strong>Highest Yes share of the 14 measures</strong>, and the first measure AP projected — at 9:08 p.m. on election night." },
+        { id: "134", kind: "proposition", name: "Proposition 134", threshold: 50,
+          desc: "Require K-12 and college sports teams to be designated male, female or coed, and limit participation to the team matching an athlete's sex by biological reproductive system (females may join male teams where no female team exists). Takes effect Jan. 1, 2027.",
+          yes: 1326812, yesPct: 52.44, no: 1203266, noPct: 47.56,
+          result: "pass", badge: "Passed · AP called Nov. 5", close: true, note: "" },
+        { id: "135", kind: "proposition", name: "Proposition 135", threshold: 50,
+          desc: "Prohibit surgery on a minor to alter biological sex characteristics, and bar state or federal funds, Medicaid and insurance from paying for it.",
+          yes: 1320316, yesPct: 52.12, no: 1212817, noPct: 47.88,
+          result: "pass", badge: "Passing · opponents conceded", close: true,
+          note: "Passing by 107,499 votes. AP had not formally called it, but opponents conceded defeat on Thursday afternoon (CPR)." },
+        { id: "136", kind: "proposition", name: "Proposition 136", threshold: 50,
+          desc: "Cap the state income tax rate at 4.4% of federal taxable income for individuals and corporations — locking in the current flat rate.",
+          yes: 1183460, yesPct: 47.37, no: 1314883, noPct: 52.63,
+          result: "fail", badge: "Failing · uncalled", close: false,
+          note: "The only proposition trailing. If it fails while Amendment 87 passes, that would avoid a conflict between the two tax measures." },
+        { id: "137", kind: "proposition", name: "Proposition 137", threshold: 50,
+          desc: "Let the state keep and spend sporting-goods sales-tax revenue above the TABOR limit — about $175 million a year from July 1, 2027 — as a voter-approved revenue change for water, land and forest conservation, wildfire prevention and outdoor recreation.",
+          yes: 1294050, yesPct: 51.47, no: 1219996, noPct: 48.53,
+          result: "pass", badge: "Passing · uncalled", close: true,
+          note: "<strong>Second-closest passing measure by Yes–No vote gap</strong> — a 74,054-vote margin." }
+      ];
+
+      var fmt = function (n) { return n.toLocaleString("en-US"); };
+      var list = document.getElementById("measure-list");
+
+      list.replaceChildren();
+      MEASURES.forEach(function (m) {
+        var card = document.createElement("article");
+        card.className = "measure";
+        card.dataset.kind = m.kind;
+        card.dataset.result = m.result;
+        card.dataset.close = m.close ? "1" : "0";
+        card.dataset.search = (m.name + " " + m.desc.replace(/<[^>]+>/g, "")).toLowerCase();
+
+        var badgeCls = m.result === "pass" ? "pass" : "fail";
+        var thrLabel = m.threshold === 55 ? "55% needed" : "50% needed";
+        var html = "";
+        html += '<div class="m-top"><span class="m-name">' + m.name + '</span>' +
+                '<span class="badge ' + badgeCls + '">' + m.badge + '</span>' +
+                '<span class="badge neutral">' + (m.kind === "amendment" ? "Constitutional amendment" : "Proposition") + ' · needs ' + (m.threshold === 55 ? "55%" : "a majority") + '</span>' +
+                (m.close ? '<span class="badge open">Close</span>' : '') + '</div>';
+        html += '<p class="m-desc">' + m.desc + '</p>';
+        html += '<div class="bar-zone"><div class="bar-track">' +
+                '<div class="bar-yes" style="width:' + m.yesPct + '%"></div><div class="bar-no"></div></div>' +
+                '<div class="threshold" data-label="' + thrLabel + '" style="left:' + m.threshold + '%"></div></div>';
+        html += '<div class="bar-labels"><span class="yes">Yes ' + m.yesPct.toFixed(2) + '% <span class="votes">' + fmt(m.yes) + '</span></span>' +
+                '<span class="no">No ' + m.noPct.toFixed(2) + '% <span class="votes">' + fmt(m.no) + '</span></span></div>';
+        if (m.note) html += '<p class="m-note">' + m.note + '</p>';
+        card.innerHTML = html;
+        list.appendChild(card);
+      });
+
+      var chips = Array.prototype.slice.call(document.querySelectorAll(".chip"));
+      var searchInput = document.getElementById("measure-search");
+      var countLine = document.getElementById("measure-count");
+      var emptyMsg = document.getElementById("measure-empty");
+      var activeFilter = "all";
+
+      function applyFilters() {
+        var q = searchInput.value.trim().toLowerCase();
+        var shown = 0;
+        Array.prototype.forEach.call(list.children, function (card) {
+          var okFilter = activeFilter === "all" ||
+            (activeFilter === "pass" && card.dataset.result === "pass") ||
+            (activeFilter === "fail" && card.dataset.result === "fail") ||
+            (activeFilter === "amendment" && card.dataset.kind === "amendment") ||
+            (activeFilter === "proposition" && card.dataset.kind === "proposition") ||
+            (activeFilter === "close" && card.dataset.close === "1");
+          var okSearch = !q || card.dataset.search.indexOf(q) !== -1;
+          var show = okFilter && okSearch;
+          card.hidden = !show;
+          if (show) shown++;
+        });
+        countLine.textContent = "Showing " + shown + " of 14 measures";
+        emptyMsg.classList.toggle("show", shown === 0);
+      }
+
+      chips.forEach(function (chip) {
+        chip.addEventListener("click", function () {
+          chips.forEach(function (c) { c.setAttribute("aria-pressed", "false"); });
+          chip.setAttribute("aria-pressed", "true");
+          activeFilter = chip.dataset.filter;
+          applyFilters();
+        });
+      });
+      searchInput.addEventListener("input", applyFilters);
+    </script>
+  
+
+<script>
+(function(){
+ if(window.parent===window)return;
+ var wrap=document.querySelector('.wrap'),pending=false;
+ function report(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;window.parent.postMessage({type:'linked-blog-story-resize',height:Math.ceil(wrap.getBoundingClientRect().bottom+window.scrollY)},'*');});}
+ new ResizeObserver(report).observe(wrap);window.addEventListener('load',report);window.addEventListener('resize',report);if(document.fonts)document.fonts.ready.then(report);report();
+ document.addEventListener('click',function(e){var a=e.target.closest('a[href^="#"]');if(!a)return;var target=document.getElementById(a.getAttribute('href').slice(1));if(!target)return;e.preventDefault();window.parent.postMessage({type:'linked-blog-story-scroll',top:Math.ceil(target.getBoundingClientRect().top+window.scrollY)},'*');});
+})();
+</script>
+</body></html>
