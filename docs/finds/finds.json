@@ -2332,5 +2332,29 @@
       1794012175,
       "02eac5993d3467dbbfb86e5e333c0eed40d298ee1849b44b74449dc7d8691e12"
     ]
+  },
+  {
+    "id": "8edff58cbce7de74cbf784de",
+    "title": "Saved attachment",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-11-07T17:48:53+00:00",
+    "tags": [
+      "diwali2026"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/8edff58cbce7de74cbf784de.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/8edff58cbce7de74cbf784de.jpg",
+        "sha256": "45d9f8fb5cb34578ba62085cd14815d68d2cef23606cabdb1802973f537ec089",
+        "size": 232747
+      }
+    ],
+    "revision": [
+      1794073746,
+      "97575b8578b2f9ce5ae3fcb5aee5fac39f58c55b64fa34c44c97393b94ddf695"
+    ]
   }
 ]
