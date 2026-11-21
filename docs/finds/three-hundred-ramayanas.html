@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="A reading guide to A. K. Ramanujan’s Three Hundred Ramayanas, with links to the original essay, endnotes, and Sanjeev Kumar’s Hindi translation.">
+<title>Three Hundred Ramayanas • Ranjan Marathe</title>
+<style>
+:root{color-scheme:light dark;--paper:#f8f3e9;--ink:#25201c;--muted:#5c5147;--rule:#cbbba5;--accent:#843b28;--panel:#efe5d4;--inverse:#fff9ef}
+@media(prefers-color-scheme:dark){:root{--paper:#211d19;--ink:#f4eadb;--muted:#d4c2ae;--rule:#625446;--accent:#ffb79e;--panel:#302923;--inverse:#241912}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:clamp(1.05rem,1rem + .3vw,1.24rem)/1.65 Georgia,"Noto Serif Devanagari","Kohinoor Devanagari",serif}
+a{color:var(--accent);text-underline-offset:.18em}a:hover{text-decoration-thickness:.13em}a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+header,main,footer{width:min(100% - 2.5rem,49rem);margin-inline:auto}
+.sitebar{margin-top:1rem;padding:.5rem 0;border-bottom:1px solid var(--rule);font-size:.95rem;display:flex;flex-wrap:wrap;justify-content:space-between;gap:.5rem}
+.sitebar a{color:var(--ink)}
+.hero{padding:clamp(2.5rem,7vw,5.5rem) 0 2rem;border-bottom:1px solid var(--rule)}
+.kicker,.tag,.jump,.actions,.eyebrow{font:700 .77rem/1.5 system-ui,sans-serif;letter-spacing:.105em;text-transform:uppercase}
+.kicker,.eyebrow,.tag{color:var(--muted)}
+h1,h2,h3,p{margin:0}h1{font-size:clamp(2.5rem,8.5vw,5.7rem);line-height:1;letter-spacing:-.045em;max-width:13ch;margin:.8rem 0 1rem}
+.subtitle{font-size:clamp(1.12rem,3vw,1.55rem);color:var(--muted);line-height:1.45}
+.byline{margin-top:.8rem}
+.actions{display:flex;flex-wrap:wrap;align-items:center;gap:.9rem 1.2rem;margin:1.6rem 0 0;letter-spacing:.035em;text-transform:none}
+.primary{display:inline-block;color:var(--inverse);background:var(--accent);padding:.7rem 1rem;text-decoration:none;border-radius:.2rem}
+.primary:hover{text-decoration:underline}
+.jump{display:flex;flex-wrap:wrap;gap:.7rem 1rem;padding:.9rem 0;border-bottom:1px solid var(--rule);letter-spacing:.035em;text-transform:none}
+section{margin:2.6rem 0;scroll-margin-top:1rem}
+h2{font-size:clamp(1.75rem,4.5vw,2.35rem);letter-spacing:-.025em;line-height:1.17;margin:0 0 1rem}
+h3{font-size:1.25rem;line-height:1.25;margin:0 0 .5rem}
+.guide{list-style:none;padding:0;margin:1.25rem 0;counter-reset:sections}
+.guide>li{counter-increment:sections;display:grid;grid-template-columns:2.4rem minmax(0,1fr);gap:.75rem;border-top:1px solid var(--rule);padding:1.25rem 0;scroll-margin-top:1rem}
+.guide>li:before{content:counter(sections,decimal-leading-zero);color:var(--accent);font:700 .86rem/1.8 system-ui,sans-serif;letter-spacing:.07em}
+.guide>li:last-child{border-bottom:1px solid var(--rule)}
+.read{display:inline-block;font:650 .86rem/1.45 system-ui,sans-serif;margin-top:.5rem}
+sup{font:700 .68em/0 system-ui,sans-serif;margin-left:.2em}
+.callout{background:var(--panel);border-left:.2rem solid var(--accent);padding:1rem 1.15rem}
+.callout p+p{margin-top:.75rem}
+.notes{padding-left:1.25rem;font-size:1rem}.notes li{padding:.45rem .3rem;scroll-margin-top:1rem}.notes li:target,.guide li:target{background:var(--panel)}
+.back{font:650 .79rem system-ui,sans-serif;white-space:nowrap}
+.links{padding-left:1.25rem}.links li{margin:.55rem 0}
+footer{font-size:.92rem;color:var(--muted);padding:1.25rem 0 2.8rem;border-top:1px solid var(--rule)}
+.skip{position:absolute;top:-10rem;left:1rem;padding:.6rem;background:var(--paper)}.skip:focus{top:0}
+@media print{body{background:white;color:black}.sitebar,.jump,.actions,.skip,.back{display:none}header,main,footer{width:auto}section{margin:1.3rem 0}.hero{padding-top:1rem}.guide>li{break-inside:avoid}}
+</style>
+</head>
+<body>
+<a href="#main" class="skip">Skip to reading guide</a>
+<header id="top">
+  <nav class="sitebar" aria-label="Blog"><a href="/">Ranjan Marathe</a><a href="/finds/">← Linked Blog</a></nav>
+  <div class="hero">
+    <p class="kicker">Reading guide · Literature &amp; translation</p>
+    <h1>Three Hundred Ramayanas</h1>
+    <p class="subtitle">Five Examples and Three Thoughts on Translation</p>
+    <p class="byline">An essay by <strong>A. K. Ramanujan</strong></p>
+    <div class="actions">
+      <a class="primary" href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e1254">Read the full English essay ↗</a>
+      <a lang="hi" href="https://jankipul.com/blog-post_25-10.html">हिंदी अनुवाद ↗</a>
+    </div>
+  </div>
+</header>
+<main id="main" tabindex="-1">
+  <nav class="jump" aria-label="On this page"><a href="#reading-map">Reading map</a><a href="#notes">Notes</a><a href="#editions">Editions</a><a href="#geet">गीतरामायण</a></nav>
+  <section id="reading-map" aria-labelledby="map-title">
+    <p class="eyebrow">Alongside the essay</p>
+    <h2 id="map-title">What changes when the story travels?</h2>
+    <p>Ramanujan asks us to read each telling on its own terms. As you go, try tracking one thing: who gets to act, who gets the reader’s sympathy, or what a familiar episode now explains. The links below open the corresponding places in the 1991 edition.</p>
+    <ol class="guide">
+      <li id="rings"><div><h3>The opening: Hanuman and the rings</h3><p>Before offering any literary argument, Ramanujan answers a question about how many Ramayanas there are with another story. Why begin that way?<sup id="ref-1"><a href="#note-1" aria-label="Reading note 1">1</a></sup></p><a class="read" href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e1254">Read the opening ↗</a></div></li>
+      <li id="ahalyas"><div><h3>Vālmīki and Kampan: two Ahalyas</h3><p>Read the Sanskrit and Tamil tellings side by side. Notice what Ahalya knows and what Rama’s arrival does in each. A shared plot doesn’t guarantee a shared moral center.<sup id="ref-2"><a href="#note-2" aria-label="Reading note 2">2</a></sup></p><a class="read" href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e1398">Read the comparison ↗</a></div></li>
+      <li id="jain"><div><h3>Jain tellings</h3><p>In the telling Ramanujan discusses, Lakshmana kills Ravana. Ask what changes when the teller separates the hero from the person who does the killing.<sup id="ref-3"><a href="#note-3" aria-label="Reading note 3">3</a></sup></p><a class="read" href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e2353">Read the Jain section ↗</a></div></li>
+      <li id="oral"><div><h3>A Kannada oral telling</h3><p>Follow Sita’s birth and listen for the Kannada wordplay in her name. What does a performance let a storyteller do that a written synopsis would miss?<sup id="ref-4"><a href="#note-4" aria-label="Reading note 4">4</a></sup></p><a class="read" href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e2426">Read the oral-telling section ↗</a></div></li>
+      <li id="thai"><div><h3>The Thai Ramakien</h3><p>Watch Hanuman. Which of his traits would surprise a reader who knows him mainly through devotional tellings?<sup id="ref-5"><a href="#note-5" aria-label="Reading note 5">5</a></sup></p><a class="read" href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e2524">Read the Thai example ↗</a></div></li>
+      <li id="translation"><div><h3>Difference, translation, and listening</h3><p>Ramanujan distinguishes resemblance to a source, the imprint of a local setting, and the reuse of a story to say something new. These can coexist in the same retelling. Where would you put a song cycle written for radio?<sup id="ref-6"><a href="#note-6" aria-label="Reading note 6">6</a></sup></p>
+        <a class="read" href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e2590">Patterns of Difference ↗</a> ·
+        <a class="read" href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e3078">Thoughts on Translation ↗</a> ·
+        <a class="read" href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e3172">What Happens When You Listen ↗</a>
+      </div></li>
+    </ol>
+  </section>
+  <section id="notes" aria-labelledby="notes-title">
+    <h2 id="notes-title">Notes for this guide</h2>
+    <p>The numbers here belong to the guide, not to the essay. In the archive, Ramanujan’s numbered references jump to his endnotes and link back to the text. <a href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#nsd0e1254">Open all of Ramanujan’s original endnotes ↗</a></p>
+    <ol class="notes">
+      <li id="note-1">Ramanujan credits Kirin Narayan for the opening Hindi folktale. <a href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e1357">Author’s note 1</a> · <a class="back" href="#ref-1" aria-label="Back to the opening">↩ Back</a></li>
+      <li id="note-2">For the editions and verse references behind the two translated passages, see <a href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e1808">author’s notes 6–7</a>. · <a class="back" href="#ref-2" aria-label="Back to the Ahalya comparison">↩ Back</a></li>
+      <li id="note-3"><em>Paumacariya</em> is the Jain work at the center of this comparison. Read the example as a specific telling, not a claim that every Jain retelling makes the same choices. <a href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e2364">Author’s note 14</a> · <a class="back" href="#ref-3" aria-label="Back to Jain tellings">↩ Back</a></li>
+      <li id="note-4">For the source collection behind the Kannada example, see <a href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e2439">author’s note 15</a>. · <a class="back" href="#ref-4" aria-label="Back to the Kannada oral telling">↩ Back</a></li>
+      <li id="note-5">The Thai section draws on Santosh N. Desai. <a href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e2532">Author’s note 18</a> · <a class="back" href="#ref-5" aria-label="Back to the Thai example">↩ Back</a></li>
+      <li id="note-6">The terms are <em>iconic</em>, <em>indexical</em>, and <em>symbolic</em>. Ramanujan borrows them from C. S. Peirce and applies them to translation. <a href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e3093">Author’s note 22</a> · <a class="back" href="#ref-6" aria-label="Back to translation and listening">↩ Back</a></li>
+    </ol>
+  </section>
+  <section id="editions" aria-labelledby="editions-title">
+    <h2 id="editions-title">Editions &amp; related reading</h2>
+    <ul class="links">
+      <li><a href="https://publishing.cdlib.org/ucpressebooks/public/book/many-ramayanas-the-diversity-of-a-narrative-tradition-in-south-asia.html#d0e1254">English · University of California Press archive</a><br>In Paula Richman, ed., <cite>Many Rāmāyaṇas</cite> (1991), pp. 22–49. Start here for linked notes.</li>
+      <li><a href="https://www.trans-techresearch.net/wp-content/uploads/2015/05/three-hundred-Ramayanas-A-K-Ramanujan.pdf">English PDF · <cite>The Collected Essays of A. K. Ramanujan</cite></a><br>A scan of a different edition; page and note numbers may differ.</li>
+      <li lang="hi"><a href="https://jankipul.com/blog-post_25-10.html">हिंदी · संजीव कुमार का अनुवाद, जानकी पुल</a></li>
+      <li lang="hi"><a href="https://anuvadasampada.azimpremjiuniversity.edu.in/3891/1/%E0%A4%A4%E0%A5%80%E0%A4%A8%20%E0%A4%B8%E0%A5%8C%20%E0%A4%B0%E0%A4%BE%E0%A4%AE%E0%A4%BE%E0%A4%AF%E0%A4%A3%E0%A5%87%E0%A4%82.pdf">हिंदी PDF · अनुवाद संपदा, अज़ीम प्रेमजी विश्वविद्यालय</a></li>
+      <li lang="mr"><a href="https://ekregh.blogspot.com/2024/02/blog-post.html">मराठी · उतारा आणि अवधूत डोंगरे यांचे भाष्य</a> (पूर्ण अनुवाद नाही)</li>
+    </ul>
+  </section>
+  <section id="geet" lang="mr" aria-labelledby="geet-title">
+    <h2 id="geet-title">गीतरामायण: माझ्यासाठी ‘३०१वे रामायण’</h2>
+    <div class="callout">
+      <p>जसजसे आपण गीतरामायण अधिक ऐकत आणि वाचत जातो, तसतसे गदिमांना ‘आधुनिक वाल्मीकी’ का म्हणतात, ते उमगत जातं. माझ्यासाठी गीतरामायण हे ‘३०१वे रामायण’ नक्कीच!</p>
+      <p><a href="https://www.gadima.com/category/4/0/0/geetramayan-akashwani">गदिमांच्या संकेतस्थळावर गीतरामायण</a> · <a href="https://www.reddit.com/r/Hindi/s/yMwmxGN8ii">r/Hindi</a> · <a href="https://www.reddit.com/r/MarathiReads/s/YXTZ3JtBCR">r/MarathiReads</a></p>
+    </div>
+  </section>
+</main>
+<footer><p>This is a companion to the essay, not a reprint. <a href="#top">Back to top ↑</a></p></footer>
+</body>
+</html>
