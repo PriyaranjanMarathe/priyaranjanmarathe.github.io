@@ -2933,5 +2933,53 @@
       1795362643,
       "04cfd12a9289d46fee66fd3311702c8084f7f2bae8489d2210107232ad78e96a"
     ]
+  },
+  {
+    "id": "b62241ab5a4c3068f8bd4da4",
+    "title": "Saved attachment",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-11-22T19:02:27+00:00",
+    "tags": [
+      "kesar"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/b62241ab5a4c3068f8bd4da4.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/b62241ab5a4c3068f8bd4da4.jpg",
+        "sha256": "4723bdf3cb2f0d6af6f127835717966d83757fc470707d87a30faeebc907b17e",
+        "size": 186696
+      }
+    ],
+    "revision": [
+      1795374170,
+      "59f910bd59cb4fa40cfe70e840b4aa11921a357e2e69ad036d2bb7dd24baaafc"
+    ]
+  },
+  {
+    "id": "627d4ae6c2d0bc67da0aaa33",
+    "title": "Saved attachment",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-11-22T19:03:01+00:00",
+    "tags": [
+      "kesar"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/627d4ae6c2d0bc67da0aaa33.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/627d4ae6c2d0bc67da0aaa33.jpg",
+        "sha256": "3a747c22a69e4647482421db08804f6faed0912eee56414890bebd02cb5fa83a",
+        "size": 260419
+      }
+    ],
+    "revision": [
+      1795374185,
+      "de5844b3866ab8d8e542bf6612507c36f5c9c54c4bce0dee8c3c6154b1fbe692"
+    ]
   }
 ]
