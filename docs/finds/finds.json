@@ -3014,5 +3014,48 @@
       1795433856,
       "500f01717870ec642ea6f73ee92552b9ce6853c58bacdcdf220636666ff95062"
     ]
+  },
+  {
+    "id": "bbcf56460f7b4598b55fd1d2",
+    "title": "Saved attachment",
+    "note": "हे सापडल - मराठी वृत्त आणि अलंकार ह्याबाबत. \n\nमो रा वाळिंबेच्या पुस्तकामध्ये. आम्हाला मराठी तिसरी भाषा होती, म्हणून कवर केल नसेल बहुतेक. ह्या वरती पण कोणी शिकवल तर मजा येईल.",
+    "body": "",
+    "saved_at": "2026-11-23T13:27:54+00:00",
+    "tags": [
+      "marathi",
+      "vrutta"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/bbcf56460f7b4598b55fd1d2.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/bbcf56460f7b4598b55fd1d2.jpg",
+        "sha256": "c008baacc60fce83fb7c71ad7a9f15f4922c90074944ff50d8af91fee04f6d4c",
+        "size": 118274
+      }
+    ],
+    "revision": [
+      1795440501,
+      "ee2bf34962f807fc63ebb65115105d45b8fa5fd24055f4cd63ccf53fbae1cff1"
+    ]
+  },
+  {
+    "id": "c571f48356947deaa4a579c8",
+    "title": "“बांधणीच्या कविता” सापडले - https://youtube.com/@bandhanichyakavita?si=oyRm0dWXb6pPhOuO ",
+    "note": "",
+    "body": "“बांधणीच्या कविता” सापडले - https://youtube.com/@bandhanichyakavita?si=oyRm0dWXb6pPhOuO \n\n“हे १.५ तासांचा लेक्चर पण भारी वाटत आहे” - https://youtu.be/Y2qFv-4WnZ8?si=OkH-I06qE4MXccGY",
+    "saved_at": "2026-11-23T13:34:38+00:00",
+    "tags": [
+      "kavita",
+      "marathi",
+      "vrutta"
+    ],
+    "tag_method": "chosen",
+    "attachments": [],
+    "revision": [
+      1795440907,
+      "78181fb04bd2feafd79b8aec0b37bd6a4b6386460f1563f35e19e9aa465f5cdf"
+    ]
   }
 ]
