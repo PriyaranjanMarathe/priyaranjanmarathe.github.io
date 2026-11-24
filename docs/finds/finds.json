@@ -3057,5 +3057,30 @@
       1795440907,
       "78181fb04bd2feafd79b8aec0b37bd6a4b6386460f1563f35e19e9aa465f5cdf"
     ]
+  },
+  {
+    "id": "3c7903fe19a3ec87a4ab75e2",
+    "title": "Saved attachment",
+    "note": "",
+    "body": "",
+    "saved_at": "2026-11-24T15:04:55+00:00",
+    "tags": [
+      "kalbhairavmandir",
+      "rangoli"
+    ],
+    "tag_method": "chosen",
+    "attachments": [
+      {
+        "url": "https://xbv2illt6mwhw67z.public.blob.vercel-storage.com/media/3c7903fe19a3ec87a4ab75e2.jpg",
+        "type": "image/jpeg",
+        "backup_url": "https://saved-finds-media.marathepriyaranjan.workers.dev/media/3c7903fe19a3ec87a4ab75e2.jpg",
+        "sha256": "50f3ad72e8401b3153b41ce8ac89728ca8a42027ed99dfc53cbaea14d032832f",
+        "size": 314325
+      }
+    ],
+    "revision": [
+      1795532709,
+      "2ff2508d1c1699b32dd5381eac8e032ca783b9a7b0f41217e011645f5187f7bd"
+    ]
   }
 ]
